@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="smallMargin">5dp</dimen>
+    <dimen name="mediumMargin">10dp</dimen>
+    <dimen name="largeMargin">15dp</dimen>
+
+    <dimen name="smallPadding">5dp</dimen>
+    <dimen name="mediumPadding">10dp</dimen>
+    <dimen name="largePadding">15dp</dimen>
+
+    <dimen name="smallTextSize">18sp</dimen>
+    <dimen name="mediumTextSize">20sp</dimen>
+    <dimen name="titleTextSize">26dp</dimen>
+</resources>
