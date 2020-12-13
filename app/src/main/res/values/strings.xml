@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">HabitTracker</string>
+    <string name="app_name">Habit Tracker</string>
+
+    <string name="tasks">Tasks</string>
+    <string name="habits">Habits</string>
 </resources>

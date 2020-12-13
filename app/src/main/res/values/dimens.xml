@@ -11,4 +11,6 @@
     <dimen name="smallTextSize">18sp</dimen>
     <dimen name="mediumTextSize">20sp</dimen>
     <dimen name="titleTextSize">26dp</dimen>
+
+    <dimen name="bottomNavigationHeight">60dp</dimen>
 </resources>

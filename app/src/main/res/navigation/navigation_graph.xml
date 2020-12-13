@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/tasksFragment">
+
+    <fragment
+        android:id="@+id/tasksFragment"
+        android:label="@string/tasks"
+        android:name="com.santtuhyvarinen.habittracker.fragments.TasksFragment"
+        tools:layout="@layout/fragment_tasks">
+    </fragment>
+
+    <fragment
+        android:id="@+id/habitsFragment"
+        android:label="@string/habits"
+        android:name="com.santtuhyvarinen.habittracker.fragments.HabitsFragment"
+        tools:layout="@layout/fragment_habits">
+    </fragment>
+</navigation>
