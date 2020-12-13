@@ -31,10 +31,16 @@
     </style>
 
     <style name="ItemTitleStyle">
-        <item name="android:textSize">@dimen/mediumTextSize</item>
+        <item name="android:textSize">@dimen/smallTextSize</item>
         <item name="android:textAlignment">textStart</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="TaskInfoTextStyle">
+        <item name="android:textSize">@dimen/extraSmallTextSize</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>

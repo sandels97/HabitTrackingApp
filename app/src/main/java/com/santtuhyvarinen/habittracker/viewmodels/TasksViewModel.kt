@@ -9,7 +9,7 @@ class TasksViewModel : ViewModel() {
     init {
         //Dummy data for testing
         for(i in 0 until 10) {
-            tasks.add(TaskModel(""))
+            tasks.add(TaskModel("Task example"))
         }
     }
 }

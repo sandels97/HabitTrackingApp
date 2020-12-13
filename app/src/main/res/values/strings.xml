@@ -5,6 +5,10 @@
     <string name="habits">Habits</string>
     <string name="habit">Habit</string>
 
+    <!--Habits-->
     <string name="create_habit">Create habit</string>
     <string name="edit_habit">Edit habit</string>
+
+    <!--Tasks-->
+    <string name="time_left">Time left: %1$s</string>
 </resources>

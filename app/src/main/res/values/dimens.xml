@@ -9,6 +9,7 @@
     <dimen name="mediumPadding">10dp</dimen>
     <dimen name="largePadding">15dp</dimen>
 
+    <dimen name="extraSmallTextSize">10sp</dimen>
     <dimen name="smallTextSize">18sp</dimen>
     <dimen name="mediumTextSize">20sp</dimen>
     <dimen name="titleTextSize">26dp</dimen>
@@ -22,6 +23,7 @@
     <dimen name="floatingActionButtonSize">50dp</dimen>
 
     <!--Tasks-->
-    <dimen name="taskCardHeight">100dp</dimen>
+    <dimen name="taskCardHeight">80dp</dimen>
+    <dimen name="taskIconSize">30dp</dimen>
 
 </resources>

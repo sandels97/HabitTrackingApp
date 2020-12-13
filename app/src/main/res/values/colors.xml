@@ -8,9 +8,11 @@
     <color name="colorSecondaryLight">#c3fdff</color>
     <color name="colorSecondaryDark">#5d99c6</color>
 
+    <color name="colorTextSecondary">#8a8a8a</color>
+
     <color name="colorNavigationElement">#ffffff</color>
 
-    <color name="colorTaskBackground">#eeeeee</color>
+    <color name="colorTaskBackground">#fefefe</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
