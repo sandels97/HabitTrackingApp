@@ -28,15 +28,34 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
+
             when(destination.id) {
-                R.id.habitFormFragment -> hideNavigationElements(true)
-                else -> hideNavigationElements(false)
+                R.id.habitFormFragment -> {
+                    hideNavigationElements(true)
+                    hideSettingsButton(false)
+                }
+                R.id.settingsFragment -> {
+                    hideNavigationElements(true)
+                    hideSettingsButton(true)
+                }
+                else -> {
+                    hideNavigationElements(false)
+                    hideSettingsButton(false)
+                }
             }
+        }
+
+        settingsButton.setOnClickListener {
+            navController.navigate(R.id.action_to_settingsFragment)
         }
     }
 
     private fun hideNavigationElements(hidden : Boolean) {
         bottomNavigation.visibility = if(hidden) View.GONE else View.VISIBLE
-        toolbarTitle.visibility = if(hidden) View.GONE else View.VISIBLE
+        //toolbarTitle.visibility = if(hidden) View.GONE else View.VISIBLE
+    }
+
+    private fun hideSettingsButton(hidden : Boolean) {
+        settingsButton.visibility = if(hidden) View.GONE else View.VISIBLE
     }
 }

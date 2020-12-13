@@ -4,6 +4,7 @@
     <string name="tasks">Tasks</string>
     <string name="habits">Habits</string>
     <string name="habit">Habit</string>
+    <string name="settings">Settings</string>
 
     <!--Habits-->
     <string name="create_habit">Create habit</string>

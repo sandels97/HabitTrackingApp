@@ -20,8 +20,18 @@
             android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:textAppearance="@style/TitleText"
+            android:visibility="gone"
 
             android:layout_gravity="center"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/settingsButton"
+            android:layout_width="@dimen/toolbarButtonSize"
+            android:layout_height="@dimen/toolbarButtonSize"
+
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_settings"
+            android:layout_gravity="end"/>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.fragment.app.FragmentContainerView

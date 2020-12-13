@@ -10,6 +10,8 @@
 
     <color name="colorTextSecondary">#8a8a8a</color>
 
+    <color name="colorRipple">#aa8a8a8a</color>
+
     <color name="colorNavigationElement">#ffffff</color>
 
     <color name="colorTaskBackground">#fefefe</color>

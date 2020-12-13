@@ -6,14 +6,15 @@
     android:id="@+id/navigation_graph"
     app:startDestination="@id/tasksFragment">
 
+    <!--Home and task List screen-->
     <fragment
         android:id="@+id/tasksFragment"
         android:label="@string/tasks"
         android:name="com.santtuhyvarinen.habittracker.fragments.TasksFragment"
         tools:layout="@layout/fragment_tasks">
-
     </fragment>
 
+    <!--Habit list screen-->
     <fragment
         android:id="@+id/habitsFragment"
         android:label="@string/habits"
@@ -27,11 +28,25 @@
             app:destination="@id/habitFormFragment"/>
     </fragment>
 
+    <!--Habit form screen-->
     <fragment
         android:id="@+id/habitFormFragment"
         android:label="@string/habit"
         android:name="com.santtuhyvarinen.habittracker.fragments.HabitFormFragment"
         tools:layout="@layout/fragment_habit_form">
     </fragment>
+
+    <!--Settings screen-->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:label="@string/settings"
+        android:name="com.santtuhyvarinen.habittracker.fragments.SettingsFragment">
+    </fragment>
+
+    <action
+        android:id="@+id/action_to_settingsFragment"
+        app:enterAnim="@anim/anim_slide_in"
+        app:exitAnim="@anim/anim_slide_out"
+        app:destination="@id/settingsFragment"/>
 
 </navigation>
