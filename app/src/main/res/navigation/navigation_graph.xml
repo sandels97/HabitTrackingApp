@@ -20,12 +20,6 @@
         android:label="@string/habits"
         android:name="com.santtuhyvarinen.habittracker.fragments.HabitsFragment"
         tools:layout="@layout/fragment_habits">
-
-        <action
-            android:id="@+id/action_from_habitsFragment_to_habitFormFragment"
-            app:enterAnim="@anim/anim_slide_in"
-            app:exitAnim="@anim/anim_slide_out"
-            app:destination="@id/habitFormFragment"/>
     </fragment>
 
     <!--Habit form screen-->
@@ -35,6 +29,12 @@
         android:name="com.santtuhyvarinen.habittracker.fragments.HabitFormFragment"
         tools:layout="@layout/fragment_habit_form">
     </fragment>
+
+    <action
+        android:id="@+id/action_to_habitFormFragment"
+        app:enterAnim="@anim/anim_slide_in"
+        app:exitAnim="@anim/anim_slide_out"
+        app:destination="@id/habitFormFragment"/>
 
     <!--Settings screen-->
     <fragment

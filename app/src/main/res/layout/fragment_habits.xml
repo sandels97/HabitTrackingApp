@@ -15,21 +15,4 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/createHabitButton"
-        android:layout_width="@dimen/floatingActionButtonSize"
-        android:layout_height="@dimen/floatingActionButtonSize"
-
-        android:contentDescription="@string/create_habit"
-        android:layout_margin="@dimen/largeMargin"
-        android:src="@drawable/ic_add_task"
-        app:backgroundTint="@color/colorSecondary"
-        android:tint="@color/white"
-        app:rippleColor="@color/white"
-        android:elevation="@dimen/elevation"
-        app:fabCustomSize="@dimen/floatingActionButtonSize"
-
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
