@@ -29,4 +29,12 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="ItemTitleStyle">
+        <item name="android:textSize">@dimen/mediumTextSize</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

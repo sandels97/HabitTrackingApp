@@ -20,4 +20,8 @@
     <dimen name="toolbarHeight">60dp</dimen>
 
     <dimen name="floatingActionButtonSize">50dp</dimen>
+
+    <!--Tasks-->
+    <dimen name="taskCardHeight">100dp</dimen>
+
 </resources>
