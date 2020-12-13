@@ -9,17 +9,13 @@ import androidx.navigation.fragment.findNavController
 import com.santtuhyvarinen.habittracker.R
 import kotlinx.android.synthetic.main.fragment_habits.*
 
-class HabitsFragment : Fragment() {
+class HabitFormFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.fragment_habits, container, false)
+        return inflater.inflate(R.layout.fragment_habit_form, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        createHabitButton.setOnClickListener {
-            findNavController().navigate(R.id.action_from_habitsFragment_to_habitFormFragment)
-        }
     }
 }

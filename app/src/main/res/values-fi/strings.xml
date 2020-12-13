@@ -3,4 +3,9 @@
 
     <string name="tasks">Tehtävät</string>
     <string name="habits">Rutiinit</string>
+
+    <string name="habit">Rutiini</string>
+
+    <string name="create_habit">Luo rutiini</string>
+    <string name="edit_habit">Muokkaa rutiinia</string>
 </resources>

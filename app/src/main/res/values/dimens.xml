@@ -18,4 +18,6 @@
     <!--Navigation-->
     <dimen name="bottomNavigationHeight">60dp</dimen>
     <dimen name="toolbarHeight">60dp</dimen>
+
+    <dimen name="floatingActionButtonSize">50dp</dimen>
 </resources>

@@ -11,6 +11,7 @@
         android:label="@string/tasks"
         android:name="com.santtuhyvarinen.habittracker.fragments.TasksFragment"
         tools:layout="@layout/fragment_tasks">
+
     </fragment>
 
     <fragment
@@ -18,5 +19,19 @@
         android:label="@string/habits"
         android:name="com.santtuhyvarinen.habittracker.fragments.HabitsFragment"
         tools:layout="@layout/fragment_habits">
+
+        <action
+            android:id="@+id/action_from_habitsFragment_to_habitFormFragment"
+            app:enterAnim="@anim/anim_slide_in"
+            app:exitAnim="@anim/anim_slide_out"
+            app:destination="@id/habitFormFragment"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/habitFormFragment"
+        android:label="@string/habit"
+        android:name="com.santtuhyvarinen.habittracker.fragments.HabitFormFragment"
+        tools:layout="@layout/fragment_habit_form">
+    </fragment>
+
 </navigation>

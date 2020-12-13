@@ -3,4 +3,8 @@
 
     <string name="tasks">Tasks</string>
     <string name="habits">Habits</string>
+    <string name="habit">Habit</string>
+
+    <string name="create_habit">Create habit</string>
+    <string name="edit_habit">Edit habit</string>
 </resources>
