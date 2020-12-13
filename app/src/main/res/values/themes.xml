@@ -16,4 +16,17 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>
+
+    <style name="NavigationElementStyle">
+        <item name="android:elevation">@dimen/elevation</item>
+        <item name="android:background">@color/colorNavigationElement</item>
+    </style>
+
+    <style name="TitleText">
+        <item name="android:textSize">@dimen/mediumTextSize</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

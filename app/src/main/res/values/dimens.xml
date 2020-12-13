@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Generic-->
     <dimen name="smallMargin">5dp</dimen>
     <dimen name="mediumMargin">10dp</dimen>
     <dimen name="largeMargin">15dp</dimen>
@@ -12,5 +13,9 @@
     <dimen name="mediumTextSize">20sp</dimen>
     <dimen name="titleTextSize">26dp</dimen>
 
+    <dimen name="elevation">5dp</dimen>
+
+    <!--Navigation-->
     <dimen name="bottomNavigationHeight">60dp</dimen>
+    <dimen name="toolbarHeight">60dp</dimen>
 </resources>
