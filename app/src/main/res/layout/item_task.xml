@@ -3,7 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/taskCardHeight"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="@dimen/largeMargin"
+
+    android:layout_marginTop="@dimen/largeMargin"
+    android:layout_marginLeft="@dimen/largeMargin"
+    android:layout_marginRight="@dimen/largeMargin"
+
     android:elevation="@dimen/elevation"
     android:background="@color/colorTaskBackground"
     android:clickable="true"

@@ -33,7 +33,7 @@
     <style name="ItemTitleStyle">
         <item name="android:textSize">@dimen/smallTextSize</item>
         <item name="android:textAlignment">textStart</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
         <item name="android:textStyle">bold</item>
         <item name="android:ellipsize">end</item>
     </style>
