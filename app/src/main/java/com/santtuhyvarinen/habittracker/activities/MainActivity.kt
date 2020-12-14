@@ -32,13 +32,9 @@ class MainActivity : AppCompatActivity() {
             when(destination.id) {
                 R.id.habitFormFragment, R.id.settingsFragment -> {
                     hideNavigationElements(true)
-                    hideSettingsButton(true)
-                    hideAddHabitButton(true)
                 }
                 else -> {
                     hideNavigationElements(false)
-                    hideSettingsButton(false)
-                    hideAddHabitButton(false)
                 }
             }
         }
@@ -54,14 +50,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun hideNavigationElements(hidden : Boolean) {
         bottomNavigation?.visibility = if(hidden) View.GONE else View.VISIBLE
+        settingsButton?.visibility = if(hidden) View.GONE else View.VISIBLE
+        addHabitButton?.visibility = if(hidden) View.GONE else View.VISIBLE
         //toolbarTitle.visibility = if(hidden) View.GONE else View.VISIBLE
     }
 
-    private fun hideSettingsButton(hidden : Boolean) {
-        settingsButton.visibility = if(hidden) View.GONE else View.VISIBLE
-    }
-
-    private fun hideAddHabitButton(hidden : Boolean) {
-        addHabitButton.visibility = if(hidden) View.GONE else View.VISIBLE
-    }
 }
