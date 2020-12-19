@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.santtuhyvarinen.habittracker.R
 
-class HabitFormFragment : Fragment() {
+class HabitViewFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.fragment_habit_form, container, false)
+        return inflater.inflate(R.layout.fragment_habit_view, container, false)
     }
 }

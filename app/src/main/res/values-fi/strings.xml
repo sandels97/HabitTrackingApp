@@ -3,9 +3,13 @@
 
     <string name="tasks">Tehtävät</string>
     <string name="habits">Rutiinit</string>
-
     <string name="habit">Rutiini</string>
+    <string name="settings">Asetukset</string>
+    <string name="statistics">Tilastot</string>
 
     <string name="create_habit">Luo rutiini</string>
     <string name="edit_habit">Muokkaa rutiinia</string>
+
+    <!--Tasks-->
+    <string name="time_left">Aikaa jäljellä: %1$s</string>
 </resources>

@@ -12,8 +12,4 @@ class HabitsFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_habits, container, false)
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
 }

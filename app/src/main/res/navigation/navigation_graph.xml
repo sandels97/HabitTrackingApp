@@ -14,12 +14,46 @@
         tools:layout="@layout/fragment_tasks">
     </fragment>
 
+    <!--Statistics screen-->
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:label="@string/statistics"
+        android:name="com.santtuhyvarinen.habittracker.fragments.StatisticsFragment"
+        tools:layout="@layout/fragment_statistics">
+
+        <action
+            android:id="@+id/action_from_statisticsFragment_to_habitViewFragment"
+            app:enterAnim="@anim/anim_slide_in"
+            app:exitAnim="@anim/anim_slide_out"
+            app:destination="@id/habitViewFragment"/>
+    </fragment>
+
     <!--Habit list screen-->
     <fragment
         android:id="@+id/habitsFragment"
         android:label="@string/habits"
         android:name="com.santtuhyvarinen.habittracker.fragments.HabitsFragment"
         tools:layout="@layout/fragment_habits">
+
+        <action
+            android:id="@+id/action_from_habitsFragment_to_habitViewFragment"
+            app:enterAnim="@anim/anim_slide_in"
+            app:exitAnim="@anim/anim_slide_out"
+            app:destination="@id/habitViewFragment"/>
+    </fragment>
+
+    <!--Habit view screen-->
+    <fragment
+        android:id="@+id/habitViewFragment"
+        android:label="@string/habit"
+        android:name="com.santtuhyvarinen.habittracker.fragments.HabitViewFragment"
+        tools:layout="@layout/fragment_habit_view">
+
+        <action
+            android:id="@+id/action_from_habitsFragment_to_habitFormFragment"
+            app:enterAnim="@anim/anim_slide_in"
+            app:exitAnim="@anim/anim_slide_out"
+            app:destination="@id/habitFormFragment"/>
     </fragment>
 
     <!--Habit form screen-->
@@ -30,6 +64,7 @@
         tools:layout="@layout/fragment_habit_form">
     </fragment>
 
+    <!--Open Habit form action-->
     <action
         android:id="@+id/action_to_habitFormFragment"
         app:enterAnim="@anim/anim_slide_in"
@@ -43,6 +78,7 @@
         android:name="com.santtuhyvarinen.habittracker.fragments.SettingsFragment">
     </fragment>
 
+    <!--Open settings action-->
     <action
         android:id="@+id/action_to_settingsFragment"
         app:enterAnim="@anim/anim_slide_in"

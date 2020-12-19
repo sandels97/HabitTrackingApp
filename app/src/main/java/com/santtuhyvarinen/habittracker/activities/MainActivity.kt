@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity() {
         //Set up bottom navigation bar and toolbar with NavController
         val appBarConfiguration = AppBarConfiguration(setOf(
             R.id.tasksFragment,
-            R.id.habitsFragment)
+            R.id.habitsFragment,
+            R.id.statisticsFragment)
         )
 
         toolbar.setupWithNavController(navController, appBarConfiguration)
