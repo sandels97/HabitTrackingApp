@@ -49,4 +49,10 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:elevation">@dimen/elevation</item>
     </style>
+
+    <style name="WeekDayButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/background_round_button</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:elevation">@dimen/elevation</item>
+    </style>
 </resources>

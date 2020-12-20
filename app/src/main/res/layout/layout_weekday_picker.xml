@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/smallPadding"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button1"
+        android:layout_width="@dimen/weekDayButtonSize"
+        android:layout_height="@dimen/weekDayButtonSize"
+        style="@style/WeekDayButtonStyle"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/button2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button2"
+        android:layout_width="@dimen/weekDayButtonSize"
+        android:layout_height="@dimen/weekDayButtonSize"
+        style="@style/WeekDayButtonStyle"
+
+        app:layout_constraintLeft_toRightOf="@id/button1"
+        app:layout_constraintRight_toLeftOf="@id/button3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button3"
+        android:layout_width="@dimen/weekDayButtonSize"
+        android:layout_height="@dimen/weekDayButtonSize"
+        style="@style/WeekDayButtonStyle"
+
+        app:layout_constraintLeft_toRightOf="@id/button2"
+        app:layout_constraintRight_toLeftOf="@id/button4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button4"
+        android:layout_width="@dimen/weekDayButtonSize"
+        android:layout_height="@dimen/weekDayButtonSize"
+        style="@style/WeekDayButtonStyle"
+
+        app:layout_constraintLeft_toRightOf="@id/button3"
+        app:layout_constraintRight_toLeftOf="@id/button5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button5"
+        android:layout_width="@dimen/weekDayButtonSize"
+        android:layout_height="@dimen/weekDayButtonSize"
+        style="@style/WeekDayButtonStyle"
+
+        app:layout_constraintLeft_toRightOf="@id/button4"
+        app:layout_constraintRight_toLeftOf="@id/button6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button6"
+        android:layout_width="@dimen/weekDayButtonSize"
+        android:layout_height="@dimen/weekDayButtonSize"
+        style="@style/WeekDayButtonStyle"
+
+        app:layout_constraintLeft_toRightOf="@id/button5"
+        app:layout_constraintRight_toLeftOf="@id/button7"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button7"
+        android:layout_width="@dimen/weekDayButtonSize"
+        android:layout_height="@dimen/weekDayButtonSize"
+        style="@style/WeekDayButtonStyle"
+
+        app:layout_constraintLeft_toRightOf="@id/button6"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

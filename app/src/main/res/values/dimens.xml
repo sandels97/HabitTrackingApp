@@ -22,6 +22,7 @@
     <dimen name="toolbarButtonSize">48dp</dimen>
 
     <dimen name="buttonHeight">60dp</dimen>
+    <dimen name="weekDayButtonSize">48dp</dimen>
 
     <dimen name="floatingActionButtonSize">50dp</dimen>
 

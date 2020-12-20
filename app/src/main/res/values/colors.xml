@@ -8,6 +8,7 @@
     <color name="colorSecondary">#78909c</color>
     <color name="colorSecondaryLight">#a7c0cd</color>
     <color name="colorSecondaryDark">#a7c0cd</color>
+    <color name="colorSecondaryTransparent">#5578909c</color>
 
     <color name="colorTextPrimary">#212121</color>
     <color name="colorTextSecondary">#8a8a8a</color>
