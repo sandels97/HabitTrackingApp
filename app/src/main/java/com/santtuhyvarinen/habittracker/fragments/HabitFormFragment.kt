@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -28,11 +29,27 @@ class HabitFormFragment : Fragment() {
 
         habitFormViewModel = ViewModelProvider(this).get(HabitFormViewModel::class.java)
 
+        if(habitFormViewModel.priorityLevels.isEmpty()) habitFormViewModel.priorityLevels = resources.getStringArray(R.array.PriorityLevels)
+
         saveHabitButton.setOnClickListener {
             val saveSuccess = habitFormViewModel.saveHabit()
 
             if(saveSuccess) findNavController().navigateUp()
         }
+
+        habitPrioritySeekBar.max = habitFormViewModel.getMaxPriorityLevel()
+        habitPrioritySeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekbar: SeekBar, progress: Int, fromUser: Boolean) {
+                habitFormViewModel.priorityValue = progress
+                updatePriorityHeader()
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+            }
+        })
 
         weekDayPicker.weekDaySelectedListener = object : WeekDayPicker.WeekDaySelectedListener {
             override fun weekDaySelected(index: Int, selected: Boolean) {
@@ -45,7 +62,13 @@ class HabitFormFragment : Fragment() {
             weekDayPicker.setWeekDayButtonSelected(i, habitFormViewModel.selectedWeekDayButtons[i])
         }
 
+        updatePriorityHeader()
         updateWeekDayHeader()
+    }
+
+    private fun updatePriorityHeader() {
+        val currentPriority = habitFormViewModel.getCurrentPriorityLevelText()
+        habitPriorityHeader.text = getString(R.string.habit_priority_header, currentPriority)
     }
 
     private fun updateWeekDayHeader() {
@@ -53,32 +76,7 @@ class HabitFormFragment : Fragment() {
             weekDayPickerHeader.text = getString(R.string.habit_repeat_every_day)
         } else {
             //Show selected week days in to the header
-
-            val daysSelected = habitFormViewModel.daysSelected()
-
-            val weekDays = if(daysSelected < 3) resources.getStringArray(R.array.WeekDays) else resources.getStringArray(R.array.WeekDaysShort)
-
-            var index = 0
-
-            val stringBuilder = StringBuilder()
-            for(i in weekDays.indices) {
-                if(habitFormViewModel.isDaySelected(i)) {
-                    val weekDay = weekDays[i]
-                    stringBuilder.append(weekDay)
-                    index ++
-
-                    if(daysSelected > 1) {
-                        if (index == daysSelected - 1) {
-                            stringBuilder.append(" ${getString(R.string.and)} ")
-                        } else if (index < daysSelected) {
-                            stringBuilder.append(", ")
-                        }
-                    }
-                }
-            }
-
-
-            weekDayPickerHeader.text = getString(R.string.habit_repeat_days, stringBuilder.toString())
+            weekDayPickerHeader.text = getString(R.string.habit_repeat_days, habitFormViewModel.getWeekDaysSelectedText(requireContext()))
         }
     }
 }

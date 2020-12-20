@@ -6,40 +6,72 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="@dimen/mediumPadding">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/habitNameInputLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/saveHabitButton">
 
-        app:layout_constraintTop_toTopOf="parent">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/habitNameEditText"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:inputType="text|textCapSentences"
-            android:imeOptions="actionDone"
-            android:hint="@string/habit_name"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/weekDayPickerHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/habit_repeat"
-        android:layout_marginTop="@dimen/largeMargin"
-        style="@style/HabitFormHeaderStyle"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/habitNameInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
-        app:layout_constraintTop_toBottomOf="@id/habitNameInputLayout"/>
+                app:layout_constraintTop_toTopOf="parent">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/habitNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:inputType="text|textCapSentences"
+                    android:imeOptions="actionDone"
+                    android:hint="@string/habit_name"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.santtuhyvarinen.habittracker.views.WeekDayPicker
-        android:id="@+id/weekDayPicker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/smallMargin"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/weekDayPickerHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/habit_repeat"
+                android:layout_marginTop="@dimen/largeMargin"
+                style="@style/HabitFormHeaderStyle"
 
-        app:layout_constraintTop_toBottomOf="@id/weekDayPickerHeader"/>
+                app:layout_constraintTop_toBottomOf="@id/habitNameInputLayout"/>
+
+            <com.santtuhyvarinen.habittracker.views.WeekDayPicker
+                android:id="@+id/weekDayPicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallMargin"
+
+                app:layout_constraintTop_toBottomOf="@id/weekDayPickerHeader"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/habitPriorityHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/habit_priority"
+                android:layout_marginTop="@dimen/largeMargin"
+                style="@style/HabitFormHeaderStyle"
+
+                app:layout_constraintTop_toBottomOf="@id/weekDayPicker"/>
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/habitPrioritySeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallMargin"
+                android:contentDescription="@string/habit_priority"
+
+                app:layout_constraintTop_toBottomOf="@id/habitPriorityHeader"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/saveHabitButton"
