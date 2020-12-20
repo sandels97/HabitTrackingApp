@@ -37,11 +37,48 @@ class HabitFormFragment : Fragment() {
         weekDayPicker.weekDaySelectedListener = object : WeekDayPicker.WeekDaySelectedListener {
             override fun weekDaySelected(index: Int, selected: Boolean) {
                 habitFormViewModel.selectedWeekDayButtons[index] = selected
+                updateWeekDayHeader()
             }
         }
 
         for(i in habitFormViewModel.selectedWeekDayButtons.indices) {
             weekDayPicker.setWeekDayButtonSelected(i, habitFormViewModel.selectedWeekDayButtons[i])
+        }
+
+        updateWeekDayHeader()
+    }
+
+    private fun updateWeekDayHeader() {
+        if(habitFormViewModel.isEveryDaySelectedOrNotSelected()) {
+            weekDayPickerHeader.text = getString(R.string.habit_repeat_every_day)
+        } else {
+            //Show selected week days in to the header
+
+            val daysSelected = habitFormViewModel.daysSelected()
+
+            val weekDays = if(daysSelected < 3) resources.getStringArray(R.array.WeekDays) else resources.getStringArray(R.array.WeekDaysShort)
+
+            var index = 0
+
+            val stringBuilder = StringBuilder()
+            for(i in weekDays.indices) {
+                if(habitFormViewModel.isDaySelected(i)) {
+                    val weekDay = weekDays[i]
+                    stringBuilder.append(weekDay)
+                    index ++
+
+                    if(daysSelected > 1) {
+                        if (index == daysSelected - 1) {
+                            stringBuilder.append(" ${getString(R.string.and)} ")
+                        } else if (index < daysSelected) {
+                            stringBuilder.append(", ")
+                        }
+                    }
+                }
+            }
+
+
+            weekDayPickerHeader.text = getString(R.string.habit_repeat_days, stringBuilder.toString())
         }
     }
 }

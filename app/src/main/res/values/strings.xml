@@ -12,8 +12,11 @@
     <string name="edit_habit">Edit habit</string>
 
     <string name="habit_name">Name</string>
-
     <string name="create">Create</string>
+    <string name="habit_repeat">Repeat</string>
+    <string name="habit_repeat_days">Repeat: Every %1$s</string>
+    <string name="habit_repeat_every_day">Repeat: Every Day</string>
+    <string name="and">and</string>
 
     <!--Tasks-->
     <string name="time_left">Time left: %1$s</string>
