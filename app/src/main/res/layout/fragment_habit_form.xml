@@ -3,17 +3,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="@dimen/mediumPadding">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/habitNameInputLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
-        android:text="@string/habit"
+        app:layout_constraintTop_toTopOf="parent">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/habitNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:inputType="text|textCapSentences"
+            android:imeOptions="actionDone"
+            android:hint="@string/habit_name"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/buttonHeight"
+        android:text="@string/create_habit"
+        style="@style/ButtonStyle"
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
