@@ -29,6 +29,7 @@
             android:id="@+id/settingsButton"
             android:layout_width="@dimen/toolbarButtonSize"
             android:layout_height="@dimen/toolbarButtonSize"
+            android:contentDescription="@string/settings"
 
             android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/ic_settings"
@@ -38,6 +39,7 @@
             android:id="@+id/addHabitButton"
             android:layout_width="@dimen/toolbarButtonSize"
             android:layout_height="@dimen/toolbarButtonSize"
+            android:contentDescription="@string/create_habit"
 
             android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/ic_add"

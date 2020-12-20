@@ -8,7 +8,7 @@
     <string name="statistics">Statistics</string>
 
     <!--Habits-->
-    <string name="create_habit">Create habit</string>
+    <string name="create_habit">Create a new habit</string>
     <string name="edit_habit">Edit habit</string>
 
     <!--Tasks-->
