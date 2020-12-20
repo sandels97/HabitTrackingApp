@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.viewmodels.HabitFormViewModel
+import com.santtuhyvarinen.habittracker.views.WeekDayPicker
 import kotlinx.android.synthetic.main.fragment_habit_form.*
 
 class HabitFormFragment : Fragment() {
@@ -31,6 +32,16 @@ class HabitFormFragment : Fragment() {
             val saveSuccess = habitFormViewModel.saveHabit()
 
             if(saveSuccess) findNavController().navigateUp()
+        }
+
+        weekDayPicker.weekDaySelectedListener = object : WeekDayPicker.WeekDaySelectedListener {
+            override fun weekDaySelected(index: Int, selected: Boolean) {
+                habitFormViewModel.selectedWeekDayButtons[index] = selected
+            }
+        }
+
+        for(i in habitFormViewModel.selectedWeekDayButtons.indices) {
+            weekDayPicker.setWeekDayButtonSelected(i, habitFormViewModel.selectedWeekDayButtons[i])
         }
     }
 }

@@ -23,6 +23,13 @@
             android:hint="@string/habit_name"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.santtuhyvarinen.habittracker.views.WeekDayPicker
+        android:id="@+id/weekDayPicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/habitNameInputLayout"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/saveHabitButton"
         android:layout_width="match_parent"

@@ -9,4 +9,14 @@
         <item>Friday</item>
         <item>Saturday</item>
     </string-array>
+
+    <string-array name="WeekDaysLetters">
+        <item>S</item>
+        <item>M</item>
+        <item>T</item>
+        <item>W</item>
+        <item>T</item>
+        <item>F</item>
+        <item>S</item>
+    </string-array>
 </resources>
