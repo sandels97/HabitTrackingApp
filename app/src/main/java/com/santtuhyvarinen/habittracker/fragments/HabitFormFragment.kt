@@ -29,9 +29,7 @@ class HabitFormFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         habitFormViewModel = ViewModelProvider(this).get(HabitFormViewModel::class.java)
-        habitFormViewModel.iconManager.loadIcons(requireContext())
-
-        if(habitFormViewModel.priorityLevels.isEmpty()) habitFormViewModel.priorityLevels = resources.getStringArray(R.array.PriorityLevels)
+        habitFormViewModel.initialize(requireContext())
 
         habitNameEditText.requestFocus()
         habitNameEditText.setOnEditorActionListener { _, actionId, keyEvent ->

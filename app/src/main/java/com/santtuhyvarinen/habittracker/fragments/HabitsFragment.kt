@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.adapters.HabitsListAdapter
+import com.santtuhyvarinen.habittracker.models.HabitModel
 import com.santtuhyvarinen.habittracker.viewmodels.HabitsViewModel
 import kotlinx.android.synthetic.main.fragment_habits.*
 
@@ -34,5 +36,15 @@ class HabitsFragment : Fragment() {
         recyclerView.adapter = habitsAdapter
         val dividerItemDecoration = DividerItemDecoration(recyclerView.context, (recyclerView.layoutManager as LinearLayoutManager).orientation)
         recyclerView.addItemDecoration(dividerItemDecoration)
+
+        habitsAdapter.habitClickedListener = object : HabitsListAdapter.HabitClickedListener {
+            override fun habitClicked(habitModel: HabitModel) {
+                openHabitView(habitModel)
+            }
+        }
+    }
+
+    fun openHabitView(habitModel: HabitModel) {
+        findNavController().navigate(R.id.action_from_habitsFragment_to_habitViewFragment)
     }
 }

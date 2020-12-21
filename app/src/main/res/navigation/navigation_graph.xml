@@ -39,7 +39,12 @@
             android:id="@+id/action_from_habitsFragment_to_habitViewFragment"
             app:enterAnim="@anim/anim_slide_in"
             app:exitAnim="@anim/anim_slide_out"
-            app:destination="@id/habitViewFragment"/>
+            app:destination="@id/habitViewFragment">
+            <argument
+                android:name="habit_id"
+                app:argType="long"
+                android:defaultValue="-1L" />
+        </action>
     </fragment>
 
     <!--Habit view screen-->
@@ -48,6 +53,11 @@
         android:label="@string/habit"
         android:name="com.santtuhyvarinen.habittracker.fragments.HabitViewFragment"
         tools:layout="@layout/fragment_habit_view">
+
+        <argument
+            android:name="habit_id"
+            app:argType="long"
+            android:defaultValue="-1L" />
 
         <action
             android:id="@+id/action_from_habitsFragment_to_habitFormFragment"

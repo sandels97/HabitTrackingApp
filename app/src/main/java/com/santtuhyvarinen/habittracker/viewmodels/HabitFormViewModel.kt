@@ -8,6 +8,8 @@ import com.santtuhyvarinen.habittracker.models.IconModel
 
 class HabitFormViewModel() : ViewModel() {
 
+    private var initialized = false
+
     var loading = false
 
     var priorityLevels : Array<String> = Array (0) { "" }
@@ -17,6 +19,15 @@ class HabitFormViewModel() : ViewModel() {
     var selectedIconModel : IconModel? = null
 
     val iconManager = IconManager()
+
+    fun initialize(context: Context) {
+        if(initialized) return
+
+        iconManager.loadIcons(context)
+        priorityLevels = context.resources.getStringArray(R.array.PriorityLevels)
+
+        initialized = true
+    }
 
     fun getMaxPriorityLevel() : Int {
         return priorityLevels.size - 1
