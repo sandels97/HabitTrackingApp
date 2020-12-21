@@ -9,13 +9,18 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+
         android:padding="@dimen/largePadding"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/saveHabitButton">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:clipChildren="false">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/habitNameInputLayout"
@@ -49,6 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/smallMargin"
+                android:clipToPadding="false"
+                android:clipChildren="false"
 
                 app:layout_constraintTop_toBottomOf="@id/weekDayPickerHeader"/>
 
