@@ -60,7 +60,7 @@
             android:defaultValue="-1L" />
 
         <action
-            android:id="@+id/action_from_habitsFragment_to_habitFormFragment"
+            android:id="@+id/action_from_habitViewFragment_to_habitFormFragment"
             app:enterAnim="@anim/anim_slide_in"
             app:exitAnim="@anim/anim_slide_out"
             app:destination="@id/habitFormFragment"/>

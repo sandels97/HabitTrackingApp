@@ -8,6 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.santtuhyvarinen.habittracker.R
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,13 +32,15 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
 
             when(destination.id) {
-                R.id.habitFormFragment, R.id.settingsFragment -> {
+                R.id.habitFormFragment, R.id.settingsFragment, R.id.habitViewFragment -> {
                     hideNavigationElements(true)
                 }
                 else -> {
                     hideNavigationElements(false)
                 }
             }
+
+            hideHabitViewButtons(destination.id != R.id.habitViewFragment)
         }
 
         //Toolbar buttons
@@ -46,6 +49,9 @@ class MainActivity : AppCompatActivity() {
         }
         addHabitButton.setOnClickListener {
             navController.navigate(R.id.action_to_habitFormFragment)
+        }
+        editButton.setOnClickListener {
+            navController.navigate(R.id.action_from_habitViewFragment_to_habitFormFragment)
         }
     }
 
@@ -56,4 +62,8 @@ class MainActivity : AppCompatActivity() {
         //toolbarTitle.visibility = if(hidden) View.GONE else View.VISIBLE
     }
 
+    private fun hideHabitViewButtons(hidden : Boolean) {
+        editButton?.visibility = if(hidden) View.GONE else View.VISIBLE
+        deleteButton?.visibility = if(hidden) View.GONE else View.VISIBLE
+    }
 }

@@ -10,6 +10,8 @@
     <!--Habits-->
     <string name="create_habit">Create a new habit</string>
     <string name="edit_habit">Edit habit</string>
+    <string name="delete_habit">Delete habit</string>
+    <string name="save_changes">Save changes</string>
 
     <string name="habit_name">Name</string>
     <string name="create">Create</string>
