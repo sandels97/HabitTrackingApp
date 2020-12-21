@@ -1,11 +1,10 @@
 package com.santtuhyvarinen.habittracker.fragments
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -31,12 +30,27 @@ class HabitFormFragment : Fragment() {
 
         if(habitFormViewModel.priorityLevels.isEmpty()) habitFormViewModel.priorityLevels = resources.getStringArray(R.array.PriorityLevels)
 
-        saveHabitButton.setOnClickListener {
-            val saveSuccess = habitFormViewModel.saveHabit()
-
-            if(saveSuccess) findNavController().navigateUp()
+        habitNameEditText.requestFocus()
+        habitNameEditText.setOnEditorActionListener { _, actionId, keyEvent ->
+            if(actionId == EditorInfo.IME_ACTION_DONE) {
+                habitNameEditText.clearFocus()
+            }
+            return@setOnEditorActionListener false
         }
 
+        //WeekDayPicker
+        weekDayPicker.weekDaySelectedListener = object : WeekDayPicker.WeekDaySelectedListener {
+            override fun weekDaySelected(index: Int, selected: Boolean) {
+                habitFormViewModel.selectedWeekDayButtons[index] = selected
+                updateWeekDayHeader()
+            }
+        }
+
+        for(i in habitFormViewModel.selectedWeekDayButtons.indices) {
+            weekDayPicker.setWeekDayButtonSelected(i, habitFormViewModel.selectedWeekDayButtons[i])
+        }
+
+        //Priority SeekBar
         habitPrioritySeekBar.max = habitFormViewModel.getMaxPriorityLevel()
         habitPrioritySeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekbar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -51,19 +65,28 @@ class HabitFormFragment : Fragment() {
             }
         })
 
-        weekDayPicker.weekDaySelectedListener = object : WeekDayPicker.WeekDaySelectedListener {
-            override fun weekDaySelected(index: Int, selected: Boolean) {
-                habitFormViewModel.selectedWeekDayButtons[index] = selected
-                updateWeekDayHeader()
-            }
-        }
+        //Save button
+        saveHabitButton.setOnClickListener {
+            val saveSuccess = habitFormViewModel.saveHabit()
 
-        for(i in habitFormViewModel.selectedWeekDayButtons.indices) {
-            weekDayPicker.setWeekDayButtonSelected(i, habitFormViewModel.selectedWeekDayButtons[i])
+            if(saveSuccess) findNavController().navigateUp()
         }
 
         updatePriorityHeader()
         updateWeekDayHeader()
+        updateLoadingProgressVisibility()
+    }
+
+    private fun updateLoadingProgressVisibility() {
+        progress.apply {
+            visibility = if(habitFormViewModel.loading) View.VISIBLE else View.GONE
+        }
+        scrollView.apply {
+            visibility = if(habitFormViewModel.loading) View.GONE else View.VISIBLE
+        }
+        saveHabitButton.apply {
+            visibility = if(habitFormViewModel.loading) View.GONE else View.VISIBLE
+        }
     }
 
     private fun updatePriorityHeader() {

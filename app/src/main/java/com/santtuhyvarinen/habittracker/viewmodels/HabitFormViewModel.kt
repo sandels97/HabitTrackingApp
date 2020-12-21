@@ -3,13 +3,10 @@ package com.santtuhyvarinen.habittracker.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.santtuhyvarinen.habittracker.R
-import kotlinx.android.synthetic.main.fragment_habit_form.*
 
 class HabitFormViewModel : ViewModel() {
 
-    companion object {
-        const val MAX_PRIORITY_VALUE = 100
-    }
+    var loading = false
 
     var priorityLevels : Array<String> = Array (0) { "" }
 
@@ -65,7 +62,6 @@ class HabitFormViewModel : ViewModel() {
     }
 
     fun saveHabit() : Boolean {
-
-        return false
+        return true
     }
 }
