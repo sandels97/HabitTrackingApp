@@ -30,4 +30,8 @@
     <dimen name="taskCardHeight">80dp</dimen>
     <dimen name="taskIconSize">30dp</dimen>
 
+    <!--Habits-->
+    <dimen name="itemHeight">80dp</dimen>
+    <dimen name="itemIconSize">30dp</dimen>
+
 </resources>
