@@ -3,16 +3,20 @@ package com.santtuhyvarinen.habittracker.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.santtuhyvarinen.habittracker.R
+import com.santtuhyvarinen.habittracker.managers.IconManager
+import com.santtuhyvarinen.habittracker.models.IconModel
 
-class HabitFormViewModel : ViewModel() {
+class HabitFormViewModel() : ViewModel() {
 
     var loading = false
 
     var priorityLevels : Array<String> = Array (0) { "" }
 
     var priorityValue = 0
-
     var selectedWeekDayButtons = Array(7) { false }
+    var selectedIconModel : IconModel? = null
+
+    val iconManager = IconManager()
 
     fun getMaxPriorityLevel() : Int {
         return priorityLevels.size - 1
@@ -51,7 +55,6 @@ class HabitFormViewModel : ViewModel() {
 
         return stringBuilder.toString()
     }
-
 
     fun isEveryDaySelectedOrNotSelected() : Boolean {
         return selectedWeekDayButtons.all { it } || selectedWeekDayButtons.all { !it }

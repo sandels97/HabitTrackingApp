@@ -44,7 +44,7 @@
 
                 app:layout_constraintTop_toBottomOf="@id/habitNameInputLayout"/>
 
-            <com.santtuhyvarinen.habittracker.views.WeekDayPicker
+            <com.santtuhyvarinen.habittracker.views.WeekDayPickerView
                 android:id="@+id/weekDayPicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,6 +70,23 @@
                 android:contentDescription="@string/habit_priority"
 
                 app:layout_constraintTop_toBottomOf="@id/habitPriorityHeader"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/iconPickerHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/habit_icon"
+                android:layout_marginTop="@dimen/largeMargin"
+                style="@style/HabitFormHeaderStyle"
+
+                app:layout_constraintTop_toBottomOf="@id/habitPrioritySeekBar"/>
+
+            <com.santtuhyvarinen.habittracker.views.IconPickerView
+                android:id="@+id/iconPickerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toBottomOf="@id/iconPickerHeader"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

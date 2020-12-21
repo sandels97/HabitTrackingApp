@@ -10,8 +10,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button1"
-        android:layout_width="@dimen/weekDayButtonSize"
-        android:layout_height="@dimen/weekDayButtonSize"
+        android:layout_width="@dimen/roundButtonSize"
+        android:layout_height="@dimen/roundButtonSize"
         style="@style/WeekDayButtonStyle"
 
         app:layout_constraintLeft_toLeftOf="parent"
@@ -21,8 +21,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button2"
-        android:layout_width="@dimen/weekDayButtonSize"
-        android:layout_height="@dimen/weekDayButtonSize"
+        android:layout_width="@dimen/roundButtonSize"
+        android:layout_height="@dimen/roundButtonSize"
         style="@style/WeekDayButtonStyle"
 
         app:layout_constraintLeft_toRightOf="@id/button1"
@@ -32,8 +32,8 @@
     
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button3"
-        android:layout_width="@dimen/weekDayButtonSize"
-        android:layout_height="@dimen/weekDayButtonSize"
+        android:layout_width="@dimen/roundButtonSize"
+        android:layout_height="@dimen/roundButtonSize"
         style="@style/WeekDayButtonStyle"
 
         app:layout_constraintLeft_toRightOf="@id/button2"
@@ -43,8 +43,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button4"
-        android:layout_width="@dimen/weekDayButtonSize"
-        android:layout_height="@dimen/weekDayButtonSize"
+        android:layout_width="@dimen/roundButtonSize"
+        android:layout_height="@dimen/roundButtonSize"
         style="@style/WeekDayButtonStyle"
 
         app:layout_constraintLeft_toRightOf="@id/button3"
@@ -54,8 +54,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button5"
-        android:layout_width="@dimen/weekDayButtonSize"
-        android:layout_height="@dimen/weekDayButtonSize"
+        android:layout_width="@dimen/roundButtonSize"
+        android:layout_height="@dimen/roundButtonSize"
         style="@style/WeekDayButtonStyle"
 
         app:layout_constraintLeft_toRightOf="@id/button4"
@@ -65,8 +65,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button6"
-        android:layout_width="@dimen/weekDayButtonSize"
-        android:layout_height="@dimen/weekDayButtonSize"
+        android:layout_width="@dimen/roundButtonSize"
+        android:layout_height="@dimen/roundButtonSize"
         style="@style/WeekDayButtonStyle"
 
         app:layout_constraintLeft_toRightOf="@id/button5"
@@ -76,8 +76,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button7"
-        android:layout_width="@dimen/weekDayButtonSize"
-        android:layout_height="@dimen/weekDayButtonSize"
+        android:layout_width="@dimen/roundButtonSize"
+        android:layout_height="@dimen/roundButtonSize"
         style="@style/WeekDayButtonStyle"
 
         app:layout_constraintLeft_toRightOf="@id/button6"

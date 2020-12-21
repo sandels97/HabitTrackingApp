@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.santtuhyvarinen.habittracker.R
+import com.santtuhyvarinen.habittracker.adapters.IconSelectionAdapter
+import com.santtuhyvarinen.habittracker.models.IconModel
 import com.santtuhyvarinen.habittracker.viewmodels.HabitFormViewModel
-import com.santtuhyvarinen.habittracker.views.WeekDayPicker
+import com.santtuhyvarinen.habittracker.views.WeekDayPickerView
 import kotlinx.android.synthetic.main.fragment_habit_form.*
 
 class HabitFormFragment : Fragment() {
@@ -27,6 +29,7 @@ class HabitFormFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         habitFormViewModel = ViewModelProvider(this).get(HabitFormViewModel::class.java)
+        habitFormViewModel.iconManager.loadIcons(requireContext())
 
         if(habitFormViewModel.priorityLevels.isEmpty()) habitFormViewModel.priorityLevels = resources.getStringArray(R.array.PriorityLevels)
 
@@ -39,7 +42,7 @@ class HabitFormFragment : Fragment() {
         }
 
         //WeekDayPicker
-        weekDayPicker.weekDaySelectedListener = object : WeekDayPicker.WeekDaySelectedListener {
+        weekDayPicker.weekDaySelectedListener = object : WeekDayPickerView.WeekDaySelectedListener {
             override fun weekDaySelected(index: Int, selected: Boolean) {
                 habitFormViewModel.selectedWeekDayButtons[index] = selected
                 updateWeekDayHeader()
@@ -64,6 +67,15 @@ class HabitFormFragment : Fragment() {
             override fun onStopTrackingTouch(p0: SeekBar?) {
             }
         })
+
+        //IconPicker
+        iconPickerView.iconManager = habitFormViewModel.iconManager
+        iconPickerView.setIconSelectedListener(object : IconSelectionAdapter.IconSelectedListener {
+            override fun iconSelected(iconModel: IconModel?) {
+                habitFormViewModel.selectedIconModel = iconModel
+            }
+        })
+        iconPickerView.setSelectedIcon(habitFormViewModel.selectedIconModel)
 
         //Save button
         saveHabitButton.setOnClickListener {

@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import com.santtuhyvarinen.habittracker.R
 import kotlinx.android.synthetic.main.layout_weekday_picker.view.*
 
-class WeekDayPicker(context: Context, attributeSet: AttributeSet) : FrameLayout(context, attributeSet) {
+class WeekDayPickerView(context: Context, attributeSet: AttributeSet) : FrameLayout(context, attributeSet) {
 
     var weekDaySelectedListener : WeekDaySelectedListener? = null
     interface WeekDaySelectedListener {

@@ -21,6 +21,8 @@
     <string name="habit_priority">Habit Priority</string>
     <string name="habit_priority_header">Priority: %1$s</string>
 
+    <string name="habit_icon">Icon</string>
+
     <!--Tasks-->
     <string name="time_left">Time left: %1$s</string>
 </resources>

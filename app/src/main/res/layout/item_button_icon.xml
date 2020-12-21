@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatImageButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/iconButton"
+    android:layout_width="@dimen/roundButtonSize"
+    android:layout_height="@dimen/roundButtonSize"
+    android:background="@drawable/background_round_button"/>

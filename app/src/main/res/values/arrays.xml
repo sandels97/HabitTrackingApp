@@ -37,4 +37,22 @@
         <item>High</item>
         <item>Very High</item>
     </string-array>
+
+    <string-array name="HabitIconKeys">
+        <item>favorite</item>
+        <item>star</item>
+        <item>thumbs_up</item>
+    </string-array>
+
+    <string-array name="HabitIconTitles">
+        <item>Favorite</item>
+        <item>Star</item>
+        <item>Thumbs up</item>
+    </string-array>
+
+    <integer-array name="HabitIcons">
+        <item>@drawable/icon_favorite</item>
+        <item>@drawable/icon_star</item>
+        <item>@drawable/icon_thumb_up</item>
+    </integer-array>
 </resources>
