@@ -2,11 +2,17 @@ package com.santtuhyvarinen.habittracker.activities
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.santtuhyvarinen.habittracker.R
+import com.santtuhyvarinen.habittracker.fragments.HabitFormFragmentArgs
+import com.santtuhyvarinen.habittracker.fragments.HabitViewFragmentDirections
+import com.santtuhyvarinen.habittracker.fragments.HabitsFragmentDirections
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
@@ -50,9 +56,6 @@ class MainActivity : AppCompatActivity() {
         addHabitButton.setOnClickListener {
             navController.navigate(R.id.action_to_habitFormFragment)
         }
-        editButton.setOnClickListener {
-            navController.navigate(R.id.action_from_habitViewFragment_to_habitFormFragment)
-        }
     }
 
     private fun hideNavigationElements(hidden : Boolean) {
@@ -65,5 +68,13 @@ class MainActivity : AppCompatActivity() {
     private fun hideHabitViewButtons(hidden : Boolean) {
         editButton?.visibility = if(hidden) View.GONE else View.VISIBLE
         deleteButton?.visibility = if(hidden) View.GONE else View.VISIBLE
+    }
+
+    fun getToolBarEditButton() : ImageButton {
+        return editButton
+    }
+
+    fun getToolBarDeleteButton() : ImageButton {
+        return deleteButton
     }
 }

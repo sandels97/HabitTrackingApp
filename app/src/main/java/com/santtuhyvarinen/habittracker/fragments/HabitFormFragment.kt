@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_habit_form.*
 
 class HabitFormFragment : Fragment() {
 
-    val args : HabitFormFragmentArgs by navArgs()
+    private val args : HabitFormFragmentArgs by navArgs()
 
     private lateinit var habitFormViewModel : HabitFormViewModel
 
@@ -33,7 +33,7 @@ class HabitFormFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         habitFormViewModel = ViewModelProvider(this).get(HabitFormViewModel::class.java)
-        habitFormViewModel.initialize(requireContext())
+        habitFormViewModel.initialize(requireContext(), args.habitId)
 
         habitNameEditText.requestFocus()
         habitNameEditText.setOnEditorActionListener { _, actionId, keyEvent ->
@@ -80,6 +80,7 @@ class HabitFormFragment : Fragment() {
         iconPickerView.setSelectedIcon(habitFormViewModel.selectedIconModel)
 
         //Save button
+        saveHabitButton.text = if(habitFormViewModel.isEditingExistingHabit()) getString(R.string.save_changes) else getString(R.string.create_habit)
         saveHabitButton.setOnClickListener {
             val saveSuccess = habitFormViewModel.saveHabit()
 

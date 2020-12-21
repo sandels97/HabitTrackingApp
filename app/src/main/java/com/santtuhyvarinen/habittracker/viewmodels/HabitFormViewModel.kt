@@ -12,16 +12,22 @@ class HabitFormViewModel() : ViewModel() {
 
     var loading = false
 
-    var priorityLevels : Array<String> = Array (0) { "" }
+    var habitId : Long = -1L
 
+    //False == Create a new habit
+    //True == Edit Habit
+
+    var priorityLevels : Array<String> = Array (0) { "" }
     var priorityValue = 0
     var selectedWeekDayButtons = Array(7) { false }
     var selectedIconModel : IconModel? = null
 
     val iconManager = IconManager()
 
-    fun initialize(context: Context) {
+    fun initialize(context: Context, id : Long) {
         if(initialized) return
+
+        habitId = id
 
         iconManager.loadIcons(context)
         priorityLevels = context.resources.getStringArray(R.array.PriorityLevels)
@@ -77,5 +83,9 @@ class HabitFormViewModel() : ViewModel() {
 
     fun saveHabit() : Boolean {
         return true
+    }
+
+    fun isEditingExistingHabit() : Boolean {
+        return habitId != -1L
     }
 }
