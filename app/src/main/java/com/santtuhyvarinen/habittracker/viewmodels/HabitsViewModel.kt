@@ -23,16 +23,19 @@ class HabitsViewModel : ViewModel() {
 
     private fun createDummyData() {
         val habit = HabitModel()
+        habit.id = 1
         habit.name = "Go to the gym"
         habit.iconDrawable = iconManager.getIconByKey("star")
         habits.add(habit)
 
         val habit2 = HabitModel()
+        habit2.id = 2
         habit2.name = "Drink water"
         habit2.iconDrawable = iconManager.getIconByKey("favorite")
         habits.add(habit2)
 
         val habit3 = HabitModel()
+        habit3.id = 3
         habit3.name = "Go for a walk"
         habit3.iconDrawable = iconManager.getIconByKey("thumbs_up")
         habits.add(habit3)

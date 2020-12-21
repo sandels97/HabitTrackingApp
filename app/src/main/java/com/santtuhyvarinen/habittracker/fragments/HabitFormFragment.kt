@@ -1,6 +1,7 @@
 package com.santtuhyvarinen.habittracker.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.adapters.IconSelectionAdapter
 import com.santtuhyvarinen.habittracker.models.IconModel
@@ -17,6 +19,8 @@ import com.santtuhyvarinen.habittracker.views.WeekDayPickerView
 import kotlinx.android.synthetic.main.fragment_habit_form.*
 
 class HabitFormFragment : Fragment() {
+
+    val args : HabitFormFragmentArgs by navArgs()
 
     private lateinit var habitFormViewModel : HabitFormViewModel
 
