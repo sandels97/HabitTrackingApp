@@ -10,13 +10,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.santtuhyvarinen.habittracker.R
-import com.santtuhyvarinen.habittracker.models.HabitModel
+import com.santtuhyvarinen.habittracker.models.Habit
 
-class HabitsListAdapter(var context: Context, var data : List<HabitModel>) : RecyclerView.Adapter<HabitsListAdapter.ViewHolder>() {
+class HabitsListAdapter(var context: Context, var data : List<Habit>) : RecyclerView.Adapter<HabitsListAdapter.ViewHolder>() {
 
     var habitClickedListener : HabitClickedListener? = null
     interface HabitClickedListener {
-        fun habitClicked(habitModel: HabitModel)
+        fun habitClicked(habit: Habit)
     }
 
     class ViewHolder(var layout : View) : RecyclerView.ViewHolder(layout) {

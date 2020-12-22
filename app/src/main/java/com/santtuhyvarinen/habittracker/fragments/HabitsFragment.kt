@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.adapters.HabitsListAdapter
-import com.santtuhyvarinen.habittracker.models.HabitModel
+import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.viewmodels.HabitsViewModel
 import kotlinx.android.synthetic.main.fragment_habits.*
 
@@ -38,14 +38,14 @@ class HabitsFragment : Fragment() {
         recyclerView.addItemDecoration(dividerItemDecoration)
 
         habitsAdapter.habitClickedListener = object : HabitsListAdapter.HabitClickedListener {
-            override fun habitClicked(habitModel: HabitModel) {
-                openHabitView(habitModel)
+            override fun habitClicked(habit: Habit) {
+                openHabitView(habit)
             }
         }
     }
 
-    fun openHabitView(habitModel: HabitModel) {
-        val action = HabitsFragmentDirections.actionFromHabitsFragmentToHabitViewFragment(habitModel.id)
+    fun openHabitView(habit: Habit) {
+        val action = HabitsFragmentDirections.actionFromHabitsFragmentToHabitViewFragment(habit.id)
         findNavController().navigate(action)
     }
 }
