@@ -24,8 +24,6 @@ class HabitViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        text.text = args.habitId.toString()
-
         val activity = (activity as MainActivity)
 
         //Edit button on Activity ToolBar
