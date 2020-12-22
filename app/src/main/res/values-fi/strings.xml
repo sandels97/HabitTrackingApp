@@ -9,6 +9,20 @@
 
     <string name="create_habit">Luo rutiini</string>
     <string name="edit_habit">Muokkaa rutiinia</string>
+    <string name="delete_habit">Poista rutiini</string>
+    <string name="save_changes">Tallenna muutokset</string>
+
+    <string name="habit_name">Nimi</string>
+    <string name="create">Luo</string>
+    <string name="habit_repeat">Toista</string>
+    <string name="habit_repeat_days">Toista: Joka %1$s</string>
+    <string name="habit_repeat_every_day">Toista: Joka päivä</string>
+    <string name="and">ja</string>
+
+    <string name="habit_priority">Rutiini </string>
+    <string name="habit_priority_header">Prioriteetti: %1$s</string>
+
+    <string name="habit_icon">Kuvake</string>
 
     <!--Tasks-->
     <string name="time_left">Aikaa jäljellä: %1$s</string>
