@@ -13,6 +13,7 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/largePadding"
         android:clipToPadding="false"
+        android:layoutAnimation="@anim/anim_task_item"
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
