@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Generic-->
+    <dimen name="smallMargin">10dp</dimen>
+    <dimen name="mediumMargin">20dp</dimen>
+    <dimen name="largeMargin">30dp</dimen>
 
+    <dimen name="smallPadding">10dp</dimen>
+    <dimen name="mediumPadding">20dp</dimen>
+    <dimen name="largePadding">30dp</dimen>
+
+    <!--Navigation-->
+    <dimen name="bottomNavigationHeight">80dp</dimen>
+    <dimen name="toolbarHeight">80dp</dimen>
+    <dimen name="toolbarButtonSize">60dp</dimen>
+
+    <dimen name="buttonHeight">80dp</dimen>
+    <dimen name="roundButtonSize">60dp</dimen>
+
+    <dimen name="floatingActionButtonSize">60dp</dimen>
+
+    <!--Tasks-->
+    <dimen name="taskCardHeight">100dp</dimen>
+    <dimen name="taskIconSize">40dp</dimen>
+
+    <!--Habits-->
+    <dimen name="itemHeight">100dp</dimen>
+    <dimen name="itemIconSize">40dp</dimen>
 </resources>

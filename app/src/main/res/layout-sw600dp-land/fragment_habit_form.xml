@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/centerGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:padding="@dimen/largePadding"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/centerGuide"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/habitNameInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+                app:layout_constraintTop_toTopOf="parent">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/habitNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:inputType="text|textCapSentences"
+                    android:imeOptions="actionDone"
+                    android:hint="@string/habit_name"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/weekDayPickerHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/habit_repeat"
+                android:layout_marginTop="@dimen/largeMargin"
+                style="@style/HabitFormHeaderStyle"
+
+                app:layout_constraintTop_toBottomOf="@id/habitNameInputLayout"/>
+
+            <com.santtuhyvarinen.habittracker.views.WeekDayPickerView
+                android:id="@+id/weekDayPicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallMargin"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+
+                app:layout_constraintTop_toBottomOf="@id/weekDayPickerHeader"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/habitPriorityHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/habit_priority"
+                android:layout_marginTop="@dimen/largeMargin"
+                style="@style/HabitFormHeaderStyle"
+
+                app:layout_constraintTop_toBottomOf="@id/weekDayPicker"/>
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/habitPrioritySeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallMargin"
+                android:contentDescription="@string/habit_priority"
+
+                app:layout_constraintTop_toBottomOf="@id/habitPriorityHeader"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/iconPickerHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/habit_icon"
+                android:layout_marginTop="@dimen/largeMargin"
+                style="@style/HabitFormHeaderStyle"
+
+                app:layout_constraintTop_toBottomOf="@id/habitPrioritySeekBar"/>
+
+            <com.santtuhyvarinen.habittracker.views.IconPickerView
+                android:id="@+id/iconPickerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toBottomOf="@id/iconPickerHeader"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveHabitButton"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/buttonHeight"
+        android:text="@string/create_habit"
+        style="@style/ButtonStyle"
+        android:layout_margin="@dimen/largeMargin"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/centerGuide"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        style="?android:attr/progressBarStyleHorizontal"
+
+        app:layout_constraintTop_toTopOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
