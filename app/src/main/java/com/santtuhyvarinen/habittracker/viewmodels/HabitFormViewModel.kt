@@ -6,7 +6,7 @@ import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.IconModel
 
-class HabitFormViewModel() : ViewModel() {
+class HabitFormViewModel : ViewModel() {
 
     private var initialized = false
 

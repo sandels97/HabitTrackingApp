@@ -9,8 +9,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.activities.MainActivity
-import kotlinx.android.synthetic.main.fragment_habit_view.*
-import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class HabitViewFragment : Fragment() {
 

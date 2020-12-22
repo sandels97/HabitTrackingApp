@@ -6,8 +6,6 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageButton
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.IconModel
