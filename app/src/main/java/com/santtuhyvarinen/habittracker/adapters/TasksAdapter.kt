@@ -11,8 +11,13 @@ import com.santtuhyvarinen.habittracker.models.TaskModel
 
 class TasksAdapter(var context: Context, var data : List<TaskModel>) : RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
 
-    class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
-        val titleTextView : TextView = view.findViewById(R.id.title)
+    var taskListener : TaskListener? = null
+    interface TaskListener {
+        fun taskMarkedDone(taskModel: TaskModel)
+    }
+
+    class ViewHolder(var layout : View) : RecyclerView.ViewHolder(layout) {
+        val titleTextView : TextView = layout.findViewById(R.id.title)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,6 +29,14 @@ class TasksAdapter(var context: Context, var data : List<TaskModel>) : RecyclerV
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val taskModel = data[position]
         holder.titleTextView.text = taskModel.title
+        holder.layout.setOnLongClickListener {
+            taskListener?.taskMarkedDone(taskModel)
+
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, itemCount)
+
+            return@setOnLongClickListener true
+        }
     }
 
     override fun getItemCount(): Int {

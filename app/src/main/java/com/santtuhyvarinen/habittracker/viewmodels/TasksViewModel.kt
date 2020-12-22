@@ -9,7 +9,11 @@ class TasksViewModel : ViewModel() {
     init {
         //Dummy data for testing
         for(i in 0 until 10) {
-            tasks.add(TaskModel("Task example"))
+            tasks.add(TaskModel("Task example ${i + 1}"))
         }
+    }
+
+    fun setTaskAsDone(taskModel: TaskModel) {
+        tasks.remove(taskModel)
     }
 }
