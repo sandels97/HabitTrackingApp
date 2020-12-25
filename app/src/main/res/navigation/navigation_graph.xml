@@ -96,7 +96,10 @@
         android:id="@+id/action_to_habitViewFragment"
         app:enterAnim="@anim/anim_slide_in"
         app:exitAnim="@anim/anim_slide_out"
-        app:destination="@id/habitViewFragment">
+        app:destination="@id/habitViewFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/habitFormFragment"
+        app:popUpToInclusive="true">
         <argument
             android:name="habit_id"
             app:argType="long"

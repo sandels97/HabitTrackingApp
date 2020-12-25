@@ -51,8 +51,6 @@ class HabitFormFragment : Fragment() {
         val saveHabitObserver = Observer<Long> { id ->
             if(id >= 0) {
                 val action = HabitFormFragmentDirections.actionToHabitViewFragment(id)
-
-                findNavController().popBackStack(R.id.habitFormFragment, true) //Pop back stack here so navigation won't get stuck to HabitViewFragment
                 findNavController().navigate(action)
             }
         }
