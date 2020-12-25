@@ -1,8 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/habitInfoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:padding="@dimen/largePadding"
+        android:background="@color/colorPrimaryBackground"
+        android:elevation="@dimen/elevation"
+
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/habitNameText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/habit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/habitIcon"
+            style="@style/HeaderStyle"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/habitIcon"
+            android:layout_width="@dimen/itemIconSize"
+            android:layout_height="@dimen/itemIconSize"
+            android:src="@drawable/icon_star"
+            app:layout_constraintTop_toTopOf="@id/habitNameText"
+            app:layout_constraintBottom_toBottomOf="@id/habitNameText"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/habitRecurrenceText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/habit_repeat_every_day"
+            android:layout_marginTop="@dimen/smallMargin"
+
+            app:layout_constraintTop_toBottomOf="@id/habitNameText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/habitIcon"
+            style="@style/SubHeaderStyle"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/habitPriorityText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/habit_priority_header"
+            android:layout_marginTop="@dimen/smallMargin"
+
+            app:layout_constraintTop_toBottomOf="@id/habitRecurrenceText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/habitIcon"
+            style="@style/SubHeaderStyle"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

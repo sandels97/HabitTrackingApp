@@ -52,6 +52,22 @@
         <item name="android:maxLines">1</item>
     </style>
 
+    <style name="HeaderStyle">
+        <item name="android:textSize">@dimen/titleTextSize</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="SubHeaderStyle">
+        <item name="android:textSize">@dimen/smallTextSize</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
     <style name="ButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:backgroundTint">@color/colorSecondary</item>
         <item name="android:textColor">@color/white</item>
