@@ -22,6 +22,7 @@
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
 
+    <string name="deleted">%1$s deleted</string>
 
     <string name="habit_name">Name</string>
     <string name="habit_repeat">Repeat</string>
@@ -39,4 +40,5 @@
 
     <!--Errors-->
     <string name="error_load_habit">Error: Can\'t show the habit</string>
+    <string name="error_delete_habit">Error: Could not delete the habit</string>
 </resources>

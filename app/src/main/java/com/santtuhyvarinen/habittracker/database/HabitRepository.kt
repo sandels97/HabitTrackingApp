@@ -2,12 +2,7 @@ package com.santtuhyvarinen.habittracker.database
 
 import android.util.Log
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.santtuhyvarinen.habittracker.database.AppDatabase.Companion.DATABASE_LOG_TAG
 import com.santtuhyvarinen.habittracker.models.Habit
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 @Suppress("RedundantSuspendModifier")
 
@@ -17,16 +12,18 @@ class HabitRepository(private val habitDao: HabitDao) {
     @WorkerThread
     suspend fun createHabit(habit : Habit) : Long {
         val id = habitDao.create(habit)
-        Log.d(DATABASE_LOG_TAG, "Habit inserted to database with id $id")
+        Log.d(AppDatabase.DATABASE_LOG_TAG, "Habit inserted to database with id $id")
 
         return id
     }
 
     @WorkerThread
-    suspend fun deleteHabit(habit : Habit) {
-        habitDao.delete(habit)
+    suspend fun deleteHabit(habit : Habit) : Int {
+        val rows = habitDao.delete(habit)
 
-        Log.d(DATABASE_LOG_TAG, "Habit deleted from database")
+        Log.d(AppDatabase.DATABASE_LOG_TAG, "$rows rows deleted from the database")
+
+        return rows
     }
 
     @WorkerThread

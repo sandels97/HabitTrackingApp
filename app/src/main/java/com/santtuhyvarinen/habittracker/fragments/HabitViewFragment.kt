@@ -48,8 +48,6 @@ class HabitViewFragment : Fragment() {
             if(habit != null) {
                 updateHabitValues(habit)
             } else {
-                //Error: could not load habit, exit view
-                Toast.makeText(requireContext(), getString(R.string.error_load_habit), Toast.LENGTH_LONG).show()
                 findNavController().navigateUp()
             }
         }
@@ -96,8 +94,7 @@ class HabitViewFragment : Fragment() {
         alertDialog.setMessage(getString(R.string.habit_delete_confirmation))
         alertDialog.setPositiveButton(getString(R.string.delete), object : DialogInterface.OnClickListener {
             override fun onClick(p0: DialogInterface?, p1: Int) {
-                //habitViewModel.deleteHabit()
-                findNavController().navigateUp()
+                habitViewModel.deleteHabit(requireContext())
             }
         })
 

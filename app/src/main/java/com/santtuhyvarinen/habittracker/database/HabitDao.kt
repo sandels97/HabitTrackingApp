@@ -21,5 +21,5 @@ interface HabitDao {
     suspend fun update(habit: Habit)
 
     @Delete
-    suspend fun delete(habit: Habit)
+    suspend fun delete(habit: Habit) : Int
 }
