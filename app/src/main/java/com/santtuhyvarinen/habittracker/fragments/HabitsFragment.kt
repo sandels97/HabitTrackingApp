@@ -38,6 +38,7 @@ class HabitsFragment : Fragment() {
         val habitsObserver = Observer<List<Habit>> { list ->
             habitsAdapter.data = list
             habitsAdapter.notifyDataSetChanged()
+            progress.visibility = View.GONE
         }
         habitsViewModel.setHabitsObserver(viewLifecycleOwner, habitsObserver)
 
