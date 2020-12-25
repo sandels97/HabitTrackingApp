@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.santtuhyvarinen.habittracker.database.DatabaseManager
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.Habit
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class HabitViewModel : ViewModel() {

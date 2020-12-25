@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -38,16 +39,19 @@ class HabitViewFragment : Fragment() {
             return
         }
 
+        updateProgress(false)
+
         habitViewModel = ViewModelProvider(this).get(HabitViewModel::class.java)
         habitViewModel.initialize(requireContext(), args.habitId)
 
         val habitObserver = Observer<Habit> { habit ->
-            habitNameText.text = habit.name
-
-            val habitKey = habit.iconKey
-
-            if(habitKey != null)
-            habitIcon.setImageDrawable(habitViewModel.iconManager.getIconByKey(habitKey))
+            if(habit != null) {
+                updateHabitValues(habit)
+            } else {
+                //Error: could not load habit, exit view
+                Toast.makeText(requireContext(), getString(R.string.error_load_habit), Toast.LENGTH_LONG).show()
+                findNavController().navigateUp()
+            }
         }
 
         habitViewModel.habit.observe(viewLifecycleOwner, habitObserver)
@@ -67,6 +71,22 @@ class HabitViewFragment : Fragment() {
 
             showDeleteConfirmationDialog()
         }
+    }
+
+    private fun updateProgress(showLayout : Boolean) {
+        progress.visibility = if(showLayout) View.GONE else View.VISIBLE
+        habitInfoLayout.visibility = if(showLayout) View.VISIBLE else View.GONE
+    }
+
+    private fun updateHabitValues(habit: Habit) {
+        habitNameText.text = habit.name
+
+        val habitKey = habit.iconKey
+
+        if (habitKey != null)
+            habitIcon.setImageDrawable(habitViewModel.iconManager.getIconByKey(habitKey))
+
+        updateProgress(true)
     }
 
     private fun showDeleteConfirmationDialog() {

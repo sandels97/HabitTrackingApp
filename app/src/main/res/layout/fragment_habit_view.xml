@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
+        android:visibility="gone"
         android:padding="@dimen/largePadding"
         android:background="@color/colorPrimaryBackground"
         android:elevation="@dimen/elevation"
@@ -60,5 +61,15 @@
             app:layout_constraintRight_toLeftOf="@id/habitIcon"
             style="@style/SubHeaderStyle"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyleHorizontal"
+
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

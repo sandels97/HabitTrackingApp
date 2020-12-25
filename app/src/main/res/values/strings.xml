@@ -36,4 +36,7 @@
 
     <!--Tasks-->
     <string name="time_left">Time left: %1$s</string>
+
+    <!--Errors-->
+    <string name="error_load_habit">Error: Can\'t show the habit</string>
 </resources>
