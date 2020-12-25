@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.adapters.IconSelectionAdapter
+import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.IconModel
 import com.santtuhyvarinen.habittracker.viewmodels.HabitFormViewModel
 import com.santtuhyvarinen.habittracker.views.WeekDayPickerView
@@ -34,6 +36,27 @@ class HabitFormFragment : Fragment() {
 
         habitFormViewModel = ViewModelProvider(this).get(HabitFormViewModel::class.java)
         habitFormViewModel.initialize(requireContext(), args.habitId)
+
+        //If editing a habit, load the existing habit values to correct fields
+        val habitObserver = Observer<Habit> { habit ->
+            if(habit != null) {
+                habitFormViewModel.loading = false
+                updateHabitValues(habit)
+                updateLoadingProgressVisibility()
+            }
+        }
+        habitFormViewModel.habitData.observe(viewLifecycleOwner, habitObserver)
+
+        //Navigate to HabitView after saving the habit
+        val saveHabitObserver = Observer<Long> { id ->
+            if(id >= 0) {
+                val action = HabitFormFragmentDirections.actionToHabitViewFragment(id)
+
+                findNavController().popBackStack(R.id.habitFormFragment, true) //Pop back stack here so navigation won't get stuck to HabitViewFragment
+                findNavController().navigate(action)
+            }
+        }
+        habitFormViewModel.habitDataSaved.observe(viewLifecycleOwner, saveHabitObserver)
 
         habitNameEditText.requestFocus()
         habitNameEditText.setOnEditorActionListener { _, actionId, keyEvent ->
@@ -82,9 +105,9 @@ class HabitFormFragment : Fragment() {
         //Save button
         saveHabitButton.text = if(habitFormViewModel.isEditingExistingHabit()) getString(R.string.save_changes) else getString(R.string.create_habit)
         saveHabitButton.setOnClickListener {
-            val saveSuccess = habitFormViewModel.saveHabit(requireContext(), habitNameEditText.text.toString())
+            habitFormViewModel.habitName = habitNameEditText.text.toString()
 
-            if(saveSuccess) findNavController().navigateUp()
+            habitFormViewModel.saveHabit(requireContext())
         }
 
         updatePriorityHeader()
@@ -116,5 +139,14 @@ class HabitFormFragment : Fragment() {
             //Show selected week days in to the header
             weekDayPickerHeader.text = getString(R.string.habit_repeat_days, habitFormViewModel.getWeekDaysSelectedText(requireContext()))
         }
+    }
+
+    private fun updateHabitValues(habit: Habit) {
+        habitNameEditText.setText(habit.name)
+        habitPrioritySeekBar.progress = habit.priority
+
+        val selectedModel = habitFormViewModel.iconManager.getIconModelByKey(habit.iconKey)
+        habitFormViewModel.selectedIconModel = selectedModel
+        iconPickerView.setSelectedIcon(selectedModel)
     }
 }

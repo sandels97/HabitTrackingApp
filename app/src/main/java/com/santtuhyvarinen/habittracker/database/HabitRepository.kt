@@ -27,7 +27,16 @@ class HabitRepository(private val habitDao: HabitDao) {
     }
 
     @WorkerThread
-    suspend fun getHabitById(id : Long) : Habit {
+    suspend fun updateHabit(habit : Habit) : Int {
+        val rows = habitDao.update(habit)
+
+        Log.d(AppDatabase.DATABASE_LOG_TAG, "$rows rows updated in the database")
+
+        return rows
+    }
+
+    @WorkerThread
+    suspend fun getHabitById(id : Long) : Habit? {
         return habitDao.getById(id)
     }
 }

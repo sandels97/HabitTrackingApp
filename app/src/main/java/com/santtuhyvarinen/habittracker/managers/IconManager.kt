@@ -2,7 +2,6 @@ package com.santtuhyvarinen.habittracker.managers
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.util.Log
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.IconModel
 
@@ -30,8 +29,14 @@ class IconManager {
     }
 
     fun getIconByKey(key : String) : Drawable? {
-        for(icon in iconModels) {
-            if(icon.key == key) return icon.drawable
+        return getIconModelByKey(key)?.drawable
+    }
+
+    fun getIconModelByKey(key : String?) : IconModel? {
+        if(key == null) return null
+
+        for(iconModel in iconModels) {
+            if(iconModel.key == key) return iconModel
         }
 
         return null

@@ -91,6 +91,18 @@
         app:exitAnim="@anim/anim_slide_out"
         app:destination="@id/habitFormFragment"/>
 
+    <!--Open Habit view action-->
+    <action
+        android:id="@+id/action_to_habitViewFragment"
+        app:enterAnim="@anim/anim_slide_in"
+        app:exitAnim="@anim/anim_slide_out"
+        app:destination="@id/habitViewFragment">
+        <argument
+            android:name="habit_id"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </action>
+
     <!--Settings screen-->
     <fragment
         android:id="@+id/settingsFragment"

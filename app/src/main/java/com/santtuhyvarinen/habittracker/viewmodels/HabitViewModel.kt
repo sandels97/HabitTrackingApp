@@ -54,7 +54,7 @@ class HabitViewModel : ViewModel() {
         }
     }
 
-    private suspend fun getHabit() : Habit {
+    private suspend fun getHabit() : Habit? {
         return databaseManager.habitRepository.getHabitById(habitId)
     }
 }

@@ -1,12 +1,11 @@
 package com.santtuhyvarinen.habittracker.viewmodels
 
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.santtuhyvarinen.habittracker.R
-import com.santtuhyvarinen.habittracker.database.AppDatabase
 import com.santtuhyvarinen.habittracker.database.DatabaseManager
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.Habit
@@ -20,9 +19,17 @@ class HabitFormViewModel : ViewModel() {
     var loading = false
 
     var habitId : Long = -1L
+    val habitData : MutableLiveData<Habit> by lazy {
+        MutableLiveData<Habit>()
+    }
+
+    val habitDataSaved : MutableLiveData<Long> by lazy {
+        MutableLiveData<Long>()
+    }
 
     lateinit var databaseManager : DatabaseManager
 
+    var habitName = ""
     var priorityLevels : Array<String> = Array (0) { "" }
     var priorityValue = 0
     var selectedWeekDayButtons = Array(7) { false }
@@ -36,6 +43,13 @@ class HabitFormViewModel : ViewModel() {
         databaseManager = DatabaseManager(context)
 
         habitId = id
+
+        if(isEditingExistingHabit()) {
+            loading = true
+            viewModelScope.launch {
+                habitData.value = getHabit()
+            }
+        }
 
         iconManager.loadIcons(context)
         priorityLevels = context.resources.getStringArray(R.array.PriorityLevels)
@@ -86,17 +100,24 @@ class HabitFormViewModel : ViewModel() {
     }
 
     fun daysSelected() : Int {
+
         return selectedWeekDayButtons.count { it }
     }
 
-    fun saveHabit(context: Context, name : String) : Boolean {
-        if(name.isEmpty()) {
+    fun saveHabit(context: Context) {
+        if(habitName.isEmpty()) {
             Toast.makeText(context, context.getString(R.string.error_name_empty), Toast.LENGTH_LONG).show()
-            return false
+            return
         }
 
-        val habit = Habit()
-        habit.name = name
+        val habit : Habit
+        if(isEditingExistingHabit()) {
+            habit = habitData.value as Habit
+        } else {
+            habit = Habit()
+        }
+
+        habit.name = habitName
 
         val currentTime = System.currentTimeMillis()
         habit.creationDate = currentTime
@@ -112,17 +133,30 @@ class HabitFormViewModel : ViewModel() {
         habit.priority = priorityValue
 
         viewModelScope.launch {
-            insertHabit(habit)
+            if(isEditingExistingHabit()) {
+                updateHabit(habit)
+                habitDataSaved.value = habitId
+            } else {
+                val id = insertHabit(habit)
+                habitDataSaved.value = id
+            }
         }
-
-        return true
     }
 
-    private suspend fun insertHabit(habit: Habit) {
-        databaseManager.habitRepository.createHabit(habit)
+    private suspend fun insertHabit(habit: Habit) : Long {
+        return databaseManager.habitRepository.createHabit(habit)
+    }
+
+    private suspend fun updateHabit(habit: Habit) : Boolean {
+        val rows = databaseManager.habitRepository.updateHabit(habit)
+        return rows > 0
     }
 
     fun isEditingExistingHabit() : Boolean {
-        return habitId != -1L
+        return habitId >= 0
+    }
+
+    private suspend fun getHabit() : Habit? {
+        return databaseManager.habitRepository.getHabitById(habitId)
     }
 }
