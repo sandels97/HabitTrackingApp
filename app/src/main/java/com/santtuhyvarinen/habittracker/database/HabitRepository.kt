@@ -28,4 +28,9 @@ class HabitRepository(private val habitDao: HabitDao) {
 
         Log.d(DATABASE_LOG_TAG, "Habit deleted from database")
     }
+
+    @WorkerThread
+    suspend fun getHabitById(id : Long) : Habit {
+        return habitDao.getById(id)
+    }
 }

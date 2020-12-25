@@ -30,7 +30,8 @@
             android:id="@+id/habitIcon"
             android:layout_width="@dimen/itemIconSize"
             android:layout_height="@dimen/itemIconSize"
-            android:src="@drawable/icon_star"
+            android:tint="@color/black"
+
             app:layout_constraintTop_toTopOf="@id/habitNameText"
             app:layout_constraintBottom_toBottomOf="@id/habitNameText"
             app:layout_constraintRight_toRightOf="parent"/>

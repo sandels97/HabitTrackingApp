@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.activities.MainActivity
+import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.viewmodels.HabitViewModel
+import kotlinx.android.synthetic.main.fragment_habit_view.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class HabitViewFragment : Fragment() {
@@ -29,7 +32,25 @@ class HabitViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //If there is no id set, navigate up
+        if(args.habitId < 0) {
+            findNavController().navigateUp()
+            return
+        }
+
         habitViewModel = ViewModelProvider(this).get(HabitViewModel::class.java)
+        habitViewModel.initialize(requireContext(), args.habitId)
+
+        val habitObserver = Observer<Habit> { habit ->
+            habitNameText.text = habit.name
+
+            val habitKey = habit.iconKey
+
+            if(habitKey != null)
+            habitIcon.setImageDrawable(habitViewModel.iconManager.getIconByKey(habitKey))
+        }
+
+        habitViewModel.habit.observe(viewLifecycleOwner, habitObserver)
 
         //Edit button on Activity ToolBar
         val activity = (activity as MainActivity)
