@@ -1,10 +1,12 @@
 package com.santtuhyvarinen.habittracker.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -32,7 +34,14 @@ class HabitsFragment : Fragment() {
         habitsViewModel = ViewModelProvider(this).get(HabitsViewModel::class.java)
         habitsViewModel.initialize(requireContext())
 
-        habitsAdapter = HabitsListAdapter(requireContext(), habitsViewModel.habits)
+        //Observer habits from database
+        val habitsObserver = Observer<List<Habit>> { list ->
+            habitsAdapter.data = list
+            habitsAdapter.notifyDataSetChanged()
+        }
+        habitsViewModel.setHabitsObserver(viewLifecycleOwner, habitsObserver)
+
+        habitsAdapter = HabitsListAdapter(requireContext())
         recyclerView.adapter = habitsAdapter
         val dividerItemDecoration = DividerItemDecoration(recyclerView.context, (recyclerView.layoutManager as LinearLayoutManager).orientation)
         recyclerView.addItemDecoration(dividerItemDecoration)

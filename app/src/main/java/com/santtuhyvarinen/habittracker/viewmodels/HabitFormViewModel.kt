@@ -1,10 +1,17 @@
 package com.santtuhyvarinen.habittracker.viewmodels
 
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.santtuhyvarinen.habittracker.R
+import com.santtuhyvarinen.habittracker.database.AppDatabase
+import com.santtuhyvarinen.habittracker.database.DatabaseManager
 import com.santtuhyvarinen.habittracker.managers.IconManager
+import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.IconModel
+import kotlinx.coroutines.launch
 
 class HabitFormViewModel : ViewModel() {
 
@@ -14,8 +21,7 @@ class HabitFormViewModel : ViewModel() {
 
     var habitId : Long = -1L
 
-    //False == Create a new habit
-    //True == Edit Habit
+    lateinit var databaseManager : DatabaseManager
 
     var priorityLevels : Array<String> = Array (0) { "" }
     var priorityValue = 0
@@ -26,6 +32,8 @@ class HabitFormViewModel : ViewModel() {
 
     fun initialize(context: Context, id : Long) {
         if(initialized) return
+
+        databaseManager = DatabaseManager(context)
 
         habitId = id
 
@@ -81,8 +89,37 @@ class HabitFormViewModel : ViewModel() {
         return selectedWeekDayButtons.count { it }
     }
 
-    fun saveHabit() : Boolean {
+    fun saveHabit(context: Context, name : String) : Boolean {
+        if(name.isEmpty()) {
+            Toast.makeText(context, context.getString(R.string.error_name_empty), Toast.LENGTH_LONG).show()
+            return false
+        }
+
+        val habit = Habit()
+        habit.name = name
+
+        val currentTime = System.currentTimeMillis()
+        habit.creationDate = currentTime
+        habit.modificationDate = currentTime
+
+        val selectedIconModel = selectedIconModel
+        if(selectedIconModel == null) {
+            habit.iconKey = null
+        } else {
+            habit.iconKey = selectedIconModel.key
+        }
+
+        habit.priority = priorityValue
+
+        viewModelScope.launch {
+            insertHabit(habit)
+        }
+
         return true
+    }
+
+    private suspend fun insertHabit(habit: Habit) {
+        databaseManager.habitRepository.createHabit(habit)
     }
 
     fun isEditingExistingHabit() : Boolean {

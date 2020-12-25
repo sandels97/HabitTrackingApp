@@ -13,6 +13,8 @@
     <string name="delete_habit">Delete habit</string>
     <string name="save_changes">Save changes</string>
 
+    <string name="error_name_empty">Habit name can not be empty</string>
+
     <string name="habit_name">Name</string>
     <string name="create">Create</string>
     <string name="habit_repeat">Repeat</string>

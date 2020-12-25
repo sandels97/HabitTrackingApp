@@ -1,22 +1,25 @@
 package com.santtuhyvarinen.habittracker.database
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.santtuhyvarinen.habittracker.models.Habit
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface HabitDao {
     @Query("SELECT * FROM habit")
-    fun getAll(): List<Habit>
+    fun getAll(): LiveData<List<Habit>>
 
     @Query("SELECT * FROM habit WHERE id IN (:id)")
-    fun getById(id : Long)
+    suspend fun getById(id : Long) : Habit
 
     @Insert
-    fun create(habit: Habit)
+    suspend fun create(habit: Habit) : Long
 
     @Update
-    fun update(habit: Habit)
+    suspend fun update(habit: Habit)
 
     @Delete
-    fun delete(habit: Habit)
+    suspend fun delete(habit: Habit)
 }

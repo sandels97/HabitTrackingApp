@@ -82,7 +82,7 @@ class HabitFormFragment : Fragment() {
         //Save button
         saveHabitButton.text = if(habitFormViewModel.isEditingExistingHabit()) getString(R.string.save_changes) else getString(R.string.create_habit)
         saveHabitButton.setOnClickListener {
-            val saveSuccess = habitFormViewModel.saveHabit()
+            val saveSuccess = habitFormViewModel.saveHabit(requireContext(), habitNameEditText.text.toString())
 
             if(saveSuccess) findNavController().navigateUp()
         }

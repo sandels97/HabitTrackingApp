@@ -10,9 +10,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.santtuhyvarinen.habittracker.R
+import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.Habit
 
-class HabitsListAdapter(var context: Context, var data : List<Habit>) : RecyclerView.Adapter<HabitsListAdapter.ViewHolder>() {
+class HabitsListAdapter(private var context: Context) : RecyclerView.Adapter<HabitsListAdapter.ViewHolder>() {
+
+    val iconManager = IconManager()
+    init {
+        iconManager.loadIcons(context)
+    }
+
+    var data : List<Habit> = ArrayList()
 
     var habitClickedListener : HabitClickedListener? = null
     interface HabitClickedListener {
@@ -33,7 +41,11 @@ class HabitsListAdapter(var context: Context, var data : List<Habit>) : Recycler
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val habitModel = data[position]
         holder.titleTextView.text = habitModel.name
-        holder.iconImageView.setImageDrawable(habitModel.iconDrawable)
+
+        val iconKey = habitModel.iconKey
+        if(iconKey != null)
+        holder.iconImageView.setImageDrawable(iconManager.getIconByKey(iconKey))
+
         holder.iconImageView.imageTintList = ColorStateList.valueOf(Color.BLACK)
 
         holder.layout.setOnClickListener {
