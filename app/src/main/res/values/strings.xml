@@ -7,6 +7,7 @@
     <string name="settings">Settings</string>
     <string name="statistics">Statistics</string>
 
+
     <!--Habits-->
     <string name="create_habit">Create a new habit</string>
     <string name="edit_habit">Edit habit</string>
@@ -15,8 +16,14 @@
 
     <string name="error_name_empty">Habit name can not be empty</string>
 
-    <string name="habit_name">Name</string>
+    <string name="habit_delete_confirmation">Are you sure? This action is irreversible.</string>
+
     <string name="create">Create</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+
+
+    <string name="habit_name">Name</string>
     <string name="habit_repeat">Repeat</string>
     <string name="habit_repeat_days">Repeat: Every %1$s</string>
     <string name="habit_repeat_every_day">Repeat: Every Day</string>

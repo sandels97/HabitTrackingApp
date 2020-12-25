@@ -69,12 +69,4 @@ class MainActivity : AppCompatActivity() {
         editButton?.visibility = if(hidden) View.GONE else View.VISIBLE
         deleteButton?.visibility = if(hidden) View.GONE else View.VISIBLE
     }
-
-    fun getToolBarEditButton() : ImageButton {
-        return editButton
-    }
-
-    fun getToolBarDeleteButton() : ImageButton {
-        return deleteButton
-    }
 }
