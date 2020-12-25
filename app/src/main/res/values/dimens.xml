@@ -34,4 +34,6 @@
     <dimen name="itemHeight">80dp</dimen>
     <dimen name="itemIconSize">30dp</dimen>
 
+    <!--HabitView-->
+    <dimen name="habitIconSize">40dp</dimen>
 </resources>
