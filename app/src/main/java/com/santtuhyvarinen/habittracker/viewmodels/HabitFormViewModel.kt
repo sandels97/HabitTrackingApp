@@ -11,6 +11,7 @@ import com.santtuhyvarinen.habittracker.managers.HabitInfoManager
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.IconModel
+import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import kotlinx.coroutines.launch
 
 class HabitFormViewModel : ViewModel() {
@@ -34,7 +35,7 @@ class HabitFormViewModel : ViewModel() {
 
     var habitName = ""
     var priorityValue = 0
-    var selectedWeekDayButtons = Array(7) { false }
+    var weekDaysSelectionModel = WeekDaysSelectionModel()
     var selectedIconModel : IconModel? = null
 
 
@@ -56,42 +57,6 @@ class HabitFormViewModel : ViewModel() {
         iconManager.loadIcons(context)
 
         initialized = true
-    }
-
-    fun getWeekDaysSelectedText(context: Context) : String {
-        val daysSelected = daysSelected()
-
-        val weekDays = if(daysSelected < 3) context.resources.getStringArray(R.array.WeekDays) else context.resources.getStringArray(R.array.WeekDaysShort)
-
-        var index = 0
-
-        val stringBuilder = StringBuilder()
-        for(i in weekDays.indices) {
-            if(selectedWeekDayButtons[i]) {
-                val weekDay = weekDays[i]
-                stringBuilder.append(weekDay)
-                index ++
-
-                if(daysSelected > 1) {
-                    if (index == daysSelected - 1) {
-                        stringBuilder.append(" ${context.getString(R.string.and)} ")
-                    } else if (index < daysSelected) {
-                        stringBuilder.append(", ")
-                    }
-                }
-            }
-        }
-
-        return stringBuilder.toString()
-    }
-
-    fun isEveryDaySelectedOrNotSelected() : Boolean {
-        return selectedWeekDayButtons.all { it } || selectedWeekDayButtons.all { !it }
-    }
-
-    fun daysSelected() : Int {
-
-        return selectedWeekDayButtons.count { it }
     }
 
     fun saveHabit(context: Context) {
@@ -131,6 +96,10 @@ class HabitFormViewModel : ViewModel() {
                 habitDataSaved.value = id
             }
         }
+    }
+
+    fun getRecurrenceHeader(context: Context) : String {
+        return habitInfoManager.getRecurrenceHeader(context, weekDaysSelectionModel)
     }
 
     private suspend fun insertHabit(habit: Habit) : Long {

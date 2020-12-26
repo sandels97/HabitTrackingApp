@@ -66,14 +66,12 @@ class HabitFormFragment : Fragment() {
         //WeekDayPicker
         weekDayPicker.weekDaySelectedListener = object : WeekDayPickerView.WeekDaySelectedListener {
             override fun weekDaySelected(index: Int, selected: Boolean) {
-                habitFormViewModel.selectedWeekDayButtons[index] = selected
+                habitFormViewModel.weekDaysSelectionModel.selectedWeekDayButtons[index] = selected
                 updateWeekDayHeader()
             }
         }
 
-        for(i in habitFormViewModel.selectedWeekDayButtons.indices) {
-            weekDayPicker.setWeekDayButtonSelected(i, habitFormViewModel.selectedWeekDayButtons[i])
-        }
+        weekDayPicker.updateFromWeekDaysModel(habitFormViewModel.weekDaysSelectionModel)
 
         //Priority SeekBar
         habitPrioritySeekBar.max = habitFormViewModel.habitInfoManager.getMaxPriorityLevel()
@@ -130,12 +128,7 @@ class HabitFormFragment : Fragment() {
     }
 
     private fun updateWeekDayHeader() {
-        if(habitFormViewModel.isEveryDaySelectedOrNotSelected()) {
-            weekDayPickerHeader.text = getString(R.string.habit_repeat_every_day)
-        } else {
-            //Show selected week days in to the header
-            weekDayPickerHeader.text = getString(R.string.habit_repeat_days, habitFormViewModel.getWeekDaysSelectedText(requireContext()))
-        }
+        weekDayPickerHeader.text = habitFormViewModel.getRecurrenceHeader(requireContext())
     }
 
     private fun updateHabitValues(habit: Habit) {

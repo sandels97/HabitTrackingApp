@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.widget.Button
 import android.widget.FrameLayout
 import com.santtuhyvarinen.habittracker.R
+import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import kotlinx.android.synthetic.main.layout_weekday_picker.view.*
 
 class WeekDayPickerView(context: Context, attributeSet: AttributeSet) : FrameLayout(context, attributeSet) {
@@ -38,6 +39,12 @@ class WeekDayPickerView(context: Context, attributeSet: AttributeSet) : FrameLay
                 button.isSelected = newValue
                 weekDaySelectedListener?.weekDaySelected(i, newValue)
             }
+        }
+    }
+
+    fun updateFromWeekDaysModel(weekDaysSelectionModel: WeekDaysSelectionModel) {
+        for(i in weekDaysSelectionModel.selectedWeekDayButtons.indices) {
+            setWeekDayButtonSelected(i, weekDaysSelectionModel.selectedWeekDayButtons[i])
         }
     }
 
