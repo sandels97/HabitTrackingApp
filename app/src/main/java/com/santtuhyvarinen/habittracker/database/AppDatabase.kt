@@ -4,12 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.santtuhyvarinen.habittracker.database.dao.HabitDao
+import com.santtuhyvarinen.habittracker.database.dao.TaskLogDao
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.TaskLog
 
 @Database(entities = [Habit::class, TaskLog::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun habitDao() : HabitDao
+    abstract fun taskLogDao() : TaskLogDao
 
     companion object {
         private const val DATABASE_NAME = "database_app"

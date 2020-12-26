@@ -1,7 +1,9 @@
-package com.santtuhyvarinen.habittracker.database
+package com.santtuhyvarinen.habittracker.database.repositories
 
 import android.util.Log
 import androidx.annotation.WorkerThread
+import com.santtuhyvarinen.habittracker.database.AppDatabase
+import com.santtuhyvarinen.habittracker.database.dao.HabitDao
 import com.santtuhyvarinen.habittracker.models.Habit
 
 @Suppress("RedundantSuspendModifier")

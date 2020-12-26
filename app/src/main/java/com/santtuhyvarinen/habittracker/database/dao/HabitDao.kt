@@ -1,4 +1,4 @@
-package com.santtuhyvarinen.habittracker.database
+package com.santtuhyvarinen.habittracker.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
