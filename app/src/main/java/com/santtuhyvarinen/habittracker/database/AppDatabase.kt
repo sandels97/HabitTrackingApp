@@ -5,8 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.santtuhyvarinen.habittracker.models.Habit
+import com.santtuhyvarinen.habittracker.models.TaskLog
 
-@Database(entities = arrayOf(Habit::class), version = 1)
+@Database(entities = [Habit::class, TaskLog::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun habitDao() : HabitDao
 
