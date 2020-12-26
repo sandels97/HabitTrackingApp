@@ -15,6 +15,9 @@ interface TaskLogDao {
     @Query("SELECT * FROM tasklog WHERE habit_id IN (:habitId)")
     suspend fun getByHabit(habitId: Long) : List<TaskLog>
 
+    @Query("SELECT * FROM tasklog WHERE habit_id IN (:habitId) AND timestamp BETWEEN (:startTime) AND (:endTime)")
+    suspend fun getByHabitAndTime(habitId: Long, startTime : Long, endTime : Long) : List<TaskLog>
+
     @Insert
     suspend fun create(taskLog: TaskLog) : Long
 

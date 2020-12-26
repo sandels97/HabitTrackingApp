@@ -6,6 +6,7 @@ import com.santtuhyvarinen.habittracker.database.AppDatabase
 import com.santtuhyvarinen.habittracker.database.dao.TaskLogDao
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.TaskLog
+import org.joda.time.DateTime
 
 @Suppress("RedundantSuspendModifier")
 
@@ -41,6 +42,14 @@ class TaskLogRepository(private val taskLogDao: TaskLogDao) {
     @WorkerThread
     suspend fun getTaskLogsByHabit(habit: Habit) : List<TaskLog> {
         return taskLogDao.getByHabit(habit.id)
+    }
+
+    @WorkerThread
+    suspend fun getTaskLogsByHabitAndTime(habit: Habit, timestamp : Long) : List<TaskLog> {
+        val startTime = DateTime(timestamp).withTimeAtStartOfDay()
+        val endTime = startTime.plusDays(1)
+
+        return taskLogDao.getByHabitAndTime(habit.id, startTime.millis, endTime.millis)
     }
 
     @WorkerThread

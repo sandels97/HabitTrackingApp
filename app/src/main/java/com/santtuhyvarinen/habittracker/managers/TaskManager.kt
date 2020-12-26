@@ -22,9 +22,11 @@ class TaskManager {
     suspend fun generateTasks(context: Context, habits : List<Habit>, taskLogRepository: TaskLogRepository) {
         val taskList = ArrayList<TaskModel>()
 
+        val currentTime = System.currentTimeMillis()
         for(habit in habits) {
-            val taskLogs = taskLogRepository.getTaskLogsByHabit(habit)
-            
+            //Check if already added a task log for habit today. If not, the list should be empty
+            val taskLogs = taskLogRepository.getTaskLogsByHabitAndTime(habit, currentTime)
+
             if(taskLogs.isEmpty() && CalendarUtil.isRRULEToday(context, habit.taskRecurrence)) {
                 taskList.add(TaskModel(habit))
             }
