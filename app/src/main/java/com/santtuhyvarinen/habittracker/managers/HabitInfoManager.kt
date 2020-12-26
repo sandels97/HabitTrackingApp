@@ -10,7 +10,7 @@ class HabitInfoManager(context: Context) {
     init {
         priorityLevels = context.resources.getStringArray(R.array.PriorityLevels)
     }
-    
+
     fun getMaxPriorityLevel() : Int {
         return priorityLevels.size - 1
     }
