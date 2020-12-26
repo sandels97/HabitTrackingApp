@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
+import org.joda.time.DateTime
 import java.lang.StringBuilder
 
 class CalendarUtil {
@@ -56,6 +57,11 @@ class CalendarUtil {
                     Log.e("", "RRule is most likely in wrong format: $rrule")
                 }
             }
+        }
+
+        fun getCurrentWeekDay() : Int {
+            val dateTime = DateTime.now()
+            return dateTime.dayOfWeek
         }
     }
 }
