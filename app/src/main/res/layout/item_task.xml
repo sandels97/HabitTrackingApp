@@ -19,7 +19,7 @@
         android:layout_width="@dimen/taskIconSize"
         android:layout_height="@dimen/taskIconSize"
         android:layout_margin="@dimen/largeMargin"
-        android:src="@drawable/ic_tasks"
+        android:tint="@color/black"
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -45,15 +45,4 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.75"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/timeLeftText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/time_left"
-        android:textAppearance="@style/TaskInfoTextStyle"
-        android:layout_margin="@dimen/smallMargin"
-        android:textAlignment="textEnd"
-
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

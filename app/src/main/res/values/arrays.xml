@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="WeekDays">
-        <item>Sunday</item>
         <item>Monday</item>
         <item>Tuesday</item>
         <item>Wednesday</item>
         <item>Thursday</item>
         <item>Friday</item>
         <item>Saturday</item>
+        <item>Sunday</item>
     </string-array>
 
     <string-array name="WeekDaysLetters">
-        <item>S</item>
         <item>M</item>
         <item>T</item>
         <item>W</item>
         <item>T</item>
         <item>F</item>
         <item>S</item>
+        <item>S</item>
     </string-array>
 
     <string-array name="WeekDaysShort">
-        <item>Sun</item>
         <item>Mon</item>
         <item>Tue</item>
         <item>Wed</item>
         <item>Thu</item>
         <item>Fri</item>
         <item>Sat</item>
+        <item>Sun</item>
     </string-array>
 
     <string-array name="WeekDaysRRULE">
-        <item>SU</item>
         <item>MO</item>
         <item>TU</item>
         <item>WE</item>
         <item>TH</item>
         <item>FR</item>
         <item>SA</item>
+        <item>SU</item>
     </string-array>
 
     <string-array name="PriorityLevels">

@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="WeekDays">
-        <item>Sunnuntai</item>
         <item>Maanantai</item>
         <item>Tiistai</item>
         <item>Keskiviikko</item>
         <item>Torstai</item>
         <item>Perjantai</item>
         <item>Lauantai</item>
+        <item>Sunnuntai</item>
     </string-array>
 
     <string-array name="WeekDaysLetters">
-        <item>S</item>
         <item>M</item>
         <item>T</item>
         <item>K</item>
         <item>T</item>
         <item>P</item>
         <item>L</item>
+        <item>S</item>
     </string-array>
 
     <string-array name="WeekDaysShort">
-        <item>Su</item>
         <item>Ma</item>
         <item>Ti</item>
         <item>Ke</item>
         <item>To</item>
         <item>Pe</item>
         <item>La</item>
+        <item>Su</item>
     </string-array>
 
     <string-array name="PriorityLevels">

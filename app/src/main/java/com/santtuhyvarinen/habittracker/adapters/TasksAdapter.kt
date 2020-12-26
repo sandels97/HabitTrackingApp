@@ -4,12 +4,21 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.santtuhyvarinen.habittracker.R
+import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.TaskModel
 
-class TasksAdapter(var context: Context, var data : List<TaskModel>) : RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
+class TasksAdapter(var context: Context) : RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
+
+    var data : ArrayList<TaskModel> = ArrayList()
+
+    val iconManager = IconManager()
+    init {
+        iconManager.loadIcons(context)
+    }
 
     var taskListener : TaskListener? = null
     interface TaskListener {
@@ -18,6 +27,7 @@ class TasksAdapter(var context: Context, var data : List<TaskModel>) : RecyclerV
 
     class ViewHolder(var layout : View) : RecyclerView.ViewHolder(layout) {
         val titleTextView : TextView = layout.findViewById(R.id.title)
+        val iconView : ImageView = layout.findViewById(R.id.icon)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,10 +38,17 @@ class TasksAdapter(var context: Context, var data : List<TaskModel>) : RecyclerV
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val taskModel = data[position]
-        holder.titleTextView.text = taskModel.title
+        holder.titleTextView.text = taskModel.habit.name
+
+        val iconKey = taskModel.habit.iconKey
+
+        if(iconKey != null)
+            holder.iconView.setImageDrawable(iconManager.getIconByKey(iconKey))
+
         holder.layout.setOnLongClickListener {
             taskListener?.taskMarkedDone(taskModel)
 
+            data.remove(taskModel)
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, itemCount)
 

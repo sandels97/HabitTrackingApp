@@ -59,6 +59,26 @@ class CalendarUtil {
             }
         }
 
+        fun isRRULEToday(context: Context, rrule : String) : Boolean {
+
+            if(rrule.contains(RRULE_EVERY_DAY)) return true
+
+            if(rrule.contains(RRULE_WEEKLY)) {
+                val currentWeekDay = getCurrentWeekDay() - 1
+                val selectedWeekDays = rrule.removePrefix(RRULE_WEEKLY).split(",")
+                val weekDaysRules = context.resources.getStringArray(R.array.WeekDaysRRULE)
+
+                val weekDayText = weekDaysRules[currentWeekDay]
+
+                return selectedWeekDays.contains(weekDayText)
+            }
+
+            return false
+        }
+
+        //Monday == 1
+        //Sunday == 7
+        //etc
         fun getCurrentWeekDay() : Int {
             val dateTime = DateTime.now()
             return dateTime.dayOfWeek
