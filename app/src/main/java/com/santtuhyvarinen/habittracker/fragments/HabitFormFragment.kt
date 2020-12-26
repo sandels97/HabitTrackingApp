@@ -1,7 +1,6 @@
 package com.santtuhyvarinen.habittracker.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,7 +76,7 @@ class HabitFormFragment : Fragment() {
         }
 
         //Priority SeekBar
-        habitPrioritySeekBar.max = habitFormViewModel.getMaxPriorityLevel()
+        habitPrioritySeekBar.max = habitFormViewModel.habitInfoManager.getMaxPriorityLevel()
         habitPrioritySeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekbar: SeekBar, progress: Int, fromUser: Boolean) {
                 habitFormViewModel.priorityValue = progress
@@ -126,7 +125,7 @@ class HabitFormFragment : Fragment() {
     }
 
     private fun updatePriorityHeader() {
-        val currentPriority = habitFormViewModel.getCurrentPriorityLevelText()
+        val currentPriority = habitFormViewModel.habitInfoManager.getCurrentPriorityLevelText(habitFormViewModel.priorityValue)
         habitPriorityHeader.text = getString(R.string.habit_priority_header, currentPriority)
     }
 

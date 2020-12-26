@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.database.DatabaseManager
+import com.santtuhyvarinen.habittracker.managers.HabitInfoManager
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.IconModel
@@ -28,19 +29,20 @@ class HabitFormViewModel : ViewModel() {
     }
 
     lateinit var databaseManager : DatabaseManager
+    lateinit var habitInfoManager : HabitInfoManager
+    val iconManager = IconManager()
 
     var habitName = ""
-    var priorityLevels : Array<String> = Array (0) { "" }
     var priorityValue = 0
     var selectedWeekDayButtons = Array(7) { false }
     var selectedIconModel : IconModel? = null
 
-    val iconManager = IconManager()
 
     fun initialize(context: Context, id : Long) {
         if(initialized) return
 
         databaseManager = DatabaseManager(context)
+        habitInfoManager = HabitInfoManager(context)
 
         habitId = id
 
@@ -52,20 +54,8 @@ class HabitFormViewModel : ViewModel() {
         }
 
         iconManager.loadIcons(context)
-        priorityLevels = context.resources.getStringArray(R.array.PriorityLevels)
 
         initialized = true
-    }
-
-    fun getMaxPriorityLevel() : Int {
-        return priorityLevels.size - 1
-    }
-
-    fun getCurrentPriorityLevelText() : String {
-        if(priorityLevels.isEmpty()) return ""
-
-        val index = priorityValue.coerceAtLeast(0).coerceAtMost(priorityLevels.size-1)
-        return priorityLevels[index]
     }
 
     fun getWeekDaysSelectedText(context: Context) : String {
