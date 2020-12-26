@@ -12,6 +12,9 @@ interface TaskLogDao {
     @Query("SELECT * FROM tasklog WHERE id IN (:id)")
     suspend fun getById(id : Long) : TaskLog?
 
+    @Query("SELECT * FROM tasklog WHERE habit_id IN (:habitId)")
+    suspend fun getByHabit(habitId: Long) : List<TaskLog>
+
     @Insert
     suspend fun create(taskLog: TaskLog) : Long
 

@@ -43,7 +43,7 @@ class TasksFragment : Fragment() {
 
         //Observer habits from database
         val habitsObserver = Observer<List<Habit>> { list ->
-            tasksViewModel.taskManager.generateTasks(requireContext(), list)
+            tasksViewModel.generateTasks(requireContext(), list)
         }
         tasksViewModel.setHabitsObserver(viewLifecycleOwner, habitsObserver)
 
