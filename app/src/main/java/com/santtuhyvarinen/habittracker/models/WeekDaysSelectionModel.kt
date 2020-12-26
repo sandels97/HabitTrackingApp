@@ -13,4 +13,8 @@ class WeekDaysSelectionModel {
     fun getNumberOfDaysSelected() : Int {
         return selectedWeekDayButtons.count { it }
     }
+
+    fun setAllWeekDaysFalse() {
+        selectedWeekDayButtons.fill(false)
+    }
 }

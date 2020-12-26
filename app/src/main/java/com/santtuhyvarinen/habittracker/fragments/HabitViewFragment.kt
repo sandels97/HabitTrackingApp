@@ -82,10 +82,14 @@ class HabitViewFragment : Fragment() {
         val priorityText = habitViewModel.habitInfoManager.getCurrentPriorityLevelText(habit.priority)
         habitPriorityText.text = getString(R.string.habit_priority_header, priorityText)
 
-        val habitKey = habit.iconKey
+        //WeekDaysText
+        val recurrenceText = habitViewModel.getRecurrenceText(requireContext(), habit)
+        habitRecurrenceText.text = recurrenceText
 
-        if (habitKey != null)
-            habitIcon.setImageDrawable(habitViewModel.iconManager.getIconByKey(habitKey))
+        //Icon
+        val iconKey = habit.iconKey
+        if (iconKey != null)
+            habitIcon.setImageDrawable(habitViewModel.iconManager.getIconByKey(iconKey))
 
         updateProgress(true)
     }

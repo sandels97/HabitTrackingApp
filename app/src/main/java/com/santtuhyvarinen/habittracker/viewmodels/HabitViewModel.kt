@@ -8,6 +8,8 @@ import com.santtuhyvarinen.habittracker.managers.DatabaseManager
 import com.santtuhyvarinen.habittracker.managers.HabitInfoManager
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.Habit
+import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
+import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import kotlinx.coroutines.launch
 
 class HabitViewModel : ViewModel() {
@@ -36,6 +38,13 @@ class HabitViewModel : ViewModel() {
         }
 
         initialized = true
+    }
+
+    fun getRecurrenceText(context: Context, habit: Habit) : String {
+        val weekDaysSelectionModel = WeekDaysSelectionModel()
+        CalendarUtil.parseRRULEtoWeekDaysSelectionModel(context, habit.taskRecurrence, weekDaysSelectionModel)
+
+        return habitInfoManager.getRecurrenceHeader(context, weekDaysSelectionModel)
     }
 
     fun deleteHabit(context: Context) {

@@ -21,7 +21,7 @@
             android:id="@+id/habitNameText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/habit"
+
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/habitIcon"
@@ -41,8 +41,7 @@
             android:id="@+id/habitRecurrenceText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/habit_repeat_every_day"
-            android:layout_marginTop="@dimen/smallMargin"
+            android:layout_marginTop="@dimen/mediumMargin"
 
             app:layout_constraintTop_toBottomOf="@id/habitNameText"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -53,7 +52,6 @@
             android:id="@+id/habitPriorityText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/habit_priority_header"
             android:layout_marginTop="@dimen/smallMargin"
 
             app:layout_constraintTop_toBottomOf="@id/habitRecurrenceText"

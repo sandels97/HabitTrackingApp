@@ -51,7 +51,17 @@ class HabitFormViewModel : ViewModel() {
         if(isEditingExistingHabit()) {
             loading = true
             viewModelScope.launch {
-                habitData.value = getHabit()
+                //Load existing habit
+                val loadedHabit = getHabit()
+
+                //Load values
+                if(loadedHabit != null) {
+                    val selectedModel = iconManager.getIconModelByKey(loadedHabit.iconKey)
+                    selectedIconModel = selectedModel
+                    CalendarUtil.parseRRULEtoWeekDaysSelectionModel(context, loadedHabit.taskRecurrence, weekDaysSelectionModel)
+                }
+
+                habitData.value = loadedHabit
             }
         }
 

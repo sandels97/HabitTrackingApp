@@ -10,8 +10,8 @@
     <dimen name="largePadding">15dp</dimen>
 
     <dimen name="extraSmallTextSize">10sp</dimen>
-    <dimen name="smallTextSize">18sp</dimen>
-    <dimen name="mediumTextSize">20sp</dimen>
+    <dimen name="smallTextSize">14sp</dimen>
+    <dimen name="mediumTextSize">18sp</dimen>
     <dimen name="titleTextSize">26dp</dimen>
 
     <dimen name="elevation">5dp</dimen>

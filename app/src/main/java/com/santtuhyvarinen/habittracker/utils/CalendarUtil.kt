@@ -1,6 +1,7 @@
 package com.santtuhyvarinen.habittracker.utils
 
 import android.content.Context
+import android.util.Log
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import java.lang.StringBuilder
@@ -34,6 +35,27 @@ class CalendarUtil {
             }
 
             return stringBuilder.toString()
+        }
+
+        fun parseRRULEtoWeekDaysSelectionModel(context: Context, rrule : String, weekDaysSelectionModel: WeekDaysSelectionModel) {
+
+            weekDaysSelectionModel.setAllWeekDaysFalse()
+
+            if(rrule.contains(RRULE_EVERY_DAY)) return
+
+            if(rrule.contains(RRULE_WEEKLY)) {
+                try {
+                    val selectedWeekDays = rrule.removePrefix(RRULE_WEEKLY).split(",")
+                    val weekDaysRules = context.resources.getStringArray(R.array.WeekDaysRRULE)
+
+                    for(i in weekDaysSelectionModel.selectedWeekDayButtons.indices) {
+                        weekDaysSelectionModel.selectedWeekDayButtons[i] = selectedWeekDays.contains(weekDaysRules[i])
+                    }
+                } catch (e : Error) {
+                    e.printStackTrace()
+                    Log.e("", "RRule is most likely in wrong format: $rrule")
+                }
+            }
         }
     }
 }

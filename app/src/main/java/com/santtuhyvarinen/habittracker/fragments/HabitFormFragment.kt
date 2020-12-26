@@ -15,6 +15,7 @@ import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.adapters.IconSelectionAdapter
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.IconModel
+import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import com.santtuhyvarinen.habittracker.viewmodels.HabitFormViewModel
 import com.santtuhyvarinen.habittracker.views.WeekDayPickerView
 import kotlinx.android.synthetic.main.fragment_habit_form.*
@@ -135,8 +136,11 @@ class HabitFormFragment : Fragment() {
         habitNameEditText.setText(habit.name)
         habitPrioritySeekBar.progress = habit.priority
 
-        val selectedModel = habitFormViewModel.iconManager.getIconModelByKey(habit.iconKey)
-        habitFormViewModel.selectedIconModel = selectedModel
-        iconPickerView.setSelectedIcon(selectedModel)
+        //Icon
+        iconPickerView.setSelectedIcon(habitFormViewModel.selectedIconModel)
+
+        //WeekDays
+        weekDayPicker.updateFromWeekDaysModel(habitFormViewModel.weekDaysSelectionModel)
+        updateWeekDayHeader()
     }
 }

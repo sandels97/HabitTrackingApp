@@ -31,7 +31,7 @@
     </style>
 
     <style name="ItemTitleStyle">
-        <item name="android:textSize">@dimen/smallTextSize</item>
+        <item name="android:textSize">@dimen/mediumTextSize</item>
         <item name="android:textAlignment">textStart</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
         <item name="android:textStyle">normal</item>
@@ -45,7 +45,7 @@
     </style>
 
     <style name="HabitFormHeaderStyle">
-        <item name="android:textSize">@dimen/smallTextSize</item>
+        <item name="android:textSize">@dimen/mediumTextSize</item>
         <item name="android:textColor">@color/colorTextSecondary</item>
         <item name="android:textStyle">normal</item>
         <item name="android:ellipsize">end</item>
