@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.adapters.TasksAdapter
 import com.santtuhyvarinen.habittracker.models.TaskModel
-import com.santtuhyvarinen.habittracker.utils.VibrateUtil
+import com.santtuhyvarinen.habittracker.utils.SettingsUtil
 import com.santtuhyvarinen.habittracker.viewmodels.TasksViewModel
 import kotlinx.android.synthetic.main.fragment_tasks.*
 
@@ -32,7 +32,7 @@ class TasksFragment : Fragment() {
         tasksAdapter.taskListener = object : TasksAdapter.TaskListener {
             override fun taskMarkedDone(taskModel: TaskModel) {
                 tasksViewModel.setTaskAsDone(taskModel)
-                VibrateUtil.vibrateDevice(requireContext())
+                SettingsUtil.vibrateDevice(requireContext())
             }
         }
 

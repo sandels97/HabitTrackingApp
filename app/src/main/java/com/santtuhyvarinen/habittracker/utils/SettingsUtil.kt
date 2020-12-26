@@ -6,15 +6,17 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
 
-class VibrateUtil {
+class SettingsUtil {
     companion object {
+        private const val DEFAULT_VIBRATE_LENGTH = 100L
+        
         fun vibrateDevice(context: Context) {
             val vibrateService = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrateService.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
+                vibrateService.vibrate(VibrationEffect.createOneShot(DEFAULT_VIBRATE_LENGTH, VibrationEffect.DEFAULT_AMPLITUDE))
             } else {
-                vibrateService.vibrate(100);
+                vibrateService.vibrate(DEFAULT_VIBRATE_LENGTH);
             }
         }
     }
