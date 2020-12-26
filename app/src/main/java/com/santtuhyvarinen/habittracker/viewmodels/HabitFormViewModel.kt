@@ -76,17 +76,18 @@ class HabitFormViewModel : ViewModel() {
             return
         }
 
+        val currentTime = System.currentTimeMillis()
+
         val habit : Habit
         if(isEditingExistingHabit()) {
             habit = habitData.value as Habit
         } else {
             habit = Habit()
+            habit.creationDate = currentTime
         }
 
         habit.name = habitName
 
-        val currentTime = System.currentTimeMillis()
-        habit.creationDate = currentTime
         habit.modificationDate = currentTime
 
         habit.taskRecurrence = CalendarUtil.getRRuleFromWeekDaysSelectionModel(context, weekDaysSelectionModel)
