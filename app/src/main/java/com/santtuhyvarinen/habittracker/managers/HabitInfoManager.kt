@@ -1,8 +1,10 @@
 package com.santtuhyvarinen.habittracker.managers
 
 import android.content.Context
+import android.util.Log
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
+import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 
 class HabitInfoManager(context: Context) {
 

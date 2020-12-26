@@ -12,6 +12,7 @@ import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.IconModel
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
+import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import kotlinx.coroutines.launch
 
 class HabitFormViewModel : ViewModel() {
@@ -77,6 +78,8 @@ class HabitFormViewModel : ViewModel() {
         val currentTime = System.currentTimeMillis()
         habit.creationDate = currentTime
         habit.modificationDate = currentTime
+
+        habit.taskRecurrence = CalendarUtil.getRRuleFromWeekDaysSelectionModel(context, weekDaysSelectionModel)
 
         val selectedIconModel = selectedIconModel
         if(selectedIconModel == null) {
