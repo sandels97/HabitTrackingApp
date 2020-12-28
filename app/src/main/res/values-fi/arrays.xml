@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="WeekDays">
-        <item>Maanantai</item>
-        <item>Tiistai</item>
-        <item>Keskiviikko</item>
-        <item>Torstai</item>
-        <item>Perjantai</item>
-        <item>Lauantai</item>
-        <item>Sunnuntai</item>
+        <item>maanantai</item>
+        <item>tiistai</item>
+        <item>keskiviikko</item>
+        <item>torstai</item>
+        <item>perjantai</item>
+        <item>lauantai</item>
+        <item>sunnuntai</item>
     </string-array>
 
     <string-array name="WeekDaysLetters">

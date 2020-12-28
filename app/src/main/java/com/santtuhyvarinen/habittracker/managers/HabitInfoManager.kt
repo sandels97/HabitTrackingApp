@@ -6,22 +6,15 @@ import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 
-class HabitInfoManager(context: Context) {
+class HabitInfoManager {
 
-    private val andString = context.getString(R.string.and)
-
-    private val weekDays : Array<String> = context.resources.getStringArray(R.array.WeekDays)
-    private val weekDaysShort : Array<String> = context.resources.getStringArray(R.array.WeekDaysShort)
-    private val priorityLevels : Array<String> = context.resources.getStringArray(R.array.PriorityLevels)
-
-    fun getMaxPriorityLevel() : Int {
-        return priorityLevels.size - 1
+    companion object {
+        const val MAX_PRIORITY_LEVEL = 4
     }
 
-    fun getCurrentPriorityLevelText(priorityValue : Int) : String {
-        if(priorityLevels.isEmpty()) return ""
-
-        val index = priorityValue.coerceAtLeast(0).coerceAtMost(priorityLevels.size-1)
+    fun getCurrentPriorityLevelText(context: Context, priorityValue : Int) : String {
+        val priorityLevels : Array<String> = context.resources.getStringArray(R.array.PriorityLevels)
+        val index = priorityValue.coerceAtLeast(0).coerceAtMost(MAX_PRIORITY_LEVEL)
         return priorityLevels[index]
     }
 
@@ -29,14 +22,14 @@ class HabitInfoManager(context: Context) {
         if(weekDaysSelectionModel.isEveryDaySelectedOrNotSelected()) {
             return context.getString(R.string.habit_repeat_every_day)
         } else {
-            return context.getString(R.string.habit_repeat_days, getWeekDaysSelectedText(weekDaysSelectionModel))
+            return context.getString(R.string.habit_repeat_days, getWeekDaysSelectedText(context, weekDaysSelectionModel))
         }
     }
 
-    private fun getWeekDaysSelectedText(weekDaysSelectionModel: WeekDaysSelectionModel) : String {
+    private fun getWeekDaysSelectedText(context: Context, weekDaysSelectionModel: WeekDaysSelectionModel) : String {
         val daysSelected = weekDaysSelectionModel.getNumberOfDaysSelected()
 
-        val weekDays = if(daysSelected < 3) weekDays else weekDaysShort
+        val weekDays = if(daysSelected < 3) context.resources.getStringArray(R.array.WeekDays) else context.resources.getStringArray(R.array.WeekDaysShort)
 
         var index = 0
 
@@ -49,7 +42,7 @@ class HabitInfoManager(context: Context) {
 
                 if(daysSelected > 1) {
                     if (index == daysSelected - 1) {
-                        stringBuilder.append(" $andString ")
+                        stringBuilder.append(" ${context.getString(R.string.and)} ")
                     } else if (index < daysSelected) {
                         stringBuilder.append(", ")
                     }

@@ -79,7 +79,7 @@ class HabitViewFragment : Fragment() {
         habitNameText.text = habit.name
 
         //Priority text
-        val priorityText = habitViewModel.habitInfoManager.getCurrentPriorityLevelText(habit.priority)
+        val priorityText = habitViewModel.habitInfoManager.getCurrentPriorityLevelText(requireContext(), habit.priority)
         habitPriorityText.text = getString(R.string.habit_priority_header, priorityText)
 
         //WeekDaysText
