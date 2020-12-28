@@ -1,5 +1,6 @@
 package com.santtuhyvarinen.habittracker.viewmodels
 
+import android.app.Application
 import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.*
@@ -12,7 +13,7 @@ import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import kotlinx.coroutines.launch
 
-class HabitViewModel : ViewModel() {
+class HabitViewModel(application: Application) : AndroidViewModel(application) {
     private var initialized = false
     private var habitId : Long = -1
 
@@ -24,14 +25,14 @@ class HabitViewModel : ViewModel() {
         MutableLiveData<Habit>()
     }
 
-    fun initialize(context: Context, id : Long) {
+    fun initialize(id : Long) {
         if (initialized) return
 
         habitId = id
-        databaseManager = DatabaseManager(context)
-        habitInfoManager = HabitInfoManager(context)
+        databaseManager = DatabaseManager(getApplication())
+        habitInfoManager = HabitInfoManager(getApplication())
 
-        iconManager.loadIcons(context)
+        iconManager.loadIcons(getApplication())
 
         viewModelScope.launch {
             habit.value = getHabit()

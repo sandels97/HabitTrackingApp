@@ -1,10 +1,8 @@
 package com.santtuhyvarinen.habittracker.viewmodels
 
+import android.app.Application
 import android.content.Context
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.santtuhyvarinen.habittracker.managers.DatabaseManager
 import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.Habit
@@ -12,20 +10,10 @@ import com.santtuhyvarinen.habittracker.models.TaskLog
 import com.santtuhyvarinen.habittracker.models.TaskModel
 import kotlinx.coroutines.launch
 
-class TasksViewModel : ViewModel() {
+class TasksViewModel(application: Application) : AndroidViewModel(application) {
 
-    private lateinit var databaseManager : DatabaseManager
-    val taskManager = TaskManager()
-
-    private var initialized = false
-
-    fun initialize(context: Context) {
-        if (initialized) return
-
-        databaseManager = DatabaseManager(context)
-
-        initialized = true
-    }
+    private val databaseManager = DatabaseManager(application)
+    private val taskManager = TaskManager()
 
     fun setTaskAsDone(taskModel: TaskModel) {
         val taskLog = TaskLog()

@@ -31,7 +31,6 @@ class TasksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tasksViewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
-        tasksViewModel.initialize(requireContext())
 
         tasksAdapter = TasksAdapter(requireContext())
         tasksAdapter.taskListener = object : TasksAdapter.TaskListener {

@@ -32,7 +32,6 @@ class HabitsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         habitsViewModel = ViewModelProvider(this).get(HabitsViewModel::class.java)
-        habitsViewModel.initialize(requireContext())
 
         //Observer habits from database
         val habitsObserver = Observer<List<Habit>> { list ->

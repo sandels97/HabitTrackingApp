@@ -1,7 +1,9 @@
 package com.santtuhyvarinen.habittracker.viewmodels
 
+import android.app.Application
 import android.content.Context
 import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,20 +17,16 @@ import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import kotlinx.coroutines.launch
 
-class HabitFormViewModel : ViewModel() {
+class HabitFormViewModel(application: Application) : AndroidViewModel(application) {
 
     private var initialized = false
 
     var loading = false
 
     var habitId : Long = -1L
-    val habitData : MutableLiveData<Habit> by lazy {
-        MutableLiveData<Habit>()
-    }
+    val habitData : MutableLiveData<Habit> = MutableLiveData<Habit>()
 
-    val habitDataSaved : MutableLiveData<Long> by lazy {
-        MutableLiveData<Long>()
-    }
+    val habitDataSaved : MutableLiveData<Long> = MutableLiveData<Long>()
 
     lateinit var databaseManager : DatabaseManager
     lateinit var habitInfoManager : HabitInfoManager
@@ -40,11 +38,11 @@ class HabitFormViewModel : ViewModel() {
     var selectedIconModel : IconModel? = null
 
 
-    fun initialize(context: Context, id : Long) {
+    fun initialize(id : Long) {
         if(initialized) return
 
-        databaseManager = DatabaseManager(context)
-        habitInfoManager = HabitInfoManager(context)
+        databaseManager = DatabaseManager(getApplication())
+        habitInfoManager = HabitInfoManager(getApplication())
 
         habitId = id
 
@@ -58,14 +56,14 @@ class HabitFormViewModel : ViewModel() {
                 if(loadedHabit != null) {
                     val selectedModel = iconManager.getIconModelByKey(loadedHabit.iconKey)
                     selectedIconModel = selectedModel
-                    CalendarUtil.parseRRULEtoWeekDaysSelectionModel(context, loadedHabit.taskRecurrence, weekDaysSelectionModel)
+                    CalendarUtil.parseRRULEtoWeekDaysSelectionModel(getApplication(), loadedHabit.taskRecurrence, weekDaysSelectionModel)
                 }
 
                 habitData.value = loadedHabit
             }
         }
 
-        iconManager.loadIcons(context)
+        iconManager.loadIcons(getApplication())
 
         initialized = true
     }

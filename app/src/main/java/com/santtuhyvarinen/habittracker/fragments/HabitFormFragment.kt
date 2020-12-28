@@ -35,7 +35,7 @@ class HabitFormFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         habitFormViewModel = ViewModelProvider(this).get(HabitFormViewModel::class.java)
-        habitFormViewModel.initialize(requireContext(), args.habitId)
+        habitFormViewModel.initialize(args.habitId)
 
         //If editing a habit, load the existing habit values to correct fields
         val habitObserver = Observer<Habit> { habit ->

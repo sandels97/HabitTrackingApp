@@ -41,7 +41,7 @@ class HabitViewFragment : Fragment() {
         updateProgress(false)
 
         habitViewModel = ViewModelProvider(this).get(HabitViewModel::class.java)
-        habitViewModel.initialize(requireContext(), args.habitId)
+        habitViewModel.initialize(args.habitId)
 
         val habitObserver = Observer<Habit> { habit ->
             if(habit != null) {
