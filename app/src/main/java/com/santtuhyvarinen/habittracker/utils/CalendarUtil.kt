@@ -3,6 +3,7 @@ package com.santtuhyvarinen.habittracker.utils
 import android.content.Context
 import android.util.Log
 import com.santtuhyvarinen.habittracker.R
+import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import org.joda.time.DateTime
 import java.lang.StringBuilder
@@ -59,7 +60,8 @@ class CalendarUtil {
             }
         }
 
-        fun isRRULEToday(context: Context, rrule : String) : Boolean {
+        fun isHabitScheduledForToday(context: Context, habit: Habit) : Boolean {
+            val rrule = habit.taskRecurrence
 
             if(rrule.contains(RRULE_EVERY_DAY)) return true
 

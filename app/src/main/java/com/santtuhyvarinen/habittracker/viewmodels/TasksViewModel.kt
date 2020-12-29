@@ -13,25 +13,20 @@ import kotlinx.coroutines.launch
 class TasksViewModel(application: Application) : AndroidViewModel(application) {
 
     private val databaseManager = DatabaseManager(application)
-    private val taskManager = TaskManager()
+    private val taskManager = TaskManager(databaseManager)
 
     fun setTaskAsDone(taskModel: TaskModel) {
-        val taskLog = TaskLog()
-
-        taskLog.habit_id = taskModel.habit.id
-        taskLog.timestamp = System.currentTimeMillis()
-        taskLog.status = TaskManager.STATUS_SUCCESS
-
         viewModelScope.launch {
-            databaseManager.taskLogRepository.createTaskLog(taskLog)
+            taskManager.insertTaskLog(taskModel, TaskManager.STATUS_SUCCESS)
         }
     }
 
     fun generateTasks(context: Context, habits : List<Habit>) {
         viewModelScope.launch {
-            taskManager.generateTasks(context, habits, databaseManager.taskLogRepository)
+            taskManager.generateTasks(context, habits)
         }
     }
+    
     fun setHabitsObserver(lifecycleOwner: LifecycleOwner, observer: Observer<List<Habit>>) {
         return databaseManager.habitRepository.habits.observe(lifecycleOwner, observer)
     }
