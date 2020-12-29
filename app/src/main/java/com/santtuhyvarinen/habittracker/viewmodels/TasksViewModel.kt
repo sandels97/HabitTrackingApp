@@ -26,7 +26,7 @@ class TasksViewModel(application: Application) : AndroidViewModel(application) {
             taskManager.generateTasks(context, habits)
         }
     }
-    
+
     fun setHabitsObserver(lifecycleOwner: LifecycleOwner, observer: Observer<List<Habit>>) {
         return databaseManager.habitRepository.habits.observe(lifecycleOwner, observer)
     }

@@ -15,7 +15,7 @@ import androidx.room.PrimaryKey
 data class TaskLog(@PrimaryKey(autoGenerate = true) val id : Long = 0) {
 
     @ColumnInfo(name = "habit_id")
-    var habit_id : Long = 0
+    var habitId : Long = 0
 
     @ColumnInfo(name = "score")
     var score : Int = 0

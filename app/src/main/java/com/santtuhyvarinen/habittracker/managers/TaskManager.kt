@@ -45,7 +45,7 @@ class TaskManager(private val databaseManager: DatabaseManager) {
     suspend fun insertTaskLog(taskModel: TaskModel, taskStatus : String) {
         val taskLog = TaskLog()
 
-        taskLog.habit_id = taskModel.habit.id
+        taskLog.habitId = taskModel.habit.id
         taskLog.timestamp = System.currentTimeMillis()
         taskLog.status = taskStatus
 
