@@ -21,13 +21,13 @@
     </string-array>
 
     <string-array name="WeekDaysShort">
-        <item>Ma</item>
-        <item>Ti</item>
-        <item>Ke</item>
-        <item>To</item>
-        <item>Pe</item>
-        <item>La</item>
-        <item>Su</item>
+        <item>ma</item>
+        <item>ti</item>
+        <item>ke</item>
+        <item>to</item>
+        <item>pe</item>
+        <item>la</item>
+        <item>su</item>
     </string-array>
 
     <string-array name="PriorityLevels">
