@@ -28,6 +28,7 @@
     <string name="habit_repeat_every_day">Toista: Joka päivä</string>
     <string name="and">ja</string>
     <string name="daily">Joka päivä</string>
+    <string name="repeat_every">Joka %1$s</string>
 
     <string name="habit_priority">Rutiini </string>
     <string name="habit_priority_header">Prioriteetti: %1$s</string>

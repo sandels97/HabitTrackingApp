@@ -30,6 +30,7 @@
     <string name="habit_repeat_every_day">Repeat: Daily</string>
     <string name="and">and</string>
     <string name="daily">Daily</string>
+    <string name="repeat_every">Every %1$s</string>
 
     <string name="habit_priority">Habit Priority</string>
     <string name="habit_priority_header">Priority: %1$s</string>

@@ -38,7 +38,7 @@ class HabitsListAdapter(private val context: Context, private val iconManager: I
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val habitModel = data[position]
         holder.titleTextView.text = habitModel.name
-        holder.recurrenceTextView.text = HabitInfoUtil.getRecurrenceHeader(context, habitModel)
+        holder.recurrenceTextView.text = HabitInfoUtil.getRecurrenceText(context, habitModel)
 
         val iconKey = habitModel.iconKey
         if(iconKey != null)

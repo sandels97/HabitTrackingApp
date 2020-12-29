@@ -24,14 +24,14 @@ class HabitInfoUtil {
             }
         }
 
-        fun getRecurrenceHeader(context: Context, habit: Habit) : String {
+        fun getRecurrenceText(context: Context, habit: Habit) : String {
             val weekDaysSelectionModel = WeekDaysSelectionModel()
             CalendarUtil.parseRRULEtoWeekDaysSelectionModel(context, habit.taskRecurrence, weekDaysSelectionModel)
 
             if(weekDaysSelectionModel.isEveryDaySelectedOrNotSelected()) {
-                return context.getString(R.string.habit_repeat_every_day)
+                return context.getString(R.string.daily)
             } else {
-                return context.getString(R.string.habit_repeat_days, getWeekDaysSelectedText(context, weekDaysSelectionModel))
+                return context.getString(R.string.repeat_every, getWeekDaysSelectedText(context, weekDaysSelectionModel))
             }
         }
 
