@@ -31,7 +31,7 @@
             android:id="@+id/habitIcon"
             android:layout_width="@dimen/itemIconSize"
             android:layout_height="@dimen/itemIconSize"
-            android:tint="@color/black"
+            android:tint="@color/colorIconTint"
 
             app:layout_constraintTop_toTopOf="@id/habitNameText"
             app:layout_constraintBottom_toBottomOf="@id/habitNameText"

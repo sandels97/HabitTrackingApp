@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.Habit
+import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
 
 class HabitsListAdapter(private var context: Context) : RecyclerView.Adapter<HabitsListAdapter.ViewHolder>() {
 
@@ -29,6 +30,7 @@ class HabitsListAdapter(private var context: Context) : RecyclerView.Adapter<Hab
 
     class ViewHolder(var layout : View) : RecyclerView.ViewHolder(layout) {
         val titleTextView : TextView = layout.findViewById(R.id.title)
+        val recurrenceTextView : TextView = layout.findViewById(R.id.recurrenceText)
         val iconImageView : ImageView = layout.findViewById(R.id.icon)
     }
 
@@ -41,12 +43,11 @@ class HabitsListAdapter(private var context: Context) : RecyclerView.Adapter<Hab
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val habitModel = data[position]
         holder.titleTextView.text = habitModel.name
+        holder.recurrenceTextView.text = HabitInfoUtil.getRecurrenceHeader(context, habitModel)
 
         val iconKey = habitModel.iconKey
         if(iconKey != null)
         holder.iconImageView.setImageDrawable(iconManager.getIconByKey(iconKey))
-
-        holder.iconImageView.imageTintList = ColorStateList.valueOf(Color.BLACK)
 
         holder.layout.setOnClickListener {
             habitClickedListener?.habitClicked(habitModel)

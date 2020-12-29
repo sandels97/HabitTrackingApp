@@ -5,16 +5,15 @@ import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.managers.DatabaseManager
-import com.santtuhyvarinen.habittracker.managers.HabitInfoManager
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.IconModel
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
+import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
 import kotlinx.coroutines.launch
 
 class HabitFormViewModel(application: Application) : AndroidViewModel(application) {
@@ -29,7 +28,6 @@ class HabitFormViewModel(application: Application) : AndroidViewModel(applicatio
     val habitDataSaved : MutableLiveData<Long> = MutableLiveData<Long>()
 
     lateinit var databaseManager : DatabaseManager
-    val habitInfoManager = HabitInfoManager()
     val iconManager = IconManager()
 
     var habitName = ""
@@ -110,7 +108,7 @@ class HabitFormViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun getRecurrenceHeader(context: Context) : String {
-        return habitInfoManager.getRecurrenceHeader(context, weekDaysSelectionModel)
+        return HabitInfoUtil.getRecurrenceHeader(context, weekDaysSelectionModel)
     }
 
     private suspend fun insertHabit(habit: Habit) : Long {

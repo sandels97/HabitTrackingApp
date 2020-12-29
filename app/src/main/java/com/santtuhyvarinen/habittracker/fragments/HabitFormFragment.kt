@@ -13,10 +13,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.adapters.IconSelectionAdapter
-import com.santtuhyvarinen.habittracker.managers.HabitInfoManager
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.IconModel
-import com.santtuhyvarinen.habittracker.utils.CalendarUtil
+import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
 import com.santtuhyvarinen.habittracker.viewmodels.HabitFormViewModel
 import com.santtuhyvarinen.habittracker.views.WeekDayPickerView
 import kotlinx.android.synthetic.main.fragment_habit_form.*
@@ -76,7 +75,7 @@ class HabitFormFragment : Fragment() {
         weekDayPicker.updateFromWeekDaysModel(habitFormViewModel.weekDaysSelectionModel)
 
         //Priority SeekBar
-        habitPrioritySeekBar.max = HabitInfoManager.MAX_PRIORITY_LEVEL
+        habitPrioritySeekBar.max = HabitInfoUtil.MAX_PRIORITY_LEVEL
         habitPrioritySeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekbar: SeekBar, progress: Int, fromUser: Boolean) {
                 habitFormViewModel.priorityValue = progress
@@ -125,7 +124,7 @@ class HabitFormFragment : Fragment() {
     }
 
     private fun updatePriorityHeader() {
-        val currentPriority = habitFormViewModel.habitInfoManager.getCurrentPriorityLevelText(requireContext(), habitFormViewModel.priorityValue)
+        val currentPriority = HabitInfoUtil.getPriorityLevelText(requireContext(), habitFormViewModel.priorityValue)
         habitPriorityHeader.text = getString(R.string.habit_priority_header, currentPriority)
     }
 

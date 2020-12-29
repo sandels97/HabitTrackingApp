@@ -19,7 +19,7 @@
         android:layout_width="@dimen/taskIconSize"
         android:layout_height="@dimen/taskIconSize"
         android:layout_margin="@dimen/largeMargin"
-        android:tint="@color/black"
+        android:tint="@color/colorIconTint"
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"

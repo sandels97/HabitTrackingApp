@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.activities.MainActivity
 import com.santtuhyvarinen.habittracker.models.Habit
+import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
 import com.santtuhyvarinen.habittracker.viewmodels.HabitViewModel
 import kotlinx.android.synthetic.main.fragment_habit_view.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
@@ -79,7 +80,7 @@ class HabitViewFragment : Fragment() {
         habitNameText.text = habit.name
 
         //Priority text
-        val priorityText = habitViewModel.habitInfoManager.getCurrentPriorityLevelText(requireContext(), habit.priority)
+        val priorityText = HabitInfoUtil.getPriorityLevelText(requireContext(), habit.priority)
         habitPriorityText.text = getString(R.string.habit_priority_header, priorityText)
 
         //WeekDaysText

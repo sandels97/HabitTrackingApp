@@ -13,6 +13,8 @@
     <color name="colorTextPrimary">#212121</color>
     <color name="colorTextSecondary">#414141</color>
 
+    <color name="colorIconTint">#515151</color>
+
     <color name="colorRipple">#aa8a8a8a</color>
 
     <color name="colorNavigationElement">#ffffff</color>

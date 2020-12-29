@@ -27,8 +27,9 @@
     <string name="habit_name">Name</string>
     <string name="habit_repeat">Repeat</string>
     <string name="habit_repeat_days">Repeat: Every %1$s</string>
-    <string name="habit_repeat_every_day">Repeat: Every Day</string>
+    <string name="habit_repeat_every_day">Repeat: Daily</string>
     <string name="and">and</string>
+    <string name="daily">Daily</string>
 
     <string name="habit_priority">Habit Priority</string>
     <string name="habit_priority_header">Priority: %1$s</string>

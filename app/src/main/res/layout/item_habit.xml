@@ -14,9 +14,10 @@
         android:id="@+id/icon"
         android:layout_width="@dimen/taskIconSize"
         android:layout_height="@dimen/taskIconSize"
-        android:layout_margin="@dimen/largeMargin"
+        android:layout_margin="@dimen/smallMargin"
+        android:tint="@color/colorIconTint"
 
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -24,19 +25,24 @@
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/habit"
-        android:textAppearance="@style/ItemTitleStyle"
-        android:layout_margin="@dimen/largeMargin"
+        android:layout_marginStart="@dimen/largeMargin"
+        style="@style/ItemTitleStyle"
 
-        app:layout_constraintLeft_toRightOf="@id/icon"
-        app:layout_constraintRight_toRightOf="@id/endGuide"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/icon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/endGuide"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/recurrenceText"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75"/>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/largeMargin"
+        style="@style/SubHeaderStyle"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/icon"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

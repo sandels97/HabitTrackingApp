@@ -6,11 +6,11 @@ import android.widget.Toast
 import androidx.lifecycle.*
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.managers.DatabaseManager
-import com.santtuhyvarinen.habittracker.managers.HabitInfoManager
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
+import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
 import kotlinx.coroutines.launch
 
 class HabitViewModel(application: Application) : AndroidViewModel(application) {
@@ -18,7 +18,6 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
     private var habitId : Long = -1
 
     private lateinit var databaseManager : DatabaseManager
-    val habitInfoManager = HabitInfoManager()
     val iconManager = IconManager()
 
     val habit : MutableLiveData<Habit> by lazy {
@@ -44,7 +43,7 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
         val weekDaysSelectionModel = WeekDaysSelectionModel()
         CalendarUtil.parseRRULEtoWeekDaysSelectionModel(context, habit.taskRecurrence, weekDaysSelectionModel)
 
-        return habitInfoManager.getRecurrenceHeader(context, weekDaysSelectionModel)
+        return HabitInfoUtil.getRecurrenceHeader(context, weekDaysSelectionModel)
     }
 
     fun deleteHabit(context: Context) {
