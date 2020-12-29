@@ -7,13 +7,22 @@
     <string name="settings">Asetukset</string>
     <string name="statistics">Tilastot</string>
 
+    <!--Generic-->
+    <string name="save_changes">Tallenna muutokset</string>
+    <string name="create">Luo</string>
+    <string name="delete">Poista</string>
+    <string name="cancel">Peruuta</string>
+    <string name="deleted">%1$s poistettu</string>
+
+    <!--Habits-->
     <string name="create_habit">Luo rutiini</string>
     <string name="edit_habit">Muokkaa rutiinia</string>
     <string name="delete_habit">Poista rutiini</string>
-    <string name="save_changes">Tallenna muutokset</string>
+
+    <string name="error_name_empty">Rutiinin nimi ei voi olla tyhjä</string>
+    <string name="habit_delete_confirmation">Oletko varma? Tätä toimenpidettä ei voida peruuttaa.</string>
 
     <string name="habit_name">Nimi</string>
-    <string name="create">Luo</string>
     <string name="habit_repeat">Toista</string>
     <string name="habit_repeat_days">Toista: Joka %1$s</string>
     <string name="habit_repeat_every_day">Toista: Joka päivä</string>
@@ -26,4 +35,7 @@
 
     <!--Tasks-->
     <string name="time_left">Aikaa jäljellä: %1$s</string>
+    <!--Errors-->
+    <string name="error_load_habit">Virhe: Rutiinia ei pystytty lataamaan</string>
+    <string name="error_delete_habit">Virhe: Rutiinia ei pystytty poistamaan</string>
 </resources>
