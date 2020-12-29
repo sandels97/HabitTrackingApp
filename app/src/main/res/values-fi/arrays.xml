@@ -42,5 +42,9 @@
         <item>Suosikki</item>
         <item>Tähti</item>
         <item>Peukku ylös</item>
+        <item>Kirja</item>
+        <item>Kävely</item>
+        <item>Emoji</item>
+        <item>Ruoka</item>
     </string-array>
 </resources>
