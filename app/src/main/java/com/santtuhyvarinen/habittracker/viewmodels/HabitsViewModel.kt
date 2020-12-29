@@ -12,12 +12,8 @@ import com.santtuhyvarinen.habittracker.models.Habit
 
 class HabitsViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val iconManager = IconManager()
+    val iconManager = IconManager(application)
     private val databaseManager : DatabaseManager = DatabaseManager(getApplication())
-
-    init {
-        iconManager.loadIcons(getApplication())
-    }
 
     fun setHabitsObserver(lifecycleOwner: LifecycleOwner, observer: Observer<List<Habit>>) {
         return databaseManager.habitRepository.habits.observe(lifecycleOwner, observer)

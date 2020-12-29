@@ -5,13 +5,11 @@ import android.graphics.drawable.Drawable
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.IconModel
 
-class IconManager {
+class IconManager(context: Context) {
 
     val iconModels = ArrayList<IconModel>()
 
-    fun loadIcons(context: Context) {
-        if(iconModels.isNotEmpty()) return
-
+    init {
         val iconKeys = context.resources.getStringArray(R.array.HabitIconKeys)
         val iconTitles = context.resources.getStringArray(R.array.HabitIconTitles)
         val iconsTypedArray = context.resources.obtainTypedArray(R.array.HabitIcons)

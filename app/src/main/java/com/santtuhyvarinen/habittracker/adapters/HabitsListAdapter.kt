@@ -14,12 +14,7 @@ import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
 
-class HabitsListAdapter(private var context: Context) : RecyclerView.Adapter<HabitsListAdapter.ViewHolder>() {
-
-    val iconManager = IconManager()
-    init {
-        iconManager.loadIcons(context)
-    }
+class HabitsListAdapter(private val context: Context, private val iconManager: IconManager) : RecyclerView.Adapter<HabitsListAdapter.ViewHolder>() {
 
     var data : List<Habit> = ArrayList()
 

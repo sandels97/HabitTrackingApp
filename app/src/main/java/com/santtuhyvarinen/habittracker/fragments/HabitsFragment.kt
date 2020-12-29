@@ -41,7 +41,7 @@ class HabitsFragment : Fragment() {
         }
         habitsViewModel.setHabitsObserver(viewLifecycleOwner, habitsObserver)
 
-        habitsAdapter = HabitsListAdapter(requireContext())
+        habitsAdapter = HabitsListAdapter(requireContext(), habitsViewModel.iconManager)
         recyclerView.adapter = habitsAdapter
         val dividerItemDecoration = DividerItemDecoration(recyclerView.context, (recyclerView.layoutManager as LinearLayoutManager).orientation)
         recyclerView.addItemDecoration(dividerItemDecoration)

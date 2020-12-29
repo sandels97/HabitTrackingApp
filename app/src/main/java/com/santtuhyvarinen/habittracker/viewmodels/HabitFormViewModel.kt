@@ -28,7 +28,7 @@ class HabitFormViewModel(application: Application) : AndroidViewModel(applicatio
     val habitDataSaved : MutableLiveData<Long> = MutableLiveData<Long>()
 
     lateinit var databaseManager : DatabaseManager
-    val iconManager = IconManager()
+    val iconManager = IconManager(application)
 
     var habitName = ""
     var priorityValue = 0
@@ -59,8 +59,6 @@ class HabitFormViewModel(application: Application) : AndroidViewModel(applicatio
                 habitData.value = loadedHabit
             }
         }
-
-        iconManager.loadIcons(getApplication())
 
         initialized = true
     }

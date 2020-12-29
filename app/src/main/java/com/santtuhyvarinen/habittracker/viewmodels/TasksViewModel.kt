@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.*
 import com.santtuhyvarinen.habittracker.managers.DatabaseManager
+import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.TaskLog
@@ -14,6 +15,7 @@ class TasksViewModel(application: Application) : AndroidViewModel(application) {
 
     private val databaseManager = DatabaseManager(application)
     private val taskManager = TaskManager(databaseManager)
+    val iconManager = IconManager(application)
 
     fun setTaskAsDone(taskModel: TaskModel) {
         viewModelScope.launch {

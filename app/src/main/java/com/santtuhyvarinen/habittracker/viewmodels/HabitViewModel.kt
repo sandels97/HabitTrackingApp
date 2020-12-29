@@ -18,7 +18,7 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
     private var habitId : Long = -1
 
     private lateinit var databaseManager : DatabaseManager
-    val iconManager = IconManager()
+    val iconManager = IconManager(application)
 
     val habit : MutableLiveData<Habit> by lazy {
         MutableLiveData<Habit>()
@@ -29,8 +29,6 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
 
         habitId = id
         databaseManager = DatabaseManager(getApplication())
-
-        iconManager.loadIcons(getApplication())
 
         viewModelScope.launch {
             habit.value = getHabit()

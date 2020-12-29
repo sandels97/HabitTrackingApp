@@ -32,7 +32,7 @@ class TasksFragment : Fragment() {
 
         tasksViewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
 
-        tasksAdapter = TasksAdapter(requireContext())
+        tasksAdapter = TasksAdapter(requireContext(), tasksViewModel.iconManager)
         tasksAdapter.taskListener = object : TasksAdapter.TaskListener {
             override fun taskMarkedDone(taskModel: TaskModel) {
                 tasksViewModel.setTaskAsDone(taskModel)

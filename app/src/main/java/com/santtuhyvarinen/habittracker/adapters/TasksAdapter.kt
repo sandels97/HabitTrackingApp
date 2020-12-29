@@ -11,14 +11,9 @@ import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.TaskModel
 
-class TasksAdapter(var context: Context) : RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
+class TasksAdapter(private var context: Context, private val iconManager: IconManager) : RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
 
     var data : ArrayList<TaskModel> = ArrayList()
-
-    val iconManager = IconManager()
-    init {
-        iconManager.loadIcons(context)
-    }
 
     var taskListener : TaskListener? = null
     interface TaskListener {
