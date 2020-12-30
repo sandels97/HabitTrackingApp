@@ -11,11 +11,13 @@ import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.adapters.TasksAdapter
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.TaskModel
+import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import com.santtuhyvarinen.habittracker.utils.SettingsUtil
 import com.santtuhyvarinen.habittracker.viewmodels.TasksViewModel
 import kotlinx.android.synthetic.main.fragment_habits.*
 import kotlinx.android.synthetic.main.fragment_tasks.*
 import kotlinx.android.synthetic.main.fragment_tasks.recyclerView
+import kotlinx.android.synthetic.main.layout_time_bar.*
 
 class TasksFragment : Fragment() {
 
@@ -55,6 +57,12 @@ class TasksFragment : Fragment() {
         tasksViewModel.setTasksObserver(viewLifecycleOwner, tasksObserver)
 
         recyclerView.adapter = tasksAdapter
+
+        updateTimeBar()
     }
 
+    fun updateTimeBar() {
+        timeBarWeekDayText.text = CalendarUtil.getCurrentWeekDayText(requireContext())
+        timeBarDateText.text = CalendarUtil.getCurrentDateText()
+    }
 }

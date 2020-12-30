@@ -14,6 +14,8 @@
     <dimen name="toolbarHeight">80dp</dimen>
     <dimen name="toolbarButtonSize">60dp</dimen>
 
+    <dimen name="timeBarHeight">60dp</dimen>
+
     <dimen name="buttonHeight">80dp</dimen>
     <dimen name="roundButtonSize">60dp</dimen>
 

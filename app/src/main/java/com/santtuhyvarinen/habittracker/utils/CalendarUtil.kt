@@ -6,6 +6,8 @@ import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormatter
 import java.lang.StringBuilder
 
 class CalendarUtil {
@@ -76,6 +78,20 @@ class CalendarUtil {
             }
 
             return false
+        }
+
+        fun getCurrentDateText() : String {
+            val dateTime = DateTime.now()
+            val dateTimeFormatter = DateTimeFormat.forPattern("dd.MM.yyyy")
+
+            return dateTimeFormatter.print(dateTime)
+        }
+
+        fun getCurrentWeekDayText(context: Context) : String {
+            val dayOfWeek = getCurrentWeekDay()-1
+            val weekDaysArray = context.resources.getStringArray(R.array.WeekDays)
+
+            return weekDaysArray[dayOfWeek]
         }
 
         //Monday == 1
