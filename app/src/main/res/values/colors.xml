@@ -8,10 +8,12 @@
     <color name="colorSecondary">#78909c</color>
     <color name="colorSecondaryLight">#a7c0cd</color>
     <color name="colorSecondaryDark">#a7c0cd</color>
+
     <color name="colorSecondaryTransparent">#5578909c</color>
 
     <color name="colorTextPrimary">#212121</color>
     <color name="colorTextSecondary">#414141</color>
+    <color name="colorTextOnDarkBackground">#f1f1f1</color>
 
     <color name="colorIconTint">#515151</color>
 
