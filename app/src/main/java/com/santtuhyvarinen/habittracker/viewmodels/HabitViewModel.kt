@@ -15,23 +15,24 @@ import kotlinx.coroutines.launch
 
 class HabitViewModel(application: Application) : AndroidViewModel(application) {
     private var initialized = false
-    private var habitId : Long = -1
 
-    private lateinit var databaseManager : DatabaseManager
+    private val databaseManager = DatabaseManager(getApplication())
     val iconManager = IconManager(application)
 
-    val habit : MutableLiveData<Habit> by lazy {
+    private val habit : MutableLiveData<Habit> by lazy {
         MutableLiveData<Habit>()
+    }
+
+    //Set true to exit the fragment
+    private val shouldExitView : MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
     }
 
     fun initialize(id : Long) {
         if (initialized) return
 
-        habitId = id
-        databaseManager = DatabaseManager(getApplication())
-
         viewModelScope.launch {
-            habit.value = getHabit()
+            habit.value = fetchHabit(id)
         }
 
         initialized = true
@@ -55,7 +56,7 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
                 val rows = databaseManager.habitRepository.deleteHabit(habitToDelete)
 
                 if(rows > 0) {
-                    habit.value = null
+                    shouldExitView.value = true
                     Toast.makeText(context, context.getString(R.string.deleted, habitName), Toast.LENGTH_LONG).show()
                 } else {
                     Toast.makeText(context, context.getString(R.string.error_delete_habit), Toast.LENGTH_LONG).show()
@@ -64,7 +65,15 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private suspend fun getHabit() : Habit? {
+    fun getHabit() : LiveData<Habit> {
+        return habit
+    }
+
+    fun getShouldExitView() : LiveData<Boolean> {
+        return shouldExitView
+    }
+
+    private suspend fun fetchHabit(habitId : Long) : Habit? {
         return databaseManager.habitRepository.getHabitById(habitId)
     }
 }

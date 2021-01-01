@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -44,15 +45,23 @@ class HabitViewFragment : Fragment() {
         habitViewModel = ViewModelProvider(this).get(HabitViewModel::class.java)
         habitViewModel.initialize(args.habitId)
 
+        //Observe Habit
         val habitObserver = Observer<Habit> { habit ->
             if(habit != null) {
                 updateHabitValues(habit)
             } else {
+                //Could not load habit
+                Toast.makeText(requireContext(), getString(R.string.error_load_habit), Toast.LENGTH_LONG).show()
                 findNavController().navigateUp()
             }
         }
+        habitViewModel.getHabit().observe(viewLifecycleOwner, habitObserver)
 
-        habitViewModel.habit.observe(viewLifecycleOwner, habitObserver)
+        //Observe ShouldExitView variable to exit the fragment
+        val shouldExitViewObserver = Observer<Boolean> { exit ->
+            if(exit) findNavController().navigateUp()
+        }
+        habitViewModel.getShouldExitView().observe(viewLifecycleOwner, shouldExitViewObserver)
 
         //Edit button on Activity ToolBar
         val activity = (activity as MainActivity)
