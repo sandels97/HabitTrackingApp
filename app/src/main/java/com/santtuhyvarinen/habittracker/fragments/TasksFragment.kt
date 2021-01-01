@@ -32,6 +32,7 @@ class TasksFragment : Fragment() {
 
         tasksViewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
 
+        //Tasks RecyclerView adapter
         tasksAdapter = TasksAdapter(requireContext(), tasksViewModel.iconManager)
         tasksAdapter.taskListener = object : TasksAdapter.TaskListener {
             override fun taskMarkedDone(taskModel: TaskModel) {
@@ -39,12 +40,14 @@ class TasksFragment : Fragment() {
                 SettingsUtil.vibrateDevice(requireContext())
             }
         }
+        recyclerView.adapter = tasksAdapter
 
         //Observer habits from database
         val habitsObserver = Observer<List<Habit>> { list ->
-            tasksViewModel.generateTasks(requireContext(), list)
+            tasksViewModel.generateDailyTasks(requireContext(), list)
         }
-        tasksViewModel.setHabitsObserver(viewLifecycleOwner, habitsObserver)
+
+        tasksViewModel.getHabits().observe(viewLifecycleOwner, habitsObserver)
 
         //Observer tasks
         val tasksObserver = Observer<ArrayList<TaskModel>> { list ->
@@ -52,14 +55,12 @@ class TasksFragment : Fragment() {
             tasksAdapter.notifyDataSetChanged()
         }
 
-        tasksViewModel.setTasksObserver(viewLifecycleOwner, tasksObserver)
-
-        recyclerView.adapter = tasksAdapter
+        tasksViewModel.getTasks().observe(viewLifecycleOwner, tasksObserver)
 
         updateTimeBar()
     }
 
-    fun updateTimeBar() {
+    private fun updateTimeBar() {
         timeBarWeekDayText.text = CalendarUtil.getCurrentWeekDayText(requireContext())
         timeBarDateText.text = CalendarUtil.getCurrentDateText()
     }

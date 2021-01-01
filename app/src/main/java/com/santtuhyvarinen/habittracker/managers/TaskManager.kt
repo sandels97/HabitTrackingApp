@@ -22,7 +22,7 @@ class TaskManager(private val databaseManager: DatabaseManager) {
         MutableLiveData<ArrayList<TaskModel>>()
     }
 
-    suspend fun generateTasks(context: Context, habits : List<Habit>) {
+    suspend fun generateDailyTasks(context: Context, habits : List<Habit>) {
         val taskList = ArrayList<TaskModel>()
 
         val currentTime = System.currentTimeMillis()
