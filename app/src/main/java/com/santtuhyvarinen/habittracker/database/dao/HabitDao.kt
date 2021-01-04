@@ -3,11 +3,16 @@ package com.santtuhyvarinen.habittracker.database.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.santtuhyvarinen.habittracker.models.Habit
+import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 
 @Dao
 interface HabitDao {
     @Query("SELECT * FROM habit")
     fun getAll(): LiveData<List<Habit>>
+
+    @Transaction
+    @Query("SELECT * FROM habit")
+    fun getHabitsWithTaskLogs(): LiveData<List<HabitWithTaskLogs>>
 
     @Query("SELECT * FROM habit WHERE id IN (:id)")
     suspend fun getById(id : Long) : Habit?

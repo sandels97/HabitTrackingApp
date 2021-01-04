@@ -5,10 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.santtuhyvarinen.habittracker.database.repositories.TaskLogRepository
 import com.santtuhyvarinen.habittracker.models.Habit
+import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.TaskLog
 import com.santtuhyvarinen.habittracker.models.TaskModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import kotlinx.coroutines.launch
+import org.joda.time.DateTime
 
 class TaskManager(private val databaseManager: DatabaseManager) {
 
@@ -22,17 +24,15 @@ class TaskManager(private val databaseManager: DatabaseManager) {
         MutableLiveData<ArrayList<TaskModel>>()
     }
 
-    suspend fun generateDailyTasks(context: Context, habits : List<Habit>) {
+    fun generateDailyTasks(context: Context, habits : List<HabitWithTaskLogs>) {
         val taskList = ArrayList<TaskModel>()
 
-        val currentTime = System.currentTimeMillis()
-        for(habit in habits) {
-            if(CalendarUtil.isHabitScheduledForToday(context, habit)) {
-                //Check if already added a task log for habit today. If not, the list should be empty
-                val taskLogs = databaseManager.taskLogRepository.getTaskLogsByHabitAndTime(habit, currentTime)
+        for(habitWithTaskLogs in habits) {
+            if(CalendarUtil.isHabitScheduledForToday(context, habitWithTaskLogs.habit)) {
 
-                if (taskLogs.isEmpty()) {
-                    taskList.add(TaskModel(habit))
+                //Check if already added a task log for habit today. If already has a task log for today, don't add the task
+                if (!hasTaskLogForToday(habitWithTaskLogs)) {
+                    taskList.add(TaskModel(habitWithTaskLogs.habit))
                 }
             }
         }
@@ -40,6 +40,23 @@ class TaskManager(private val databaseManager: DatabaseManager) {
         taskList.sortWith (compareByDescending<TaskModel> { it.habit.priority}.thenBy { it.habit.name} )
 
         tasks.value = taskList
+    }
+
+    private fun hasTaskLogForToday(habitWithTaskLogs: HabitWithTaskLogs) : Boolean {
+        val currentTime = System.currentTimeMillis()
+        val startTime = DateTime(currentTime).withTimeAtStartOfDay()
+        val endTime = startTime.plusDays(1)
+
+        val startTimeMillis = startTime.millis
+        val endTimeMillis = endTime.millis
+
+        for(taskLog in habitWithTaskLogs.taskLogs) {
+            if(taskLog.timestamp in startTimeMillis..endTimeMillis) {
+                return true
+            }
+        }
+
+        return false
     }
 
     suspend fun insertTaskLog(taskModel: TaskModel, taskStatus : String) {

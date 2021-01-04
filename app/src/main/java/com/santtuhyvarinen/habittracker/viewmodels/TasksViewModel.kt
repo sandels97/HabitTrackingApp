@@ -7,6 +7,7 @@ import com.santtuhyvarinen.habittracker.managers.DatabaseManager
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.Habit
+import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.TaskModel
 import kotlinx.coroutines.launch
 
@@ -22,14 +23,14 @@ class TasksViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun generateDailyTasks(context: Context, habits : List<Habit>) {
+    fun generateDailyTasks(context: Context, habits : List<HabitWithTaskLogs>) {
         viewModelScope.launch {
             taskManager.generateDailyTasks(context, habits)
         }
     }
 
-    fun getHabits() : LiveData<List<Habit>> {
-        return databaseManager.habitRepository.habits
+    fun getHabitsWithTaskLogs() : LiveData<List<HabitWithTaskLogs>> {
+        return databaseManager.habitRepository.habitsWithTaskLogs
     }
 
     fun getTasks() : LiveData<ArrayList<TaskModel>> {

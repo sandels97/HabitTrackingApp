@@ -10,6 +10,7 @@ import com.santtuhyvarinen.habittracker.models.Habit
 
 class HabitRepository(private val habitDao: HabitDao) {
     val habits = habitDao.getAll()
+    val habitsWithTaskLogs = habitDao.getHabitsWithTaskLogs()
 
     @WorkerThread
     suspend fun createHabit(habit : Habit) : Long {
