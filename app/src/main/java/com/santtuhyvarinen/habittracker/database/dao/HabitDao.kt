@@ -1,10 +1,8 @@
 package com.santtuhyvarinen.habittracker.database.dao
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.santtuhyvarinen.habittracker.models.Habit
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface HabitDao {
