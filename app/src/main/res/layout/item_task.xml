@@ -38,6 +38,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/scoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/scoreViewHeight"
+
+        android:layout_margin="@dimen/largeMargin"
+        style="@style/ScoreTextStyle"
+
+        app:layout_constraintDimensionRatio=""
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/endGuide"
         android:layout_width="0dp"

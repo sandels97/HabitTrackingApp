@@ -38,4 +38,8 @@
 
     <!--HabitView-->
     <dimen name="habitIconSize">40dp</dimen>
+
+    <dimen name="scoreViewHeight">30dp</dimen>
+    <dimen name="scoreTextSize">16sp</dimen>
+    <dimen name="scoreViewCornerRadius">15dp</dimen>
 </resources>

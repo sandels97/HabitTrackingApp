@@ -58,6 +58,17 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/habitIcon"
             style="@style/SubHeaderStyle"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/scoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/scoreViewHeight"
+
+            style="@style/ScoreTextStyle"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.ContentLoadingProgressBar
