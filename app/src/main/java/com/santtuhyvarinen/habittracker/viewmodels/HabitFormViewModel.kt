@@ -53,7 +53,7 @@ class HabitFormViewModel(application: Application) : AndroidViewModel(applicatio
                 if(loadedHabit != null) {
                     val selectedModel = iconManager.getIconModelByKey(loadedHabit.iconKey)
                     selectedIconModel = selectedModel
-                    CalendarUtil.parseRRULEtoWeekDaysSelectionModel(getApplication(), loadedHabit.taskRecurrence, weekDaysSelectionModel)
+                    CalendarUtil.parseRRULEtoWeekDaysSelectionModel(loadedHabit.taskRecurrence, weekDaysSelectionModel)
                 }
 
                 habitData.value = loadedHabit
@@ -83,7 +83,7 @@ class HabitFormViewModel(application: Application) : AndroidViewModel(applicatio
 
         habit.modificationDate = currentTime
 
-        habit.taskRecurrence = CalendarUtil.getRRuleFromWeekDaysSelectionModel(context, weekDaysSelectionModel)
+        habit.taskRecurrence = CalendarUtil.getRRuleFromWeekDaysSelectionModel(weekDaysSelectionModel)
 
         val selectedIconModel = selectedIconModel
         if(selectedIconModel == null) {

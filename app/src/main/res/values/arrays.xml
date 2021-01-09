@@ -30,16 +30,6 @@
         <item>Sun</item>
     </string-array>
 
-    <string-array name="WeekDaysRRULE">
-        <item>MO</item>
-        <item>TU</item>
-        <item>WE</item>
-        <item>TH</item>
-        <item>FR</item>
-        <item>SA</item>
-        <item>SU</item>
-    </string-array>
-
     <string-array name="PriorityLevels">
         <item>Very Low</item>
         <item>Low</item>

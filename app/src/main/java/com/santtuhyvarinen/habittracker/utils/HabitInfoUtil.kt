@@ -26,7 +26,7 @@ class HabitInfoUtil {
 
         fun getRecurrenceText(context: Context, habit: Habit) : String {
             val weekDaysSelectionModel = WeekDaysSelectionModel()
-            CalendarUtil.parseRRULEtoWeekDaysSelectionModel(context, habit.taskRecurrence, weekDaysSelectionModel)
+            CalendarUtil.parseRRULEtoWeekDaysSelectionModel(habit.taskRecurrence, weekDaysSelectionModel)
 
             if(weekDaysSelectionModel.isEveryDaySelectedOrNotSelected()) {
                 return context.getString(R.string.daily)

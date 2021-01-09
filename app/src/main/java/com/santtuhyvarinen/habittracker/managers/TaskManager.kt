@@ -2,14 +2,10 @@ package com.santtuhyvarinen.habittracker.managers
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.santtuhyvarinen.habittracker.database.repositories.TaskLogRepository
-import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.TaskLog
 import com.santtuhyvarinen.habittracker.models.TaskModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
-import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 
 class TaskManager(private val databaseManager: DatabaseManager) {
@@ -28,7 +24,7 @@ class TaskManager(private val databaseManager: DatabaseManager) {
         val taskList = ArrayList<TaskModel>()
 
         for(habitWithTaskLogs in habits) {
-            if(CalendarUtil.isHabitScheduledForToday(context, habitWithTaskLogs.habit)) {
+            if(CalendarUtil.isHabitScheduledForToday(habitWithTaskLogs.habit)) {
 
                 //Check if already added a task log for habit today. If already has a task log for today, don't add the task
                 if (!hasTaskLogForToday(habitWithTaskLogs)) {

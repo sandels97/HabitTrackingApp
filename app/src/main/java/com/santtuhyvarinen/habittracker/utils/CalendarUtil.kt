@@ -15,7 +15,11 @@ class CalendarUtil {
         const val RRULE_EVERY_DAY = "FREQ=DAILY;"
         const val RRULE_WEEKLY = "FREQ=WEEKLY;BYDAY="
 
-        fun getRRuleFromWeekDaysSelectionModel(context: Context, weekDaysSelectionModel: WeekDaysSelectionModel) : String {
+        fun getRRuleWeekDays() : Array<String> {
+            return arrayOf("MO", "TU", "WE", "TH", "FR", "SA", "SU")
+        }
+
+        fun getRRuleFromWeekDaysSelectionModel(weekDaysSelectionModel: WeekDaysSelectionModel) : String {
             if(weekDaysSelectionModel.isEveryDaySelectedOrNotSelected()) {
                 return RRULE_EVERY_DAY
             }
@@ -23,7 +27,7 @@ class CalendarUtil {
             val stringBuilder = StringBuilder()
             stringBuilder.append(RRULE_WEEKLY)
 
-            val weekDaysRules = context.resources.getStringArray(R.array.WeekDaysRRULE)
+            val weekDaysRules = getRRuleWeekDays()
 
             val numberOfSelected = weekDaysSelectionModel.getNumberOfDaysSelected()
             var index = 0
@@ -41,7 +45,7 @@ class CalendarUtil {
             return stringBuilder.toString()
         }
 
-        fun parseRRULEtoWeekDaysSelectionModel(context: Context, rrule : String, weekDaysSelectionModel: WeekDaysSelectionModel) {
+        fun parseRRULEtoWeekDaysSelectionModel(rrule : String, weekDaysSelectionModel: WeekDaysSelectionModel) {
 
             weekDaysSelectionModel.setAllWeekDaysFalse()
 
@@ -50,7 +54,7 @@ class CalendarUtil {
             if(rrule.contains(RRULE_WEEKLY)) {
                 try {
                     val selectedWeekDays = rrule.removePrefix(RRULE_WEEKLY).split(",")
-                    val weekDaysRules = context.resources.getStringArray(R.array.WeekDaysRRULE)
+                    val weekDaysRules = getRRuleWeekDays()
 
                     for(i in weekDaysSelectionModel.selectedWeekDayButtons.indices) {
                         weekDaysSelectionModel.selectedWeekDayButtons[i] = selectedWeekDays.contains(weekDaysRules[i])
@@ -62,7 +66,7 @@ class CalendarUtil {
             }
         }
 
-        fun isHabitScheduledForToday(context: Context, habit: Habit) : Boolean {
+        fun isHabitScheduledForToday(habit: Habit) : Boolean {
             val rrule = habit.taskRecurrence
 
             if(rrule.contains(RRULE_EVERY_DAY)) return true
@@ -70,7 +74,7 @@ class CalendarUtil {
             if(rrule.contains(RRULE_WEEKLY)) {
                 val currentWeekDay = getCurrentWeekDay() - 1
                 val selectedWeekDays = rrule.removePrefix(RRULE_WEEKLY).split(",")
-                val weekDaysRules = context.resources.getStringArray(R.array.WeekDaysRRULE)
+                val weekDaysRules = getRRuleWeekDays()
 
                 val weekDayText = weekDaysRules[currentWeekDay]
 
@@ -80,7 +84,7 @@ class CalendarUtil {
             return false
         }
 
-        fun getPreviousDateForHabit(context: Context, habit: Habit) : DateTime? {
+        fun getPreviousDateForHabit(habit: Habit) : DateTime? {
             val rrule = habit.taskRecurrence
 
             //If Habit is scheduled for every day, return yesterday
@@ -88,7 +92,7 @@ class CalendarUtil {
 
             if(rrule.contains(RRULE_WEEKLY)) {
                 val selectedWeekDays = rrule.removePrefix(RRULE_WEEKLY).split(",")
-                val weekDaysRules = context.resources.getStringArray(R.array.WeekDaysRRULE)
+                val weekDaysRules = getRRuleWeekDays()
 
                 var dateToCheck = DateTime.now().minusDays(1).withTimeAtStartOfDay()
 

@@ -40,7 +40,7 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getRecurrenceText(context: Context, habit: Habit) : String {
         val weekDaysSelectionModel = WeekDaysSelectionModel()
-        CalendarUtil.parseRRULEtoWeekDaysSelectionModel(context, habit.taskRecurrence, weekDaysSelectionModel)
+        CalendarUtil.parseRRULEtoWeekDaysSelectionModel(habit.taskRecurrence, weekDaysSelectionModel)
 
         return HabitInfoUtil.getRecurrenceHeader(context, weekDaysSelectionModel)
     }
