@@ -7,7 +7,7 @@ data class HabitWithTaskLogs (
     val habit: Habit,
     @Relation(
         parentColumn = "id",
-        entityColumn = "habit_id"
+        entityColumn = "habitId"
     )
     val taskLogs: List<TaskLog>
 )
