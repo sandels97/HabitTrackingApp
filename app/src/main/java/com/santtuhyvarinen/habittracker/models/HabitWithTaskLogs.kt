@@ -1,6 +1,7 @@
 package com.santtuhyvarinen.habittracker.models
 
 import androidx.room.*
+import com.santtuhyvarinen.habittracker.utils.ScoreUtil
 
 data class HabitWithTaskLogs (
     @Embedded
@@ -10,4 +11,9 @@ data class HabitWithTaskLogs (
         entityColumn = "habitId"
     )
     val taskLogs: List<TaskLog>
-)
+) {
+    init {
+        val shouldResetHabitScore = ScoreUtil.shouldResetHabitScore(this)
+        if(shouldResetHabitScore) habit.score = 0
+    }
+}

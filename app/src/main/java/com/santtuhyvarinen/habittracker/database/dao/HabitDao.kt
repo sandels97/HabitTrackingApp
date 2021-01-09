@@ -17,6 +17,9 @@ interface HabitDao {
     @Query("SELECT * FROM habit WHERE id IN (:id)")
     suspend fun getById(id : Long) : Habit?
 
+    @Query("SELECT * FROM habit WHERE id IN (:id)")
+    suspend fun getHabitWithTaskLogsById(id : Long) : HabitWithTaskLogs?
+
     @Insert
     suspend fun create(habit: Habit) : Long
 

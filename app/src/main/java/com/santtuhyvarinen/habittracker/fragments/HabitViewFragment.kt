@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.activities.MainActivity
 import com.santtuhyvarinen.habittracker.models.Habit
+import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
 import com.santtuhyvarinen.habittracker.viewmodels.HabitViewModel
 import kotlinx.android.synthetic.main.fragment_habit_view.*
@@ -46,7 +47,7 @@ class HabitViewFragment : Fragment() {
         habitViewModel.initialize(args.habitId)
 
         //Observe Habit
-        val habitObserver = Observer<Habit> { habit ->
+        val habitObserver = Observer<HabitWithTaskLogs> { habit ->
             if(habit != null) {
                 updateHabitValues(habit)
             } else {
@@ -55,7 +56,7 @@ class HabitViewFragment : Fragment() {
                 findNavController().navigateUp()
             }
         }
-        habitViewModel.getHabit().observe(viewLifecycleOwner, habitObserver)
+        habitViewModel.getHabitWithTaskLogs().observe(viewLifecycleOwner, habitObserver)
 
         //Observe ShouldExitView variable to exit the fragment
         val shouldExitViewObserver = Observer<Boolean> { exit ->
@@ -85,7 +86,8 @@ class HabitViewFragment : Fragment() {
         habitInfoLayout.visibility = if(showLayout) View.VISIBLE else View.GONE
     }
 
-    private fun updateHabitValues(habit: Habit) {
+    private fun updateHabitValues(habitWithTaskLogs: HabitWithTaskLogs) {
+        val habit = habitWithTaskLogs.habit
         habitNameText.text = habit.name
 
         //Priority text

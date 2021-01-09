@@ -5,6 +5,7 @@ import androidx.annotation.WorkerThread
 import com.santtuhyvarinen.habittracker.database.AppDatabase
 import com.santtuhyvarinen.habittracker.database.dao.HabitDao
 import com.santtuhyvarinen.habittracker.models.Habit
+import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 
 @Suppress("RedundantSuspendModifier")
 
@@ -41,5 +42,10 @@ class HabitRepository(private val habitDao: HabitDao) {
     @WorkerThread
     suspend fun getHabitById(id : Long) : Habit? {
         return habitDao.getById(id)
+    }
+
+    @WorkerThread
+    suspend fun getHabitWithTaskLogsById(id : Long) : HabitWithTaskLogs? {
+        return habitDao.getHabitWithTaskLogsById(id)
     }
 }

@@ -8,6 +8,7 @@ import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.managers.DatabaseManager
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.Habit
+import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
@@ -19,8 +20,8 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
     private val databaseManager = DatabaseManager(getApplication())
     val iconManager = IconManager(application)
 
-    private val habit : MutableLiveData<Habit> by lazy {
-        MutableLiveData<Habit>()
+    private val habitWithTaskLogs : MutableLiveData<HabitWithTaskLogs> by lazy {
+        MutableLiveData<HabitWithTaskLogs>()
     }
 
     //Set true to exit the fragment
@@ -32,7 +33,7 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
         if (initialized) return
 
         viewModelScope.launch {
-            habit.value = fetchHabit(id)
+            habitWithTaskLogs.value = fetchHabit(id)
         }
 
         initialized = true
@@ -46,10 +47,10 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun deleteHabit(context: Context) {
-        val habitToDelete = habit.value
+        val habitWithTaskLogsToDelete = habitWithTaskLogs.value
 
-        if(habitToDelete != null) {
-
+        if(habitWithTaskLogsToDelete != null) {
+            val habitToDelete = habitWithTaskLogsToDelete.habit
             val habitName = habitToDelete.name
 
             viewModelScope.launch {
@@ -65,15 +66,15 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getHabit() : LiveData<Habit> {
-        return habit
+    fun getHabitWithTaskLogs() : LiveData<HabitWithTaskLogs> {
+        return habitWithTaskLogs
     }
 
     fun getShouldExitView() : LiveData<Boolean> {
         return shouldExitView
     }
 
-    private suspend fun fetchHabit(habitId : Long) : Habit? {
-        return databaseManager.habitRepository.getHabitById(habitId)
+    private suspend fun fetchHabit(habitId : Long) : HabitWithTaskLogs? {
+        return databaseManager.habitRepository.getHabitWithTaskLogsById(habitId)
     }
 }
