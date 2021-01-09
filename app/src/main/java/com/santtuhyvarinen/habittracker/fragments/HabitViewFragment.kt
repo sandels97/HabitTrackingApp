@@ -101,6 +101,10 @@ class HabitViewFragment : Fragment() {
         if (iconKey != null)
             habitIcon.setImageDrawable(habitViewModel.iconManager.getIconByKey(iconKey))
 
+        //Score
+        val score = habit.score
+        scoreTextView.text = getString(R.string.score_text, score)
+
         updateProgress(true)
     }
 

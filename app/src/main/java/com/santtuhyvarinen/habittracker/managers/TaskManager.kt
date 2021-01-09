@@ -62,10 +62,34 @@ class TaskManager(private val databaseManager: DatabaseManager) {
     suspend fun insertTaskLog(taskModel: TaskModel, taskStatus : String) {
         val taskLog = TaskLog()
 
-        taskLog.habitId = taskModel.habit.id
+        val habit = taskModel.habit
+
+        taskLog.habitId = habit.id
         taskLog.timestamp = System.currentTimeMillis()
         taskLog.status = taskStatus
 
+        when(taskStatus) {
+            STATUS_SUCCESS -> {
+                //Increase habit score
+                val oldScore = habit.score
+                val newScore = oldScore + 1
+
+                habit.score = newScore
+                taskLog.score = newScore
+            }
+
+            STATUS_FAILED -> {
+                //Reset habit score
+                val newScore = 0
+
+                habit.score = newScore
+                taskLog.score = newScore
+            }
+        }
+
+
         databaseManager.taskLogRepository.createTaskLog(taskLog)
+
+        databaseManager.habitRepository.updateHabit(habit)
     }
 }

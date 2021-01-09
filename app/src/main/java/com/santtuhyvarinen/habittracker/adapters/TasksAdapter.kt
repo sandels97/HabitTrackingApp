@@ -22,6 +22,7 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
 
     class ViewHolder(var layout : View) : RecyclerView.ViewHolder(layout) {
         val titleTextView : TextView = layout.findViewById(R.id.title)
+        val scoreTextView : TextView = layout.findViewById(R.id.scoreTextView)
         val iconView : ImageView = layout.findViewById(R.id.icon)
     }
 
@@ -34,6 +35,7 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val taskModel = data[position]
         holder.titleTextView.text = taskModel.habit.name
+        holder.scoreTextView.text = context.getString(R.string.score_text, taskModel.habit.score)
 
         val iconKey = taskModel.habit.iconKey
 

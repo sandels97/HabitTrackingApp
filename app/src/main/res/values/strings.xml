@@ -34,6 +34,7 @@
 
     <!--Score-->
     <string name="score_content_description">Habit Score</string>
+    <string name="score_text">+%1$d</string>
 
     <string name="habit_priority">Habit Priority</string>
     <string name="habit_priority_header">Priority: %1$s</string>
