@@ -80,6 +80,35 @@ class CalendarUtil {
             return false
         }
 
+        fun getPreviousDateForHabit(context: Context, habit: Habit) : DateTime? {
+            val rrule = habit.taskRecurrence
+
+            //If Habit is scheduled for every day, return yesterday
+            if(rrule.contains(RRULE_EVERY_DAY)) return DateTime.now().minusDays(1)
+
+            if(rrule.contains(RRULE_WEEKLY)) {
+                val selectedWeekDays = rrule.removePrefix(RRULE_WEEKLY).split(",")
+                val weekDaysRules = context.resources.getStringArray(R.array.WeekDaysRRULE)
+
+                var dateToCheck = DateTime.now().minusDays(1).withTimeAtStartOfDay()
+
+                //Find the previous date when habit was scheduled
+                for (i in 0 until 7) {
+                    val weekDay = dateToCheck.dayOfWeek - 1
+                    val weekDayText = weekDaysRules[weekDay]
+
+                    if(selectedWeekDays.contains(weekDayText)) {
+                        return dateToCheck
+                    }
+
+                    dateToCheck = dateToCheck.minusDays(1)
+                }
+            }
+
+            //Return null if could not find the previous date
+            return null
+        }
+
         fun getCurrentDateText() : String {
             val dateTime = DateTime.now()
             val dateTimeFormatter = DateTimeFormat.forPattern("dd.MM.yyyy")
