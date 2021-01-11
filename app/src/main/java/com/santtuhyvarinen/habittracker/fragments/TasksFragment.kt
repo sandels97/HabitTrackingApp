@@ -17,6 +17,8 @@ import com.santtuhyvarinen.habittracker.utils.SettingsUtil
 import com.santtuhyvarinen.habittracker.viewmodels.TasksViewModel
 import kotlinx.android.synthetic.main.fragment_tasks.recyclerView
 import kotlinx.android.synthetic.main.layout_time_bar.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class TasksFragment : Fragment() {
 
@@ -62,7 +64,8 @@ class TasksFragment : Fragment() {
     }
 
     private fun updateTimeBar() {
-        timeBarWeekDayText.text = CalendarUtil.getCurrentWeekDayText(requireContext())
+        timeBarWeekDayText.text =
+            CalendarUtil.getCurrentWeekDayText(requireContext()).capitalize(Locale.ROOT)
         timeBarDateText.text = CalendarUtil.getCurrentDateText()
     }
 }

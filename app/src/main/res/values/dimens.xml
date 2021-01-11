@@ -25,6 +25,7 @@
 
     <dimen name="buttonHeight">60dp</dimen>
     <dimen name="roundButtonSize">48dp</dimen>
+    <dimen name="largeRoundButtonSize">54dp</dimen>
 
     <dimen name="floatingActionButtonSize">50dp</dimen>
 

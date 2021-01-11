@@ -91,13 +91,12 @@
     </style>
 
     <style name="ScoreTextStyle">
-        <item name="android:background">@drawable/background_score</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
         <item name="android:textSize">@dimen/scoreTextSize</item>
         <item name="android:textAlignment">textEnd</item>
         <item name="android:text">+0</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
-        <item name="android:padding">@dimen/smallPadding</item>
         <item name="android:contentDescription">@string/score_content_description</item>
     </style>
 </resources>

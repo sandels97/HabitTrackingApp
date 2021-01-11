@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/taskCardHeight"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:layout_marginTop="@dimen/largeMargin"
@@ -22,8 +22,7 @@
         android:tint="@color/colorIconTint"
 
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
@@ -35,8 +34,7 @@
 
         app:layout_constraintLeft_toRightOf="@id/icon"
         app:layout_constraintRight_toRightOf="@id/endGuide"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/scoreTextView"
@@ -45,11 +43,51 @@
 
         android:layout_margin="@dimen/largeMargin"
         style="@style/ScoreTextStyle"
+        android:textAlignment="textStart"
 
-        app:layout_constraintDimensionRatio=""
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/taskSuccessButton"
+        app:layout_constraintBottom_toBottomOf="@id/taskSuccessButton"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/taskSuccessButton"
+        android:layout_width="@dimen/roundButtonSize"
+        android:layout_height="@dimen/roundButtonSize"
+
+        android:src="@drawable/ic_task_success"
+        android:background="?selectableItemBackgroundBorderless"
+        android:tint="@color/colorSuccess"
+        android:layout_marginTop="@dimen/largeMargin"
+
+        app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/taskSkipButton"
+        android:layout_width="@dimen/roundButtonSize"
+        android:layout_height="@dimen/roundButtonSize"
+
+        android:src="@drawable/ic_task_skip"
+        android:background="?selectableItemBackgroundBorderless"
+        android:layout_marginEnd="@dimen/smallMargin"
+        android:tint="@color/colorIconTint"
+
+        app:layout_constraintTop_toTopOf="@id/taskSuccessButton"
+        app:layout_constraintBottom_toBottomOf="@id/taskSuccessButton"
+        app:layout_constraintRight_toLeftOf="@id/taskSuccessButton"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/taskFailButton"
+        android:layout_width="@dimen/roundButtonSize"
+        android:layout_height="@dimen/roundButtonSize"
+
+        android:src="@drawable/ic_task_fail"
+        android:background="?selectableItemBackgroundBorderless"
+        android:layout_marginEnd="@dimen/smallMargin"
+
+        app:layout_constraintTop_toTopOf="@id/taskSuccessButton"
+        app:layout_constraintBottom_toBottomOf="@id/taskSuccessButton"
+        app:layout_constraintRight_toLeftOf="@id/taskSkipButton"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/endGuide"
