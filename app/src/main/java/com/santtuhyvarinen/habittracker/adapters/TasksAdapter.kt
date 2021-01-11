@@ -4,18 +4,18 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
+import android.view.animation.*
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.TaskModel
 import com.santtuhyvarinen.habittracker.viewmodels.TasksViewModel
+import kotlinx.android.synthetic.main.item_task.view.*
 
 class TasksAdapter(private var context: Context, private val iconManager: IconManager) : RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
 
@@ -34,6 +34,8 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
         val successButton : ImageButton = layout.findViewById(R.id.taskSuccessButton)
         val skipButton : ImageButton = layout.findViewById(R.id.taskSkipButton)
         val failButton : ImageButton = layout.findViewById(R.id.taskFailButton)
+
+        val taskPopUp : TextView = layout.findViewById(R.id.taskPopUp)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -78,14 +80,76 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
 
         val layout = viewHolder.layout
 
-        val animationDuration = context.resources.getInteger(android.R.integer.config_mediumAnimTime)
+        val animationDuration = context.resources.getInteger(android.R.integer.config_longAnimTime).toLong()
         val animationSet = AnimationSet(true)
         val alphaAnimation = AlphaAnimation(1f, 0f)
-        alphaAnimation.duration = animationDuration.toLong()
+        alphaAnimation.duration = animationDuration
         animationSet.addAnimation(alphaAnimation)
+        animationSet.interpolator = AccelerateDecelerateInterpolator()
+
+        viewHolder.taskPopUp.visibility = View.VISIBLE
 
         when(status) {
             TaskManager.STATUS_SUCCESS -> {
+                //Task marked as success animation
+                viewHolder.taskPopUp.text = context.getString(R.string.task_done)
+                viewHolder.taskPopUp.setBackgroundColor(ContextCompat.getColor(context, R.color.colorSuccess))
+
+                val scaleAnimation = ScaleAnimation(
+                    1f,
+                    1.1f,
+                    1f,
+                    1.1f,
+                    Animation.RELATIVE_TO_SELF,
+                    0.5f,
+                    Animation.RELATIVE_TO_SELF,
+                    0.5f
+                )
+
+                scaleAnimation.duration = animationDuration
+                animationSet.addAnimation(scaleAnimation)
+            }
+
+            TaskManager.STATUS_SKIPPED -> {
+                viewHolder.taskPopUp.text = context.getString(R.string.task_skipped)
+                viewHolder.taskPopUp.setBackgroundColor(ContextCompat.getColor(context, R.color.colorSkipped))
+                viewHolder.taskPopUp.setTextColor(ContextCompat.getColor(context, R.color.colorTextSecondary))
+
+                //Task marked as skipped animation
+                val translateAnimation = TranslateAnimation(
+                    Animation.RELATIVE_TO_SELF,
+                    0f,
+                    Animation.RELATIVE_TO_SELF,
+                    0.1f,
+                    Animation.RELATIVE_TO_SELF,
+                    0f,
+                    Animation.RELATIVE_TO_SELF,
+                    0f
+                )
+
+                translateAnimation.duration = animationDuration
+                animationSet.addAnimation(translateAnimation)
+            }
+
+            TaskManager.STATUS_FAILED -> {
+                //Task marked as failed animation
+                viewHolder.taskPopUp.visibility = View.VISIBLE
+                viewHolder.taskPopUp.text = context.getString(R.string.task_failed)
+                viewHolder.taskPopUp.setBackgroundColor(ContextCompat.getColor(context, R.color.colorFail))
+
+                val scaleAnimation = ScaleAnimation(
+                    1f,
+                    0.9f,
+                    1f,
+                    0.9f,
+                    Animation.RELATIVE_TO_SELF,
+                    0.5f,
+                    Animation.RELATIVE_TO_SELF,
+                    0.5f
+                )
+
+                scaleAnimation.duration = animationDuration
+                animationSet.addAnimation(scaleAnimation)
             }
         }
 

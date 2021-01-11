@@ -33,7 +33,7 @@
         android:layout_margin="@dimen/largeMargin"
 
         app:layout_constraintLeft_toRightOf="@id/icon"
-        app:layout_constraintRight_toRightOf="@id/endGuide"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -58,6 +58,7 @@
         android:background="?selectableItemBackgroundBorderless"
         android:tint="@color/colorSuccess"
         android:layout_marginTop="@dimen/largeMargin"
+        android:contentDescription="@string/task_set_success"
 
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -71,6 +72,7 @@
         android:background="?selectableItemBackgroundBorderless"
         android:layout_marginEnd="@dimen/smallMargin"
         android:tint="@color/colorIconTint"
+        android:contentDescription="@string/task_set_skip"
 
         app:layout_constraintTop_toTopOf="@id/taskSuccessButton"
         app:layout_constraintBottom_toBottomOf="@id/taskSuccessButton"
@@ -84,16 +86,24 @@
         android:src="@drawable/ic_task_fail"
         android:background="?selectableItemBackgroundBorderless"
         android:layout_marginEnd="@dimen/smallMargin"
+        android:contentDescription="@string/task_set_failed"
 
         app:layout_constraintTop_toTopOf="@id/taskSuccessButton"
         app:layout_constraintBottom_toBottomOf="@id/taskSuccessButton"
         app:layout_constraintRight_toLeftOf="@id/taskSkipButton"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/endGuide"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/taskPopUp"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75"/>
+        android:visibility="gone"
+
+        style="@style/TaskPopUpStyle"
+        android:padding="@dimen/largePadding"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

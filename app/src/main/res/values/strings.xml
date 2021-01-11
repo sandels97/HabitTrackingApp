@@ -43,6 +43,12 @@
 
     <!--Tasks-->
     <string name="time_left">Time left: %1$s</string>
+    <string name="task_set_success">Mark task as done</string>
+    <string name="task_set_failed">Mark task as failed</string>
+    <string name="task_set_skip">Skip task</string>
+    <string name="task_done">Done!</string>
+    <string name="task_failed">Failed</string>
+    <string name="task_skipped">Skip</string>
 
     <!--Errors-->
     <string name="error_load_habit">Error: Can\'t show the habit</string>
