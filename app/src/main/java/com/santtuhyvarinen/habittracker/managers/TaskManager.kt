@@ -20,7 +20,7 @@ class TaskManager(private val databaseManager: DatabaseManager) {
         MutableLiveData<ArrayList<TaskModel>>()
     }
 
-    fun generateDailyTasks(context: Context, habits : List<HabitWithTaskLogs>) {
+    fun generateDailyTasks(habits : List<HabitWithTaskLogs>) {
         val taskList = ArrayList<TaskModel>()
 
         for(habitWithTaskLogs in habits) {

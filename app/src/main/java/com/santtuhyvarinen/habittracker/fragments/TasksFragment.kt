@@ -38,8 +38,8 @@ class TasksFragment : Fragment() {
         //Tasks RecyclerView adapter
         tasksAdapter = TasksAdapter(requireContext(), tasksViewModel.iconManager)
         tasksAdapter.taskListener = object : TasksAdapter.TaskListener {
-            override fun taskMarkedDone(taskModel: TaskModel) {
-                tasksViewModel.setTaskAsDone(taskModel)
+            override fun createTaskLog(taskModel: TaskModel, status : String) {
+                tasksViewModel.createTaskLog(taskModel, status)
                 SettingsUtil.vibrateDevice(requireContext())
             }
         }
@@ -48,6 +48,7 @@ class TasksFragment : Fragment() {
         //Observer habits from database
         val habitsObserver = Observer<List<HabitWithTaskLogs>> { list ->
             tasksViewModel.generateDailyTasks(requireContext(), list)
+            tasksViewModel.getHabitsWithTaskLogs().removeObservers(viewLifecycleOwner)
         }
 
         tasksViewModel.getHabitsWithTaskLogs().observe(viewLifecycleOwner, habitsObserver)

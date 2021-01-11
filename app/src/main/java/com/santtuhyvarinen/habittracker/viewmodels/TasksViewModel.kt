@@ -6,7 +6,6 @@ import androidx.lifecycle.*
 import com.santtuhyvarinen.habittracker.managers.DatabaseManager
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.managers.TaskManager
-import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.TaskModel
 import kotlinx.coroutines.launch
@@ -17,15 +16,15 @@ class TasksViewModel(application: Application) : AndroidViewModel(application) {
     private val taskManager = TaskManager(databaseManager)
     val iconManager = IconManager(application)
 
-    fun setTaskAsDone(taskModel: TaskModel) {
+    fun createTaskLog(taskModel: TaskModel, status : String) {
         viewModelScope.launch {
-            taskManager.insertTaskLog(taskModel, TaskManager.STATUS_SUCCESS)
+            taskManager.insertTaskLog(taskModel, status)
         }
     }
 
     fun generateDailyTasks(context: Context, habits : List<HabitWithTaskLogs>) {
         viewModelScope.launch {
-            taskManager.generateDailyTasks(context, habits)
+            taskManager.generateDailyTasks(habits)
         }
     }
 
