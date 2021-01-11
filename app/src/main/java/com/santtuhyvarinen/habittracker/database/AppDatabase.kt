@@ -9,7 +9,7 @@ import com.santtuhyvarinen.habittracker.database.dao.TaskLogDao
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.TaskLog
 
-@Database(entities = [Habit::class, TaskLog::class], version = 1)
+@Database(entities = [Habit::class, TaskLog::class], version = 1, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun habitDao() : HabitDao
     abstract fun taskLogDao() : TaskLogDao
@@ -23,7 +23,10 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getDatabase(context: Context) : AppDatabase {
             return DATABASE_INSTANCE?: synchronized(this) {
-                val instance = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, DATABASE_NAME).build()
+                val instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        AppDatabase::class.java, DATABASE_NAME)
+                        .build()
 
                 DATABASE_INSTANCE = instance
 
