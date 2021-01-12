@@ -8,6 +8,7 @@ import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.TaskModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TasksViewModel(application: Application) : AndroidViewModel(application) {
@@ -17,15 +18,13 @@ class TasksViewModel(application: Application) : AndroidViewModel(application) {
     val iconManager = IconManager(application)
 
     fun createTaskLog(taskModel: TaskModel, status : String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             taskManager.insertTaskLog(taskModel, status)
         }
     }
 
-    fun generateDailyTasks(context: Context, habits : List<HabitWithTaskLogs>) {
-        viewModelScope.launch {
-            taskManager.generateDailyTasks(habits)
-        }
+    fun generateDailyTasks(habits : List<HabitWithTaskLogs>) {
+        taskManager.generateDailyTasks(habits)
     }
 
     fun getHabitsWithTaskLogs() : LiveData<List<HabitWithTaskLogs>> {

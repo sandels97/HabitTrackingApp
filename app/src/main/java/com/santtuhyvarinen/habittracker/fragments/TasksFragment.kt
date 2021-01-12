@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.adapters.TasksAdapter
-import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.TaskModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
@@ -47,7 +46,7 @@ class TasksFragment : Fragment() {
 
         //Observer habits from database
         val habitsObserver = Observer<List<HabitWithTaskLogs>> { list ->
-            tasksViewModel.generateDailyTasks(requireContext(), list)
+            tasksViewModel.generateDailyTasks(list)
             tasksViewModel.getHabitsWithTaskLogs().removeObservers(viewLifecycleOwner)
         }
 
