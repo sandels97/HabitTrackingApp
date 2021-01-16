@@ -24,6 +24,8 @@ class TaskManager(private val databaseManager: DatabaseManager) {
         val taskList = ArrayList<TaskModel>()
 
         for(habitWithTaskLogs in habits) {
+            if(habitWithTaskLogs.habit.disabled) continue
+            
             if(CalendarUtil.isHabitScheduledForToday(habitWithTaskLogs.habit)) {
 
                 //Check if already added a task log for habit today. If already has a task log for today, don't add the task

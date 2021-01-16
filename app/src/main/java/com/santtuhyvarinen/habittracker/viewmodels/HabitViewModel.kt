@@ -66,6 +66,19 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun setHabitEnabled(enabled : Boolean) {
+        val habitWithTaskLogs = habitWithTaskLogs.value
+
+        if(habitWithTaskLogs != null) {
+            val habit = habitWithTaskLogs.habit
+            habit.disabled = !enabled
+
+            viewModelScope.launch {
+                val rows = databaseManager.habitRepository.updateHabit(habit)
+            }
+        }
+    }
+
     fun getHabitWithTaskLogs() : LiveData<HabitWithTaskLogs> {
         return habitWithTaskLogs
     }

@@ -79,6 +79,10 @@ class HabitViewFragment : Fragment() {
 
             showDeleteConfirmationDialog()
         }
+
+        habitDisableSwitch.setOnCheckedChangeListener { compoundButton, enabled ->
+            habitViewModel.setHabitEnabled(enabled)
+        }
     }
 
     private fun updateProgress(showLayout : Boolean) {
@@ -106,6 +110,9 @@ class HabitViewFragment : Fragment() {
         //Score
         val score = habit.score
         scoreTextView.text = getString(R.string.score_text, score)
+
+        //Disabled
+        habitDisableSwitch.isChecked = !habit.disabled
 
         updateProgress(true)
     }

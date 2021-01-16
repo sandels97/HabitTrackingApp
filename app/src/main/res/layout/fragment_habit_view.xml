@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:visibility="gone"
         android:padding="@dimen/largePadding"
         android:background="@color/colorPrimaryBackground"
         android:elevation="@dimen/elevation"
@@ -63,12 +62,20 @@
             android:id="@+id/scoreTextView"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/scoreViewHeight"
+            android:layout_marginTop="@dimen/smallMargin"
 
             style="@style/ScoreTextStyle"
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/habitPriorityText"
+            app:layout_constraintLeft_toLeftOf="parent"/>
 
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/habitDisableSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.ContentLoadingProgressBar
