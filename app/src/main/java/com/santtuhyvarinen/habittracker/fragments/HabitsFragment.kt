@@ -36,6 +36,7 @@ class HabitsFragment : Fragment() {
         //Observer habits from database
         val habitsObserver = Observer<List<Habit>> { list ->
             habitsAdapter.data = list
+            habitsAdapter.sortData()
             habitsAdapter.notifyDataSetChanged()
             progress.visibility = View.GONE
         }

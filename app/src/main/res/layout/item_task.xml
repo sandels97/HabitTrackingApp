@@ -29,8 +29,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/tasks"
-        android:textAppearance="@style/ItemTitleStyle"
         android:layout_margin="@dimen/largeMargin"
+        style="@style/ItemTitleStyle"
 
         app:layout_constraintLeft_toRightOf="@id/icon"
         app:layout_constraintRight_toRightOf="parent"

@@ -26,7 +26,12 @@ class HabitsListAdapter(private val context: Context, private val iconManager: I
     class ViewHolder(var layout : View) : RecyclerView.ViewHolder(layout) {
         val titleTextView : TextView = layout.findViewById(R.id.title)
         val recurrenceTextView : TextView = layout.findViewById(R.id.recurrenceText)
+        val disabledTextView : TextView = layout.findViewById(R.id.disabledText)
         val iconImageView : ImageView = layout.findViewById(R.id.icon)
+    }
+
+    fun sortData() {
+        data = data.sortedByDescending { it.creationDate }.sortedBy { it.disabled }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -46,6 +51,14 @@ class HabitsListAdapter(private val context: Context, private val iconManager: I
 
         holder.layout.setOnClickListener {
             habitClickedListener?.habitClicked(habitModel)
+        }
+
+        if(habitModel.disabled) {
+            holder.disabledTextView.visibility = View.VISIBLE
+            holder.layout.alpha = 0.7f
+        } else {
+            holder.disabledTextView.visibility = View.GONE
+            holder.layout.alpha = 1f
         }
     }
 
