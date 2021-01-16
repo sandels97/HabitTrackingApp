@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+
+    android:id="@+id/layoutMessage">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/messageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/ItemTitleStyle"
+        android:text="@string/all_tasks_done"
+        android:textColor="@color/colorIconTint"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/messageIcon"
+        android:layout_width="@dimen/itemIconSize"
+        android:layout_height="@dimen/itemIconSize"
+        android:src="@drawable/icon_thumb_up"
+        android:layout_marginBottom="@dimen/mediumMargin"
+        android:tint="@color/colorIconTint"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/messageText"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,16 +14,15 @@ import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.TaskModel
-import com.santtuhyvarinen.habittracker.viewmodels.TasksViewModel
-import kotlinx.android.synthetic.main.item_task.view.*
 
 class TasksAdapter(private var context: Context, private val iconManager: IconManager) : RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
 
     var data : ArrayList<TaskModel> = ArrayList()
 
-    var taskListener : TaskListener? = null
-    interface TaskListener {
+    var tasksAdapterListener : TasksAdapterListener? = null
+    interface TasksAdapterListener {
         fun createTaskLog(taskModel: TaskModel, status : String)
+        fun allTasksDone()
     }
 
     class ViewHolder(var layout : View) : RecyclerView.ViewHolder(layout) {
@@ -74,7 +73,7 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
     private fun animateExit(status : String, viewHolder: ViewHolder, taskModel: TaskModel, position : Int) {
         if(!taskModel.enabled) return
 
-        taskListener?.createTaskLog(taskModel, status)
+        tasksAdapterListener?.createTaskLog(taskModel, status)
 
         taskModel.enabled = false
 
@@ -162,6 +161,8 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
                 data.remove(taskModel)
                 notifyItemRemoved(position)
                 notifyItemRangeChanged(position, itemCount)
+
+                if(data.isEmpty()) tasksAdapterListener?.allTasksDone()
             }
 
             override fun onAnimationRepeat(p0: Animation?) {

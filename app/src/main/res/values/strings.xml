@@ -52,6 +52,9 @@
     <string name="task_failed">Failed</string>
     <string name="task_skipped">Skip</string>
 
+    <string name="all_tasks_done">Everything done here!</string>
+    <string name="habits_missing">You haven\'t created any habits yet</string>
+
     <!--Errors-->
     <string name="error_load_habit">Error: Can\'t show the habit</string>
     <string name="error_delete_habit">Error: Could not delete the habit</string>
