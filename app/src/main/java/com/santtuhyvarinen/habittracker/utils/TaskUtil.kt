@@ -1,5 +1,6 @@
 package com.santtuhyvarinen.habittracker.utils
 
+import android.content.Context
 import com.santtuhyvarinen.habittracker.models.DateStatusModel
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import org.joda.time.DateTime
@@ -30,13 +31,13 @@ class TaskUtil {
         }
 
         //Returns an array for Habit that contains Habit task status from last seven days
-        fun getDateStatusModelsForHabit(habitWithTaskLogs: HabitWithTaskLogs, fromDate : DateTime, days : Int) : Array<DateStatusModel> {
+        fun getDateStatusModelsForHabit(context: Context, habitWithTaskLogs: HabitWithTaskLogs, fromDate : DateTime, days : Int) : Array<DateStatusModel> {
             val array = Array(days) { DateStatusModel("", STATUS_NONE) }
 
             var date = fromDate
             for(i in array.indices) {
                 val dateStatusModel = array[i]
-                dateStatusModel.date = CalendarUtil.getDateTextShort(date.millis)
+                dateStatusModel.date = CalendarUtil.getWeekDayTextShort(context, date)
 
                 val startTime = DateTime(date).withTimeAtStartOfDay()
                 val endTime = startTime.plusDays(1)

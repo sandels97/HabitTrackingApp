@@ -113,7 +113,7 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
             TaskUtil.STATUS_SKIPPED -> {
                 viewHolder.taskPopUp.text = context.getString(R.string.task_skipped)
                 viewHolder.taskPopUp.setBackgroundColor(ContextCompat.getColor(context, R.color.colorSkipped))
-                viewHolder.taskPopUp.setTextColor(ContextCompat.getColor(context, R.color.colorTextSecondary))
+                viewHolder.taskPopUp.setTextColor(ContextCompat.getColor(context, R.color.colorTextPrimaryLight))
 
                 //Task marked as skipped animation
                 val translateAnimation = TranslateAnimation(

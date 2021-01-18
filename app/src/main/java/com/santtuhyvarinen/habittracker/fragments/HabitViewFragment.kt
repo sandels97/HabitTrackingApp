@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -91,8 +92,8 @@ class HabitViewFragment : Fragment() {
 
         //Update stat headers
         setStatHeader(binding.statCreated, getString(R.string.created))
-        setStatHeader(binding.statHighestScore, getString(R.string.highest_score))
         setStatHeader(binding.statTotalSuccesses, getString(R.string.total_success))
+        setStatHeader(binding.statHighestScore, getString(R.string.highest_score))
     }
 
     private fun updateProgress(showLayout : Boolean) {

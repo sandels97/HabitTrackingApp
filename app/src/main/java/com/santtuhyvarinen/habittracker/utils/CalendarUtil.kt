@@ -157,6 +157,13 @@ class CalendarUtil {
             return weekDaysArray[dayOfWeek]
         }
 
+        fun getWeekDayTextShort(context: Context, date: DateTime) : String {
+            val dayOfWeek = date.dayOfWeek - 1
+            val weekDaysArray = context.resources.getStringArray(R.array.WeekDaysShort)
+
+            return weekDaysArray[dayOfWeek]
+        }
+
         //Monday == 1
         //Sunday == 7
         //etc

@@ -8,14 +8,14 @@
     android:paddingStart="@dimen/largePadding"
     android:paddingEnd="@dimen/largePadding"
 
-    android:background="@color/colorSecondary"
+    android:background="@color/colorSecondaryDark"
     android:elevation="@dimen/elevation">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/timeBarWeekDayText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/TimeBarTextStyle"
+        style="@style/BarTextStyle"
         android:textStyle="bold"
 
         app:layout_constraintRight_toRightOf="@id/centerGuide"
@@ -27,7 +27,7 @@
         android:id="@+id/timeBarDateText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/TimeBarTextStyle"
+        style="@style/BarTextStyle"
         android:textAlignment="textEnd"
 
         app:layout_constraintLeft_toLeftOf="@id/centerGuide"

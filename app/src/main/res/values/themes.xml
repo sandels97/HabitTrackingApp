@@ -41,13 +41,13 @@
 
     <style name="TaskInfoTextStyle">
         <item name="android:textSize">@dimen/extraSmallTextSize</item>
-        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:textColor">@color/colorTextPrimaryLight</item>
         <item name="android:textStyle">normal</item>
     </style>
 
     <style name="HabitFormHeaderStyle">
         <item name="android:textSize">@dimen/mediumTextSize</item>
-        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:textColor">@color/colorTextPrimaryLight</item>
         <item name="android:textStyle">normal</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
@@ -63,16 +63,16 @@
 
     <style name="SubHeaderStyle">
         <item name="android:textSize">@dimen/smallTextSize</item>
-        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:textColor">@color/colorTextPrimaryLight</item>
         <item name="android:textStyle">normal</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
         <item name="android:textAlignment">textStart</item>
     </style>
 
-    <style name="TimeBarTextStyle">
+    <style name="BarTextStyle">
         <item name="android:textSize">@dimen/smallTextSize</item>
-        <item name="android:textColor">@color/colorTextOnDarkBackground</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
         <item name="android:textStyle">normal</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>

@@ -29,7 +29,7 @@ class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(con
     fun setup(habitWithTaskLogs: HabitWithTaskLogs) {
         habit = habitWithTaskLogs
 
-        dateStatusModels = TaskUtil.getDateStatusModelsForHabit(habitWithTaskLogs, fromDate, days)
+        dateStatusModels = TaskUtil.getDateStatusModelsForHabit(context, habitWithTaskLogs, fromDate, days)
         invalidate()
     }
 
