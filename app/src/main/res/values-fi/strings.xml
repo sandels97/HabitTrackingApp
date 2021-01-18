@@ -35,8 +35,21 @@
 
     <string name="habit_icon">Kuvake</string>
 
+    <string name="score_content_description">Rutiinin pisteet</string>
+
+    <string name="disabled">Pois päältä</string>
+
     <!--Tasks-->
-    <string name="time_left">Aikaa jäljellä: %1$s</string>
+    <string name="task_set_success">Merkitse tehtävä suoritetuksi</string>
+    <string name="task_set_failed">Merkitse tehtävä epäonnistuneeksi</string>
+    <string name="task_set_skip">Ohita tehtävä</string>
+    <string name="task_done">Valmis!</string>
+    <string name="task_failed">Epäonnistunut</string>
+    <string name="task_skipped">Ohita</string>
+
+    <string name="all_tasks_done">Kaikki valmista!</string>
+    <string name="habits_missing">You haven\'t created any habits yet</string>
+
     <!--Errors-->
     <string name="error_load_habit">Virhe: Rutiinia ei pystytty lataamaan</string>
     <string name="error_delete_habit">Virhe: Rutiinia ei pystytty poistamaan</string>
