@@ -47,6 +47,7 @@
     <string name="created">Created</string>
     <string name="total_success">Total Tasks Completed</string>
     <string name="highest_score">Highest Streak</string>
+    <string name="stat_habits">Habits</string>
 
     <!--Tasks-->
     <string name="task_set_success">Mark task as done</string>
