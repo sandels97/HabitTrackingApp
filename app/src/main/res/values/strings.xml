@@ -43,6 +43,11 @@
 
     <string name="habit_icon">Icon</string>
 
+    <!--Statistics-->
+    <string name="created">Created</string>
+    <string name="total_success">Total Tasks Completed</string>
+    <string name="highest_score">Highest Streak</string>
+
     <!--Tasks-->
     <string name="task_set_success">Mark task as done</string>
     <string name="task_set_failed">Mark task as failed</string>

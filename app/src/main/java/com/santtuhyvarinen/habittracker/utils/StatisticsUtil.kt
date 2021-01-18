@@ -10,6 +10,7 @@ class StatisticsUtil {
         }
 
         fun getHighestScore(taskLogs : List<TaskLog>) : Int {
+            if(taskLogs.isEmpty()) return 0
             return taskLogs.maxOf { it.score }
         }
     }

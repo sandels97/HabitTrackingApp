@@ -53,4 +53,5 @@
     <!--Errors-->
     <string name="error_load_habit">Virhe: Rutiinia ei pystytty lataamaan</string>
     <string name="error_delete_habit">Virhe: Rutiinia ei pystytty poistamaan</string>
+
 </resources>

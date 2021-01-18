@@ -45,4 +45,7 @@
     <dimen name="scoreViewHeight">30dp</dimen>
     <dimen name="scoreTextSize">16sp</dimen>
     <dimen name="scoreViewCornerRadius">15dp</dimen>
+
+    <!--Stats-->
+    <dimen name="statHeight">40dp</dimen>
 </resources>

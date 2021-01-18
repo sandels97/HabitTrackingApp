@@ -118,6 +118,13 @@ class CalendarUtil {
             return dateTimeFormatter.print(dateTime)
         }
 
+        fun getDateText(timestamp : Long) : String {
+            val dateTime = DateTime(timestamp)
+            val dateTimeFormatter = DateTimeFormat.forPattern("dd.MM.yyyy")
+
+            return dateTimeFormatter.print(dateTime)
+        }
+
         fun getCurrentWeekDayText(context: Context) : String {
             val dayOfWeek = getCurrentWeekDay()-1
             val weekDaysArray = context.resources.getStringArray(R.array.WeekDays)

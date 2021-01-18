@@ -15,8 +15,11 @@ import androidx.navigation.fragment.navArgs
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.activities.MainActivity
 import com.santtuhyvarinen.habittracker.databinding.FragmentHabitViewBinding
+import com.santtuhyvarinen.habittracker.databinding.LayoutStatBinding
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
+import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
+import com.santtuhyvarinen.habittracker.utils.StatisticsUtil
 import com.santtuhyvarinen.habittracker.viewmodels.HabitViewModel
 
 class HabitViewFragment : Fragment() {
@@ -85,6 +88,11 @@ class HabitViewFragment : Fragment() {
         binding.habitDisableSwitch.setOnCheckedChangeListener { compoundButton, enabled ->
             habitViewModel.setHabitEnabled(enabled)
         }
+
+        //Update stat headers
+        setStatHeader(binding.statCreated, getString(R.string.created))
+        setStatHeader(binding.statHighestScore, getString(R.string.highest_score))
+        setStatHeader(binding.statTotalSuccesses, getString(R.string.total_success))
     }
 
     private fun updateProgress(showLayout : Boolean) {
@@ -116,7 +124,22 @@ class HabitViewFragment : Fragment() {
         //Disabled
         binding.habitDisableSwitch.isChecked = !habit.disabled
 
+        //Update stats
+        updateStatValue(binding.statCreated, CalendarUtil.getDateText(habitWithTaskLogs.habit.creationDate))
+        updateStatValue(binding.statTotalSuccesses, StatisticsUtil.getTotalSuccesses(habitWithTaskLogs.taskLogs).toString())
+
+        val highestScore = StatisticsUtil.getHighestScore(habitWithTaskLogs.taskLogs)
+        updateStatValue(binding.statHighestScore, getString(R.string.score_text, highestScore))
+
         updateProgress(true)
+    }
+
+    private fun setStatHeader(stat : LayoutStatBinding, headerText : String) {
+        stat.statHeaderText.text = headerText
+    }
+
+    private fun updateStatValue(stat : LayoutStatBinding, value : String) {
+        stat.statValueText.text = value
     }
 
     private fun showDeleteConfirmationDialog() {
