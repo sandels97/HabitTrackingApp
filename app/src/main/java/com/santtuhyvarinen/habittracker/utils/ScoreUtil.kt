@@ -15,7 +15,7 @@ class ScoreUtil {
             val taskLogs = habitWithTaskLogs.taskLogs.sortedByDescending { it.timestamp }
             for (taskLog in taskLogs) {
 
-                if(taskLog.status == TaskManager.STATUS_FAILED) return true
+                if(taskLog.status == TaskUtil.STATUS_FAILED) return true
 
                 //Return false, if TaskLog timestamp is more recent than previous scheduled date
                 if(taskLog.timestamp > startTime) {

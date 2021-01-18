@@ -14,6 +14,7 @@ import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.TaskModel
+import com.santtuhyvarinen.habittracker.utils.TaskUtil
 
 class TasksAdapter(private var context: Context, private val iconManager: IconManager) : RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
 
@@ -58,15 +59,15 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
             holder.iconView.setImageDrawable(iconManager.getIconByKey(iconKey))
 
         holder.successButton.setOnClickListener {
-            animateExit(TaskManager.STATUS_SUCCESS, holder, taskModel, position)
+            animateExit(TaskUtil.STATUS_SUCCESS, holder, taskModel, position)
         }
 
         holder.failButton.setOnClickListener {
-            animateExit(TaskManager.STATUS_FAILED, holder, taskModel, position)
+            animateExit(TaskUtil.STATUS_FAILED, holder, taskModel, position)
         }
 
         holder.skipButton.setOnClickListener {
-            animateExit(TaskManager.STATUS_SKIPPED, holder, taskModel, position)
+            animateExit(TaskUtil.STATUS_SKIPPED, holder, taskModel, position)
         }
     }
 
@@ -89,7 +90,7 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
         viewHolder.taskPopUp.visibility = View.VISIBLE
 
         when(status) {
-            TaskManager.STATUS_SUCCESS -> {
+            TaskUtil.STATUS_SUCCESS -> {
                 //Task marked as success animation
                 viewHolder.taskPopUp.text = context.getString(R.string.task_done)
                 viewHolder.taskPopUp.setBackgroundColor(ContextCompat.getColor(context, R.color.colorSuccess))
@@ -109,7 +110,7 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
                 animationSet.addAnimation(scaleAnimation)
             }
 
-            TaskManager.STATUS_SKIPPED -> {
+            TaskUtil.STATUS_SKIPPED -> {
                 viewHolder.taskPopUp.text = context.getString(R.string.task_skipped)
                 viewHolder.taskPopUp.setBackgroundColor(ContextCompat.getColor(context, R.color.colorSkipped))
                 viewHolder.taskPopUp.setTextColor(ContextCompat.getColor(context, R.color.colorTextSecondary))
@@ -130,7 +131,7 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
                 animationSet.addAnimation(translateAnimation)
             }
 
-            TaskManager.STATUS_FAILED -> {
+            TaskUtil.STATUS_FAILED -> {
                 //Task marked as failed animation
                 viewHolder.taskPopUp.visibility = View.VISIBLE
                 viewHolder.taskPopUp.text = context.getString(R.string.task_failed)

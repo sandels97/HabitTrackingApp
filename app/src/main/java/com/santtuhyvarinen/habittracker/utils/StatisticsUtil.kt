@@ -7,7 +7,7 @@ import com.santtuhyvarinen.habittracker.models.TaskLog
 class StatisticsUtil {
     companion object {
         fun getTotalSuccesses(taskLogs : List<TaskLog>) : Int {
-            return taskLogs.filter { it.status == TaskManager.STATUS_SUCCESS }.count()
+            return taskLogs.filter { it.status == TaskUtil.STATUS_SUCCESS }.count()
         }
 
         fun getTotalSuccessesForHabits(habitsWithTaskLogs : List<HabitWithTaskLogs>) : Int {

@@ -131,6 +131,8 @@ class HabitViewFragment : Fragment() {
         val highestScore = StatisticsUtil.getHighestScore(habitWithTaskLogs.taskLogs)
         updateStatValue(binding.statHighestScore, getString(R.string.score_text, highestScore))
 
+        binding.habitTimelineView.setup(habitWithTaskLogs)
+
         updateProgress(true)
     }
 

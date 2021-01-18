@@ -82,6 +82,24 @@ class CalendarUtil {
             return false
         }
 
+        fun isHabitScheduledForDate(habit: Habit, date : DateTime) : Boolean {
+            val rrule = habit.taskRecurrence
+
+            if(rrule.contains(RRULE_EVERY_DAY)) return true
+
+            if(rrule.contains(RRULE_WEEKLY)) {
+                val currentWeekDay = date.dayOfWeek - 1
+                val selectedWeekDays = rrule.removePrefix(RRULE_WEEKLY).split(",")
+                val weekDaysRules = getRRuleWeekDays()
+
+                val weekDayText = weekDaysRules[currentWeekDay]
+
+                return selectedWeekDays.contains(weekDayText)
+            }
+
+            return false
+        }
+
         fun getPreviousDateForHabit(habit: Habit) : DateTime? {
             val rrule = habit.taskRecurrence
 
@@ -121,6 +139,13 @@ class CalendarUtil {
         fun getDateText(timestamp : Long) : String {
             val dateTime = DateTime(timestamp)
             val dateTimeFormatter = DateTimeFormat.forPattern("dd.MM.yyyy")
+
+            return dateTimeFormatter.print(dateTime)
+        }
+
+        fun getDateTextShort(timestamp : Long) : String {
+            val dateTime = DateTime(timestamp)
+            val dateTimeFormatter = DateTimeFormat.forPattern("dd.MM")
 
             return dateTimeFormatter.print(dateTime)
         }

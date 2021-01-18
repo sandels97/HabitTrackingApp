@@ -94,6 +94,16 @@
             <include android:id="@+id/statTotalSuccesses" layout="@layout/layout_stat"/>
             <include android:id="@+id/statHighestScore" layout="@layout/layout_stat"/>
 
+            <com.santtuhyvarinen.habittracker.views.HabitTimelineView
+                android:id="@+id/habitTimelineView"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="@dimen/smallMargin"
+
+                app:days="7"
+                app:textColor="@color/colorTextPrimary"
+                app:textSize="@dimen/smallTextSize"/>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </ScrollView>

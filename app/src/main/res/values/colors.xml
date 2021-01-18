@@ -7,7 +7,7 @@
 
     <color name="colorSecondary">#78909c</color>
     <color name="colorSecondaryLight">#a7c0cd</color>
-    <color name="colorSecondaryDark">#a7c0cd</color>
+    <color name="colorSecondaryDark">#4b636e</color>
 
     <color name="colorSecondaryTransparent">#5578909c</color>
 
@@ -16,6 +16,7 @@
     <color name="colorTextOnDarkBackground">#f1f1f1</color>
 
     <color name="colorIconTint">#515151</color>
+    <color name="colorIconTintLight">#B1B1B1</color>
 
     <color name="colorRipple">#aa8a8a8a</color>
 
