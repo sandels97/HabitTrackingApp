@@ -1,7 +1,6 @@
 package com.santtuhyvarinen.habittracker.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,21 +10,24 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.adapters.HabitsListAdapter
+import com.santtuhyvarinen.habittracker.databinding.FragmentHabitsBinding
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.viewmodels.HabitsViewModel
-import kotlinx.android.synthetic.main.fragment_habits.*
 
 
 class HabitsFragment : Fragment() {
-    
+
+    private var _binding: FragmentHabitsBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var habitsAdapter: HabitsListAdapter
     private lateinit var habitsViewModel : HabitsViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.fragment_habits, container, false)
+        _binding = FragmentHabitsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,15 +40,15 @@ class HabitsFragment : Fragment() {
             habitsAdapter.data = list
             habitsAdapter.sortData()
             habitsAdapter.notifyDataSetChanged()
-            progress.visibility = View.GONE
+            binding.progress.visibility = View.GONE
         }
         habitsViewModel.getHabits().observe(viewLifecycleOwner, habitsObserver)
 
         //HabitsAdapter
         habitsAdapter = HabitsListAdapter(requireContext(), habitsViewModel.iconManager)
-        recyclerView.adapter = habitsAdapter
-        val dividerItemDecoration = DividerItemDecoration(recyclerView.context, (recyclerView.layoutManager as LinearLayoutManager).orientation)
-        recyclerView.addItemDecoration(dividerItemDecoration)
+        binding.recyclerView.adapter = habitsAdapter
+        val dividerItemDecoration = DividerItemDecoration(binding.recyclerView.context, (binding.recyclerView.layoutManager as LinearLayoutManager).orientation)
+        binding.recyclerView.addItemDecoration(dividerItemDecoration)
 
         habitsAdapter.habitClickedListener = object : HabitsListAdapter.HabitClickedListener {
             override fun habitClicked(habit: Habit) {
@@ -58,5 +60,10 @@ class HabitsFragment : Fragment() {
     fun openHabitView(habit: Habit) {
         val action = HabitsFragmentDirections.actionFromHabitsFragmentToHabitViewFragment(habit.id)
         findNavController().navigate(action)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

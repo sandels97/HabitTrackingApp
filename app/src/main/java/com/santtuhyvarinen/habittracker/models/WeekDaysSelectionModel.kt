@@ -1,8 +1,5 @@
 package com.santtuhyvarinen.habittracker.models
 
-import android.content.Context
-import com.santtuhyvarinen.habittracker.R
-
 class WeekDaysSelectionModel {
     var selectedWeekDayButtons = Array(7) { false }
 

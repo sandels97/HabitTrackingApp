@@ -1,8 +1,9 @@
 package com.santtuhyvarinen.habittracker.viewmodels
 
 import android.app.Application
-import android.content.Context
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
 import com.santtuhyvarinen.habittracker.managers.DatabaseManager
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.managers.TaskManager

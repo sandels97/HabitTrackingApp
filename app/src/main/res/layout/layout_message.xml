@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:visibility="gone"
 
-    android:id="@+id/layoutMessage">
+    android:id="@+id/messageContainer">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/messageText"

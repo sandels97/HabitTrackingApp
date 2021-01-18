@@ -13,14 +13,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.adapters.IconSelectionAdapter
+import com.santtuhyvarinen.habittracker.databinding.FragmentHabitFormBinding
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.IconModel
 import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
 import com.santtuhyvarinen.habittracker.viewmodels.HabitFormViewModel
 import com.santtuhyvarinen.habittracker.views.WeekDayPickerView
-import kotlinx.android.synthetic.main.fragment_habit_form.*
 
 class HabitFormFragment : Fragment() {
+
+    private var _binding: FragmentHabitFormBinding? = null
+    private val binding get() = _binding!!
 
     private val args : HabitFormFragmentArgs by navArgs()
 
@@ -28,7 +31,8 @@ class HabitFormFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.fragment_habit_form, container, false)
+        _binding = FragmentHabitFormBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,27 +60,27 @@ class HabitFormFragment : Fragment() {
         }
         habitFormViewModel.habitDataSaved.observe(viewLifecycleOwner, saveHabitObserver)
 
-        habitNameEditText.requestFocus()
-        habitNameEditText.setOnEditorActionListener { _, actionId, keyEvent ->
+        binding.habitNameEditText.requestFocus()
+        binding.habitNameEditText.setOnEditorActionListener { _, actionId, keyEvent ->
             if(actionId == EditorInfo.IME_ACTION_DONE) {
-                habitNameEditText.clearFocus()
+                binding.habitNameEditText.clearFocus()
             }
             return@setOnEditorActionListener false
         }
 
         //WeekDayPicker
-        weekDayPicker.weekDaySelectedListener = object : WeekDayPickerView.WeekDaySelectedListener {
+        binding.weekDayPicker.weekDaySelectedListener = object : WeekDayPickerView.WeekDaySelectedListener {
             override fun weekDaySelected(index: Int, selected: Boolean) {
                 habitFormViewModel.weekDaysSelectionModel.selectedWeekDayButtons[index] = selected
                 updateWeekDayHeader()
             }
         }
 
-        weekDayPicker.updateFromWeekDaysModel(habitFormViewModel.weekDaysSelectionModel)
+        binding.weekDayPicker.updateFromWeekDaysModel(habitFormViewModel.weekDaysSelectionModel)
 
         //Priority SeekBar
-        habitPrioritySeekBar.max = HabitInfoUtil.MAX_PRIORITY_LEVEL
-        habitPrioritySeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        binding.habitPrioritySeekBar.max = HabitInfoUtil.MAX_PRIORITY_LEVEL
+        binding.habitPrioritySeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekbar: SeekBar, progress: Int, fromUser: Boolean) {
                 habitFormViewModel.priorityValue = progress
                 updatePriorityHeader()
@@ -90,18 +94,18 @@ class HabitFormFragment : Fragment() {
         })
 
         //IconPicker
-        iconPickerView.iconManager = habitFormViewModel.iconManager
-        iconPickerView.setIconSelectedListener(object : IconSelectionAdapter.IconSelectedListener {
+        binding.iconPickerView.iconManager = habitFormViewModel.iconManager
+        binding.iconPickerView.setIconSelectedListener(object : IconSelectionAdapter.IconSelectedListener {
             override fun iconSelected(iconModel: IconModel?) {
                 habitFormViewModel.selectedIconModel = iconModel
             }
         })
-        iconPickerView.setSelectedIcon(habitFormViewModel.selectedIconModel)
+        binding.iconPickerView.setSelectedIcon(habitFormViewModel.selectedIconModel)
 
         //Save button
-        saveHabitButton.text = if(habitFormViewModel.isEditingExistingHabit()) getString(R.string.save_changes) else getString(R.string.create_habit)
-        saveHabitButton.setOnClickListener {
-            habitFormViewModel.habitName = habitNameEditText.text.toString()
+        binding.saveHabitButton.text = if(habitFormViewModel.isEditingExistingHabit()) getString(R.string.save_changes) else getString(R.string.create_habit)
+        binding.saveHabitButton.setOnClickListener {
+            habitFormViewModel.habitName = binding.habitNameEditText.text.toString()
 
             habitFormViewModel.saveHabit(requireContext())
         }
@@ -112,35 +116,40 @@ class HabitFormFragment : Fragment() {
     }
 
     private fun updateLoadingProgressVisibility() {
-        progress.apply {
+        binding.progress.apply {
             visibility = if(habitFormViewModel.loading) View.VISIBLE else View.GONE
         }
-        scrollView.apply {
+        binding.scrollView.apply {
             visibility = if(habitFormViewModel.loading) View.GONE else View.VISIBLE
         }
-        saveHabitButton.apply {
+        binding.saveHabitButton.apply {
             visibility = if(habitFormViewModel.loading) View.GONE else View.VISIBLE
         }
     }
 
     private fun updatePriorityHeader() {
         val currentPriority = HabitInfoUtil.getPriorityLevelText(requireContext(), habitFormViewModel.priorityValue)
-        habitPriorityHeader.text = getString(R.string.habit_priority_header, currentPriority)
+        binding.habitPriorityHeader.text = getString(R.string.habit_priority_header, currentPriority)
     }
 
     private fun updateWeekDayHeader() {
-        weekDayPickerHeader.text = habitFormViewModel.getRecurrenceHeader(requireContext())
+        binding.weekDayPickerHeader.text = habitFormViewModel.getRecurrenceHeader(requireContext())
     }
 
     private fun updateHabitValues(habit: Habit) {
-        habitNameEditText.setText(habit.name)
-        habitPrioritySeekBar.progress = habit.priority
+        binding.habitNameEditText.setText(habit.name)
+        binding.habitPrioritySeekBar.progress = habit.priority
 
         //Icon
-        iconPickerView.setSelectedIcon(habitFormViewModel.selectedIconModel)
+        binding.iconPickerView.setSelectedIcon(habitFormViewModel.selectedIconModel)
 
         //WeekDays
-        weekDayPicker.updateFromWeekDaysModel(habitFormViewModel.weekDaysSelectionModel)
+        binding.weekDayPicker.updateFromWeekDaysModel(habitFormViewModel.weekDaysSelectionModel)
         updateWeekDayHeader()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -1,8 +1,6 @@
 package com.santtuhyvarinen.habittracker.adapters
 
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

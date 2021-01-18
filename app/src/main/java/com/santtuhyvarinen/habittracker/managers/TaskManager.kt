@@ -1,6 +1,5 @@
 package com.santtuhyvarinen.habittracker.managers
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.TaskLog

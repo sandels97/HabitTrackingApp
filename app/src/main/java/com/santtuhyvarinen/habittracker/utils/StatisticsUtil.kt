@@ -1,7 +1,6 @@
 package com.santtuhyvarinen.habittracker.utils
 
 import com.santtuhyvarinen.habittracker.managers.TaskManager
-import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.TaskLog
 
 class StatisticsUtil {

@@ -2,13 +2,16 @@ package com.santtuhyvarinen.habittracker.views
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.FrameLayout
 import com.santtuhyvarinen.habittracker.R
+import com.santtuhyvarinen.habittracker.databinding.LayoutWeekdayPickerBinding
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
-import kotlinx.android.synthetic.main.layout_weekday_picker.view.*
 
 class WeekDayPickerView(context: Context, attributeSet: AttributeSet) : FrameLayout(context, attributeSet) {
+
+    private val binding : LayoutWeekdayPickerBinding = LayoutWeekdayPickerBinding.inflate(LayoutInflater.from(context), this, true)
 
     var weekDaySelectedListener : WeekDaySelectedListener? = null
     interface WeekDaySelectedListener {
@@ -24,7 +27,7 @@ class WeekDayPickerView(context: Context, attributeSet: AttributeSet) : FrameLay
     }
 
     private fun initializeWeekDayButtons() {
-        buttons = arrayOf(button1, button2, button3, button4, button5, button6, button7)
+        buttons = arrayOf(binding.button1, binding.button2, binding.button3, binding.button4, binding.button5, binding.button6, binding.button7)
 
         val weekDayLetters = context.resources.getStringArray(R.array.WeekDaysLetters)
         val weekDayContentDescriptions = context.resources.getStringArray(R.array.WeekDays)

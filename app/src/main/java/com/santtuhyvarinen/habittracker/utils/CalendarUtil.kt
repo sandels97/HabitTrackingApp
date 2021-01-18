@@ -7,8 +7,6 @@ import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
-import org.joda.time.format.DateTimeFormatter
-import java.lang.StringBuilder
 
 class CalendarUtil {
     companion object {

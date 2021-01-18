@@ -24,5 +24,7 @@
         app:layout_constraintTop_toBottomOf="@id/timeBar"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <include layout="@layout/layout_message"/>
+    <include
+        android:id="@+id/layoutMessage"
+        layout="@layout/layout_message"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

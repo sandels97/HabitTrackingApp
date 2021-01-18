@@ -2,24 +2,24 @@ package com.santtuhyvarinen.habittracker.activities
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.santtuhyvarinen.habittracker.R
-import com.santtuhyvarinen.habittracker.fragments.HabitFormFragmentArgs
-import com.santtuhyvarinen.habittracker.fragments.HabitViewFragmentDirections
-import com.santtuhyvarinen.habittracker.fragments.HabitsFragmentDirections
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_toolbar.*
+import com.santtuhyvarinen.habittracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         //Navigation
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
             R.id.statisticsFragment)
         )
 
-        toolbar.setupWithNavController(navController, appBarConfiguration)
-        bottomNavigation.setupWithNavController(navController)
+        binding.toolbarLayout.toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.bottomNavigation.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
 
@@ -50,23 +50,31 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Toolbar buttons
-        settingsButton.setOnClickListener {
+        binding.toolbarLayout.settingsButton.setOnClickListener {
             navController.navigate(R.id.action_to_settingsFragment)
         }
-        addHabitButton.setOnClickListener {
+        binding.toolbarLayout.addHabitButton.setOnClickListener {
             navController.navigate(R.id.action_to_habitFormFragment)
         }
     }
 
     private fun hideNavigationElements(hidden : Boolean) {
-        bottomNavigation?.visibility = if(hidden) View.GONE else View.VISIBLE
-        settingsButton?.visibility = if(hidden) View.GONE else View.VISIBLE
-        addHabitButton?.visibility = if(hidden) View.GONE else View.VISIBLE
+        binding.bottomNavigation.visibility = if(hidden) View.GONE else View.VISIBLE
+        binding.toolbarLayout.settingsButton.visibility = if(hidden) View.GONE else View.VISIBLE
+        binding.toolbarLayout.addHabitButton.visibility = if(hidden) View.GONE else View.VISIBLE
         //toolbarTitle.visibility = if(hidden) View.GONE else View.VISIBLE
     }
 
     private fun hideHabitViewButtons(hidden : Boolean) {
-        editButton?.visibility = if(hidden) View.GONE else View.VISIBLE
-        deleteButton?.visibility = if(hidden) View.GONE else View.VISIBLE
+        binding.toolbarLayout.editButton.visibility = if(hidden) View.GONE else View.VISIBLE
+        binding.toolbarLayout.deleteButton.visibility = if(hidden) View.GONE else View.VISIBLE
+    }
+
+    fun getEditButton() : ImageButton {
+        return binding.toolbarLayout.editButton
+    }
+
+    fun getDeleteButton() : ImageButton {
+        return binding.toolbarLayout.deleteButton
     }
 }

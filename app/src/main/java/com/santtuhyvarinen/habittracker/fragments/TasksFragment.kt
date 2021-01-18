@@ -11,25 +11,26 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.adapters.TasksAdapter
+import com.santtuhyvarinen.habittracker.databinding.FragmentTasksBinding
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.TaskModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import com.santtuhyvarinen.habittracker.utils.SettingsUtil
 import com.santtuhyvarinen.habittracker.viewmodels.TasksViewModel
-import kotlinx.android.synthetic.main.fragment_tasks.recyclerView
-import kotlinx.android.synthetic.main.layout_message.*
-import kotlinx.android.synthetic.main.layout_time_bar.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 class TasksFragment : Fragment() {
+
+    private var _binding: FragmentTasksBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var tasksAdapter: TasksAdapter
     private lateinit var tasksViewModel : TasksViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.fragment_tasks, container, false)
+        _binding = FragmentTasksBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,7 +50,7 @@ class TasksFragment : Fragment() {
                 updateMessageVisibility(true)
             }
         }
-        recyclerView.adapter = tasksAdapter
+        binding.recyclerView.adapter = tasksAdapter
 
         //Observer habits from database
         val habitsObserver = Observer<List<HabitWithTaskLogs>> { list ->
@@ -72,24 +73,29 @@ class TasksFragment : Fragment() {
         updateTimeBar()
 
         //Set message text and icon
-        messageText.text = getString(R.string.all_tasks_done)
-        messageIcon.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_thumb_up))
+        binding.layoutMessage.messageText.text = getString(R.string.all_tasks_done)
+        binding.layoutMessage.messageIcon.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_thumb_up))
     }
 
     private fun updateMessageVisibility(visible : Boolean) {
-        val previousLayoutMessageVisibility = layoutMessage.visibility
-        layoutMessage.visibility = if(visible) View.VISIBLE else View.GONE
+        val previousLayoutMessageVisibility = binding.layoutMessage.messageContainer.visibility
+        binding.layoutMessage.messageContainer.visibility = if(visible) View.VISIBLE else View.GONE
 
         if(previousLayoutMessageVisibility == View.GONE && visible) {
             val alphaAnimation = AlphaAnimation(0f, 1f)
             alphaAnimation.duration = resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()
-            layoutMessage.startAnimation(alphaAnimation)
+            binding.layoutMessage.messageContainer.startAnimation(alphaAnimation)
         }
     }
 
     private fun updateTimeBar() {
-        timeBarWeekDayText.text =
+        binding.timeBar.timeBarWeekDayText.text =
             CalendarUtil.getCurrentWeekDayText(requireContext()).capitalize(Locale.ROOT)
-        timeBarDateText.text = CalendarUtil.getCurrentDateText()
+        binding.timeBar.timeBarDateText.text = CalendarUtil.getCurrentDateText()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

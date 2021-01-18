@@ -1,6 +1,7 @@
 package com.santtuhyvarinen.habittracker.models
 
-import androidx.room.*
+import androidx.room.Embedded
+import androidx.room.Relation
 import com.santtuhyvarinen.habittracker.utils.ScoreUtil
 
 data class HabitWithTaskLogs (
