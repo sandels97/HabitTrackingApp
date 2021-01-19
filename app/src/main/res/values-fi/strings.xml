@@ -39,6 +39,13 @@
 
     <string name="disabled">Pois päältä</string>
 
+    <!--Statistics-->
+    <string name="created">Luotu</string>
+    <string name="total_success">Tehtäviä suoritettu</string>
+    <string name="highest_score">Suurin pistesarja</string>
+    <string name="stat_habits">Rutiinit</string>
+    <string name="stat_task_success_per_day">Suoritetut tehtävät per päivä</string>
+
     <!--Tasks-->
     <string name="task_set_success">Merkitse tehtävä suoritetuksi</string>
     <string name="task_set_failed">Merkitse tehtävä epäonnistuneeksi</string>

@@ -48,6 +48,7 @@
     <string name="total_success">Total Tasks Completed</string>
     <string name="highest_score">Highest Streak</string>
     <string name="stat_habits">Habits</string>
+    <string name="stat_task_success_per_day">Completed tasks per day</string>
 
     <!--Tasks-->
     <string name="task_set_success">Mark task as done</string>

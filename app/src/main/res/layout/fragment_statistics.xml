@@ -20,6 +20,15 @@
             <include android:id="@+id/statHabits" layout="@layout/layout_stat"/>
             <include android:id="@+id/statTotalSuccesses" layout="@layout/layout_stat"/>
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/stat_task_success_per_day"
+                android:layout_margin="@dimen/largeMargin"
+                android:textStyle="bold"
+
+                style="@style/HabitFormHeaderStyle"/>
+
             <com.santtuhyvarinen.habittracker.views.LineGraphView
                 android:id="@+id/lineGraphView"
                 android:layout_width="match_parent"
