@@ -7,11 +7,11 @@ import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
 import com.santtuhyvarinen.habittracker.R
+import com.santtuhyvarinen.habittracker.models.LineGraphDataModel
 
 class LineGraphView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
 
-    var columnLabels : List<String> = ArrayList()
-    var values : List<Int> = ArrayList()
+    var lineGraphData : List<LineGraphDataModel> = ArrayList()
 
     private val paint = Paint()
     private val textPaint = TextPaint()
@@ -82,7 +82,7 @@ class LineGraphView(context: Context, attributeSet: AttributeSet) : View(context
             canvas.drawLine(x, bottomHeight, x, paddingTop.toFloat(), paint)
 
             //Column labels
-            val label = if(column < columnLabels.size) columnLabels[column] else continue
+            val label = if(column < lineGraphData.size) lineGraphData[column].label else continue
 
             textPaint.getTextBounds(label, 0, label.length, textBounds)
             canvas.drawText(label, x, height.toFloat() + textBounds.exactCenterY(), textPaint)
@@ -95,7 +95,7 @@ class LineGraphView(context: Context, attributeSet: AttributeSet) : View(context
         var previousX = 0f
         var previousY = bottomHeight
         for (i in 0 until columns) {
-            val value = if(i < values.size) values[i] else 0
+            val value = if(i < lineGraphData.size) lineGraphData[i].value else 0
 
             val x = paddingLeft + (i * columnWidth) + columnWidth / 2f
             val y = bottomHeight - (rowHeight * value)
@@ -111,7 +111,7 @@ class LineGraphView(context: Context, attributeSet: AttributeSet) : View(context
 
         //Draw value texts
         for (i in 0 until columns) {
-            val value = if (i < values.size) values[i] else 0
+            val value = if (i < lineGraphData.size) lineGraphData[i].value else 0
             val label = value.toString()
 
             val x = paddingLeft + (i * columnWidth) + columnWidth / 2f

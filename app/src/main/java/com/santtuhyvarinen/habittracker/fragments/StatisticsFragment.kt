@@ -11,6 +11,7 @@ import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.databinding.FragmentStatisticsBinding
 import com.santtuhyvarinen.habittracker.databinding.LayoutStatBinding
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
+import com.santtuhyvarinen.habittracker.models.LineGraphDataModel
 import com.santtuhyvarinen.habittracker.utils.StatisticsUtil
 import com.santtuhyvarinen.habittracker.viewmodels.StatisticsViewModel
 
@@ -30,24 +31,30 @@ class StatisticsFragment : Fragment() {
         //Observer habits from database
         val habitsObserver = Observer<List<HabitWithTaskLogs>> { list ->
             updateStats(list)
+            statisticsViewModel.generateLineGraphData(list, binding.lineGraphView.columns)
         }
 
         statisticsViewModel.getHabitsWithTaskLogs().observe(viewLifecycleOwner, habitsObserver)
 
+        val lineGraphDataObserver = Observer<List<LineGraphDataModel>> { list ->
+            updateLineGraphView(list)
+        }
+
+        statisticsViewModel.getLineGraphData().observe(viewLifecycleOwner, lineGraphDataObserver)
+
         setStatHeader(binding.statHabits, getString(R.string.stat_habits))
         setStatHeader(binding.statTotalSuccesses, getString(R.string.total_success))
 
-        updateLineGraphView()
+
 
         return binding.root
     }
 
-    private fun updateLineGraphView() {
-        binding.lineGraphView.columnLabels = listOf("Mon", "Tue", "Wed","Mon", "Tue", "Wed","Sun")
+    private fun updateLineGraphView(data : List<LineGraphDataModel>) {
 
-        val values = listOf(0, 1, 2, 13, 2, 22, 2, 1)
-        binding.lineGraphView.rows = if(values.isNotEmpty()) values.maxOf { it } else 0
-        binding.lineGraphView.values = values
+        binding.lineGraphView.lineGraphData = data
+
+        binding.lineGraphView.rows = if(data.isNotEmpty()) data.maxOf { it.value }.coerceAtLeast(5) else 0
 
         binding.lineGraphView.invalidate()
     }
