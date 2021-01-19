@@ -20,6 +20,16 @@
             <include android:id="@+id/statHabits" layout="@layout/layout_stat"/>
             <include android:id="@+id/statTotalSuccesses" layout="@layout/layout_stat"/>
 
+            <com.santtuhyvarinen.habittracker.views.LineGraphView
+                android:id="@+id/lineGraphView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/lineGraphHeight"
+                android:layout_gravity="center"
+                android:padding="@dimen/largePadding"
+
+                app:lineColor="@color/colorPrimary"
+                app:lineStrokeWidth="@dimen/lineGraphStrokeWidth"/>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </ScrollView>

@@ -38,7 +38,14 @@ class StatisticsFragment : Fragment() {
         setStatHeader(binding.statHabits, getString(R.string.stat_habits))
         setStatHeader(binding.statTotalSuccesses, getString(R.string.total_success))
 
+        updateLineGraphView()
+
         return binding.root
+    }
+
+    private fun updateLineGraphView() {
+        binding.lineGraphView.values = listOf(0, 1, 2, 3, 2, 3, 2, 1)
+        binding.lineGraphView.invalidate()
     }
 
     private fun updateStats(habits : List<HabitWithTaskLogs>) {

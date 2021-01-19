@@ -5,4 +5,13 @@
         <attr name="textSize" format="dimension"/>
         <attr name="textColor" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="LineGraphView">
+        <attr name="columns" format="integer"/>
+        <attr name="lineColor" format="color"/>
+        <attr name="lineStrokeWidth" format="dimension"/>
+        <attr name="backgroundLineColor" format="color"/>
+        <attr name="backgroundLineStrokeWidth" format="dimension"/>
+        <attr name="dotRadius" format="dimension"/>
+    </declare-styleable>
 </resources>
