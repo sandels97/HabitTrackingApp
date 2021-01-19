@@ -2,19 +2,20 @@ package com.santtuhyvarinen.habittracker.views
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
+import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
 import com.santtuhyvarinen.habittracker.R
 
 class LineGraphView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
 
-    private var headers : List<Int> = ArrayList()
+    var columnLabels : List<String> = ArrayList()
     var values : List<Int> = ArrayList()
 
     private val paint = Paint()
+    private val textPaint = TextPaint()
+    private val textBounds = Rect()
 
     var columns = 7
     set(value) {
@@ -40,12 +41,18 @@ class LineGraphView(context: Context, attributeSet: AttributeSet) : View(context
         paint.strokeJoin = Paint.Join.ROUND
         paint.strokeCap = Paint.Cap.ROUND
 
+        textPaint.isAntiAlias = true
+        textPaint.textAlign = Paint.Align.CENTER
+
         val attributes: TypedArray = context.obtainStyledAttributes(attributeSet, R.styleable.LineGraphView)
 
         lineColor = attributes.getColor(R.styleable.LineGraphView_lineColor, Color.BLACK)
         lineStrokeWidth = attributes.getDimension(R.styleable.LineGraphView_lineStrokeWidth, 10f)
         backgroundLineColor = attributes.getColor(R.styleable.LineGraphView_backgroundLineColor, Color.GRAY)
         backgroundLineStrokeWidth = attributes.getDimension(R.styleable.LineGraphView_backgroundLineStrokeWidth, 2f)
+
+        textPaint.textSize = attributes.getDimension(R.styleable.LineGraphView_textSize, 18f)
+        textPaint.color = attributes.getColor(R.styleable.LineGraphView_textColor, Color.BLACK)
 
         dotRadius = attributes.getDimension(R.styleable.LineGraphView_dotRadius, 15f)
         columns = attributes.getInt(R.styleable.LineGraphView_columns, columns)
@@ -56,10 +63,11 @@ class LineGraphView(context: Context, attributeSet: AttributeSet) : View(context
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
+        val textMargin = textPaint.textSize
         val columnWidth = (width - paddingLeft - paddingRight) / columns
-        val rowHeight = (height - paddingTop - paddingBottom) / rows
+        val rowHeight = (height - paddingTop - paddingBottom - textMargin*2) / rows
 
-        val bottomHeight = (height - paddingBottom).toFloat()
+        val bottomHeight = (height - paddingBottom - textMargin)
         //Draw lines
 
         //Background lines
@@ -72,6 +80,12 @@ class LineGraphView(context: Context, attributeSet: AttributeSet) : View(context
         for(column in 0 until columns) {
             val x = paddingLeft + (column * columnWidth) + columnWidth / 2f
             canvas.drawLine(x, bottomHeight, x, paddingTop.toFloat(), paint)
+
+            //Column labels
+            val label = if(column < columnLabels.size) columnLabels[column] else continue
+
+            textPaint.getTextBounds(label, 0, label.length, textBounds)
+            canvas.drawText(label, x, height.toFloat() + textBounds.exactCenterY(), textPaint)
         }
 
         //Graph
@@ -84,14 +98,27 @@ class LineGraphView(context: Context, attributeSet: AttributeSet) : View(context
             val value = if(i < values.size) values[i] else 0
 
             val x = paddingLeft + (i * columnWidth) + columnWidth / 2f
-            val y = bottomHeight - (rowHeight * value).toFloat()
+            val y = bottomHeight - (rowHeight * value)
 
             if(i > 0) canvas.drawLine(previousX, previousY, x, y, paint)
 
             canvas.drawCircle(x, y, dotRadius, paint)
 
+
             previousX = x
             previousY = y
+        }
+
+        //Draw value texts
+        for (i in 0 until columns) {
+            val value = if (i < values.size) values[i] else 0
+            val label = value.toString()
+
+            val x = paddingLeft + (i * columnWidth) + columnWidth / 2f
+            val y = bottomHeight - (rowHeight * value)
+
+            textPaint.getTextBounds(label, 0, label.length, textBounds)
+            canvas.drawText(label, x, y - dotRadius*3 - textBounds.exactCenterY(), textPaint)
         }
     }
 }

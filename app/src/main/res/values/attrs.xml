@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="textSize" format="dimension"/>
+    <attr name="textColor" format="color"/>
+
     <declare-styleable name="HabitTimelineView">
         <attr name="days" format="integer"/>
-        <attr name="textSize" format="dimension"/>
-        <attr name="textColor" format="color"/>
+        <attr name="textSize"/>
+        <attr name="textColor"/>
     </declare-styleable>
 
     <declare-styleable name="LineGraphView">
@@ -13,5 +16,7 @@
         <attr name="backgroundLineColor" format="color"/>
         <attr name="backgroundLineStrokeWidth" format="dimension"/>
         <attr name="dotRadius" format="dimension"/>
+        <attr name="textSize"/>
+        <attr name="textColor"/>
     </declare-styleable>
 </resources>

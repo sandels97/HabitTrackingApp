@@ -27,6 +27,10 @@
                 android:layout_gravity="center"
                 android:padding="@dimen/largePadding"
 
+                app:dotRadius="@dimen/lineGraphDotRadiusWidth"
+                app:backgroundLineColor="@color/colorLineGraphBackground"
+                app:textColor="@color/colorTextPrimaryLight"
+                app:textSize="@dimen/smallTextSize"
                 app:lineColor="@color/colorPrimary"
                 app:lineStrokeWidth="@dimen/lineGraphStrokeWidth"/>
 

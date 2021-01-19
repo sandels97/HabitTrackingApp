@@ -12,7 +12,6 @@ import com.santtuhyvarinen.habittracker.databinding.FragmentStatisticsBinding
 import com.santtuhyvarinen.habittracker.databinding.LayoutStatBinding
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.utils.StatisticsUtil
-import com.santtuhyvarinen.habittracker.viewmodels.HabitsViewModel
 import com.santtuhyvarinen.habittracker.viewmodels.StatisticsViewModel
 
 class StatisticsFragment : Fragment() {
@@ -44,7 +43,12 @@ class StatisticsFragment : Fragment() {
     }
 
     private fun updateLineGraphView() {
-        binding.lineGraphView.values = listOf(0, 1, 2, 3, 2, 3, 2, 1)
+        binding.lineGraphView.columnLabels = listOf("Mon", "Tue", "Wed","Mon", "Tue", "Wed","Sun")
+
+        val values = listOf(0, 1, 2, 13, 2, 22, 2, 1)
+        binding.lineGraphView.rows = if(values.isNotEmpty()) values.maxOf { it } else 0
+        binding.lineGraphView.values = values
+
         binding.lineGraphView.invalidate()
     }
 

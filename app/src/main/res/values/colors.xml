@@ -29,6 +29,7 @@
     <color name="colorSuccess">#3bd464</color>
     <color name="colorSkipped">#fefefe</color>
 
+    <color name="colorLineGraphBackground">#558a8a8a</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
