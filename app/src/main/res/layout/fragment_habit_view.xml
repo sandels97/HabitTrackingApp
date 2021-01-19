@@ -76,6 +76,8 @@
 
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
+
+        
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
@@ -97,7 +99,7 @@
             <com.santtuhyvarinen.habittracker.views.HabitTimelineView
                 android:id="@+id/habitTimelineView"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="@dimen/habitTimelineHeight"
                 android:layout_marginTop="@dimen/smallMargin"
 
                 app:days="7"

@@ -36,12 +36,15 @@ class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(con
     private var successIcon = ContextCompat.getDrawable(context, R.drawable.ic_task_success)!!
     private var failIcon = ContextCompat.getDrawable(context, R.drawable.ic_task_fail)!!
     private var skipIcon = ContextCompat.getDrawable(context, R.drawable.ic_task_skip)!!
-    private var noneIcon = ContextCompat.getDrawable(context, R.drawable.ic_task_none)!!
 
     private val paint = Paint()
     private val textPaint = TextPaint()
     init {
+
         paint.isAntiAlias = true
+        paint.color = ContextCompat.getColor(context, R.color.colorIconTintLight)
+        paint.style = Paint.Style.FILL
+
         textPaint.isAntiAlias = true
         textPaint.textAlign = Paint.Align.CENTER
 
@@ -59,7 +62,6 @@ class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(con
         val tintColor = ContextCompat.getColor(context, R.color.colorIconTint)
         failIcon.mutate().setTint(tintColor)
         skipIcon.mutate().setTint(tintColor)
-        noneIcon.mutate().setTint(ContextCompat.getColor(context, R.color.colorIconTintLight))
     }
 
     private val textBounds = Rect()
@@ -89,24 +91,29 @@ class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(con
 
             //Icon
             val status = dateStatusModels[i].status
-            val icon : Drawable
+            val icon : Drawable?
             when(status) {
                 TaskUtil.STATUS_SUCCESS -> icon = successIcon
                 TaskUtil.STATUS_SKIPPED -> icon = skipIcon
                 TaskUtil.STATUS_FAILED -> icon = failIcon
-                else -> icon = noneIcon
+                else -> icon = null
             }
 
             val bottom = top + iconSize
             val right = left + iconSize
 
-            icon.setBounds(
-                    left + iconMargin,
-                    top + iconMargin,
-                    right - iconMargin,
-                    bottom - iconMargin)
+            if(icon != null) {
+                icon.setBounds(
+                        left + iconMargin,
+                        top + iconMargin,
+                        right - iconMargin,
+                        bottom - iconMargin)
 
-            icon.draw(canvas)
+                icon.draw(canvas)
+            } else {
+                val circleRadius = iconSize / 8f
+                canvas.drawCircle(left + iconSize/2f, top + iconSize/2f, circleRadius, paint)
+            }
         }
 
         textPaint.typeface = Typeface.DEFAULT

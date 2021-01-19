@@ -48,4 +48,5 @@
 
     <!--Stats-->
     <dimen name="statHeight">40dp</dimen>
+    <dimen name="habitTimelineHeight">100dp</dimen>
 </resources>
