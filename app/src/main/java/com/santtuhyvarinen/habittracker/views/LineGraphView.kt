@@ -67,7 +67,7 @@ class LineGraphView(context: Context, attributeSet: AttributeSet) : View(context
         val columnWidth = (width - paddingLeft - paddingRight) / columns
         val rowHeight = (height - paddingTop - paddingBottom - textMargin*2) / rows
 
-        val bottomHeight = (height - paddingBottom - textMargin)
+        val bottomHeight = (height - paddingBottom - textMargin*2)
         //Draw lines
 
         //Background lines
@@ -83,9 +83,20 @@ class LineGraphView(context: Context, attributeSet: AttributeSet) : View(context
 
             //Column labels
             val label = if(column < lineGraphData.size) lineGraphData[column].label else continue
+            val underLabel = if(column < lineGraphData.size) lineGraphData[column].underLabel else ""
 
             textPaint.getTextBounds(label, 0, label.length, textBounds)
-            canvas.drawText(label, x, height.toFloat() + textBounds.exactCenterY(), textPaint)
+
+            val labelTextHeight = textBounds.height()
+
+            val textY = bottomHeight + labelTextHeight - textBounds.exactCenterY()
+
+            textPaint.typeface = Typeface.DEFAULT_BOLD
+            canvas.drawText(label, x, textY, textPaint)
+            textPaint.typeface = Typeface.DEFAULT
+
+            textPaint.getTextBounds(underLabel, 0, underLabel.length, textBounds)
+            canvas.drawText(underLabel, x, textY + labelTextHeight - textBounds.exactCenterY(), textPaint)
         }
 
         //Graph

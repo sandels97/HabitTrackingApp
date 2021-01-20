@@ -51,5 +51,5 @@
     <dimen name="habitTimelineHeight">100dp</dimen>
     <dimen name="lineGraphHeight">200dp</dimen>
     <dimen name="lineGraphStrokeWidth">5dp</dimen>
-    <dimen name="lineGraphDotRadiusWidth">7dp</dimen>
+    <dimen name="lineGraphDotRadiusWidth">5dp</dimen>
 </resources>

@@ -68,7 +68,9 @@ class TaskUtil {
             var date = toDate
             val list = ArrayList<LineGraphDataModel>()
             for(i in 0 until difference) {
-                val lineGraphDataModel = LineGraphDataModel(CalendarUtil.getWeekDayTextShort(context, date), getAmountOfDoneTasksForDate(habitsWithTaskLogs, date))
+                val weekDayText = CalendarUtil.getWeekDayTextShort(context, date)
+                val dateText = CalendarUtil.getDateTextShort(date)
+                val lineGraphDataModel = LineGraphDataModel(weekDayText, dateText, getAmountOfDoneTasksForDate(habitsWithTaskLogs, date))
                 list.add(lineGraphDataModel)
 
                 date = date.minusDays(1)

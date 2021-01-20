@@ -143,11 +143,9 @@ class CalendarUtil {
             return dateTimeFormatter.print(dateTime)
         }
 
-        fun getDateTextShort(timestamp : Long) : String {
-            val dateTime = DateTime(timestamp)
+        fun getDateTextShort(date: DateTime) : String {
             val dateTimeFormatter = DateTimeFormat.forPattern("dd.MM")
-
-            return dateTimeFormatter.print(dateTime)
+            return dateTimeFormatter.print(date)
         }
 
         fun getCurrentWeekDayText(context: Context) : String {
