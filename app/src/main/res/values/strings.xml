@@ -64,4 +64,12 @@
     <!--Errors-->
     <string name="error_load_habit">Error: Can\'t show the habit</string>
     <string name="error_delete_habit">Error: Could not delete the habit</string>
+
+    <!--Notifications-->
+    <string name="tasks_left">%1$s tasks left for today</string>
+
+    <!--Settings-->
+    <string translatable="false" name="setting_notification_enable_key">enable_notifications</string>
+    <string name="setting_notification_enable_title">Enable Task Notifications</string>
+    <string name="setting_notification_enable_summary">Shows how many tasks are still left for today</string>
 </resources>

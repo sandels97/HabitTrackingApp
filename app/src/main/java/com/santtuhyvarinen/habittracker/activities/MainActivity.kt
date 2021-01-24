@@ -9,6 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.databinding.ActivityMainBinding
+import com.santtuhyvarinen.habittracker.utils.SettingsUtil
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,6 +57,8 @@ class MainActivity : AppCompatActivity() {
         binding.toolbarLayout.addHabitButton.setOnClickListener {
             navController.navigate(R.id.action_to_habitFormFragment)
         }
+
+        if(SettingsUtil.isNotificationServiceEnabled(this)) SettingsUtil.startNotificationService(this)
     }
 
     private fun hideNavigationElements(hidden : Boolean) {

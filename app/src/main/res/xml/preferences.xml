@@ -2,4 +2,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <Preference
         android:title="@string/settings"/>
+    <SwitchPreference
+        android:key="@string/setting_notification_enable_key"
+        android:title="@string/setting_notification_enable_title"
+        android:summary="@string/setting_notification_enable_summary"
+        android:defaultValue="true"/>
 </PreferenceScreen>

@@ -1,9 +1,13 @@
 package com.santtuhyvarinen.habittracker.utils
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
+import androidx.preference.PreferenceManager
+import com.santtuhyvarinen.habittracker.R
+import com.santtuhyvarinen.habittracker.services.NotificationService
 
 class SettingsUtil {
     companion object {
@@ -17,6 +21,26 @@ class SettingsUtil {
             } else {
                 vibrateService.vibrate(DEFAULT_VIBRATE_LENGTH);
             }
+        }
+
+        fun startNotificationService(context: Context) {
+            val intent = Intent(context, NotificationService::class.java)
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.startForegroundService(intent)
+            } else {
+                context.startService(intent)
+            }
+        }
+
+        fun stopNotificationService(context: Context) {
+            val intent = Intent(context, NotificationService::class.java)
+            context.stopService(intent)
+        }
+
+        fun isNotificationServiceEnabled(context: Context) : Boolean {
+            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+            return prefs.getBoolean(context.getString(R.string.setting_notification_enable_key), true)
         }
     }
 }
