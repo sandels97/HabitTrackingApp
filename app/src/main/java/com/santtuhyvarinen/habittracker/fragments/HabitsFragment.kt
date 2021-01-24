@@ -35,19 +35,25 @@ class HabitsFragment : Fragment() {
 
         habitsViewModel = ViewModelProvider(this).get(HabitsViewModel::class.java)
 
-        //Observer habits from database
+        //Observer habits from Database
         val habitsObserver = Observer<List<Habit>> { list ->
             habitsAdapter.data = list
             habitsAdapter.sortData()
             habitsAdapter.notifyDataSetChanged()
+
             binding.progress.visibility = View.GONE
         }
         habitsViewModel.getHabits().observe(viewLifecycleOwner, habitsObserver)
 
-        //HabitsAdapter
+        //Set up HabitsListAdapter and RecyclerView
         habitsAdapter = HabitsListAdapter(requireContext(), habitsViewModel.iconManager)
         binding.recyclerView.adapter = habitsAdapter
-        val dividerItemDecoration = DividerItemDecoration(binding.recyclerView.context, (binding.recyclerView.layoutManager as LinearLayoutManager).orientation)
+
+        val dividerItemDecoration = DividerItemDecoration(
+                binding.recyclerView.context,
+                (binding.recyclerView.layoutManager as LinearLayoutManager).orientation
+        )
+
         binding.recyclerView.addItemDecoration(dividerItemDecoration)
 
         habitsAdapter.habitClickedListener = object : HabitsListAdapter.HabitClickedListener {

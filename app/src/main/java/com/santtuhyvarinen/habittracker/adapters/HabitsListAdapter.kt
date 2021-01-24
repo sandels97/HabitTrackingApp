@@ -29,7 +29,7 @@ class HabitsListAdapter(private val context: Context, private val iconManager: I
     }
 
     fun sortData() {
-        data = data.sortedByDescending { it.creationDate }.sortedBy { it.disabled }
+        data = data.sortedByDescending { it.modificationDate }.sortedBy { it.disabled }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
