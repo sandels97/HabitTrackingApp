@@ -72,7 +72,8 @@
     <string name="error_delete_habit">Error: Could not delete the habit</string>
 
     <!--Notifications-->
-    <string name="notification_tasks_left">%1$d task(s) left for today</string>
+    <string name="notification_tasks_left_plural">%1$d tasks left for today</string>
+    <string name="notification_tasks_left_one">1 task left for today</string>
     <string name="notification_tasks_done">All tasks done for today</string>
 
     <!--Settings-->

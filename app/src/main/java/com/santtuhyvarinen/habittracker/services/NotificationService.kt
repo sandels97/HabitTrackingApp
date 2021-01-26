@@ -80,10 +80,12 @@ class NotificationService : LifecycleService() {
 
     private fun updateNotification(tasksLeft : Int) {
         val allTasksDone = tasksLeft == 0
-        val contentText : String = if(!allTasksDone) {
-            getString(R.string.notification_tasks_left, tasksLeft)
-        } else {
-            getString(R.string.notification_tasks_done)
+
+        val smallIcon = if(allTasksDone) R.drawable.ic_notification_tasks_done else R.drawable.ic_notification_tasks
+        val contentText = when(tasksLeft) {
+            0 -> getString(R.string.notification_tasks_done)
+            1 -> getString(R.string.notification_tasks_left_one)
+            else -> getString(R.string.notification_tasks_left_plural, tasksLeft)
         }
 
         val notificationIntent = Intent(this, MainActivity::class.java)
@@ -91,7 +93,7 @@ class NotificationService : LifecycleService() {
 
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle(getText(R.string.app_name))
-                .setSmallIcon(R.drawable.ic_tasks)
+                .setSmallIcon(smallIcon)
                 .setContentText(contentText)
                 .setContentIntent(pendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
