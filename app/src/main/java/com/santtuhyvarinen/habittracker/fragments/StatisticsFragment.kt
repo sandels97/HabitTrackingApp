@@ -4,9 +4,11 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -45,6 +47,10 @@ class StatisticsFragment : Fragment() {
             updateLineGraphView(list)
         }
 
+        binding.selectColumnsLineGraphViewButton.setOnClickListener {
+            showColumnsMenu()
+        }
+
         binding.selectDateLineGraphViewButton.setOnClickListener {
             showDatePickerDialog()
         }
@@ -74,6 +80,25 @@ class StatisticsFragment : Fragment() {
         }, selectedDate.year, selectedDate.monthOfYear - 1, selectedDate.dayOfMonth)
 
         dialog.show()
+    }
+
+    private fun showColumnsMenu() {
+        val popupMenu = PopupMenu(activity, binding.selectColumnsLineGraphViewButton)
+
+        popupMenu.menuInflater.inflate(R.menu.menu_select_columns, popupMenu.menu)
+
+        popupMenu.setOnMenuItemClickListener { item ->
+
+            when(item.itemId) {
+                R.id.columnsWeekView -> statisticsViewModel.setColumns(7)
+                R.id.columnsTwoWeeksView -> statisticsViewModel.setColumns(14)
+                R.id.columnsMonthView -> statisticsViewModel.setColumns(30)
+            }
+
+            true
+        }
+
+        popupMenu.show()
     }
 
     private fun updateStats() {

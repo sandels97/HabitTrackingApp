@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/columnsWeekView"
+        android:title="@string/columns_week"/>
+
+    <item
+        android:id="@+id/columnsTwoWeeksView"
+        android:title="@string/columns_two_weeks"/>
+    <item
+        android:id="@+id/columnsMonthView"
+        android:title="@string/columns_month"/>
+</menu>

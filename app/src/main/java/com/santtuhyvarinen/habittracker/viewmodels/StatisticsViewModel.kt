@@ -34,6 +34,11 @@ class StatisticsViewModel(application: Application) : AndroidViewModel(applicati
         generateLineGraphData()
     }
 
+    fun setColumns(columns : Int) {
+        lineGraphColumns = columns
+        generateLineGraphData()
+    }
+
     fun getSelectedDate() : DateTime {
         return selectedDate
     }

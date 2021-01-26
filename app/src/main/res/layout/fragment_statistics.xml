@@ -23,7 +23,7 @@
                 layout="@layout/layout_stat"
 
                 app:layout_constraintTop_toTopOf="parent" />
-            
+
             <include
                 android:id="@+id/statTotalSuccesses"
                 android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                 android:id="@+id/selectDateLineGraphViewButton"
                 android:layout_width="@dimen/toolbarButtonSize"
                 android:layout_height="@dimen/toolbarButtonSize"
-                android:contentDescription="@string/settings"
+                android:contentDescription="@string/select_date_content_description"
 
                 android:background="?selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_select_date"
@@ -56,6 +56,20 @@
                 app:layout_constraintTop_toTopOf="@id/completedTasksHeader"
                 app:layout_constraintBottom_toBottomOf="@id/completedTasksHeader"
                 app:layout_constraintRight_toRightOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/selectColumnsLineGraphViewButton"
+                android:layout_width="@dimen/toolbarButtonSize"
+                android:layout_height="@dimen/toolbarButtonSize"
+                android:contentDescription="@string/select_columns_content_description"
+
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_columns"
+                android:layout_marginEnd="@dimen/smallMargin"
+
+                app:layout_constraintTop_toTopOf="@id/completedTasksHeader"
+                app:layout_constraintBottom_toBottomOf="@id/completedTasksHeader"
+                app:layout_constraintRight_toLeftOf="@id/selectDateLineGraphViewButton"/>
 
             <com.santtuhyvarinen.habittracker.views.LineGraphView
                 android:id="@+id/lineGraphView"

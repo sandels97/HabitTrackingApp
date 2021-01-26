@@ -76,11 +76,17 @@ class LineGraphView(context: Context, attributeSet: AttributeSet) : View(context
 
         canvas.drawLine(paddingLeft.toFloat(), bottomHeight, width - paddingRight.toFloat(), bottomHeight, paint)
 
+        val useMinimizedLabels = shouldUseMinimizedLabels()
+
         //Draw columns
         for(column in 0 until columns) {
             val x = paddingLeft + (column * columnWidth) + columnWidth / 2f
             canvas.drawLine(x, bottomHeight, x, paddingTop.toFloat(), paint)
 
+            if(useMinimizedLabels) {
+                if(column > 0 && column < columns-1) continue
+            }
+            
             //Column labels
             val label = if(column < lineGraphData.size) lineGraphData[column].label else continue
             val underLabel = if(column < lineGraphData.size) lineGraphData[column].underLabel else ""
@@ -131,5 +137,17 @@ class LineGraphView(context: Context, attributeSet: AttributeSet) : View(context
             textPaint.getTextBounds(label, 0, label.length, textBounds)
             canvas.drawText(label, x, y - dotRadius*3 - textBounds.exactCenterY(), textPaint)
         }
+    }
+
+    //Checks if the label text will fit the columns
+    private fun shouldUseMinimizedLabels() : Boolean {
+        if(lineGraphData.isEmpty()) return false
+
+        val underLabelText = lineGraphData[0].underLabel
+        textPaint.getTextBounds(underLabelText, 0, underLabelText.length, textBounds)
+
+        val labelsEstimatedWidth = textBounds.width() * lineGraphData.size
+
+        return labelsEstimatedWidth >= width
     }
 }
