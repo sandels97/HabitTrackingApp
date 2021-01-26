@@ -11,7 +11,12 @@ import com.santtuhyvarinen.habittracker.utils.TaskUtil
 import org.joda.time.DateTime
 
 class StatisticsViewModel(application: Application) : AndroidViewModel(application) {
-    private var lineGraphLoaded = false
+
+    var habitsWithTaskLogs : List<HabitWithTaskLogs> = ArrayList()
+
+    var lineGraphColumns = 7
+
+    private var selectedDate = DateTime.now()
     private val databaseManager = DatabaseManager(application)
 
     private val lineGraphData : MutableLiveData<List<LineGraphDataModel>> = MutableLiveData()
@@ -24,12 +29,17 @@ class StatisticsViewModel(application: Application) : AndroidViewModel(applicati
         return lineGraphData
     }
 
-    fun generateLineGraphData(habitsWithTaskLogs : List<HabitWithTaskLogs>, columns : Int) {
-        if(lineGraphLoaded) return
+    fun setSelectedDate(dateTime: DateTime) {
+        selectedDate = dateTime
+        generateLineGraphData()
+    }
 
-        val toDate = DateTime.now()
-        val fromDate = toDate.minusDays(columns)
-        lineGraphData.value = TaskUtil.getAmountOfDoneTasksForDateRange(getApplication(), habitsWithTaskLogs, fromDate, toDate).reversed()
-        lineGraphLoaded = true
+    fun getSelectedDate() : DateTime {
+        return selectedDate
+    }
+
+    fun generateLineGraphData() {
+        val fromDate = selectedDate.minusDays(lineGraphColumns)
+        lineGraphData.value = TaskUtil.getAmountOfDoneTasksForDateRange(getApplication(), habitsWithTaskLogs, fromDate, selectedDate).reversed()
     }
 }

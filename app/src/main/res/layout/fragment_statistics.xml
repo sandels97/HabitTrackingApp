@@ -12,22 +12,50 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <include android:id="@+id/statHabits" layout="@layout/layout_stat"/>
-            <include android:id="@+id/statTotalSuccesses" layout="@layout/layout_stat"/>
+            <include
+                android:id="@+id/statHabits"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/statHeight"
+                layout="@layout/layout_stat"
+
+                app:layout_constraintTop_toTopOf="parent" />
+            
+            <include
+                android:id="@+id/statTotalSuccesses"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/statHeight"
+                layout="@layout/layout_stat"
+
+                app:layout_constraintTop_toBottomOf="@id/statHabits" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/completedTasksHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/stat_task_success_per_day"
                 android:layout_margin="@dimen/largeMargin"
                 android:textStyle="bold"
 
-                style="@style/HabitFormHeaderStyle"/>
+                style="@style/HabitFormHeaderStyle"
+
+                app:layout_constraintTop_toBottomOf="@id/statTotalSuccesses"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/selectDateLineGraphViewButton"
+                android:layout_width="@dimen/toolbarButtonSize"
+                android:layout_height="@dimen/toolbarButtonSize"
+                android:contentDescription="@string/settings"
+
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_select_date"
+
+                app:layout_constraintTop_toTopOf="@id/completedTasksHeader"
+                app:layout_constraintBottom_toBottomOf="@id/completedTasksHeader"
+                app:layout_constraintRight_toRightOf="parent"/>
 
             <com.santtuhyvarinen.habittracker.views.LineGraphView
                 android:id="@+id/lineGraphView"
@@ -41,9 +69,11 @@
                 app:textColor="@color/colorTextPrimaryLight"
                 app:textSize="@dimen/smallTextSize"
                 app:lineColor="@color/colorPrimary"
-                app:lineStrokeWidth="@dimen/lineGraphStrokeWidth"/>
+                app:lineStrokeWidth="@dimen/lineGraphStrokeWidth"
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                app:layout_constraintTop_toBottomOf="@id/completedTasksHeader"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

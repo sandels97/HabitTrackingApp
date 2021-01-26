@@ -1,9 +1,12 @@
 package com.santtuhyvarinen.habittracker.fragments
 
+import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +17,7 @@ import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.LineGraphDataModel
 import com.santtuhyvarinen.habittracker.utils.StatisticsUtil
 import com.santtuhyvarinen.habittracker.viewmodels.StatisticsViewModel
+import org.joda.time.DateTime
 
 class StatisticsFragment : Fragment() {
 
@@ -30,8 +34,9 @@ class StatisticsFragment : Fragment() {
 
         //Observer habits from database
         val habitsObserver = Observer<List<HabitWithTaskLogs>> { list ->
-            updateStats(list)
-            statisticsViewModel.generateLineGraphData(list, binding.lineGraphView.columns)
+            statisticsViewModel.habitsWithTaskLogs = list
+            updateStats()
+            statisticsViewModel.generateLineGraphData()
         }
 
         statisticsViewModel.getHabitsWithTaskLogs().observe(viewLifecycleOwner, habitsObserver)
@@ -40,12 +45,14 @@ class StatisticsFragment : Fragment() {
             updateLineGraphView(list)
         }
 
+        binding.selectDateLineGraphViewButton.setOnClickListener {
+            showDatePickerDialog()
+        }
+
         statisticsViewModel.getLineGraphData().observe(viewLifecycleOwner, lineGraphDataObserver)
 
         setStatHeader(binding.statHabits, getString(R.string.stat_habits))
         setStatHeader(binding.statTotalSuccesses, getString(R.string.total_success))
-
-
 
         return binding.root
     }
@@ -53,13 +60,24 @@ class StatisticsFragment : Fragment() {
     private fun updateLineGraphView(data : List<LineGraphDataModel>) {
 
         binding.lineGraphView.lineGraphData = data
-
-        binding.lineGraphView.rows = if(data.isNotEmpty()) data.maxOf { it.value }.coerceAtLeast(5) else 0
+        binding.lineGraphView.columns = statisticsViewModel.lineGraphColumns
+        binding.lineGraphView.rows = if(data.isNotEmpty()) (data.maxOf { it.value }.coerceAtLeast(5)) + 1 else 0
 
         binding.lineGraphView.invalidate()
     }
 
-    private fun updateStats(habits : List<HabitWithTaskLogs>) {
+    private fun showDatePickerDialog() {
+        val selectedDate = statisticsViewModel.getSelectedDate()
+        val dialog = DatePickerDialog(requireContext(), { _, year, month, day ->
+            val dateTime = DateTime.now().withYear(year).withMonthOfYear(month + 1).withDayOfMonth(day)
+            statisticsViewModel.setSelectedDate(dateTime)
+        }, selectedDate.year, selectedDate.monthOfYear - 1, selectedDate.dayOfMonth)
+
+        dialog.show()
+    }
+
+    private fun updateStats() {
+        val habits = statisticsViewModel.habitsWithTaskLogs
         updateStatValue(binding.statHabits, habits.size.toString())
         updateStatValue(binding.statTotalSuccesses, StatisticsUtil.getTotalSuccessesForHabits(habits).toString())
     }
