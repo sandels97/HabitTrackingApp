@@ -1,11 +1,13 @@
 package com.santtuhyvarinen.habittracker.services
 
 import android.app.*
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
-import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.Observer
 import com.santtuhyvarinen.habittracker.R
@@ -14,15 +16,22 @@ import com.santtuhyvarinen.habittracker.managers.DatabaseManager
 import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.TaskModel
+import com.santtuhyvarinen.habittracker.utils.CalendarUtil
+import org.joda.time.DateTime
 
 class NotificationService : LifecycleService() {
 
+    private var tasksUpdatedDatetime = DateTime.now()
+    private var habitsWithTaskLogs : List<HabitWithTaskLogs> = ArrayList()
+
     private lateinit var databaseManager: DatabaseManager
     private lateinit var taskManager: TaskManager
+    private lateinit var minuteTickReceiver : BroadcastReceiver
 
     companion object {
         const val ONGOING_NOTIFICATION_ID = 12
         const val CHANNEL_ID = "HabitTrackerNotificationChannel"
+        const val SERVICE_LOG_TAG = "notification_service"
     }
 
     override fun onCreate() {
@@ -34,7 +43,8 @@ class NotificationService : LifecycleService() {
         taskManager = TaskManager(databaseManager)
 
         val habitsObserver = Observer<List<HabitWithTaskLogs>> {
-            taskManager.generateDailyTasks(it)
+            habitsWithTaskLogs = it
+            updateTasks()
         }
         databaseManager.habitRepository.habitsWithTaskLogs.observe(this, habitsObserver)
 
@@ -42,6 +52,30 @@ class NotificationService : LifecycleService() {
             updateNotification(it.size)
         }
         taskManager.tasks.observe(this, tasksObserver)
+
+
+        //Broadcast Receiver. For updating the notification at midnight
+        minuteTickReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                if (intent.action != null) {
+                    if (intent.action!!.compareTo(Intent.ACTION_TIME_TICK) == 0) {
+                        //Check if midnight has passed from last tasks update
+                        val currentDate = DateTime.now()
+                        if(!CalendarUtil.areSameDate(currentDate, tasksUpdatedDatetime)) {
+                            Log.d(SERVICE_LOG_TAG, "Date changed. Updating notification")
+                            updateTasks()
+                        }
+                    }
+                }
+            }
+        }
+
+        registerReceiver(minuteTickReceiver, IntentFilter(Intent.ACTION_TIME_TICK))
+    }
+
+    private fun updateTasks() {
+        tasksUpdatedDatetime = DateTime.now()
+        taskManager.generateDailyTasks(habitsWithTaskLogs)
     }
 
     private fun updateNotification(tasksLeft : Int) {
@@ -77,5 +111,10 @@ class NotificationService : LifecycleService() {
             val manager = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(serviceChannel)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(minuteTickReceiver)
     }
 }

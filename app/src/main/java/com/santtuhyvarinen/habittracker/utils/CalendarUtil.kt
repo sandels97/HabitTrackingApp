@@ -155,6 +155,10 @@ class CalendarUtil {
             return weekDaysArray[dayOfWeek]
         }
 
+        fun areSameDate(dateTime: DateTime, dateTime2: DateTime) : Boolean {
+            return dateTime.toLocalDate().isEqual(dateTime2.toLocalDate())
+        }
+
         fun getWeekDayTextShort(context: Context, date: DateTime) : String {
             val dayOfWeek = date.dayOfWeek - 1
             val weekDaysArray = context.resources.getStringArray(R.array.WeekDaysShort)
