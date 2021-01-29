@@ -19,14 +19,19 @@ class StatisticsViewModel(application: Application) : AndroidViewModel(applicati
     private var selectedDate = DateTime.now()
     private val databaseManager = DatabaseManager(application)
 
-    private val graphData : MutableLiveData<List<GraphDataModel>> = MutableLiveData()
+    private val completedTasksGraphData : MutableLiveData<List<GraphDataModel>> = MutableLiveData()
+    private val scheduledTasksGraphData : MutableLiveData<List<GraphDataModel>> = MutableLiveData()
 
     fun getHabitsWithTaskLogs() : LiveData<List<HabitWithTaskLogs>> {
         return databaseManager.habitRepository.habitsWithTaskLogs
     }
 
-    fun getLineGraphData() : LiveData<List<GraphDataModel>> {
-        return graphData
+    fun getCompletedTasksGraphData() : LiveData<List<GraphDataModel>> {
+        return completedTasksGraphData
+    }
+
+    fun getScheduledTasksGraphData() : LiveData<List<GraphDataModel>> {
+        return scheduledTasksGraphData
     }
 
     fun setSelectedDate(dateTime: DateTime) {
@@ -45,6 +50,10 @@ class StatisticsViewModel(application: Application) : AndroidViewModel(applicati
 
     fun generateLineGraphData() {
         val fromDate = selectedDate.minusDays(lineGraphColumns)
-        graphData.value = TaskUtil.getAmountOfDoneTasksForDateRange(getApplication(), habitsWithTaskLogs, fromDate, selectedDate).reversed()
+        completedTasksGraphData.value = TaskUtil.getAmountOfDoneTasksForDateRange(getApplication(), habitsWithTaskLogs, fromDate, selectedDate).reversed()
+    }
+
+    fun generateScheduledTasksGraphData() {
+        scheduledTasksGraphData.value = TaskUtil.getAmountOfScheduledTasksPerWeekDay(getApplication(), habitsWithTaskLogs)
     }
 }

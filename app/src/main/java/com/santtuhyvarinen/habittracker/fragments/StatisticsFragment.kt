@@ -36,6 +36,7 @@ class StatisticsFragment : Fragment() {
             statisticsViewModel.habitsWithTaskLogs = list
             updateStats()
             statisticsViewModel.generateLineGraphData()
+            statisticsViewModel.generateScheduledTasksGraphData()
         }
 
         statisticsViewModel.getHabitsWithTaskLogs().observe(viewLifecycleOwner, habitsObserver)
@@ -43,6 +44,11 @@ class StatisticsFragment : Fragment() {
         val lineGraphDataObserver = Observer<List<GraphDataModel>> { list ->
             updateLineGraphView(list)
         }
+        val scheduledTasksGraphDataObserver = Observer<List<GraphDataModel>> { list ->
+            updateScheduledTasksGraphView(list)
+        }
+        statisticsViewModel.getCompletedTasksGraphData().observe(viewLifecycleOwner, lineGraphDataObserver)
+        statisticsViewModel.getScheduledTasksGraphData().observe(viewLifecycleOwner, scheduledTasksGraphDataObserver)
 
         binding.selectColumnsLineGraphViewButton.setOnClickListener {
             showColumnsMenu()
@@ -52,7 +58,6 @@ class StatisticsFragment : Fragment() {
             showDatePickerDialog()
         }
 
-        statisticsViewModel.getLineGraphData().observe(viewLifecycleOwner, lineGraphDataObserver)
 
         setStatHeader(binding.statHabits, getString(R.string.stat_habits))
         setStatHeader(binding.statTotalSuccesses, getString(R.string.total_success))
@@ -67,6 +72,13 @@ class StatisticsFragment : Fragment() {
         binding.completedTasksGraphView.rows = if(data.isNotEmpty()) (data.maxOf { it.value }.coerceAtLeast(5)) + 1 else 0
 
         binding.completedTasksGraphView.invalidate()
+    }
+
+    private fun updateScheduledTasksGraphView(data : List<GraphDataModel>) {
+        binding.scheduledTasksGraphView.graphData = data
+        binding.scheduledTasksGraphView.rows = if(data.isNotEmpty()) (data.maxOf { it.value }.coerceAtLeast(5)) + 1 else 0
+
+        binding.scheduledTasksGraphView.invalidate()
     }
 
     private fun showDatePickerDialog() {

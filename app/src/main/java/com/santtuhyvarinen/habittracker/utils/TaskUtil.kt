@@ -1,6 +1,7 @@
 package com.santtuhyvarinen.habittracker.utils
 
 import android.content.Context
+import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.DateStatusModel
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.GraphDataModel
@@ -59,6 +60,22 @@ class TaskUtil {
             array.reverse()
 
             return array
+        }
+
+        fun getAmountOfScheduledTasksPerWeekDay(context: Context, habitsWithTaskLogs: List<HabitWithTaskLogs>) : List<GraphDataModel> {
+            val list = ArrayList<GraphDataModel>()
+
+            val weekDaysArray = context.resources.getStringArray(R.array.WeekDaysShort)
+            for(i in 0 until 7) {
+                var tasksSum = 0
+                for(habit in habitsWithTaskLogs) {
+                    if(CalendarUtil.isHabitScheduledForWeekday(habit.habit, i)) tasksSum ++
+                }
+
+                list.add(GraphDataModel(weekDaysArray[i], "", tasksSum))
+            }
+
+            return list
         }
 
         fun getAmountOfDoneTasksForDateRange(context: Context, habitsWithTaskLogs: List<HabitWithTaskLogs>, fromDate: DateTime, toDate: DateTime) : List<GraphDataModel> {

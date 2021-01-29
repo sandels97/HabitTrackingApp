@@ -109,6 +109,7 @@
                 android:padding="@dimen/largePadding"
 
                 app:graphType="column"
+                app:columns="7"
                 app:columnCornerRadius="@dimen/graphColumnCornerRadius"
                 app:dotRadius="@dimen/lineGraphDotRadiusWidth"
                 app:backgroundLineColor="@color/colorLineGraphBackground"
