@@ -100,6 +100,25 @@ class CalendarUtil {
             return false
         }
 
+        //WeekDay. Monday = 0, Sunday = 6
+        fun isHabitScheduledForWeekday(habit: Habit, weekDay : Int) : Boolean {
+            val rrule = habit.taskRecurrence
+
+            if(rrule.contains(RRULE_EVERY_DAY)) return true
+
+            if(rrule.contains(RRULE_WEEKLY)) {
+
+                val selectedWeekDays = rrule.removePrefix(RRULE_WEEKLY).split(",")
+                val weekDaysRules = getRRuleWeekDays()
+
+                val weekDayText = weekDaysRules[weekDay]
+
+                return selectedWeekDays.contains(weekDayText)
+            }
+
+            return false
+        }
+
         fun getPreviousDateForHabit(habit: Habit) : DateTime? {
             val rrule = habit.taskRecurrence
 

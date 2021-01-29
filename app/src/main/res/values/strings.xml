@@ -49,6 +49,7 @@
     <string name="highest_score">Highest Streak</string>
     <string name="stat_habits">Habits</string>
     <string name="stat_task_success_per_day">Completed tasks per day</string>
+    <string name="stat_task_scheduled_per_weekday">Scheduled tasks per weekday</string>
     <string name="select_date_content_description">Select Date</string>
     <string name="select_columns_content_description">Select Columns</string>
 

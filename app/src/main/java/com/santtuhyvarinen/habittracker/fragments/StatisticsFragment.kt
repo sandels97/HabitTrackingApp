@@ -2,12 +2,9 @@ package com.santtuhyvarinen.habittracker.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,7 +13,7 @@ import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.databinding.FragmentStatisticsBinding
 import com.santtuhyvarinen.habittracker.databinding.LayoutStatBinding
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
-import com.santtuhyvarinen.habittracker.models.LineGraphDataModel
+import com.santtuhyvarinen.habittracker.models.GraphDataModel
 import com.santtuhyvarinen.habittracker.utils.StatisticsUtil
 import com.santtuhyvarinen.habittracker.viewmodels.StatisticsViewModel
 import org.joda.time.DateTime
@@ -43,7 +40,7 @@ class StatisticsFragment : Fragment() {
 
         statisticsViewModel.getHabitsWithTaskLogs().observe(viewLifecycleOwner, habitsObserver)
 
-        val lineGraphDataObserver = Observer<List<LineGraphDataModel>> { list ->
+        val lineGraphDataObserver = Observer<List<GraphDataModel>> { list ->
             updateLineGraphView(list)
         }
 
@@ -63,13 +60,13 @@ class StatisticsFragment : Fragment() {
         return binding.root
     }
 
-    private fun updateLineGraphView(data : List<LineGraphDataModel>) {
+    private fun updateLineGraphView(data : List<GraphDataModel>) {
 
-        binding.lineGraphView.lineGraphData = data
-        binding.lineGraphView.columns = statisticsViewModel.lineGraphColumns
-        binding.lineGraphView.rows = if(data.isNotEmpty()) (data.maxOf { it.value }.coerceAtLeast(5)) + 1 else 0
+        binding.completedTasksGraphView.graphData = data
+        binding.completedTasksGraphView.columns = statisticsViewModel.lineGraphColumns
+        binding.completedTasksGraphView.rows = if(data.isNotEmpty()) (data.maxOf { it.value }.coerceAtLeast(5)) + 1 else 0
 
-        binding.lineGraphView.invalidate()
+        binding.completedTasksGraphView.invalidate()
     }
 
     private fun showDatePickerDialog() {

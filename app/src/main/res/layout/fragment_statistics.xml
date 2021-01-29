@@ -71,13 +71,15 @@
                 app:layout_constraintBottom_toBottomOf="@id/completedTasksHeader"
                 app:layout_constraintRight_toLeftOf="@id/selectDateLineGraphViewButton"/>
 
-            <com.santtuhyvarinen.habittracker.views.LineGraphView
-                android:id="@+id/lineGraphView"
+            <com.santtuhyvarinen.habittracker.views.GraphView
+                android:id="@+id/completedTasksGraphView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/lineGraphHeight"
                 android:layout_gravity="center"
                 android:padding="@dimen/largePadding"
 
+                app:graphType="line"
+                app:columnCornerRadius="@dimen/graphColumnCornerRadius"
                 app:dotRadius="@dimen/lineGraphDotRadiusWidth"
                 app:backgroundLineColor="@color/colorLineGraphBackground"
                 app:textColor="@color/colorTextPrimaryLight"
@@ -86,6 +88,36 @@
                 app:lineStrokeWidth="@dimen/lineGraphStrokeWidth"
 
                 app:layout_constraintTop_toBottomOf="@id/completedTasksHeader"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/scheduledTasksHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/stat_task_scheduled_per_weekday"
+                android:layout_margin="@dimen/largeMargin"
+                android:textStyle="bold"
+
+                style="@style/HabitFormHeaderStyle"
+
+                app:layout_constraintTop_toBottomOf="@id/completedTasksGraphView"/>
+
+            <com.santtuhyvarinen.habittracker.views.GraphView
+                android:id="@+id/scheduledTasksGraphView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/lineGraphHeight"
+                android:layout_gravity="center"
+                android:padding="@dimen/largePadding"
+
+                app:graphType="column"
+                app:columnCornerRadius="@dimen/graphColumnCornerRadius"
+                app:dotRadius="@dimen/lineGraphDotRadiusWidth"
+                app:backgroundLineColor="@color/colorLineGraphBackground"
+                app:textColor="@color/colorTextPrimaryLight"
+                app:textSize="@dimen/smallTextSize"
+                app:lineColor="@color/colorPrimary"
+                app:lineStrokeWidth="@dimen/lineGraphStrokeWidth"
+
+                app:layout_constraintTop_toBottomOf="@id/scheduledTasksHeader"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -23,14 +23,10 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
     private val databaseManager = DatabaseManager(getApplication())
     val iconManager = IconManager(application)
 
-    private val habitWithTaskLogs : MutableLiveData<HabitWithTaskLogs> by lazy {
-        MutableLiveData<HabitWithTaskLogs>()
-    }
+    private val habitWithTaskLogs : MutableLiveData<HabitWithTaskLogs> = MutableLiveData<HabitWithTaskLogs>()
 
     //Set true to exit the fragment
-    private val shouldExitView : MutableLiveData<Boolean> by lazy {
-        MutableLiveData<Boolean>()
-    }
+    private val shouldExitView : MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
     fun initialize(id : Long) {
         if (initialized) return

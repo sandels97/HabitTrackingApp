@@ -3,8 +3,7 @@ package com.santtuhyvarinen.habittracker.utils
 import android.content.Context
 import com.santtuhyvarinen.habittracker.models.DateStatusModel
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
-import com.santtuhyvarinen.habittracker.models.LineGraphDataModel
-import com.santtuhyvarinen.habittracker.models.TaskLog
+import com.santtuhyvarinen.habittracker.models.GraphDataModel
 import org.joda.time.DateTime
 import org.joda.time.Days
 
@@ -62,15 +61,15 @@ class TaskUtil {
             return array
         }
 
-        fun getAmountOfDoneTasksForDateRange(context: Context, habitsWithTaskLogs: List<HabitWithTaskLogs>, fromDate: DateTime, toDate: DateTime) : List<LineGraphDataModel> {
+        fun getAmountOfDoneTasksForDateRange(context: Context, habitsWithTaskLogs: List<HabitWithTaskLogs>, fromDate: DateTime, toDate: DateTime) : List<GraphDataModel> {
             val difference = Days.daysBetween(fromDate.toLocalDate(), toDate.toLocalDate()).days
 
             var date = toDate
-            val list = ArrayList<LineGraphDataModel>()
+            val list = ArrayList<GraphDataModel>()
             for(i in 0 until difference) {
                 val weekDayText = CalendarUtil.getWeekDayTextShort(context, date)
                 val dateText = CalendarUtil.getDateTextShort(date)
-                val lineGraphDataModel = LineGraphDataModel(weekDayText, dateText, getAmountOfDoneTasksForDate(habitsWithTaskLogs, date))
+                val lineGraphDataModel = GraphDataModel(weekDayText, dateText, getAmountOfDoneTasksForDate(habitsWithTaskLogs, date))
                 list.add(lineGraphDataModel)
 
                 date = date.minusDays(1)
@@ -79,7 +78,7 @@ class TaskUtil {
             return list
         }
 
-        fun getAmountOfDoneTasksForDate(habitsWithTaskLogs: List<HabitWithTaskLogs>, date: DateTime) : Int {
+        private fun getAmountOfDoneTasksForDate(habitsWithTaskLogs: List<HabitWithTaskLogs>, date: DateTime) : Int {
             val startTime = DateTime(date).withTimeAtStartOfDay()
             val endTime = startTime.plusDays(1)
             val startTimeMillis = startTime.millis

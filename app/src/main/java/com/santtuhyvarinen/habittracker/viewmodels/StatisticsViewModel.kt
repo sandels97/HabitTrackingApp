@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.santtuhyvarinen.habittracker.managers.DatabaseManager
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
-import com.santtuhyvarinen.habittracker.models.LineGraphDataModel
+import com.santtuhyvarinen.habittracker.models.GraphDataModel
 import com.santtuhyvarinen.habittracker.utils.TaskUtil
 import org.joda.time.DateTime
 
@@ -19,14 +19,14 @@ class StatisticsViewModel(application: Application) : AndroidViewModel(applicati
     private var selectedDate = DateTime.now()
     private val databaseManager = DatabaseManager(application)
 
-    private val lineGraphData : MutableLiveData<List<LineGraphDataModel>> = MutableLiveData()
+    private val graphData : MutableLiveData<List<GraphDataModel>> = MutableLiveData()
 
     fun getHabitsWithTaskLogs() : LiveData<List<HabitWithTaskLogs>> {
         return databaseManager.habitRepository.habitsWithTaskLogs
     }
 
-    fun getLineGraphData() : LiveData<List<LineGraphDataModel>> {
-        return lineGraphData
+    fun getLineGraphData() : LiveData<List<GraphDataModel>> {
+        return graphData
     }
 
     fun setSelectedDate(dateTime: DateTime) {
@@ -45,6 +45,6 @@ class StatisticsViewModel(application: Application) : AndroidViewModel(applicati
 
     fun generateLineGraphData() {
         val fromDate = selectedDate.minusDays(lineGraphColumns)
-        lineGraphData.value = TaskUtil.getAmountOfDoneTasksForDateRange(getApplication(), habitsWithTaskLogs, fromDate, selectedDate).reversed()
+        graphData.value = TaskUtil.getAmountOfDoneTasksForDateRange(getApplication(), habitsWithTaskLogs, fromDate, selectedDate).reversed()
     }
 }

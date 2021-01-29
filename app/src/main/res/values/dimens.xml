@@ -52,4 +52,5 @@
     <dimen name="lineGraphHeight">200dp</dimen>
     <dimen name="lineGraphStrokeWidth">5dp</dimen>
     <dimen name="lineGraphDotRadiusWidth">5dp</dimen>
+    <dimen name="graphColumnCornerRadius">5dp</dimen>
 </resources>

@@ -3,13 +3,21 @@
     <attr name="textSize" format="dimension"/>
     <attr name="textColor" format="color"/>
 
+
     <declare-styleable name="HabitTimelineView">
         <attr name="days" format="integer"/>
         <attr name="textSize"/>
         <attr name="textColor"/>
     </declare-styleable>
 
-    <declare-styleable name="LineGraphView">
+    <declare-styleable name="GraphView">
+
+        <attr name="graphType" format="enum">
+            <enum name="line" value="0"/>
+            <enum name="column" value="1"/>
+        </attr>
+
+        <attr name="columnCornerRadius" format="dimension"/>
         <attr name="columns" format="integer"/>
         <attr name="lineColor" format="color"/>
         <attr name="lineStrokeWidth" format="dimension"/>
