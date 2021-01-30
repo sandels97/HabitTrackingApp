@@ -41,7 +41,7 @@ class HabitsFragment : Fragment() {
             habitsAdapter.sortData()
             habitsAdapter.notifyDataSetChanged()
 
-            binding.progress.visibility = View.GONE
+            binding.progress.hide()
         }
         habitsViewModel.getHabits().observe(viewLifecycleOwner, habitsObserver)
 

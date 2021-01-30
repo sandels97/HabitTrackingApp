@@ -67,6 +67,8 @@ class TasksFragment : Fragment() {
             tasksAdapter.notifyDataSetChanged()
 
             updateMessageVisibility(list.isEmpty())
+
+            binding.progress.hide()
         }
 
         tasksViewModel.getTasks().observe(viewLifecycleOwner, tasksObserver)

@@ -10,6 +10,7 @@ import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.TaskModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class TasksViewModel(application: Application) : AndroidViewModel(application) {
@@ -25,7 +26,9 @@ class TasksViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun generateDailyTasks(habits : List<HabitWithTaskLogs>) {
-        taskManager.generateDailyTasks(habits)
+        viewModelScope.launch(Dispatchers.Main) {
+            taskManager.generateDailyTasks(habits)
+        }
     }
 
     fun getHabitsWithTaskLogs() : LiveData<List<HabitWithTaskLogs>> {

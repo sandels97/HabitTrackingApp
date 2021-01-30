@@ -4,10 +4,13 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.santtuhyvarinen.habittracker.managers.DatabaseManager
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.GraphDataModel
 import com.santtuhyvarinen.habittracker.utils.TaskUtil
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 
 class StatisticsViewModel(application: Application) : AndroidViewModel(application) {
@@ -18,6 +21,8 @@ class StatisticsViewModel(application: Application) : AndroidViewModel(applicati
 
     private var selectedDate = DateTime.now()
     private val databaseManager = DatabaseManager(application)
+
+    private val loading : MutableLiveData<Boolean> = MutableLiveData()
 
     private val completedTasksGraphData : MutableLiveData<List<GraphDataModel>> = MutableLiveData()
     private val scheduledTasksGraphData : MutableLiveData<List<GraphDataModel>> = MutableLiveData()
@@ -34,6 +39,10 @@ class StatisticsViewModel(application: Application) : AndroidViewModel(applicati
         return scheduledTasksGraphData
     }
 
+    fun getLoadingLiveData() : LiveData<Boolean> {
+        return loading
+    }
+
     fun setSelectedDate(dateTime: DateTime) {
         selectedDate = dateTime
         generateLineGraphData()
@@ -48,12 +57,21 @@ class StatisticsViewModel(application: Application) : AndroidViewModel(applicati
         return selectedDate
     }
 
-    fun generateLineGraphData() {
+    fun generateData() {
+        viewModelScope.launch {
+            generateLineGraphData()
+            generateScheduledTasksGraphData()
+
+            loading.value = false
+        }
+    }
+
+    private fun generateLineGraphData() {
         val fromDate = selectedDate.minusDays(lineGraphColumns)
         completedTasksGraphData.value = TaskUtil.getAmountOfDoneTasksForDateRange(getApplication(), habitsWithTaskLogs, fromDate, selectedDate).reversed()
     }
 
-    fun generateScheduledTasksGraphData() {
+    private fun generateScheduledTasksGraphData() {
         scheduledTasksGraphData.value = TaskUtil.getAmountOfScheduledTasksPerWeekDay(getApplication(), habitsWithTaskLogs)
     }
 }

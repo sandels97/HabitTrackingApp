@@ -31,12 +31,17 @@ class StatisticsFragment : Fragment() {
 
         statisticsViewModel = ViewModelProvider(this).get(StatisticsViewModel::class.java)
 
-        //Observer habits from database
+        //Observer loading
+        val loadingObserver = Observer<Boolean> { loading ->
+            updateProgress(!loading)
+        }
+        statisticsViewModel.getLoadingLiveData().observe(viewLifecycleOwner, loadingObserver)
+
+        //Observe habits from database
         val habitsObserver = Observer<List<HabitWithTaskLogs>> { list ->
             statisticsViewModel.habitsWithTaskLogs = list
             updateStats()
-            statisticsViewModel.generateLineGraphData()
-            statisticsViewModel.generateScheduledTasksGraphData()
+            statisticsViewModel.generateData()
         }
 
         statisticsViewModel.getHabitsWithTaskLogs().observe(viewLifecycleOwner, habitsObserver)
@@ -122,6 +127,11 @@ class StatisticsFragment : Fragment() {
 
     private fun updateStatValue(stat : LayoutStatBinding, value : String) {
         stat.statValueText.text = value
+    }
+
+    private fun updateProgress(showLayout : Boolean) {
+        binding.progress.visibility = if(showLayout) View.GONE else View.VISIBLE
+        binding.scrollView.visibility = if(showLayout) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

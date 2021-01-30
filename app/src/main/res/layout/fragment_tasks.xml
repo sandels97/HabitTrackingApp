@@ -27,4 +27,13 @@
     <include
         android:id="@+id/layoutMessage"
         layout="@layout/layout_message"/>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        style="?android:attr/progressBarStyleHorizontal"
+
+        app:layout_constraintTop_toBottomOf="@id/timeBar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
