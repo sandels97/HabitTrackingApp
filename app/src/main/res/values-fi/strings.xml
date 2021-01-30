@@ -45,6 +45,13 @@
     <string name="highest_score">Suurin pistesarja</string>
     <string name="stat_habits">Rutiinit</string>
     <string name="stat_task_success_per_day">Suoritetut tehtävät per päivä</string>
+    <string name="stat_task_scheduled_per_weekday">Ajoitetut tehtävät per viikonpäivä</string>
+    <string name="select_date_content_description">Valitse päivä</string>
+    <string name="select_columns_content_description">Valitse näkymä</string>
+
+    <string name="columns_week">Viikko</string>
+    <string name="columns_two_weeks">Kaksi viikkoa</string>
+    <string name="columns_month">Kuukausi</string>
 
     <!--Tasks-->
     <string name="task_set_success">Merkitse tehtävä suoritetuksi</string>
@@ -61,4 +68,15 @@
     <string name="error_load_habit">Virhe: Rutiinia ei pystytty lataamaan</string>
     <string name="error_delete_habit">Virhe: Rutiinia ei pystytty poistamaan</string>
 
+    <!--Notifications-->
+    <string name="notification_tasks_left_plural">%1$d tehtävää jäljellä täksi päiväksi</string>
+    <string name="notification_tasks_left_one">1 tehtävä jäljellä täksi päiväksi</string>
+    <string name="notification_tasks_done">Kaikki tehtävät tehty täksi päiväksi</string>
+
+    <!--Settings-->
+    <string name="setting_notification_enable_title">Ota tehtävämuistutukset käyttöön</string>
+    <string name="setting_notification_enable_summary">Näyttää kuinka monta tehtävää on vielä jäljellä täksi päiväksi</string>
+
+    <string name="setting_touch_feedback_title">Värinäpalaute</string>
+    <string name="setting_touch_feedback_summary">Antaa värinäpalautteen, kun tehtävä merkataan suoritetuksi</string>
 </resources>
