@@ -13,7 +13,9 @@ class SettingsUtil {
     companion object {
         private const val DEFAULT_VIBRATE_LENGTH = 100L
         
-        fun vibrateDevice(context: Context) {
+        fun sendTouchFeedback(context: Context) {
+            if(!isTouchFeedbackEnabled(context)) return
+
             val vibrateService = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -41,6 +43,11 @@ class SettingsUtil {
         fun isNotificationServiceEnabled(context: Context) : Boolean {
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             return prefs.getBoolean(context.getString(R.string.setting_notification_enable_key), true)
+        }
+
+        fun isTouchFeedbackEnabled(context: Context) : Boolean {
+            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+            return prefs.getBoolean(context.getString(R.string.setting_touch_feedback_key), true)
         }
     }
 }

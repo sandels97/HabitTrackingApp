@@ -78,7 +78,11 @@
     <string name="notification_tasks_done">All tasks done for today</string>
 
     <!--Settings-->
-    <string translatable="false" name="setting_notification_enable_key">enable_notifications</string>
-    <string name="setting_notification_enable_title">Enable Task Notifications</string>
+    <string translatable="false" name="setting_notification_enable_key">enable_notifications_key</string>
+    <string name="setting_notification_enable_title">Enable task notifications</string>
     <string name="setting_notification_enable_summary">Shows how many tasks are still left for today</string>
+
+    <string translatable="false" name="setting_touch_feedback_key">touch_feedback_key</string>
+    <string name="setting_touch_feedback_title">Touch feedback</string>
+    <string name="setting_touch_feedback_summary">Give touch feedback on task completion</string>
 </resources>

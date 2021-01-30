@@ -43,7 +43,8 @@ class TasksFragment : Fragment() {
         tasksAdapter.tasksAdapterListener = object : TasksAdapter.TasksAdapterListener {
             override fun createTaskLog(taskModel: TaskModel, status : String) {
                 tasksViewModel.createTaskLog(taskModel, status)
-                SettingsUtil.vibrateDevice(requireContext())
+
+                SettingsUtil.sendTouchFeedback(requireContext())
             }
 
             override fun allTasksDone() {
