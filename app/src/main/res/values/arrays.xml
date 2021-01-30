@@ -46,6 +46,13 @@
         <item>walk</item>
         <item>emoji</item>
         <item>food</item>
+
+        <item>clock</item>
+        <item>sun</item>
+        <item>flower</item>
+        <item>gym</item>
+        <item>relax</item>
+        <item>person</item>
     </string-array>
 
     <string-array name="HabitIconTitles">
@@ -56,15 +63,32 @@
         <item>Walk</item>
         <item>Emoji</item>
         <item>Food</item>
+
+        <item>Clock</item>
+        <item>Sun</item>
+        <item>Flower</item>
+
+        <item>Gym</item>
+        <item>Relax</item>
+        <item>Person</item>
     </string-array>
 
     <integer-array name="HabitIcons">
         <item>@drawable/icon_favorite</item>
         <item>@drawable/icon_star</item>
         <item>@drawable/icon_thumb_up</item>
+
         <item>@drawable/icon_book</item>
         <item>@drawable/icon_walk</item>
         <item>@drawable/icon_emoji</item>
         <item>@drawable/icon_food</item>
+
+        <item>@drawable/icon_clock</item>
+        <item>@drawable/icon_sun</item>
+        <item>@drawable/icon_flower</item>
+
+        <item>@drawable/icon_gym</item>
+        <item>@drawable/icon_relax</item>
+        <item>@drawable/icon_person</item>
     </integer-array>
 </resources>

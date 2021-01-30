@@ -46,5 +46,13 @@
         <item>Kävely</item>
         <item>Emoji</item>
         <item>Ruoka</item>
+
+        <item>Kello</item>
+        <item>Aurinko</item>
+        <item>Kukka</item>
+
+        <item>Kuntosali</item>
+        <item>Rentoudu</item>
+        <item>Henkilö</item>
     </string-array>
 </resources>
