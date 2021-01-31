@@ -69,7 +69,7 @@ class TaskUtil {
             for(i in 0 until 7) {
                 var tasksSum = 0
                 for(habit in habitsWithTaskLogs) {
-                    if(CalendarUtil.isHabitScheduledForWeekday(habit.habit, i)) tasksSum ++
+                    if(!habit.habit.disabled && CalendarUtil.isHabitScheduledForWeekday(habit.habit, i)) tasksSum ++
                 }
 
                 list.add(GraphDataModel(weekDaysArray[i], "", tasksSum))
