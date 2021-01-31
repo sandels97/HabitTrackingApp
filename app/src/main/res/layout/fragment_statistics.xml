@@ -46,7 +46,7 @@
                 app:layout_constraintTop_toBottomOf="@id/statTotalSuccesses"/>
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/selectDateLineGraphViewButton"
+                android:id="@+id/selectDateLineChartViewButton"
                 android:layout_width="@dimen/toolbarButtonSize"
                 android:layout_height="@dimen/toolbarButtonSize"
                 android:contentDescription="@string/select_date_content_description"
@@ -59,7 +59,7 @@
                 app:layout_constraintRight_toRightOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/selectColumnsLineGraphViewButton"
+                android:id="@+id/selectColumnsLineChartViewButton"
                 android:layout_width="@dimen/toolbarButtonSize"
                 android:layout_height="@dimen/toolbarButtonSize"
                 android:contentDescription="@string/select_columns_content_description"
@@ -70,10 +70,10 @@
 
                 app:layout_constraintTop_toTopOf="@id/completedTasksHeader"
                 app:layout_constraintBottom_toBottomOf="@id/completedTasksHeader"
-                app:layout_constraintRight_toLeftOf="@id/selectDateLineGraphViewButton"/>
+                app:layout_constraintRight_toLeftOf="@id/selectDateLineChartViewButton"/>
 
-            <com.santtuhyvarinen.habittracker.views.GraphView
-                android:id="@+id/completedTasksGraphView"
+            <com.santtuhyvarinen.habittracker.views.ChartView
+                android:id="@+id/completedTasksChartView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/lineGraphHeight"
                 android:layout_gravity="center"
@@ -100,10 +100,10 @@
 
                 style="@style/HabitFormHeaderStyle"
 
-                app:layout_constraintTop_toBottomOf="@id/completedTasksGraphView"/>
+                app:layout_constraintTop_toBottomOf="@id/completedTasksChartView"/>
 
-            <com.santtuhyvarinen.habittracker.views.GraphView
-                android:id="@+id/scheduledTasksGraphView"
+            <com.santtuhyvarinen.habittracker.views.ChartView
+                android:id="@+id/scheduledTasksChartView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/lineGraphHeight"
                 android:layout_gravity="center"

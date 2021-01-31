@@ -13,7 +13,7 @@ import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.databinding.FragmentStatisticsBinding
 import com.santtuhyvarinen.habittracker.databinding.LayoutStatBinding
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
-import com.santtuhyvarinen.habittracker.models.GraphDataModel
+import com.santtuhyvarinen.habittracker.models.ChartDataModel
 import com.santtuhyvarinen.habittracker.utils.StatisticsUtil
 import com.santtuhyvarinen.habittracker.viewmodels.StatisticsViewModel
 import org.joda.time.DateTime
@@ -46,20 +46,20 @@ class StatisticsFragment : Fragment() {
 
         statisticsViewModel.getHabitsWithTaskLogs().observe(viewLifecycleOwner, habitsObserver)
 
-        val lineGraphDataObserver = Observer<List<GraphDataModel>> { list ->
-            updateLineGraphView(list)
+        val linechartDataObserver = Observer<List<ChartDataModel>> { list ->
+            updateLineChartView(list)
         }
-        val scheduledTasksGraphDataObserver = Observer<List<GraphDataModel>> { list ->
-            updateScheduledTasksGraphView(list)
+        val scheduledTaskschartDataObserver = Observer<List<ChartDataModel>> { list ->
+            updateScheduledTasksChartView(list)
         }
-        statisticsViewModel.getCompletedTasksGraphData().observe(viewLifecycleOwner, lineGraphDataObserver)
-        statisticsViewModel.getScheduledTasksGraphData().observe(viewLifecycleOwner, scheduledTasksGraphDataObserver)
+        statisticsViewModel.getCompletedTasksChartData().observe(viewLifecycleOwner, linechartDataObserver)
+        statisticsViewModel.getScheduledTasksChartData().observe(viewLifecycleOwner, scheduledTaskschartDataObserver)
 
-        binding.selectColumnsLineGraphViewButton.setOnClickListener {
+        binding.selectColumnsLineChartViewButton.setOnClickListener {
             showColumnsMenu()
         }
 
-        binding.selectDateLineGraphViewButton.setOnClickListener {
+        binding.selectDateLineChartViewButton.setOnClickListener {
             showDatePickerDialog()
         }
 
@@ -70,20 +70,20 @@ class StatisticsFragment : Fragment() {
         return binding.root
     }
 
-    private fun updateLineGraphView(data : List<GraphDataModel>) {
+    private fun updateLineChartView(data : List<ChartDataModel>) {
 
-        binding.completedTasksGraphView.graphData = data
-        binding.completedTasksGraphView.columns = statisticsViewModel.lineGraphColumns
-        binding.completedTasksGraphView.rows = if(data.isNotEmpty()) (data.maxOf { it.value }.coerceAtLeast(5)) + 1 else 0
+        binding.completedTasksChartView.chartData = data
+        binding.completedTasksChartView.columns = statisticsViewModel.lineChartColumns
+        binding.completedTasksChartView.rows = if(data.isNotEmpty()) (data.maxOf { it.value }.coerceAtLeast(5)) + 1 else 0
 
-        binding.completedTasksGraphView.invalidate()
+        binding.completedTasksChartView.invalidate()
     }
 
-    private fun updateScheduledTasksGraphView(data : List<GraphDataModel>) {
-        binding.scheduledTasksGraphView.graphData = data
-        binding.scheduledTasksGraphView.rows = if(data.isNotEmpty()) (data.maxOf { it.value }.coerceAtLeast(5)) + 1 else 0
+    private fun updateScheduledTasksChartView(data : List<ChartDataModel>) {
+        binding.scheduledTasksChartView.chartData = data
+        binding.scheduledTasksChartView.rows = if(data.isNotEmpty()) (data.maxOf { it.value }.coerceAtLeast(5)) + 1 else 0
 
-        binding.scheduledTasksGraphView.invalidate()
+        binding.scheduledTasksChartView.invalidate()
     }
 
     private fun showDatePickerDialog() {
@@ -97,7 +97,7 @@ class StatisticsFragment : Fragment() {
     }
 
     private fun showColumnsMenu() {
-        val popupMenu = PopupMenu(activity, binding.selectColumnsLineGraphViewButton)
+        val popupMenu = PopupMenu(activity, binding.selectColumnsLineChartViewButton)
 
         popupMenu.menuInflater.inflate(R.menu.menu_select_columns, popupMenu.menu)
 

@@ -7,9 +7,9 @@ import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
 import com.santtuhyvarinen.habittracker.R
-import com.santtuhyvarinen.habittracker.models.GraphDataModel
+import com.santtuhyvarinen.habittracker.models.ChartDataModel
 
-class GraphView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
+class ChartView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
 
     companion object {
         const val GRAPH_TYPE_LINE = 0
@@ -18,7 +18,7 @@ class GraphView(context: Context, attributeSet: AttributeSet) : View(context, at
 
     var type = GRAPH_TYPE_LINE
 
-    var graphData : List<GraphDataModel> = ArrayList()
+    var chartData : List<ChartDataModel> = ArrayList()
 
     private val paint = Paint()
     private val textPaint = TextPaint()
@@ -51,19 +51,19 @@ class GraphView(context: Context, attributeSet: AttributeSet) : View(context, at
         textPaint.isAntiAlias = true
         textPaint.textAlign = Paint.Align.CENTER
 
-        val attributes: TypedArray = context.obtainStyledAttributes(attributeSet, R.styleable.GraphView)
+        val attributes: TypedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ChartView)
 
-        lineColor = attributes.getColor(R.styleable.GraphView_lineColor, Color.BLACK)
-        lineStrokeWidth = attributes.getDimension(R.styleable.GraphView_lineStrokeWidth, 10f)
-        backgroundLineColor = attributes.getColor(R.styleable.GraphView_backgroundLineColor, Color.GRAY)
-        backgroundLineStrokeWidth = attributes.getDimension(R.styleable.GraphView_backgroundLineStrokeWidth, 2f)
-        type = attributes.getInt(R.styleable.GraphView_graphType, GRAPH_TYPE_LINE)
+        lineColor = attributes.getColor(R.styleable.ChartView_lineColor, Color.BLACK)
+        lineStrokeWidth = attributes.getDimension(R.styleable.ChartView_lineStrokeWidth, 10f)
+        backgroundLineColor = attributes.getColor(R.styleable.ChartView_backgroundLineColor, Color.GRAY)
+        backgroundLineStrokeWidth = attributes.getDimension(R.styleable.ChartView_backgroundLineStrokeWidth, 2f)
+        type = attributes.getInt(R.styleable.ChartView_graphType, GRAPH_TYPE_LINE)
 
-        textPaint.textSize = attributes.getDimension(R.styleable.GraphView_textSize, 18f)
-        textPaint.color = attributes.getColor(R.styleable.GraphView_textColor, Color.BLACK)
+        textPaint.textSize = attributes.getDimension(R.styleable.ChartView_textSize, 18f)
+        textPaint.color = attributes.getColor(R.styleable.ChartView_textColor, Color.BLACK)
 
-        dotRadius = attributes.getDimension(R.styleable.GraphView_dotRadius, 15f)
-        columns = attributes.getInt(R.styleable.GraphView_columns, columns)
+        dotRadius = attributes.getDimension(R.styleable.ChartView_dotRadius, 15f)
+        columns = attributes.getInt(R.styleable.ChartView_columns, columns)
 
         attributes.recycle()
     }
@@ -76,7 +76,6 @@ class GraphView(context: Context, attributeSet: AttributeSet) : View(context, at
         val rowHeight = (height - paddingTop - paddingBottom - textMargin*2) / rows
 
         val bottomHeight = (height - paddingBottom - textMargin*2)
-        //Draw lines
 
         //Background lines
         paint.color = backgroundLineColor
@@ -88,6 +87,7 @@ class GraphView(context: Context, attributeSet: AttributeSet) : View(context, at
 
         //Draw columns
         for(column in 0 until columns) {
+            //Column lines
             val x = paddingLeft + (column * columnWidth) + columnWidth / 2f
             canvas.drawLine(x, bottomHeight, x, paddingTop.toFloat(), paint)
 
@@ -96,8 +96,8 @@ class GraphView(context: Context, attributeSet: AttributeSet) : View(context, at
             }
             
             //Column labels
-            val label = if(column < graphData.size) graphData[column].label else continue
-            val underLabel = if(column < graphData.size) graphData[column].underLabel else ""
+            val label = if(column < chartData.size) chartData[column].label else continue
+            val underLabel = if(column < chartData.size) chartData[column].underLabel else ""
 
             textPaint.getTextBounds(label, 0, label.length, textBounds)
 
@@ -123,7 +123,7 @@ class GraphView(context: Context, attributeSet: AttributeSet) : View(context, at
                 var previousX = 0f
                 var previousY = bottomHeight
                 for (i in 0 until columns) {
-                    val value = if(i < graphData.size) graphData[i].value else 0
+                    val value = if(i < chartData.size) chartData[i].value else 0
 
                     val x = paddingLeft + (i * columnWidth) + columnWidth / 2f
                     val y = bottomHeight - (rowHeight * value)
@@ -131,7 +131,6 @@ class GraphView(context: Context, attributeSet: AttributeSet) : View(context, at
                     if(i > 0) canvas.drawLine(previousX, previousY, x, y, paint)
 
                     canvas.drawCircle(x, y, dotRadius, paint)
-
 
                     previousX = x
                     previousY = y
@@ -143,7 +142,7 @@ class GraphView(context: Context, attributeSet: AttributeSet) : View(context, at
                 val margin = columnWidth / 10
 
                 for (i in 0 until columns) {
-                    val value = if(i < graphData.size) graphData[i].value else 0
+                    val value = if(i < chartData.size) chartData[i].value else 0
 
                     val left = paddingLeft + (i * columnWidth).toFloat() + margin
                     val top = bottomHeight - (rowHeight * value)
@@ -158,7 +157,7 @@ class GraphView(context: Context, attributeSet: AttributeSet) : View(context, at
 
         //Draw value texts
         for (i in 0 until columns) {
-            val value = if (i < graphData.size) graphData[i].value else 0
+            val value = if (i < chartData.size) chartData[i].value else 0
             val label = value.toString()
 
             val x = paddingLeft + (i * columnWidth) + columnWidth / 2f
@@ -171,12 +170,12 @@ class GraphView(context: Context, attributeSet: AttributeSet) : View(context, at
 
     //Checks if the label text will fit the columns
     private fun shouldUseMinimizedLabels() : Boolean {
-        if(graphData.isEmpty()) return false
+        if(chartData.isEmpty()) return false
 
-        val underLabelText = graphData[0].underLabel
+        val underLabelText = chartData[0].underLabel
         textPaint.getTextBounds(underLabelText, 0, underLabelText.length, textBounds)
 
-        val labelsEstimatedWidth = textBounds.width() * graphData.size
+        val labelsEstimatedWidth = textBounds.width() * chartData.size
 
         return labelsEstimatedWidth >= width
     }

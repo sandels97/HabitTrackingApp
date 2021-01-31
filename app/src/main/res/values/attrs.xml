@@ -10,7 +10,7 @@
         <attr name="textColor"/>
     </declare-styleable>
 
-    <declare-styleable name="GraphView">
+    <declare-styleable name="ChartView">
 
         <attr name="graphType" format="enum">
             <enum name="line" value="0"/>

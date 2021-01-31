@@ -4,7 +4,7 @@ import android.content.Context
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.DateStatusModel
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
-import com.santtuhyvarinen.habittracker.models.GraphDataModel
+import com.santtuhyvarinen.habittracker.models.ChartDataModel
 import org.joda.time.DateTime
 import org.joda.time.Days
 
@@ -62,8 +62,8 @@ class TaskUtil {
             return array
         }
 
-        fun getAmountOfScheduledTasksPerWeekDay(context: Context, habitsWithTaskLogs: List<HabitWithTaskLogs>) : List<GraphDataModel> {
-            val list = ArrayList<GraphDataModel>()
+        fun getAmountOfScheduledTasksPerWeekDay(context: Context, habitsWithTaskLogs: List<HabitWithTaskLogs>) : List<ChartDataModel> {
+            val list = ArrayList<ChartDataModel>()
 
             val weekDaysArray = context.resources.getStringArray(R.array.WeekDaysShort)
             for(i in 0 until 7) {
@@ -72,22 +72,22 @@ class TaskUtil {
                     if(!habit.habit.disabled && CalendarUtil.isHabitScheduledForWeekday(habit.habit, i)) tasksSum ++
                 }
 
-                list.add(GraphDataModel(weekDaysArray[i], "", tasksSum))
+                list.add(ChartDataModel(weekDaysArray[i], "", tasksSum))
             }
 
             return list
         }
 
-        fun getAmountOfDoneTasksForDateRange(context: Context, habitsWithTaskLogs: List<HabitWithTaskLogs>, fromDate: DateTime, toDate: DateTime) : List<GraphDataModel> {
+        fun getAmountOfDoneTasksForDateRange(context: Context, habitsWithTaskLogs: List<HabitWithTaskLogs>, fromDate: DateTime, toDate: DateTime) : List<ChartDataModel> {
             val difference = Days.daysBetween(fromDate.toLocalDate(), toDate.toLocalDate()).days
 
             var date = toDate
-            val list = ArrayList<GraphDataModel>()
+            val list = ArrayList<ChartDataModel>()
             for(i in 0 until difference) {
                 val weekDayText = CalendarUtil.getWeekDayTextShort(context, date)
                 val dateText = CalendarUtil.getDateTextShort(date)
-                val lineGraphDataModel = GraphDataModel(weekDayText, dateText, getAmountOfDoneTasksForDate(habitsWithTaskLogs, date))
-                list.add(lineGraphDataModel)
+                val linechartDataModel = ChartDataModel(weekDayText, dateText, getAmountOfDoneTasksForDate(habitsWithTaskLogs, date))
+                list.add(linechartDataModel)
 
                 date = date.minusDays(1)
             }

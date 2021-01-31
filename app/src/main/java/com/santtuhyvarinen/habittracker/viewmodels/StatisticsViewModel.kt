@@ -7,9 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.santtuhyvarinen.habittracker.managers.DatabaseManager
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
-import com.santtuhyvarinen.habittracker.models.GraphDataModel
+import com.santtuhyvarinen.habittracker.models.ChartDataModel
 import com.santtuhyvarinen.habittracker.utils.TaskUtil
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 
@@ -17,26 +16,26 @@ class StatisticsViewModel(application: Application) : AndroidViewModel(applicati
 
     var habitsWithTaskLogs : List<HabitWithTaskLogs> = ArrayList()
 
-    var lineGraphColumns = 7
+    var lineChartColumns = 7
 
     private var selectedDate = DateTime.now()
     private val databaseManager = DatabaseManager(application)
 
     private val loading : MutableLiveData<Boolean> = MutableLiveData()
 
-    private val completedTasksGraphData : MutableLiveData<List<GraphDataModel>> = MutableLiveData()
-    private val scheduledTasksGraphData : MutableLiveData<List<GraphDataModel>> = MutableLiveData()
+    private val completedTasksChartData : MutableLiveData<List<ChartDataModel>> = MutableLiveData()
+    private val scheduledTasksChartData : MutableLiveData<List<ChartDataModel>> = MutableLiveData()
 
     fun getHabitsWithTaskLogs() : LiveData<List<HabitWithTaskLogs>> {
         return databaseManager.habitRepository.habitsWithTaskLogs
     }
 
-    fun getCompletedTasksGraphData() : LiveData<List<GraphDataModel>> {
-        return completedTasksGraphData
+    fun getCompletedTasksChartData() : LiveData<List<ChartDataModel>> {
+        return completedTasksChartData
     }
 
-    fun getScheduledTasksGraphData() : LiveData<List<GraphDataModel>> {
-        return scheduledTasksGraphData
+    fun getScheduledTasksChartData() : LiveData<List<ChartDataModel>> {
+        return scheduledTasksChartData
     }
 
     fun getLoadingLiveData() : LiveData<Boolean> {
@@ -45,12 +44,12 @@ class StatisticsViewModel(application: Application) : AndroidViewModel(applicati
 
     fun setSelectedDate(dateTime: DateTime) {
         selectedDate = dateTime
-        generateLineGraphData()
+        generateLineChartData()
     }
 
     fun setColumns(columns : Int) {
-        lineGraphColumns = columns
-        generateLineGraphData()
+        lineChartColumns = columns
+        generateLineChartData()
     }
 
     fun getSelectedDate() : DateTime {
@@ -59,19 +58,19 @@ class StatisticsViewModel(application: Application) : AndroidViewModel(applicati
 
     fun generateData() {
         viewModelScope.launch {
-            generateLineGraphData()
-            generateScheduledTasksGraphData()
+            generateLineChartData()
+            generateScheduledTasksChartData()
 
             loading.value = false
         }
     }
 
-    private fun generateLineGraphData() {
-        val fromDate = selectedDate.minusDays(lineGraphColumns)
-        completedTasksGraphData.value = TaskUtil.getAmountOfDoneTasksForDateRange(getApplication(), habitsWithTaskLogs, fromDate, selectedDate).reversed()
+    private fun generateLineChartData() {
+        val fromDate = selectedDate.minusDays(lineChartColumns)
+        completedTasksChartData.value = TaskUtil.getAmountOfDoneTasksForDateRange(getApplication(), habitsWithTaskLogs, fromDate, selectedDate).reversed()
     }
 
-    private fun generateScheduledTasksGraphData() {
-        scheduledTasksGraphData.value = TaskUtil.getAmountOfScheduledTasksPerWeekDay(getApplication(), habitsWithTaskLogs)
+    private fun generateScheduledTasksChartData() {
+        scheduledTasksChartData.value = TaskUtil.getAmountOfScheduledTasksPerWeekDay(getApplication(), habitsWithTaskLogs)
     }
 }
