@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.action_to_habitFormFragment)
         }
 
-        if(SettingsUtil.isNotificationServiceEnabled(this)) SettingsUtil.startNotificationService(this)
+        SettingsUtil.startNotificationService(this)
     }
 
     private fun hideNavigationElements(hidden : Boolean) {
