@@ -79,7 +79,7 @@
                 android:layout_gravity="center"
                 android:padding="@dimen/largePadding"
 
-                app:graphType="line"
+                app:chartType="line"
                 app:columnCornerRadius="@dimen/graphColumnCornerRadius"
                 app:dotRadius="@dimen/lineGraphDotRadiusWidth"
                 app:backgroundLineColor="@color/colorLineGraphBackground"
@@ -109,7 +109,7 @@
                 android:layout_gravity="center"
                 android:padding="@dimen/largePadding"
 
-                app:graphType="column"
+                app:chartType="column"
                 app:columns="7"
                 app:columnCornerRadius="@dimen/graphColumnCornerRadius"
                 app:dotRadius="@dimen/lineGraphDotRadiusWidth"

@@ -6,17 +6,18 @@ import android.graphics.*
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.withStyledAttributes
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.ChartDataModel
 
 class ChartView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
 
     companion object {
-        const val GRAPH_TYPE_LINE = 0
-        const val GRAPH_TYPE_COLUMN = 1
+        const val CHART_TYPE_LINE = 0
+        const val CHART_TYPE_COLUMN = 1
     }
 
-    var type = GRAPH_TYPE_LINE
+    var chartType = CHART_TYPE_LINE
 
     var chartData : List<ChartDataModel> = ArrayList()
 
@@ -33,15 +34,29 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
         field = value.coerceAtLeast(0)
     }
 
-    var lineColor : Int
-    var lineStrokeWidth : Float
+    var lineColor = Color.BLACK
+    var lineStrokeWidth = 10f
 
-    var backgroundLineColor : Int
-    var backgroundLineStrokeWidth : Float
+    var backgroundLineColor = Color.GRAY
+    var backgroundLineStrokeWidth = 2f
 
     var dotRadius : Float = 15f
 
     init {
+        context.withStyledAttributes(attributeSet, R.styleable.ChartView) {
+            lineColor = getColor(R.styleable.ChartView_lineColor, Color.BLACK)
+            lineStrokeWidth = getDimension(R.styleable.ChartView_lineStrokeWidth, 10f)
+            backgroundLineColor = getColor(R.styleable.ChartView_backgroundLineColor, Color.GRAY)
+            backgroundLineStrokeWidth = getDimension(R.styleable.ChartView_backgroundLineStrokeWidth, 2f)
+            chartType = getInt(R.styleable.ChartView_chartType, CHART_TYPE_LINE)
+
+            textPaint.textSize = getDimension(R.styleable.ChartView_textSize, 18f)
+            textPaint.color = getColor(R.styleable.ChartView_textColor, Color.BLACK)
+
+            dotRadius = getDimension(R.styleable.ChartView_dotRadius, 15f)
+            columns = getInt(R.styleable.ChartView_columns, columns)
+            rows = getInt(R.styleable.ChartView_rows, rows)
+        }
 
         paint.isAntiAlias = true
         paint.style = Paint.Style.FILL
@@ -50,22 +65,6 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
 
         textPaint.isAntiAlias = true
         textPaint.textAlign = Paint.Align.CENTER
-
-        val attributes: TypedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ChartView)
-
-        lineColor = attributes.getColor(R.styleable.ChartView_lineColor, Color.BLACK)
-        lineStrokeWidth = attributes.getDimension(R.styleable.ChartView_lineStrokeWidth, 10f)
-        backgroundLineColor = attributes.getColor(R.styleable.ChartView_backgroundLineColor, Color.GRAY)
-        backgroundLineStrokeWidth = attributes.getDimension(R.styleable.ChartView_backgroundLineStrokeWidth, 2f)
-        type = attributes.getInt(R.styleable.ChartView_graphType, GRAPH_TYPE_LINE)
-
-        textPaint.textSize = attributes.getDimension(R.styleable.ChartView_textSize, 18f)
-        textPaint.color = attributes.getColor(R.styleable.ChartView_textColor, Color.BLACK)
-
-        dotRadius = attributes.getDimension(R.styleable.ChartView_dotRadius, 15f)
-        columns = attributes.getInt(R.styleable.ChartView_columns, columns)
-
-        attributes.recycle()
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -110,13 +109,12 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
             canvas.drawText(underLabel, x, textY + labelTextHeight, textPaint)
         }
 
-        //Graph
         paint.color = lineColor
         paint.strokeWidth = lineStrokeWidth
 
-        when(type) {
-            GRAPH_TYPE_LINE -> {
-                //Draw line graph data
+        when(chartType) {
+            CHART_TYPE_LINE -> {
+                //Draw line chart data
                 var previousX = 0f
                 var previousY = bottomHeight
                 for (i in 0 until columns) {
@@ -134,8 +132,8 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
                 }
             }
 
-            GRAPH_TYPE_COLUMN -> {
-                //Draw columns graph
+            CHART_TYPE_COLUMN -> {
+                //Draw columns chart data
                 val margin = columnWidth / 10
 
                 for (i in 0 until columns) {

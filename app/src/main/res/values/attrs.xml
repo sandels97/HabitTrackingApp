@@ -11,13 +11,14 @@
 
     <declare-styleable name="ChartView">
 
-        <attr name="graphType" format="enum">
+        <attr name="chartType" format="enum">
             <enum name="line" value="0"/>
             <enum name="column" value="1"/>
         </attr>
 
         <attr name="columnCornerRadius" format="dimension"/>
         <attr name="columns" format="integer"/>
+        <attr name="rows" format="integer"/>
         <attr name="lineColor" format="color"/>
         <attr name="lineStrokeWidth" format="dimension"/>
         <attr name="backgroundLineColor" format="color"/>
