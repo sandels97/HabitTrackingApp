@@ -99,18 +99,15 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
             val label = if(column < chartData.size) chartData[column].label else continue
             val underLabel = if(column < chartData.size) chartData[column].underLabel else ""
 
-            textPaint.getTextBounds(label, 0, label.length, textBounds)
+            val labelTextHeight = textPaint.textSize
 
-            val labelTextHeight = textBounds.height()
-
-            val textY = bottomHeight + labelTextHeight - textBounds.exactCenterY()
+            val textY = bottomHeight + labelTextHeight
 
             textPaint.typeface = Typeface.DEFAULT_BOLD
             canvas.drawText(label, x, textY, textPaint)
             textPaint.typeface = Typeface.DEFAULT
 
-            textPaint.getTextBounds(underLabel, 0, underLabel.length, textBounds)
-            canvas.drawText(underLabel, x, textY + labelTextHeight - textBounds.exactCenterY(), textPaint)
+            canvas.drawText(underLabel, x, textY + labelTextHeight, textPaint)
         }
 
         //Graph

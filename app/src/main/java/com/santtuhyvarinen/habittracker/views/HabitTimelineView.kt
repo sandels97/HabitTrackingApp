@@ -83,7 +83,7 @@ class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(con
             val dayHeader = dateStatusModels[i].date
             textPaint.getTextBounds(dayHeader, 0, dayHeader.length, textBounds)
 
-            val textTop = (textBounds.height() - textBounds.exactCenterY()).toInt()
+            val textTop = textPaint.textSize
             val left = i * iconSize
             canvas.drawText(dayHeader, left + (iconSize / 2f), textTop.toFloat(), textPaint)
 

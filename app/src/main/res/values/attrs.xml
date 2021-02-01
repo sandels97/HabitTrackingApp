@@ -3,7 +3,6 @@
     <attr name="textSize" format="dimension"/>
     <attr name="textColor" format="color"/>
 
-
     <declare-styleable name="HabitTimelineView">
         <attr name="days" format="integer"/>
         <attr name="textSize"/>
