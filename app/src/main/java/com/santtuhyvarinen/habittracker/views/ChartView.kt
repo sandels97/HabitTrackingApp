@@ -1,7 +1,6 @@
 package com.santtuhyvarinen.habittracker.views
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.*
 import android.text.TextPaint
 import android.util.AttributeSet
@@ -70,11 +69,12 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        val textMargin = textPaint.textSize
+        val textSize = textPaint.textSize
         val columnWidth = (width - paddingLeft - paddingRight) / columns
-        val rowHeight = (height - paddingTop - paddingBottom - textMargin*2) / rows
+        val rowHeight = (height - paddingTop - paddingBottom - textSize*2) / rows
 
-        val bottomHeight = (height - paddingBottom - textMargin*2)
+        val bottomHeight = (height - paddingBottom - textSize*2)
+        val textY = bottomHeight + textSize
 
         //Background lines
         paint.color = backgroundLineColor
@@ -82,31 +82,30 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
 
         canvas.drawLine(paddingLeft.toFloat(), bottomHeight, width - paddingRight.toFloat(), bottomHeight, paint)
 
+        //Use minimized labels if the column labels won't fit the view
         val useMinimizedLabels = shouldUseMinimizedLabels()
 
         //Draw columns
         for(column in 0 until columns) {
             //Column lines
-            val x = paddingLeft + (column * columnWidth) + columnWidth / 2f
-            canvas.drawLine(x, bottomHeight, x, paddingTop.toFloat(), paint)
+            val columnX = paddingLeft + (column * columnWidth) + columnWidth / 2f
+            canvas.drawLine(columnX, bottomHeight, columnX, paddingTop.toFloat(), paint)
 
             if(useMinimizedLabels) {
                 if(column > 0 && column < columns-1) continue
             }
             
             //Column labels
-            val label = if(column < chartData.size) chartData[column].label else continue
-            val underLabel = if(column < chartData.size) chartData[column].underLabel else ""
+            val labelText = if(column < chartData.size) chartData[column].label else continue
+            val underLabelText = if(column < chartData.size) chartData[column].underLabel else ""
 
-            val labelTextHeight = textPaint.textSize
-
-            val textY = bottomHeight + labelTextHeight
-
+            //Draw label
             textPaint.typeface = Typeface.DEFAULT_BOLD
-            canvas.drawText(label, x, textY, textPaint)
+            canvas.drawText(labelText, columnX, textY, textPaint)
             textPaint.typeface = Typeface.DEFAULT
 
-            canvas.drawText(underLabel, x, textY + labelTextHeight, textPaint)
+            //Draw under label
+            canvas.drawText(underLabelText, columnX, textY + textSize, textPaint)
         }
 
         paint.color = lineColor
