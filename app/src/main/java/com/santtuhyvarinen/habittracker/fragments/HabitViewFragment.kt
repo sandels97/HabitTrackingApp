@@ -30,18 +30,18 @@ class HabitViewFragment : Fragment() {
 
     private lateinit var habitViewModel : HabitViewModel
 
-    private val args: HabitViewFragmentArgs by navArgs()
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         _binding = FragmentHabitViewBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    private val args: HabitViewFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //If there is no id set, navigate up
+        //If habitId is negative, should navigate up and exit fragment
         if(args.habitId < 0) {
             findNavController().navigateUp()
             return

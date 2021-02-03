@@ -63,7 +63,7 @@ class HabitsFragment : Fragment() {
         }
     }
 
-    fun openHabitView(habit: Habit) {
+    private fun openHabitView(habit: Habit) {
         val action = HabitsFragmentDirections.actionFromHabitsFragmentToHabitViewFragment(habit.id)
         findNavController().navigate(action)
     }
