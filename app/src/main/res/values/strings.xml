@@ -85,4 +85,11 @@
     <string translatable="false" name="setting_touch_feedback_key">touch_feedback_key</string>
     <string name="setting_touch_feedback_title">Touch feedback</string>
     <string name="setting_touch_feedback_summary">Give touch feedback on task completion</string>
+
+    <string translatable="false" name="setting_delete_all_habits_key">delete_habits_key</string>
+    <string name="setting_delete_all_habits_title">Delete all data</string>
+    <string name="setting_delete_all_habits_summary">Deletes all habits and task data from the app</string>
+
+    <string name="setting_delete_all_habits_confirmation">Delete all habits and task data from the app? This action is irreversible.</string>
+    <string name="setting_delete_all_habits_done">All data deleted</string>
 </resources>

@@ -28,4 +28,7 @@ interface HabitDao {
 
     @Delete
     suspend fun delete(habit: Habit) : Int
+
+    @Query("DELETE FROM habit")
+    suspend fun deleteAll() : Int
 }

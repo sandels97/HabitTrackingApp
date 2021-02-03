@@ -48,4 +48,13 @@ class HabitRepository(private val habitDao: HabitDao) {
     suspend fun getHabitWithTaskLogsById(id : Long) : HabitWithTaskLogs? {
         return habitDao.getHabitWithTaskLogsById(id)
     }
+
+    @WorkerThread
+    suspend fun deleteAll() : Int {
+        val rows = habitDao.deleteAll()
+
+        Log.d(AppDatabase.DATABASE_LOG_TAG, "$rows rows deleted from the database")
+
+        return rows
+    }
 }

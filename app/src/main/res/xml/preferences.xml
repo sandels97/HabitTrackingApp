@@ -12,4 +12,10 @@
         android:title="@string/setting_touch_feedback_title"
         android:summary="@string/setting_touch_feedback_summary"
         android:defaultValue="true"/>
+
+    <Preference
+        android:key="@string/setting_delete_all_habits_key"
+        android:title="@string/setting_delete_all_habits_title"
+        android:summary="@string/setting_delete_all_habits_summary"/>
+
 </PreferenceScreen>
