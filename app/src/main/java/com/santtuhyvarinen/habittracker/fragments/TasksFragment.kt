@@ -56,7 +56,6 @@ class TasksFragment : Fragment() {
         //Observer habits from database
         val habitsObserver = Observer<List<HabitWithTaskLogs>> { list ->
             tasksViewModel.generateDailyTasks(list)
-            tasksViewModel.getHabitsWithTaskLogs().removeObservers(viewLifecycleOwner)
         }
 
         tasksViewModel.getHabitsWithTaskLogs().observe(viewLifecycleOwner, habitsObserver)
@@ -83,8 +82,7 @@ class TasksFragment : Fragment() {
             SettingsUtil.TASK_SORT_SCORE -> taskList.sortWith(compareByDescending { it.habitWithTaskLogs.habit.score })
         }
 
-        tasksAdapter.data = taskList
-        tasksAdapter.notifyDataSetChanged()
+        tasksAdapter.updateData(taskList)
 
         updateMessageVisibility(taskList.isEmpty())
 

@@ -9,8 +9,10 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.santtuhyvarinen.habittracker.R
+import com.santtuhyvarinen.habittracker.callbacks.TaskModelDiffCallback
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.TaskModel
 import com.santtuhyvarinen.habittracker.utils.SettingsUtil
@@ -165,11 +167,6 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
 
             override fun onAnimationEnd(p0: Animation?) {
                 layout.visibility = View.GONE
-                data.remove(taskModel)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, itemCount)
-
-                if(data.isEmpty()) tasksAdapterListener?.allTasksDone()
             }
 
             override fun onAnimationRepeat(p0: Animation?) {
@@ -177,5 +174,13 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
         })
 
         layout.startAnimation(animationSet)
+    }
+
+    fun updateData(newData : ArrayList<TaskModel>) {
+        val result = DiffUtil.calculateDiff(TaskModelDiffCallback(data, newData))
+
+        data = newData
+
+        result.dispatchUpdatesTo(this)
     }
 }

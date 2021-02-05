@@ -25,4 +25,15 @@ data class Habit(@PrimaryKey(autoGenerate = true) val id : Long = 0) {
     override fun toString(): String {
         return "${name}, taskRecurrence = ${taskRecurrence}, priority = ${priority}, iconKey = ${iconKey}"
     }
+
+    fun hasSameContent(habit: Habit): Boolean {
+        val idSame = id == habit.id
+        val nameSame = name == habit.name
+        val prioritySame = priority == habit.priority
+        val iconKeySame = iconKey == habit.iconKey
+        val scoreSame = score == habit.score
+        val disabledSame = disabled == habit.disabled
+
+        return idSame && nameSame && prioritySame && iconKeySame && scoreSame && disabledSame
+    }
 }
