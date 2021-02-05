@@ -63,12 +63,7 @@ class TasksFragment : Fragment() {
 
         //Observer tasks
         val tasksObserver = Observer<ArrayList<TaskModel>> { list ->
-            tasksAdapter.data = list
-            tasksAdapter.notifyDataSetChanged()
-
-            updateMessageVisibility(list.isEmpty())
-
-            binding.progress.hide()
+            updateTasks(list)
         }
 
         tasksViewModel.getTasks().observe(viewLifecycleOwner, tasksObserver)
@@ -78,6 +73,22 @@ class TasksFragment : Fragment() {
         //Set message text and icon
         binding.layoutMessage.messageText.text = getString(R.string.all_tasks_done)
         binding.layoutMessage.messageIcon.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_thumb_up))
+    }
+
+    private fun updateTasks(taskList : ArrayList<TaskModel>) {
+        //Sort tasks based on the task sort setting
+        when(SettingsUtil.getSortTasksValue(requireContext())) {
+            SettingsUtil.TASK_SORT_PRIORITY -> taskList.sortWith (compareByDescending<TaskModel> { it.habitWithTaskLogs.habit.priority }.thenBy { it.habitWithTaskLogs.habit.name } )
+            SettingsUtil.TASK_SORT_ALPHABET -> taskList.sortWith (compareBy { it.habitWithTaskLogs.habit.name })
+            SettingsUtil.TASK_SORT_SCORE -> taskList.sortWith(compareByDescending { it.habitWithTaskLogs.habit.score })
+        }
+
+        tasksAdapter.data = taskList
+        tasksAdapter.notifyDataSetChanged()
+
+        updateMessageVisibility(taskList.isEmpty())
+
+        binding.progress.hide()
     }
 
     private fun updateMessageVisibility(visible : Boolean) {

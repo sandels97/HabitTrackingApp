@@ -103,4 +103,16 @@
         <item>score</item>
         <item>total</item>
     </string-array>
+
+    <string-array name="SortTasksEntries">
+        <item>Alphabetically</item>
+        <item>By priority</item>
+        <item>By score</item>
+    </string-array>
+
+    <string-array name="SortTasksEntryValues">
+        <item>alphabet</item>
+        <item>priority</item>
+        <item>score</item>
+    </string-array>
 </resources>

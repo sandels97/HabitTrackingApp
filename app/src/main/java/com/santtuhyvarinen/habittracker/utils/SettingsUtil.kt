@@ -16,7 +16,11 @@ class SettingsUtil {
         const val TASK_STAT_NONE = "none"
         const val TASK_STAT_STREAK = "score"
         const val TASK_STAT_TOTAL = "total"
-        
+
+        const val TASK_SORT_PRIORITY = "priority"
+        const val TASK_SORT_ALPHABET = "alphabet"
+        const val TASK_SORT_SCORE = "score"
+
         fun sendTouchFeedback(context: Context) {
             if(!isTouchFeedbackEnabled(context)) return
 
@@ -56,10 +60,14 @@ class SettingsUtil {
             return prefs.getBoolean(context.getString(R.string.setting_touch_feedback_key), true)
         }
 
-
         fun getDisplayTaskStatValue(context: Context) : String {
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             return prefs.getString(context.getString(R.string.setting_task_stat_key), TASK_STAT_STREAK)!!
+        }
+
+        fun getSortTasksValue(context: Context) : String {
+            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+            return prefs.getString(context.getString(R.string.setting_task_sort_key), TASK_SORT_PRIORITY)!!
         }
     }
 }

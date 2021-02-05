@@ -87,4 +87,6 @@
     <string name="setting_delete_all_habits_done">Kaikki data poistettu</string>
 
     <string name="setting_task_stat_title">Näytettävä tieto tehtävässä</string>
+
+    <string name="setting_task_sort_title">Järjestä tehtävät listalla</string>
 </resources>

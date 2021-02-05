@@ -93,6 +93,9 @@
     <string name="setting_delete_all_habits_confirmation">Delete all habits and task data from the app? This action is irreversible.</string>
     <string name="setting_delete_all_habits_done">All data deleted</string>
 
-    <string translatable="false" name="setting_task_stat_key">task_show_that_key</string>
+    <string translatable="false" name="setting_task_stat_key">task_display_stat_key</string>
     <string name="setting_task_stat_title">Displayed stat value in a task</string>
+
+    <string translatable="false" name="setting_task_sort_key">task_sort_key</string>
+    <string name="setting_task_sort_title">Sort tasks in the task list</string>
 </resources>

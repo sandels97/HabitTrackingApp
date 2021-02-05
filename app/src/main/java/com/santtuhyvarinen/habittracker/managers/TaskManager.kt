@@ -28,8 +28,6 @@ class TaskManager(private val databaseManager: DatabaseManager) {
             }
         }
 
-        taskList.sortWith (compareByDescending<TaskModel> { it.habitWithTaskLogs.habit.priority }.thenBy { it.habitWithTaskLogs.habit.name } )
-
         tasks.value = taskList
     }
 

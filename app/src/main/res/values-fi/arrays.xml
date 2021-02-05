@@ -61,4 +61,10 @@
         <item>Pisteet</item>
         <item>Tehtäviä suoritettu yhteensä</item>
     </string-array>
+
+    <string-array name="SortTasksEntries">
+        <item>Aakkosjärjestyksessä</item>
+        <item>Prioriteetin mukaan</item>
+        <item>Pisteiden mukaan</item>
+    </string-array>
 </resources>
