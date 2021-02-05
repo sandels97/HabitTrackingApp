@@ -91,4 +91,16 @@
         <item>@drawable/icon_relax</item>
         <item>@drawable/icon_person</item>
     </integer-array>
+
+    <string-array name="TaskValueEntries">
+        <item>None</item>
+        <item>Score</item>
+        <item>Total tasks done</item>
+    </string-array>
+
+    <string-array name="TaskValueEntryValues">
+        <item>none</item>
+        <item>score</item>
+        <item>total</item>
+    </string-array>
 </resources>

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
+import androidx.preference.SwitchPreferenceCompat
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.utils.SettingsUtil
 import com.santtuhyvarinen.habittracker.viewmodels.HabitsViewModel
@@ -21,7 +22,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         settingsViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
 
-        val notificationPreference = findPreference<SwitchPreference>(requireContext().getString(R.string.setting_notification_enable_key))
+        val notificationPreference = findPreference<SwitchPreferenceCompat>(requireContext().getString(R.string.setting_notification_enable_key))
         notificationPreference?.setOnPreferenceChangeListener { _, newValue ->
             val isNotificationsEnabled = newValue as Boolean
             if(isNotificationsEnabled) {

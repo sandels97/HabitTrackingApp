@@ -12,6 +12,10 @@ import com.santtuhyvarinen.habittracker.services.NotificationService
 class SettingsUtil {
     companion object {
         private const val DEFAULT_VIBRATE_LENGTH = 100L
+
+        const val TASK_SCORE_NONE = "none"
+        const val TASK_SCORE_STREAK = "score"
+        const val TASK_SCORE_TOTAL = "total"
         
         fun sendTouchFeedback(context: Context) {
             if(!isTouchFeedbackEnabled(context)) return
