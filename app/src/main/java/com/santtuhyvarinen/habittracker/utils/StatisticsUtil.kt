@@ -6,14 +6,14 @@ import com.santtuhyvarinen.habittracker.models.TaskLog
 
 class StatisticsUtil {
     companion object {
-        fun getTotalSuccesses(taskLogs : List<TaskLog>) : Int {
-            return taskLogs.filter { it.status == TaskUtil.STATUS_SUCCESS }.count()
+        fun getTotalSuccesses(habitWithTaskLogs: HabitWithTaskLogs) : Int {
+            return habitWithTaskLogs.taskLogs.filter { it.status == TaskUtil.STATUS_SUCCESS }.count()
         }
 
         fun getTotalSuccessesForHabits(habitsWithTaskLogs : List<HabitWithTaskLogs>) : Int {
             var sum = 0
             for(habitWithTaskLogs in habitsWithTaskLogs) {
-                sum += getTotalSuccesses(habitWithTaskLogs.taskLogs)
+                sum += getTotalSuccesses(habitWithTaskLogs)
             }
 
             return sum

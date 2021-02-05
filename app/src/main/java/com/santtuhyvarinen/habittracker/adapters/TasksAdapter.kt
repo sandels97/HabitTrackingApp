@@ -12,11 +12,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.managers.IconManager
-import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.TaskModel
+import com.santtuhyvarinen.habittracker.utils.SettingsUtil
+import com.santtuhyvarinen.habittracker.utils.StatisticsUtil
 import com.santtuhyvarinen.habittracker.utils.TaskUtil
 
 class TasksAdapter(private var context: Context, private val iconManager: IconManager) : RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
+
+    private val displayTaskTaskValue = SettingsUtil.getDisplayTaskStatValue(context)
 
     var data : ArrayList<TaskModel> = ArrayList()
 
@@ -50,11 +53,14 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val taskModel = data[position]
-        holder.titleTextView.text = taskModel.habit.name
-        holder.scoreTextView.text = context.getString(R.string.score_text, taskModel.habit.score)
+        holder.titleTextView.text = taskModel.habitWithTaskLogs.habit.name
+        holder.scoreTextView.text = when(displayTaskTaskValue) {
+            SettingsUtil.TASK_STAT_STREAK -> context.getString(R.string.score_text, taskModel.habitWithTaskLogs.habit.score)
+            SettingsUtil.TASK_STAT_TOTAL -> StatisticsUtil.getTotalSuccesses(taskModel.habitWithTaskLogs).toString()
+            else -> ""
+        }
 
-        val iconKey = taskModel.habit.iconKey
-
+        val iconKey = taskModel.habitWithTaskLogs.habit.iconKey
         if(iconKey != null)
             holder.iconView.setImageDrawable(iconManager.getIconByKey(iconKey))
 

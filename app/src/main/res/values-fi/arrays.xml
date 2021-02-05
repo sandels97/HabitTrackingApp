@@ -55,4 +55,10 @@
         <item>Rentoudu</item>
         <item>Henkilö</item>
     </string-array>
+
+    <string-array name="TaskValueEntries">
+        <item>Ei mitään</item>
+        <item>Pisteet</item>
+        <item>Tehtäviä suoritettu yhteensä</item>
+    </string-array>
 </resources>

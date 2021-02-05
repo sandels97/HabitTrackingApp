@@ -94,5 +94,5 @@
     <string name="setting_delete_all_habits_done">All data deleted</string>
 
     <string translatable="false" name="setting_task_stat_key">task_show_that_key</string>
-    <string name="setting_task_stat_title">Display stat value in task</string>
+    <string name="setting_task_stat_title">Displayed stat value in a task</string>
 </resources>

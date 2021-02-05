@@ -127,7 +127,7 @@ class HabitViewFragment : Fragment() {
 
         //Update stats
         updateStatValue(binding.statCreated, CalendarUtil.getDateText(habitWithTaskLogs.habit.creationDate))
-        updateStatValue(binding.statTotalSuccesses, StatisticsUtil.getTotalSuccesses(habitWithTaskLogs.taskLogs).toString())
+        updateStatValue(binding.statTotalSuccesses, StatisticsUtil.getTotalSuccesses(habitWithTaskLogs).toString())
 
         val highestScore = StatisticsUtil.getHighestScore(habitWithTaskLogs.taskLogs)
         updateStatValue(binding.statHighestScore, getString(R.string.score_text, highestScore))

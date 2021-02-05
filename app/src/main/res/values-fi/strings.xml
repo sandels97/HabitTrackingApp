@@ -85,4 +85,6 @@
 
     <string name="setting_delete_all_habits_confirmation">Haluatko poistaa kaikki rutiinit ja tehtävien tiedot sovelluksesta? Tätä toimenpidettä ei voi perua.</string>
     <string name="setting_delete_all_habits_done">Kaikki data poistettu</string>
+
+    <string name="setting_task_stat_title">Näytettävä tieto tehtävässä</string>
 </resources>

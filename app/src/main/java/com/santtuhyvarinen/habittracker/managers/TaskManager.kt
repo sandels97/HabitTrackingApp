@@ -6,7 +6,6 @@ import com.santtuhyvarinen.habittracker.models.TaskLog
 import com.santtuhyvarinen.habittracker.models.TaskModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import com.santtuhyvarinen.habittracker.utils.TaskUtil
-import org.joda.time.DateTime
 
 class TaskManager(private val databaseManager: DatabaseManager) {
 
@@ -24,12 +23,12 @@ class TaskManager(private val databaseManager: DatabaseManager) {
 
                 //Check if already added a task log for habit today. If already has a task log for today, don't add the task
                 if (!TaskUtil.hasTaskLogForToday(habitWithTaskLogs)) {
-                    taskList.add(TaskModel(habitWithTaskLogs.habit))
+                    taskList.add(TaskModel(habitWithTaskLogs))
                 }
             }
         }
 
-        taskList.sortWith (compareByDescending<TaskModel> { it.habit.priority }.thenBy { it.habit.name } )
+        taskList.sortWith (compareByDescending<TaskModel> { it.habitWithTaskLogs.habit.priority }.thenBy { it.habitWithTaskLogs.habit.name } )
 
         tasks.value = taskList
     }
@@ -37,7 +36,7 @@ class TaskManager(private val databaseManager: DatabaseManager) {
     suspend fun insertTaskLog(taskModel: TaskModel, taskStatus : String) {
         val taskLog = TaskLog()
 
-        val habit = taskModel.habit
+        val habit = taskModel.habitWithTaskLogs.habit
 
         taskLog.habitId = habit.id
         taskLog.timestamp = System.currentTimeMillis()

@@ -13,9 +13,9 @@ class SettingsUtil {
     companion object {
         private const val DEFAULT_VIBRATE_LENGTH = 100L
 
-        const val TASK_SCORE_NONE = "none"
-        const val TASK_SCORE_STREAK = "score"
-        const val TASK_SCORE_TOTAL = "total"
+        const val TASK_STAT_NONE = "none"
+        const val TASK_STAT_STREAK = "score"
+        const val TASK_STAT_TOTAL = "total"
         
         fun sendTouchFeedback(context: Context) {
             if(!isTouchFeedbackEnabled(context)) return
@@ -54,6 +54,12 @@ class SettingsUtil {
         fun isTouchFeedbackEnabled(context: Context) : Boolean {
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             return prefs.getBoolean(context.getString(R.string.setting_touch_feedback_key), true)
+        }
+
+
+        fun getDisplayTaskStatValue(context: Context) : String {
+            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+            return prefs.getString(context.getString(R.string.setting_task_stat_key), TASK_STAT_STREAK)!!
         }
     }
 }
