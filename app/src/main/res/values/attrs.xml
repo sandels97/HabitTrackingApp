@@ -7,6 +7,7 @@
         <attr name="days" format="integer"/>
         <attr name="textSize"/>
         <attr name="textColor"/>
+        <attr name="iconSize" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="ChartView">

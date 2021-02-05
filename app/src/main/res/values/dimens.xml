@@ -49,6 +49,7 @@
     <!--Stats-->
     <dimen name="statHeight">40dp</dimen>
     <dimen name="habitTimelineHeight">100dp</dimen>
+    <dimen name="habitTimelineIconSize">48dp</dimen>
     <dimen name="lineGraphHeight">200dp</dimen>
     <dimen name="lineGraphStrokeWidth">5dp</dimen>
     <dimen name="lineGraphDotRadiusWidth">5dp</dimen>

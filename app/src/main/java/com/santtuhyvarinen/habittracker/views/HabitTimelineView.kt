@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.withStyledAttributes
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.DateStatusModel
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
@@ -25,6 +26,7 @@ class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(con
 
     var fromDate : DateTime = DateTime.now()
     var days = 7
+    var iconSize = 20
 
     fun setup(habitWithTaskLogs: HabitWithTaskLogs) {
         habit = habitWithTaskLogs
@@ -50,9 +52,12 @@ class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(con
 
         val attributes: TypedArray = context.obtainStyledAttributes(attributeSet, R.styleable.HabitTimelineView)
 
-        textPaint.textSize = attributes.getDimension(R.styleable.HabitTimelineView_textSize, 18f)
-        textPaint.color = attributes.getColor(R.styleable.HabitTimelineView_textColor, Color.BLACK)
-        days = attributes.getInt(R.styleable.HabitTimelineView_days, 7)
+        context.withStyledAttributes(attributeSet, R.styleable.HabitTimelineView) {
+            textPaint.textSize = getDimension(R.styleable.HabitTimelineView_textSize, 18f)
+            textPaint.color = getColor(R.styleable.HabitTimelineView_textColor, Color.BLACK)
+            days = getInt(R.styleable.HabitTimelineView_days, days)
+            iconSize = getDimension(R.styleable.HabitTimelineView_iconSize, 20f).toInt()
+        }
 
         attributes.recycle()
 
@@ -71,7 +76,7 @@ class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(con
 
         if(days <= 0 || habit == null) return
 
-        val iconSize = width / days
+        val columnWidth = width / days
         val iconMargin = iconSize / 8
 
         //Draw day headers and icons
@@ -84,10 +89,8 @@ class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(con
             textPaint.getTextBounds(dayHeader, 0, dayHeader.length, textBounds)
 
             val textTop = textPaint.textSize
-            val left = i * iconSize
-            canvas.drawText(dayHeader, left + (iconSize / 2f), textTop.toFloat(), textPaint)
-
-            val top = (height/2) - (iconSize/2)
+            val textLeft = i * columnWidth + (columnWidth / 2f)
+            canvas.drawText(dayHeader, textLeft, textTop, textPaint)
 
             //Icon
             val status = dateStatusModels[i].status
@@ -99,6 +102,8 @@ class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(con
                 else -> icon = null
             }
 
+            val top = (height/2) - (iconSize/2)
+            val left = i * columnWidth + (columnWidth / 2) - (iconSize / 2)
             val bottom = top + iconSize
             val right = left + iconSize
 

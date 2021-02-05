@@ -102,6 +102,7 @@
                 android:layout_height="@dimen/habitTimelineHeight"
                 android:layout_marginTop="@dimen/smallMargin"
 
+                app:iconSize="@dimen/habitTimelineIconSize"
                 app:days="7"
                 app:textColor="@color/colorTextPrimary"
                 app:textSize="@dimen/smallTextSize"/>
