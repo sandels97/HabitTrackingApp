@@ -12,8 +12,7 @@
         android:id="@+id/messageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/ItemTitleStyle"
-        android:text="@string/all_tasks_done"
+        style="@style/MessageTextStyle"
         android:textColor="@color/colorIconTint"
 
         app:layout_constraintLeft_toLeftOf="parent"
@@ -25,7 +24,6 @@
         android:id="@+id/messageIcon"
         android:layout_width="@dimen/itemIconSize"
         android:layout_height="@dimen/itemIconSize"
-        android:src="@drawable/icon_thumb_up"
         android:layout_marginBottom="@dimen/mediumMargin"
         android:tint="@color/colorIconTint"
 

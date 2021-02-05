@@ -100,6 +100,15 @@ class TasksFragment : Fragment() {
             alphaAnimation.duration = resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()
             binding.layoutMessage.messageContainer.startAnimation(alphaAnimation)
         }
+
+        //Set message content
+        if(tasksViewModel.hasHabits()) {
+            binding.layoutMessage.messageText.text = getString(R.string.all_tasks_done)
+            binding.layoutMessage.messageIcon.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_notification_tasks_done))
+        } else {
+            binding.layoutMessage.messageText.text = getString(R.string.no_habits_message)
+            binding.layoutMessage.messageIcon.setImageDrawable(null)
+        }
     }
 
     private fun updateTimeBar() {

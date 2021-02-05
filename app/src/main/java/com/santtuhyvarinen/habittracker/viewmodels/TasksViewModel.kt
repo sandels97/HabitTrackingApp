@@ -14,7 +14,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class TasksViewModel(application: Application) : AndroidViewModel(application) {
-
+    private var hasHabits = false
     private val databaseManager = DatabaseManager(application)
     private val taskManager = TaskManager(databaseManager)
     val iconManager = IconManager(application)
@@ -26,9 +26,15 @@ class TasksViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun generateDailyTasks(habits : List<HabitWithTaskLogs>) {
+        hasHabits = habits.isNotEmpty()
+
         viewModelScope.launch(Dispatchers.Main) {
             taskManager.generateDailyTasks(habits)
         }
+    }
+
+    fun hasHabits() : Boolean {
+        return hasHabits
     }
 
     fun getHabitsWithTaskLogs() : LiveData<List<HabitWithTaskLogs>> {

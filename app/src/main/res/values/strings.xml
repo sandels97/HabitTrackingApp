@@ -14,6 +14,8 @@
     <string name="delete_habit">Delete habit</string>
     <string name="save_changes">Save changes</string>
 
+    <string name="no_habits_message">You haven\'t added any habits yet\nAdd a new habit by pressing the + button</string>
+
     <string name="error_name_empty">Habit name can not be empty</string>
 
     <string name="habit_delete_confirmation">Are you sure? This action is irreversible.</string>

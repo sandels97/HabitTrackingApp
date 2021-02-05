@@ -39,6 +39,13 @@
         <item name="android:maxLines">1</item>
     </style>
 
+    <style name="MessageTextStyle">
+        <item name="android:textSize">@dimen/mediumTextSize</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/colorIconTint</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
     <style name="TaskInfoTextStyle">
         <item name="android:textSize">@dimen/extraSmallTextSize</item>
         <item name="android:textColor">@color/colorTextPrimaryLight</item>
