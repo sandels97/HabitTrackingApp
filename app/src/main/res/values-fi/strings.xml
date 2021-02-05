@@ -79,4 +79,10 @@
 
     <string name="setting_touch_feedback_title">Värinäpalaute</string>
     <string name="setting_touch_feedback_summary">Antaa värinäpalautteen, kun tehtävä merkataan suoritetuksi</string>
+
+    <string name="setting_delete_all_habits_title">Poista kaikki data</string>
+    <string name="setting_delete_all_habits_summary">Poistaa kaikki rutiinit ja tehtävien tiedot sovelluksesta</string>
+
+    <string name="setting_delete_all_habits_confirmation">Haluatko poistaa kaikki rutiinit ja tehtävien tiedot sovelluksesta? Tätä toimenpidettä ei voi perua.</string>
+    <string name="setting_delete_all_habits_done">Kaikki data poistettu</string>
 </resources>
