@@ -15,6 +15,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <include
+        android:id="@+id/layoutMessage"
+        layout="@layout/layout_message"/>
+
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progress"
         android:layout_width="match_parent"
