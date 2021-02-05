@@ -17,6 +17,7 @@
             <enum name="column" value="1"/>
         </attr>
 
+        <attr name="columnMaxWidth" format="dimension"/>
         <attr name="columnCornerRadius" format="dimension"/>
         <attr name="columns" format="integer"/>
         <attr name="rows" format="integer"/>

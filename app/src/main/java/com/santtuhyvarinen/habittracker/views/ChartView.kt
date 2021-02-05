@@ -39,7 +39,9 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
     var backgroundLineColor = Color.GRAY
     var backgroundLineStrokeWidth = 2f
 
-    var dotRadius : Float = 15f
+    var dotRadius = 15f
+    var columnCornerRadius = 10f
+    var columnMaxWidth = 0f
 
     init {
         context.withStyledAttributes(attributeSet, R.styleable.ChartView) {
@@ -52,7 +54,9 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
             textPaint.textSize = getDimension(R.styleable.ChartView_textSize, 18f)
             textPaint.color = getColor(R.styleable.ChartView_textColor, Color.BLACK)
 
-            dotRadius = getDimension(R.styleable.ChartView_dotRadius, 15f)
+            columnMaxWidth = getDimension(R.styleable.ChartView_columnMaxWidth, columnMaxWidth)
+            columnCornerRadius = getDimension(R.styleable.ChartView_columnCornerRadius, columnCornerRadius)
+            dotRadius = getDimension(R.styleable.ChartView_dotRadius, dotRadius)
             columns = getInt(R.styleable.ChartView_columns, columns)
             rows = getInt(R.styleable.ChartView_rows, rows)
         }
@@ -133,17 +137,20 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
 
             CHART_TYPE_COLUMN -> {
                 //Draw columns chart data
-                val margin = columnWidth / 10
+                var columnDataWidth = columnWidth - (columnWidth/8f)
+                if(columnMaxWidth > 0f) {
+                    columnDataWidth = columnDataWidth.coerceAtMost(columnMaxWidth)
+                }
 
                 for (i in 0 until columns) {
                     val value = if(i < chartData.size) chartData[i].value else 0
 
-                    val left = paddingLeft + (i * columnWidth).toFloat() + margin
+                    val left = (paddingLeft + (i * columnWidth).toFloat() + (columnWidth/2f)) - (columnDataWidth/2f)
                     val top = bottomHeight - (rowHeight * value)
-                    val right = left + columnWidth - (margin*2)
+                    val right = left + columnDataWidth
                     val bottom = bottomHeight
 
-                    canvas.drawRoundRect(left, top, right, bottom, 10f, 10f, paint)
+                    canvas.drawRoundRect(left, top, right, bottom, columnCornerRadius, columnCornerRadius, paint)
                 }
             }
         }

@@ -80,13 +80,13 @@
                 android:padding="@dimen/largePadding"
 
                 app:chartType="line"
-                app:columnCornerRadius="@dimen/graphColumnCornerRadius"
-                app:dotRadius="@dimen/lineGraphDotRadiusWidth"
+                app:columnCornerRadius="@dimen/columnChartCornerRadius"
+                app:dotRadius="@dimen/lineChartDotRadiusWidth"
                 app:backgroundLineColor="@color/colorLineGraphBackground"
                 app:textColor="@color/colorTextPrimaryLight"
                 app:textSize="@dimen/smallTextSize"
                 app:lineColor="@color/colorPrimary"
-                app:lineStrokeWidth="@dimen/lineGraphStrokeWidth"
+                app:lineStrokeWidth="@dimen/lineChartStrokeWidth"
 
                 app:layout_constraintTop_toBottomOf="@id/completedTasksHeader"/>
 
@@ -109,15 +109,16 @@
                 android:layout_gravity="center"
                 android:padding="@dimen/largePadding"
 
+                app:columnMaxWidth="@dimen/columnChartColumnMaxWidth"
                 app:chartType="column"
                 app:columns="7"
-                app:columnCornerRadius="@dimen/graphColumnCornerRadius"
-                app:dotRadius="@dimen/lineGraphDotRadiusWidth"
+                app:columnCornerRadius="@dimen/columnChartCornerRadius"
+                app:dotRadius="@dimen/lineChartDotRadiusWidth"
                 app:backgroundLineColor="@color/colorLineGraphBackground"
                 app:textColor="@color/colorTextPrimaryLight"
                 app:textSize="@dimen/smallTextSize"
                 app:lineColor="@color/colorPrimary"
-                app:lineStrokeWidth="@dimen/lineGraphStrokeWidth"
+                app:lineStrokeWidth="@dimen/lineChartStrokeWidth"
 
                 app:layout_constraintTop_toBottomOf="@id/scheduledTasksHeader"/>
 
