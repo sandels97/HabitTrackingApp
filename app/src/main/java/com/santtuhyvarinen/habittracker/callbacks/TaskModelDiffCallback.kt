@@ -24,7 +24,7 @@ class TaskModelDiffCallback(private val oldData : List<TaskModel>, private val n
         val newTaskModel = newData[newItemPosition]
 
 
-        val newTaskLogs = oldTaskModel.habitWithTaskLogs.taskLogs
+        val newTaskLogs = newTaskModel.habitWithTaskLogs.taskLogs
         val oldTaskLogs = oldTaskModel.habitWithTaskLogs.taskLogs
 
         val areTaskLogAmountSame = newTaskLogs.size == oldTaskLogs.size
