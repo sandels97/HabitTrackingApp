@@ -33,6 +33,14 @@
 
                 app:layout_constraintTop_toBottomOf="@id/statHabits" />
 
+            <include
+                android:id="@+id/statAverageSuccesses"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/statHeight"
+                layout="@layout/layout_stat"
+
+                app:layout_constraintTop_toBottomOf="@id/statTotalSuccesses" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/completedTasksHeader"
                 android:layout_width="match_parent"
@@ -43,7 +51,7 @@
 
                 style="@style/HabitFormHeaderStyle"
 
-                app:layout_constraintTop_toBottomOf="@id/statTotalSuccesses"/>
+                app:layout_constraintTop_toBottomOf="@id/statAverageSuccesses"/>
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/selectDateLineChartViewButton"

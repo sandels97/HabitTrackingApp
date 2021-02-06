@@ -47,9 +47,10 @@
 
     <!--Statistics-->
     <string name="created">Created</string>
-    <string name="total_success">Total Tasks Completed</string>
-    <string name="highest_score">Highest Streak</string>
+    <string name="total_success">Total tasks completed</string>
+    <string name="highest_score">Highest streak</string>
     <string name="stat_habits">Habits</string>
+    <string name="stat_average_task_success_per_day">Average number of tasks completed per day</string>
     <string name="stat_task_success_per_day">Completed tasks per day</string>
     <string name="stat_task_scheduled_per_weekday">Scheduled tasks per weekday</string>
     <string name="select_date_content_description">Select Date</string>

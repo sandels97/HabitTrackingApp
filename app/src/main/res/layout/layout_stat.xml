@@ -20,19 +20,19 @@
         style="@style/BarTextStyle"
         android:textStyle="bold"
 
-        app:layout_constraintRight_toRightOf="@id/centerGuide"
+        app:layout_constraintRight_toLeftOf="@id/statValueText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/statValueText"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/BarTextStyle"
         android:textAlignment="textEnd"
 
-        app:layout_constraintLeft_toLeftOf="@id/centerGuide"
+        app:layout_constraintLeft_toRightOf="@id/statHeaderText"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

@@ -22,6 +22,8 @@
     <string name="error_name_empty">Rutiinin nimi ei voi olla tyhjä</string>
     <string name="habit_delete_confirmation">Oletko varma? Tätä toimenpidettä ei voida peruuttaa.</string>
 
+    <string name="no_habits_message">Et ole lisännyt vielä rutiineja\n\nVoit lisätä uuden rutiinin painamalla + painiketta</string>
+
     <string name="habit_name">Nimi</string>
     <string name="habit_repeat">Toista</string>
     <string name="habit_repeat_days">Toista: Joka %1$s</string>
@@ -44,6 +46,7 @@
     <string name="total_success">Tehtäviä suoritettu</string>
     <string name="highest_score">Suurin pistesarja</string>
     <string name="stat_habits">Rutiinit</string>
+    <string name="stat_average_task_success_per_day">Suoritetut tehtävät per päivä keskiarvo</string>
     <string name="stat_task_success_per_day">Suoritetut tehtävät per päivä</string>
     <string name="stat_task_scheduled_per_weekday">Ajoitetut tehtävät per viikonpäivä</string>
     <string name="select_date_content_description">Valitse päivä</string>

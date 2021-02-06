@@ -66,6 +66,7 @@ class StatisticsFragment : Fragment() {
 
         setStatHeader(binding.statHabits, getString(R.string.stat_habits))
         setStatHeader(binding.statTotalSuccesses, getString(R.string.total_success))
+        setStatHeader(binding.statAverageSuccesses, getString(R.string.stat_average_task_success_per_day))
 
         return binding.root
     }
@@ -119,6 +120,7 @@ class StatisticsFragment : Fragment() {
         val habits = statisticsViewModel.habitsWithTaskLogs
         updateStatValue(binding.statHabits, habits.size.toString())
         updateStatValue(binding.statTotalSuccesses, StatisticsUtil.getTotalSuccessesForHabits(habits).toString())
+        updateStatValue(binding.statAverageSuccesses, "%.1f".format(StatisticsUtil.getAverageTasksCompletedByDay(habits)))
     }
 
     private fun setStatHeader(stat : LayoutStatBinding, headerText : String) {
