@@ -36,6 +36,8 @@ class StatisticsUtil {
 
             val doneTaskLogs = taskLogs.filter { it.status == TaskUtil.STATUS_SUCCESS }.sortedBy { it.timestamp }
 
+            if(doneTaskLogs.isEmpty()) return 0.0
+
             val sum = doneTaskLogs.size
 
             val firstLogTimeStamp = doneTaskLogs.minOf { it.timestamp }
