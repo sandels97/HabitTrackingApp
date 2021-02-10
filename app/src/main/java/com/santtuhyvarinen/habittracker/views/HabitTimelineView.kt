@@ -6,15 +6,12 @@ import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.text.TextPaint
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.DateStatusModel
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
-import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import com.santtuhyvarinen.habittracker.utils.TaskUtil
 import org.joda.time.DateTime
 
@@ -22,7 +19,7 @@ import org.joda.time.DateTime
 class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
 
     private var habit : HabitWithTaskLogs? = null
-    private var dateStatusModels : Array<DateStatusModel> = Array(0) { DateStatusModel("", TaskUtil.STATUS_NONE) }
+    private var dateStatusModels : Array<DateStatusModel> = Array(0) { DateStatusModel("", "", TaskUtil.STATUS_NONE) }
 
     var fromDate : DateTime = DateTime.now()
     var days = 7
@@ -69,8 +66,6 @@ class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(con
         skipIcon.mutate().setTint(tintColor)
     }
 
-    private val textBounds = Rect()
-
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
@@ -84,16 +79,21 @@ class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(con
             if(i == dateStatusModels.size-1) {
                 textPaint.typeface = Typeface.DEFAULT_BOLD
             }
-            //Day header
-            val dayHeader = dateStatusModels[i].date
-            textPaint.getTextBounds(dayHeader, 0, dayHeader.length, textBounds)
 
-            val textTop = textPaint.textSize
+            val dateStatusModel = dateStatusModels[i]
+            //Day header
+            val label = dateStatusModel.label
+            val underLabel = dateStatusModel.underLabel
+
+            val textSize = textPaint.textSize
+            val textTop = textSize
             val textLeft = i * columnWidth + (columnWidth / 2f)
-            canvas.drawText(dayHeader, textLeft, textTop, textPaint)
+            canvas.drawText(label, textLeft, textTop, textPaint)
+            canvas.drawText(underLabel, textLeft, textTop + textSize, textPaint)
+
 
             //Icon
-            val status = dateStatusModels[i].status
+            val status = dateStatusModel.status
             val icon : Drawable?
             when(status) {
                 TaskUtil.STATUS_SUCCESS -> icon = successIcon

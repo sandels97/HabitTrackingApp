@@ -35,12 +35,13 @@ class TaskUtil {
 
         //Returns an array for Habit that contains Habit task status from last seven days
         fun getDateStatusModelsForHabit(context: Context, habitWithTaskLogs: HabitWithTaskLogs, fromDate : DateTime, days : Int) : Array<DateStatusModel> {
-            val array = Array(days) { DateStatusModel("", STATUS_NONE) }
+            val array = Array(days) { DateStatusModel("", "", STATUS_NONE) }
 
             var date = fromDate
             for(i in array.indices) {
                 val dateStatusModel = array[i]
-                dateStatusModel.date = CalendarUtil.getWeekDayTextShort(context, date)
+                dateStatusModel.label = CalendarUtil.getWeekDayTextShort(context, date)
+                dateStatusModel.underLabel = CalendarUtil.getDateTextShort(date)
 
                 val startTime = DateTime(date).withTimeAtStartOfDay()
                 val endTime = startTime.plusDays(1)

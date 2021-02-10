@@ -1,3 +1,3 @@
 package com.santtuhyvarinen.habittracker.models
 
-data class DateStatusModel(var date : String, var status : String)
+data class DateStatusModel(var label : String, var underLabel : String, var status : String)
