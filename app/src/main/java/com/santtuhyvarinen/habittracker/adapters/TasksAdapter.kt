@@ -21,9 +21,12 @@ import com.santtuhyvarinen.habittracker.utils.TaskUtil
 
 class TasksAdapter(private var context: Context, private val iconManager: IconManager) : RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
 
+    private var animationPlaying = false
+
     private val displayTaskTaskValue = SettingsUtil.getDisplayTaskStatValue(context)
 
     var data : ArrayList<TaskModel> = ArrayList()
+    private var holdData : ArrayList<TaskModel>? = null
 
     var tasksAdapterListener : TasksAdapterListener? = null
     interface TasksAdapterListener {
@@ -167,6 +170,12 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
 
             override fun onAnimationEnd(p0: Animation?) {
                 layout.visibility = View.GONE
+                animationPlaying = false
+
+                val dataToUpdate = holdData
+                if(dataToUpdate != null) {
+                    updateData(dataToUpdate)
+                }
             }
 
             override fun onAnimationRepeat(p0: Animation?) {
@@ -174,13 +183,18 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
         })
 
         layout.startAnimation(animationSet)
+        animationPlaying = true
     }
 
     fun updateData(newData : ArrayList<TaskModel>) {
-        val result = DiffUtil.calculateDiff(TaskModelDiffCallback(data, newData))
+        if(!animationPlaying) {
+            val result = DiffUtil.calculateDiff(TaskModelDiffCallback(data, newData))
+            data = newData
+            result.dispatchUpdatesTo(this)
 
-        data = newData
-
-        result.dispatchUpdatesTo(this)
+            holdData = null
+        } else {
+            holdData = newData
+        }
     }
 }
