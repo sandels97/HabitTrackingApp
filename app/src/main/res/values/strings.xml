@@ -34,7 +34,9 @@
     <string name="daily">Daily</string>
     <string name="repeat_every">Every %1$s</string>
 
-    <string name="disabled">Turned off</string>
+    <string name="disable_tasks_switch_content_description">Enable tasks</string>
+    <string name="tasks_disabled">Tasks disabled</string>
+    <string name="tasks_enabled">Tasks enabled</string>
 
     <!--Score-->
     <string name="score_content_description">Habit Score: +%1$d</string>

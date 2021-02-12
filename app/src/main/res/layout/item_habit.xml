@@ -52,7 +52,7 @@
         android:layout_marginStart="@dimen/largeMargin"
         style="@style/SubHeaderStyle"
         android:textAlignment="textEnd"
-        android:text="@string/disabled"
+        android:text="@string/tasks_disabled"
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="@id/icon"

@@ -86,8 +86,11 @@ class HabitViewFragment : Fragment() {
             showDeleteConfirmationDialog()
         }
 
-        binding.habitDisableSwitch.setOnCheckedChangeListener { compoundButton, enabled ->
+        binding.habitDisableSwitch.setOnCheckedChangeListener { _, enabled ->
             habitViewModel.setHabitEnabled(enabled)
+
+            val toastStringId = if(enabled) R.string.tasks_enabled else R.string.tasks_disabled
+            Toast.makeText(requireContext(), getString(toastStringId), Toast.LENGTH_SHORT).show()
         }
 
         //Update stat headers

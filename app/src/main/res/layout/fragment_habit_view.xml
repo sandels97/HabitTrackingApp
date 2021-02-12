@@ -73,6 +73,7 @@
             android:id="@+id/habitDisableSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/disable_tasks_switch_content_description"
 
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
