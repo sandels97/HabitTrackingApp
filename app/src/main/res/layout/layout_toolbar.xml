@@ -31,7 +31,7 @@
         android:id="@+id/editButton"
         android:layout_width="@dimen/toolbarButtonSize"
         android:layout_height="@dimen/toolbarButtonSize"
-        android:contentDescription="@string/delete_habit"
+        android:contentDescription="@string/edit_habit"
 
         android:background="?selectableItemBackgroundBorderless"
         android:src="@drawable/ic_edit"

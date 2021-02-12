@@ -59,10 +59,21 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val taskModel = data[position]
         holder.titleTextView.text = taskModel.habitWithTaskLogs.habit.name
-        holder.scoreTextView.text = when(displayTaskTaskValue) {
-            SettingsUtil.TASK_STAT_STREAK -> context.getString(R.string.score_text, taskModel.habitWithTaskLogs.habit.score)
-            SettingsUtil.TASK_STAT_TOTAL -> StatisticsUtil.getTotalSuccesses(taskModel.habitWithTaskLogs).toString()
-            else -> ""
+        when(displayTaskTaskValue) {
+            SettingsUtil.TASK_STAT_STREAK -> {
+                val score = taskModel.habitWithTaskLogs.habit.score
+                holder.scoreTextView.text = context.getString(R.string.score_text, score)
+                holder.scoreTextView.contentDescription = context.getString(R.string.score_content_description, score)
+            }
+            SettingsUtil.TASK_STAT_TOTAL -> {
+                val totalSuccesses = StatisticsUtil.getTotalSuccesses(taskModel.habitWithTaskLogs)
+                holder.scoreTextView.text = totalSuccesses.toString()
+                holder.scoreTextView.contentDescription = context.getString(R.string.total_completed_content_description, totalSuccesses)
+            }
+            else -> {
+                holder.scoreTextView.text = ""
+                holder.scoreTextView.contentDescription = ""
+            }
         }
 
         val iconKey = taskModel.habitWithTaskLogs.habit.iconKey

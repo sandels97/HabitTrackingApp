@@ -121,6 +121,7 @@ class HabitViewFragment : Fragment() {
         //Score
         val score = habit.score
         binding.scoreTextView.text = getString(R.string.score_text, score)
+        binding.scoreTextView.contentDescription = getString(R.string.score_content_description, score)
 
         //Disabled
         binding.habitDisableSwitch.isChecked = !habit.disabled

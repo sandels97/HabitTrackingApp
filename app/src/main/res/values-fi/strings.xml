@@ -37,7 +37,8 @@
 
     <string name="habit_icon">Kuvake</string>
 
-    <string name="score_content_description">Rutiinin pisteet</string>
+    <string name="score_content_description">Rutiinin pisteet: +%1$d</string>
+    <string name="total_completed_content_description">Tehtäviä suoritettu yhteensä: %1$d</string>
 
     <string name="disabled">Pois päältä</string>
 
