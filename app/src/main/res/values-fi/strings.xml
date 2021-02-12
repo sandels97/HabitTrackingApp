@@ -64,8 +64,7 @@
     <string name="task_failed">Epäonnistunut</string>
     <string name="task_skipped">Ohita</string>
 
-    <string name="all_tasks_done">Kaikki valmista!</string>
-    <string name="habits_missing">You haven\'t created any habits yet</string>
+    <string name="all_tasks_done">Kaikki valmista tänään!\nKatso uudestaan huomenna</string>
 
     <!--Errors-->
     <string name="error_load_habit">Virhe: Rutiinia ei pystytty lataamaan</string>
