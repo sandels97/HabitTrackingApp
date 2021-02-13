@@ -10,17 +10,21 @@ import androidx.lifecycle.viewModelScope
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.managers.DatabaseManager
 import com.santtuhyvarinen.habittracker.managers.IconManager
+import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
+import com.santtuhyvarinen.habittracker.models.TaskModel
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HabitViewModel(application: Application) : AndroidViewModel(application) {
     private var initialized = false
 
     private val databaseManager = DatabaseManager(getApplication())
+    private val taskManager = TaskManager(databaseManager)
     val iconManager = IconManager(application)
 
     private val habitWithTaskLogs : MutableLiveData<HabitWithTaskLogs> = MutableLiveData<HabitWithTaskLogs>()
@@ -73,14 +77,19 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
             habit.disabled = !enabled
 
             viewModelScope.launch {
-                val rows = databaseManager.habitRepository.updateHabit(habit)
+                databaseManager.habitRepository.updateHabit(habit)
             }
         }
     }
 
-    fun getHabitWithTaskLogs() : LiveData<HabitWithTaskLogs> {
+    fun getHabitWithTaskLogsLiveData() : LiveData<HabitWithTaskLogs> {
         return habitWithTaskLogs
     }
+
+    fun getHabitWithTaskLogs() : HabitWithTaskLogs? {
+        return habitWithTaskLogs.value
+    }
+
 
     fun getShouldExitView() : LiveData<Boolean> {
         return shouldExitView
@@ -88,5 +97,14 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
 
     private suspend fun fetchHabit(habitId : Long) : HabitWithTaskLogs? {
         return databaseManager.habitRepository.getHabitWithTaskLogsById(habitId)
+    }
+
+    fun createTaskLog(taskModel: TaskModel, status : String, timestamp : Long) {
+        viewModelScope.launch {
+            taskManager.insertTaskLog(taskModel, status, timestamp)
+
+            //Reload the habit to update the statistics
+            habitWithTaskLogs.value = fetchHabit(taskModel.habitWithTaskLogs.habit.id)
+        }
     }
 }

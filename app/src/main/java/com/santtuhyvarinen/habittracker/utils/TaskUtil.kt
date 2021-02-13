@@ -16,9 +16,9 @@ class TaskUtil {
         const val STATUS_FAILED = "failed"
         const val STATUS_NONE = "none"
 
-        fun hasTaskLogForToday(habitWithTaskLogs: HabitWithTaskLogs) : Boolean {
-            val currentTime = System.currentTimeMillis()
-            val startTime = DateTime(currentTime).withTimeAtStartOfDay()
+        fun hasTaskLogForDate(habitWithTaskLogs: HabitWithTaskLogs, timestamp : Long) : Boolean {
+
+            val startTime = DateTime(timestamp).withTimeAtStartOfDay()
             val endTime = startTime.plusDays(1)
 
             val startTimeMillis = startTime.millis

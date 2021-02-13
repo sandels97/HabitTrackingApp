@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,10 +16,13 @@ import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.activities.MainActivity
 import com.santtuhyvarinen.habittracker.databinding.FragmentHabitViewBinding
 import com.santtuhyvarinen.habittracker.databinding.LayoutStatBinding
+import com.santtuhyvarinen.habittracker.dialogs.MarkTaskDialog
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
+import com.santtuhyvarinen.habittracker.models.TaskModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
 import com.santtuhyvarinen.habittracker.utils.StatisticsUtil
+import com.santtuhyvarinen.habittracker.utils.TaskUtil
 import com.santtuhyvarinen.habittracker.viewmodels.HabitViewModel
 
 class HabitViewFragment : Fragment() {
@@ -62,7 +64,7 @@ class HabitViewFragment : Fragment() {
                 findNavController().navigateUp()
             }
         }
-        habitViewModel.getHabitWithTaskLogs().observe(viewLifecycleOwner, habitObserver)
+        habitViewModel.getHabitWithTaskLogsLiveData().observe(viewLifecycleOwner, habitObserver)
 
         //Observe ShouldExitView variable to exit the fragment
         val shouldExitViewObserver = Observer<Boolean> { exit ->
@@ -90,6 +92,10 @@ class HabitViewFragment : Fragment() {
             handleHabitDisableSwitch(binding.habitDisableSwitch.isChecked)
         }
 
+        binding.markTaskButton.setOnClickListener {
+            openMarkTaskDialog()
+        }
+
         //Update stat headers
         setStatHeader(binding.statCreated, getString(R.string.created))
         setStatHeader(binding.statTotalSuccesses, getString(R.string.total_success))
@@ -106,6 +112,7 @@ class HabitViewFragment : Fragment() {
     private fun updateProgress(showLayout : Boolean) {
         binding.progress.visibility = if(showLayout) View.GONE else View.VISIBLE
         binding.habitInfoLayout.visibility = if(showLayout) View.VISIBLE else View.GONE
+        binding.markTaskButton.visibility = if(showLayout) View.VISIBLE else View.GONE
     }
 
     private fun updateHabitValues(habitWithTaskLogs: HabitWithTaskLogs) {
@@ -158,15 +165,25 @@ class HabitViewFragment : Fragment() {
 
         alertDialog.setTitle(getString(R.string.delete_habit))
         alertDialog.setMessage(getString(R.string.habit_delete_confirmation))
-        alertDialog.setPositiveButton(getString(R.string.delete), object : DialogInterface.OnClickListener {
-            override fun onClick(p0: DialogInterface?, p1: Int) {
-                habitViewModel.deleteHabit(requireContext())
-            }
-        })
+        alertDialog.setPositiveButton(getString(R.string.delete)) { _, _ -> habitViewModel.deleteHabit(requireContext()) }
 
         alertDialog.setNegativeButton(getString(R.string.cancel), null)
 
         val dialog = alertDialog.create()
+        dialog.show()
+    }
+
+    private fun openMarkTaskDialog() {
+        val habitWithTaskLogs = habitViewModel.getHabitWithTaskLogs()?: return
+
+        val dialog = MarkTaskDialog(requireContext(), habitWithTaskLogs)
+
+        dialog.onTaskMarkedListener = object : MarkTaskDialog.OnTaskMarkedListener {
+            override fun taskMarkedComplete(timestamp: Long) {
+                habitViewModel.createTaskLog(TaskModel(habitWithTaskLogs), TaskUtil.STATUS_SUCCESS, timestamp)
+                Toast.makeText(requireContext(), getString(R.string.task_marked), Toast.LENGTH_SHORT).show()
+            }
+        }
         dialog.show()
     }
 

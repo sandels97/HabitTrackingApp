@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/mediumPadding"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/HabitFormHeaderStyle"
+        android:text="@string/mark_task_dialog_header"
+
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dateText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ItemTitleStyle"
+        android:text="@string/select_date_content_description"
+
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toBottomOf="@id/selectDateButton"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/selectDateButton"
+        android:layout_width="@dimen/toolbarButtonSize"
+        android:layout_height="@dimen/toolbarButtonSize"
+        android:contentDescription="@string/select_date_content_description"
+
+        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_select_date"
+        android:tint="@color/colorIconTint"
+
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/markTaskButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/buttonHeight"
+        android:text="@string/mark_task"
+        style="@style/ButtonStyle"
+        android:layout_marginTop="@dimen/largeMargin"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/selectDateButton"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

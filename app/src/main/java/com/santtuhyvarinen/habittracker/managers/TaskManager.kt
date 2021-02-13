@@ -16,13 +16,15 @@ class TaskManager(private val databaseManager: DatabaseManager) {
     fun generateDailyTasks(habits : List<HabitWithTaskLogs>) {
         val taskList = ArrayList<TaskModel>()
 
+        val currentTimestamp = System.currentTimeMillis()
+
         for(habitWithTaskLogs in habits) {
             if(habitWithTaskLogs.habit.disabled) continue
             
             if(CalendarUtil.isHabitScheduledForToday(habitWithTaskLogs.habit)) {
 
                 //Check if already added a task log for habit today. If already has a task log for today, don't add the task
-                if (!TaskUtil.hasTaskLogForToday(habitWithTaskLogs)) {
+                if (!TaskUtil.hasTaskLogForDate(habitWithTaskLogs, currentTimestamp)) {
                     taskList.add(TaskModel(habitWithTaskLogs))
                 }
             }
@@ -31,13 +33,14 @@ class TaskManager(private val databaseManager: DatabaseManager) {
         tasks.value = taskList
     }
 
-    suspend fun insertTaskLog(taskModel: TaskModel, taskStatus : String) {
+    suspend fun insertTaskLog(taskModel: TaskModel, taskStatus : String, timestamp: Long) {
         val taskLog = TaskLog()
 
         val habit = taskModel.habitWithTaskLogs.habit
 
         taskLog.habitId = habit.id
-        taskLog.timestamp = System.currentTimeMillis()
+
+        taskLog.timestamp = timestamp
         taskLog.status = taskStatus
 
         when(taskStatus) {

@@ -21,7 +21,7 @@ class TasksViewModel(application: Application) : AndroidViewModel(application) {
 
     fun createTaskLog(taskModel: TaskModel, status : String) {
         viewModelScope.launch(Dispatchers.IO) {
-            taskManager.insertTaskLog(taskModel, status)
+            taskManager.insertTaskLog(taskModel, status, System.currentTimeMillis())
         }
     }
 

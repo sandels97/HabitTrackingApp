@@ -46,6 +46,8 @@
     <dimen name="scoreTextSize">16sp</dimen>
     <dimen name="scoreViewCornerRadius">15dp</dimen>
 
+    <dimen name="markTaskDialogWidth">350dp</dimen>
+
     <!--Stats-->
     <dimen name="statHeight">40dp</dimen>
     <dimen name="habitTimelineHeight">100dp</dimen>
@@ -55,4 +57,5 @@
     <dimen name="lineChartDotRadiusWidth">5dp</dimen>
     <dimen name="columnChartCornerRadius">5dp</dimen>
     <dimen name="columnChartColumnMaxWidth">48dp</dimen>
+
 </resources>
