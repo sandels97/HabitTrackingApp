@@ -25,6 +25,8 @@ import com.santtuhyvarinen.habittracker.viewmodels.HabitViewModel
 
 class HabitViewFragment : Fragment() {
 
+    private var switchCheckIsFromUser = true
+
     private var _binding: FragmentHabitViewBinding? = null
     private val binding get() = _binding!!
 
@@ -87,16 +89,24 @@ class HabitViewFragment : Fragment() {
         }
 
         binding.habitDisableSwitch.setOnCheckedChangeListener { _, enabled ->
-            habitViewModel.setHabitEnabled(enabled)
-
-            val toastStringId = if(enabled) R.string.tasks_enabled else R.string.tasks_disabled
-            Toast.makeText(requireContext(), getString(toastStringId), Toast.LENGTH_SHORT).show()
+            handleHabitDisableSwitch(enabled)
         }
 
         //Update stat headers
         setStatHeader(binding.statCreated, getString(R.string.created))
         setStatHeader(binding.statTotalSuccesses, getString(R.string.total_success))
         setStatHeader(binding.statHighestScore, getString(R.string.highest_score))
+    }
+
+    private fun handleHabitDisableSwitch(enabled : Boolean) {
+        if(switchCheckIsFromUser) {
+            habitViewModel.setHabitEnabled(enabled)
+
+            val toastStringId = if (enabled) R.string.tasks_enabled else R.string.tasks_disabled
+            Toast.makeText(requireContext(), getString(toastStringId), Toast.LENGTH_SHORT).show()
+        }
+
+        switchCheckIsFromUser = true
     }
 
     private fun updateProgress(showLayout : Boolean) {
@@ -127,6 +137,7 @@ class HabitViewFragment : Fragment() {
         binding.scoreTextView.contentDescription = getString(R.string.score_content_description, score)
 
         //Disabled
+        switchCheckIsFromUser = false
         binding.habitDisableSwitch.isChecked = !habit.disabled
 
         //Update stats
