@@ -69,6 +69,29 @@
                 app:argType="long"
                 android:defaultValue="-1L" />
         </action>
+
+        <action
+            android:id="@+id/action_from_habitViewFragment_to_taskManagementFragment"
+            app:enterAnim="@anim/anim_slide_in"
+            app:exitAnim="@anim/anim_slide_out"
+            app:destination="@id/taskManagementFragment">
+            <argument
+                android:name="habit_id"
+                app:argType="long"
+                android:defaultValue="-1L" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/taskManagementFragment"
+        android:label="@string/tasks"
+        android:name="com.santtuhyvarinen.habittracker.fragments.TaskManagementFragment"
+        tools:layout="@layout/fragment_task_management">
+
+        <argument
+            android:name="habit_id"
+            app:argType="long"
+            android:defaultValue="-1L" />
     </fragment>
 
     <!--Habit form screen-->

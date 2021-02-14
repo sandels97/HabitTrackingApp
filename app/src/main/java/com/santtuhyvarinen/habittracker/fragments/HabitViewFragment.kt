@@ -93,7 +93,7 @@ class HabitViewFragment : Fragment() {
         }
 
         binding.markTaskButton.setOnClickListener {
-            openMarkTaskDialog()
+            navigateToTaskManagement()
         }
 
         //Update stat headers
@@ -171,6 +171,11 @@ class HabitViewFragment : Fragment() {
 
         val dialog = alertDialog.create()
         dialog.show()
+    }
+
+    private fun navigateToTaskManagement() {
+        val direction = HabitViewFragmentDirections.actionFromHabitViewFragmentToTaskManagementFragment(args.habitId)
+        findNavController().navigate(direction)
     }
 
     private fun openMarkTaskDialog() {
