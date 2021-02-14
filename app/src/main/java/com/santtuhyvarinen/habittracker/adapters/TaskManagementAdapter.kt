@@ -67,7 +67,7 @@ class TaskManagementAdapter(private val context: Context) : RecyclerView.Adapter
         val result = DiffUtil.calculateDiff(TaskLogDiffCallback(data, newData))
 
         data = newData
-        
+
         result.dispatchUpdatesTo(this)
     }
 }
