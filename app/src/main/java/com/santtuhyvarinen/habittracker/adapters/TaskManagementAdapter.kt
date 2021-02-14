@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.santtuhyvarinen.habittracker.R
+import com.santtuhyvarinen.habittracker.callbacks.TaskLogDiffCallback
 import com.santtuhyvarinen.habittracker.managers.IconManager
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.TaskLog
@@ -61,7 +63,11 @@ class TaskManagementAdapter(private val context: Context) : RecyclerView.Adapter
     }
 
     fun updateData(taskLogs: List<TaskLog>) {
-        data = taskLogs.sortedByDescending { it.timestamp }
-        notifyDataSetChanged()
+        val newData = taskLogs.sortedByDescending { it.timestamp }
+        val result = DiffUtil.calculateDiff(TaskLogDiffCallback(data, newData))
+
+        data = newData
+        
+        result.dispatchUpdatesTo(this)
     }
 }

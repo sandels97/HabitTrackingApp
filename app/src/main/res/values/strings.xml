@@ -36,9 +36,9 @@
 
 
     <string name="mark_task_dialog_header">Mark task for a date</string>
-    <string name="task_already_marked">Task has already been marked for the selected date</string>
+    <string name="task_already_marked">A task log already exists for the date</string>
     <string name="mark_task">Mark task as complete</string>
-    <string name="task_marked">Task marked as complete</string>
+    <string name="task_log_added">Task log added</string>
     <string name="disable_tasks_switch_content_description">Enable tasks</string>
     <string name="tasks_disabled">Tasks disabled</string>
     <string name="tasks_enabled">Tasks enabled</string>

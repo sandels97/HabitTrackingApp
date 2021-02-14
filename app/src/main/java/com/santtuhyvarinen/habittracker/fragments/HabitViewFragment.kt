@@ -1,6 +1,5 @@
 package com.santtuhyvarinen.habittracker.fragments
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,13 +15,10 @@ import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.activities.MainActivity
 import com.santtuhyvarinen.habittracker.databinding.FragmentHabitViewBinding
 import com.santtuhyvarinen.habittracker.databinding.LayoutStatBinding
-import com.santtuhyvarinen.habittracker.dialogs.MarkTaskDialog
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
-import com.santtuhyvarinen.habittracker.models.TaskModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
 import com.santtuhyvarinen.habittracker.utils.StatisticsUtil
-import com.santtuhyvarinen.habittracker.utils.TaskUtil
 import com.santtuhyvarinen.habittracker.viewmodels.HabitViewModel
 
 class HabitViewFragment : Fragment() {
@@ -176,20 +172,6 @@ class HabitViewFragment : Fragment() {
     private fun navigateToTaskManagement() {
         val direction = HabitViewFragmentDirections.actionFromHabitViewFragmentToTaskManagementFragment(args.habitId)
         findNavController().navigate(direction)
-    }
-
-    private fun openMarkTaskDialog() {
-        val habitWithTaskLogs = habitViewModel.getHabitWithTaskLogs()?: return
-
-        val dialog = MarkTaskDialog(requireContext(), habitWithTaskLogs)
-
-        dialog.onTaskMarkedListener = object : MarkTaskDialog.OnTaskMarkedListener {
-            override fun taskMarkedComplete(timestamp: Long) {
-                habitViewModel.createTaskLog(TaskModel(habitWithTaskLogs), TaskUtil.STATUS_SUCCESS, timestamp)
-                Toast.makeText(requireContext(), getString(R.string.task_marked), Toast.LENGTH_SHORT).show()
-            }
-        }
-        dialog.show()
     }
 
     override fun onDestroyView() {

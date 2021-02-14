@@ -17,6 +17,7 @@ import com.santtuhyvarinen.habittracker.models.TaskModel
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
+import com.santtuhyvarinen.habittracker.utils.TaskUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -29,8 +30,12 @@ class TaskManagementViewModel(application: Application) : AndroidViewModel(appli
 
     private val habitWithTaskLogs : MutableLiveData<HabitWithTaskLogs> = MutableLiveData<HabitWithTaskLogs>()
 
+    private var selectedDateTimestamp : MutableLiveData<Long> = MutableLiveData()
+
     fun initialize(id : Long) {
         if (initialized) return
+
+        selectedDateTimestamp.value = System.currentTimeMillis()
 
         viewModelScope.launch {
             habitWithTaskLogs.value = fetchHabit(id)
@@ -52,12 +57,32 @@ class TaskManagementViewModel(application: Application) : AndroidViewModel(appli
         return databaseManager.habitRepository.getHabitWithTaskLogsById(habitId)
     }
 
-    fun createTaskLog(taskModel: TaskModel, status : String, timestamp : Long) {
-        viewModelScope.launch {
-            taskManager.insertTaskLog(taskModel, status, timestamp)
+    fun createTaskLog(status : String) : Boolean {
+        val habit = getHabitWithTaskLogs()?: return false
+        if(!canAddTaskLog()) return false
 
-            //Reload the habit to update the statistics
-            habitWithTaskLogs.value = fetchHabit(taskModel.habitWithTaskLogs.habit.id)
+        viewModelScope.launch {
+            taskManager.insertTaskLog(TaskModel(habit), status, getSelectedDateTimestamp())
+            habitWithTaskLogs.value = fetchHabit(habit.habit.id)
         }
+
+        return true
+    }
+
+    fun getSelectedDateTimestampLiveData() : LiveData<Long> {
+        return selectedDateTimestamp
+    }
+
+    fun getSelectedDateTimestamp() : Long {
+        return selectedDateTimestamp.value?: System.currentTimeMillis()
+    }
+
+    fun setSelectedDateTimestamp(timestamp: Long) {
+        selectedDateTimestamp.value = timestamp
+    }
+
+    fun canAddTaskLog() : Boolean {
+        val habitWithTaskLogs = getHabitWithTaskLogs()?: return false
+        return !TaskUtil.hasTaskLogForDate(habitWithTaskLogs, getSelectedDateTimestamp())
     }
 }
