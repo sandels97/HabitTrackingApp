@@ -47,7 +47,75 @@
         android:orientation="vertical"
 
         app:layout_constraintTop_toBottomOf="@id/habitInfoLayout"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@id/bottomDivider"/>
+
+    <View
+        android:id="@+id/bottomDivider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/smallMargin"
+        android:background="@color/colorSecondaryBackground"
+        app:layout_constraintTop_toBottomOf="@id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@id/addTaskLogLayout"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/addTaskLogLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/mediumPadding"
+        android:background="@color/colorPrimaryBackground"
+        android:elevation="@dimen/elevation"
+
+        app:layout_constraintBottom_toBottomOf="parent">
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_task_log"
+            style="@style/ItemTitleStyle"
+
+            app:layout_constraintTop_toTopOf="parent"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/SubHeaderStyle"
+            android:text="@string/select_date_content_description"
+
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/selectDateButton"
+            android:layout_width="@dimen/toolbarButtonSize"
+            android:layout_height="@dimen/toolbarButtonSize"
+            android:contentDescription="@string/add_task_log"
+
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_select_date"
+            android:tint="@color/colorIconTint"
+            android:layout_marginRight="@dimen/smallMargin"
+
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/addTaskLogButton"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/addTaskLogButton"
+            android:layout_width="@dimen/toolbarButtonSize"
+            android:layout_height="@dimen/toolbarButtonSize"
+            android:contentDescription="@string/add_task_log"
+
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_add"
+            android:tint="@color/colorIconTint"
+
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progress"

@@ -47,6 +47,7 @@
     <string name="task_logs">Task logs</string>
     <string name="view_task_logs">View task logs</string>
     <string name="add_task_log">Add a new task log</string>
+    <string name="for_date">For date: %1$s</string>
 
     <!--Score-->
     <string name="score_content_description">Habit Score: +%1$d</string>
