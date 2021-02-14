@@ -31,6 +31,7 @@ class NotificationService : LifecycleService() {
     companion object {
         const val ONGOING_NOTIFICATION_ID = 12
         const val CHANNEL_ID = "HabitTrackerNotificationChannel"
+        const val CHANNEL_NAME = "Habit Tracker Tasks"
         const val SERVICE_LOG_TAG = "notification_service"
     }
 
@@ -107,9 +108,10 @@ class NotificationService : LifecycleService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val serviceChannel = NotificationChannel(
                     CHANNEL_ID,
-                    CHANNEL_ID,
+                    CHANNEL_NAME,
                     NotificationManager.IMPORTANCE_LOW
             )
+
             val manager = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(serviceChannel)
         }
