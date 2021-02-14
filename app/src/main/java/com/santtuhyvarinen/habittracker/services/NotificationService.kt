@@ -58,14 +58,13 @@ class NotificationService : LifecycleService() {
         //Broadcast Receiver. For updating the notification at midnight
         minuteTickReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                if (intent.action != null) {
-                    if (intent.action!!.compareTo(Intent.ACTION_TIME_TICK) == 0) {
-                        //Check if midnight has passed from last tasks update
-                        val currentDate = DateTime.now()
-                        if(!CalendarUtil.areSameDate(currentDate, tasksUpdatedDatetime)) {
-                            Log.d(SERVICE_LOG_TAG, "Date changed. Updating notification")
-                            updateTasks()
-                        }
+                val intentAction = intent.action?: return
+                if (intentAction.compareTo(Intent.ACTION_TIME_TICK) == 0) {
+                    //Check if midnight has passed from last tasks update
+                    val currentDate = DateTime.now()
+                    if(!CalendarUtil.areSameDate(currentDate, tasksUpdatedDatetime)) {
+                        Log.d(SERVICE_LOG_TAG, "Date changed. Updating notification")
+                        updateTasks()
                     }
                 }
             }
