@@ -5,6 +5,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/habitInfoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:padding="@dimen/largePadding"
+        android:background="@color/colorPrimaryBackground"
+        android:elevation="@dimen/elevation"
+
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/habitNameText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/habitIcon"
+            style="@style/HeaderStyle"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/habitIcon"
+            android:layout_width="@dimen/itemIconSize"
+            android:layout_height="@dimen/itemIconSize"
+            android:tint="@color/colorIconTint"
+
+            app:layout_constraintTop_toTopOf="@id/habitNameText"
+            app:layout_constraintBottom_toBottomOf="@id/habitNameText"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -12,7 +46,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
 
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/habitInfoLayout"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.core.widget.ContentLoadingProgressBar

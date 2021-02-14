@@ -92,7 +92,7 @@ class HabitViewFragment : Fragment() {
             handleHabitDisableSwitch(binding.habitDisableSwitch.isChecked)
         }
 
-        binding.markTaskButton.setOnClickListener {
+        binding.viewTaskLogsButton.setOnClickListener {
             navigateToTaskManagement()
         }
 
@@ -112,7 +112,7 @@ class HabitViewFragment : Fragment() {
     private fun updateProgress(showLayout : Boolean) {
         binding.progress.visibility = if(showLayout) View.GONE else View.VISIBLE
         binding.habitInfoLayout.visibility = if(showLayout) View.VISIBLE else View.GONE
-        binding.markTaskButton.visibility = if(showLayout) View.VISIBLE else View.GONE
+        binding.viewTaskLogsButton.visibility = if(showLayout) View.VISIBLE else View.GONE
     }
 
     private fun updateHabitValues(habitWithTaskLogs: HabitWithTaskLogs) {

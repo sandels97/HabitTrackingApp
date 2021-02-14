@@ -84,7 +84,7 @@
 
     <fragment
         android:id="@+id/taskManagementFragment"
-        android:label="@string/tasks"
+        android:label="@string/task_logs"
         android:name="com.santtuhyvarinen.habittracker.fragments.TaskManagementFragment"
         tools:layout="@layout/fragment_task_management">
 

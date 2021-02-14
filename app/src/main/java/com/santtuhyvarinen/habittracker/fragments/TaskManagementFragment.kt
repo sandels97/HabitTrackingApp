@@ -53,6 +53,10 @@ class TaskManagementFragment : Fragment() {
     }
 
     private fun updateData(habitWithTaskLogs: HabitWithTaskLogs) {
+
+        binding.habitNameText.text = habitWithTaskLogs.habit.name
+        binding.habitIcon.setImageDrawable(taskManagementViewModel.iconManager.getIconByKey(habitWithTaskLogs.habit.iconKey))
+        
         taskManagementAdapter.updateData(habitWithTaskLogs.taskLogs)
         binding.progress.visibility = View.GONE
     }

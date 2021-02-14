@@ -26,7 +26,9 @@ class IconManager(context: Context) {
         iconsTypedArray.recycle()
     }
 
-    fun getIconByKey(key : String) : Drawable? {
+    fun getIconByKey(key : String?) : Drawable? {
+        if(key == null) return null
+
         return getIconModelByKey(key)?.drawable
     }
 

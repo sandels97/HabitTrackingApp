@@ -34,6 +34,7 @@
     <string name="daily">Daily</string>
     <string name="repeat_every">Every %1$s</string>
 
+
     <string name="mark_task_dialog_header">Mark task for a date</string>
     <string name="task_already_marked">Task has already been marked for the selected date</string>
     <string name="mark_task">Mark task as complete</string>
@@ -41,6 +42,11 @@
     <string name="disable_tasks_switch_content_description">Enable tasks</string>
     <string name="tasks_disabled">Tasks disabled</string>
     <string name="tasks_enabled">Tasks enabled</string>
+
+    <!--Task management-->
+    <string name="task_logs">Task logs</string>
+    <string name="view_task_logs">View task logs</string>
+    <string name="add_task_log">Add a new task log</string>
 
     <!--Score-->
     <string name="score_content_description">Habit Score: +%1$d</string>
