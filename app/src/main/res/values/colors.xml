@@ -25,6 +25,8 @@
 
     <color name="colorTaskBackground">#fefefe</color>
 
+    <color name="dividerColor">#dadada</color>
+
     <color name="colorFail">#d43b3b</color>
     <color name="colorSuccess">#3bd464</color>
     <color name="colorSkipped">#fefefe</color>

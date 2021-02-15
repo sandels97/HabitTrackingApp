@@ -45,12 +45,8 @@ class TaskManagementViewModel(application: Application) : AndroidViewModel(appli
         return habitWithTaskLogs
     }
 
-    private fun getHabitWithTaskLogs() : HabitWithTaskLogs? {
-        return habitWithTaskLogs.value
-    }
-
     fun createTaskLog(status : String) : Boolean {
-        val habit = getHabitWithTaskLogs()?: return false
+        val habit = habitWithTaskLogs.value?: return false
         if(!canAddTaskLog()) return false
 
         viewModelScope.launch {
@@ -73,7 +69,7 @@ class TaskManagementViewModel(application: Application) : AndroidViewModel(appli
     }
 
     fun canAddTaskLog() : Boolean {
-        val habitWithTaskLogs = getHabitWithTaskLogs()?: return false
+        val habitWithTaskLogs = habitWithTaskLogs.value?: return false
         return !TaskUtil.hasTaskLogForDate(habitWithTaskLogs, getSelectedDateTimestamp())
     }
 }
