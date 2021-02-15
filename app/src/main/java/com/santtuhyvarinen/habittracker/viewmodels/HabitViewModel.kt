@@ -24,10 +24,9 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
     private var initialized = false
 
     private val databaseManager = DatabaseManager(getApplication())
-    private val taskManager = TaskManager(databaseManager)
     val iconManager = IconManager(application)
 
-    private val habitWithTaskLogs : MutableLiveData<HabitWithTaskLogs> = MutableLiveData<HabitWithTaskLogs>()
+    private lateinit var habitWithTaskLogs : LiveData<HabitWithTaskLogs?>
 
     //Set true to exit the fragment
     private val shouldExitView : MutableLiveData<Boolean> = MutableLiveData<Boolean>()
@@ -35,9 +34,7 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
     fun initialize(id : Long) {
         if (initialized) return
 
-        viewModelScope.launch {
-            habitWithTaskLogs.value = fetchHabit(id)
-        }
+        habitWithTaskLogs = databaseManager.habitRepository.getHabitWithTaskLogsById(id)
 
         initialized = true
     }
@@ -82,29 +79,11 @@ class HabitViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getHabitWithTaskLogsLiveData() : LiveData<HabitWithTaskLogs> {
+    fun getHabitWithTaskLogsLiveData() : LiveData<HabitWithTaskLogs?> {
         return habitWithTaskLogs
     }
 
-    fun getHabitWithTaskLogs() : HabitWithTaskLogs? {
-        return habitWithTaskLogs.value
-    }
-
-
     fun getShouldExitView() : LiveData<Boolean> {
         return shouldExitView
-    }
-
-    private suspend fun fetchHabit(habitId : Long) : HabitWithTaskLogs? {
-        return databaseManager.habitRepository.getHabitWithTaskLogsById(habitId)
-    }
-
-    fun createTaskLog(taskModel: TaskModel, status : String, timestamp : Long) {
-        viewModelScope.launch {
-            taskManager.insertTaskLog(taskModel, status, timestamp)
-
-            //Reload the habit to update the statistics
-            habitWithTaskLogs.value = fetchHabit(taskModel.habitWithTaskLogs.habit.id)
-        }
     }
 }

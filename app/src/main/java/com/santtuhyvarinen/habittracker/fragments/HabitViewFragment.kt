@@ -51,7 +51,7 @@ class HabitViewFragment : Fragment() {
         habitViewModel.initialize(args.habitId)
 
         //Observe Habit
-        val habitObserver = Observer<HabitWithTaskLogs> { habit ->
+        val habitObserver = Observer<HabitWithTaskLogs?> { habit ->
             if(habit != null) {
                 updateHabitValues(habit)
             } else {

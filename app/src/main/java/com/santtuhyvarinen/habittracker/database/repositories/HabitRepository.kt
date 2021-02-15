@@ -2,6 +2,7 @@ package com.santtuhyvarinen.habittracker.database.repositories
 
 import android.util.Log
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
 import com.santtuhyvarinen.habittracker.database.AppDatabase
 import com.santtuhyvarinen.habittracker.database.dao.HabitDao
 import com.santtuhyvarinen.habittracker.models.Habit
@@ -44,8 +45,7 @@ class HabitRepository(private val habitDao: HabitDao) {
         return habitDao.getById(id)
     }
 
-    @WorkerThread
-    suspend fun getHabitWithTaskLogsById(id : Long) : HabitWithTaskLogs? {
+    fun getHabitWithTaskLogsById(id : Long) : LiveData<HabitWithTaskLogs?> {
         return habitDao.getHabitWithTaskLogsById(id)
     }
 

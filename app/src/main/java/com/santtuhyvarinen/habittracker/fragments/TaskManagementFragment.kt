@@ -51,7 +51,7 @@ class TaskManagementFragment : Fragment() {
         taskManagementAdapter = TaskManagementAdapter(requireContext())
         binding.recyclerView.adapter = taskManagementAdapter
 
-        val habitObserver = Observer<HabitWithTaskLogs> {
+        val habitObserver = Observer<HabitWithTaskLogs?> {
             updateData(it)
         }
         taskManagementViewModel.getHabitWithTaskLogsLiveData().observe(viewLifecycleOwner, habitObserver)

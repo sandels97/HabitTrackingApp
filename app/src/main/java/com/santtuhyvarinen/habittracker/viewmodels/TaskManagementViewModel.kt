@@ -28,7 +28,7 @@ class TaskManagementViewModel(application: Application) : AndroidViewModel(appli
     private val taskManager = TaskManager(databaseManager)
     val iconManager = IconManager(application)
 
-    private val habitWithTaskLogs : MutableLiveData<HabitWithTaskLogs> = MutableLiveData<HabitWithTaskLogs>()
+    private lateinit var habitWithTaskLogs : LiveData<HabitWithTaskLogs?>
 
     private var selectedDateTimestamp : MutableLiveData<Long> = MutableLiveData()
 
@@ -36,25 +36,17 @@ class TaskManagementViewModel(application: Application) : AndroidViewModel(appli
         if (initialized) return
 
         selectedDateTimestamp.value = System.currentTimeMillis()
-
-        viewModelScope.launch {
-            habitWithTaskLogs.value = fetchHabit(id)
-        }
+        habitWithTaskLogs = databaseManager.habitRepository.getHabitWithTaskLogsById(id)
 
         initialized = true
     }
 
-    fun getHabitWithTaskLogsLiveData() : LiveData<HabitWithTaskLogs> {
+    fun getHabitWithTaskLogsLiveData() : LiveData<HabitWithTaskLogs?> {
         return habitWithTaskLogs
     }
 
-    fun getHabitWithTaskLogs() : HabitWithTaskLogs? {
+    private fun getHabitWithTaskLogs() : HabitWithTaskLogs? {
         return habitWithTaskLogs.value
-    }
-
-
-    private suspend fun fetchHabit(habitId : Long) : HabitWithTaskLogs? {
-        return databaseManager.habitRepository.getHabitWithTaskLogsById(habitId)
     }
 
     fun createTaskLog(status : String) : Boolean {
@@ -63,7 +55,6 @@ class TaskManagementViewModel(application: Application) : AndroidViewModel(appli
 
         viewModelScope.launch {
             taskManager.insertTaskLog(TaskModel(habit), status, getSelectedDateTimestamp())
-            habitWithTaskLogs.value = fetchHabit(habit.habit.id)
         }
 
         return true
