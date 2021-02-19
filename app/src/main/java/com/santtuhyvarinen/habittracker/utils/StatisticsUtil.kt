@@ -42,9 +42,14 @@ class StatisticsUtil {
 
             val firstLogTimeStamp = doneTaskLogs.minOf { it.timestamp }
             val firstLogDate = DateTime(firstLogTimeStamp).toLocalDate()
+
+            val lastLogTimeStamp = doneTaskLogs.maxOf { it.timestamp }
+            val lastLogDate = DateTime(lastLogTimeStamp).toLocalDate()
             val currentDate = DateTime.now().toLocalDate()
 
-            val dayCount = Days.daysBetween(firstLogDate, currentDate).days.toDouble() + 1
+            val compareDate = if(lastLogDate.isBefore(currentDate)) currentDate else lastLogDate
+
+            val dayCount = Days.daysBetween(firstLogDate, compareDate).days.toDouble() + 1
 
             if(dayCount <= 0.0) return 0.0
 
