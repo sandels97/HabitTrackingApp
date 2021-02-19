@@ -93,7 +93,7 @@
             android:id="@+id/selectDateButton"
             android:layout_width="@dimen/toolbarButtonSize"
             android:layout_height="@dimen/toolbarButtonSize"
-            android:contentDescription="@string/add_task_log"
+            android:contentDescription="@string/select_date_content_description"
 
             android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/ic_select_date"
