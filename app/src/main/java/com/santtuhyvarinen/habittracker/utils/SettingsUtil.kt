@@ -8,6 +8,7 @@ import android.os.Vibrator
 import androidx.preference.PreferenceManager
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.services.NotificationService
+import java.util.*
 
 class SettingsUtil {
     companion object {
@@ -68,6 +69,14 @@ class SettingsUtil {
         fun getSortTasksValue(context: Context) : String {
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             return prefs.getString(context.getString(R.string.setting_task_sort_key), TASK_SORT_PRIORITY)!!
+        }
+
+        fun getLocale(context: Context) : Locale {
+            return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                context.resources.configuration.locales[0]
+            } else {
+                context.resources.configuration.locale
+            }
         }
     }
 }

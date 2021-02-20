@@ -1,12 +1,14 @@
 package com.santtuhyvarinen.habittracker.utils
 
 import android.content.Context
+import android.text.format.DateFormat
 import android.util.Log
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
+import java.util.*
 
 class CalendarUtil {
     companion object {
@@ -148,22 +150,27 @@ class CalendarUtil {
             return null
         }
 
-        fun getCurrentDateText() : String {
+        fun getCurrentDateText(context: Context) : String {
             val dateTime = DateTime.now()
-            val dateTimeFormatter = DateTimeFormat.forPattern("dd.MM.yyyy")
+            val dateTimeFormatter = DateTimeFormat.longDate().withLocale(SettingsUtil.getLocale(context))
 
             return dateTimeFormatter.print(dateTime)
         }
 
-        fun getDateText(timestamp : Long) : String {
+        fun getDateText(timestamp : Long, context: Context) : String {
+
             val dateTime = DateTime(timestamp)
-            val dateTimeFormatter = DateTimeFormat.forPattern("dd.MM.yyyy")
+            val dateTimeFormatter = DateTimeFormat.longDate().withLocale(SettingsUtil.getLocale(context))
 
             return dateTimeFormatter.print(dateTime)
         }
 
-        fun getDateTextShort(date: DateTime) : String {
-            val dateTimeFormatter = DateTimeFormat.forPattern("dd.MM")
+        fun getDateTextShort(date: DateTime, context: Context) : String {
+            val pattern = DateTimeFormat.patternForStyle("S-", SettingsUtil.getLocale(context)).replace("y", "")
+
+            Log.d("testt", pattern)
+
+            val dateTimeFormatter = DateTimeFormat.forPattern(pattern.substring(0, pattern.length - 1))
             return dateTimeFormatter.print(date)
         }
 

@@ -112,7 +112,7 @@ class TasksFragment : Fragment() {
     private fun updateTimeBar() {
         binding.timeBar.timeBarWeekDayText.text =
             CalendarUtil.getCurrentWeekDayText(requireContext()).capitalize(Locale.ROOT)
-        binding.timeBar.timeBarDateText.text = CalendarUtil.getCurrentDateText()
+        binding.timeBar.timeBarDateText.text = CalendarUtil.getCurrentDateText(requireContext())
     }
 
     override fun onDestroyView() {

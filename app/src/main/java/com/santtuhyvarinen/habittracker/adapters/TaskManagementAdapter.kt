@@ -42,7 +42,7 @@ class TaskManagementAdapter(private val context: Context) : RecyclerView.Adapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val taskLog = data[position]
 
-        holder.dateTextView.text = CalendarUtil.getDateText(taskLog.timestamp)
+        holder.dateTextView.text = CalendarUtil.getDateText(taskLog.timestamp, context)
 
         val iconId = when(taskLog.status) {
             TaskUtil.STATUS_SUCCESS -> R.drawable.ic_task_success

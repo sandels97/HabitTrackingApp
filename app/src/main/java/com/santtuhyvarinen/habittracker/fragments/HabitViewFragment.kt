@@ -137,7 +137,7 @@ class HabitViewFragment : Fragment() {
         binding.habitDisableSwitch.isChecked = !habit.disabled
 
         //Update stats
-        updateStatValue(binding.statCreated, CalendarUtil.getDateText(habitWithTaskLogs.habit.creationDate))
+        updateStatValue(binding.statCreated, CalendarUtil.getDateText(habitWithTaskLogs.habit.creationDate, requireContext()))
         updateStatValue(binding.statTotalSuccesses, StatisticsUtil.getTotalSuccesses(habitWithTaskLogs).toString())
 
         val highestScore = StatisticsUtil.getHighestScore(habitWithTaskLogs.taskLogs)

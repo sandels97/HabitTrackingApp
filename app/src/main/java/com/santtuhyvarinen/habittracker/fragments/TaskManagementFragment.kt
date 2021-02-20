@@ -92,7 +92,7 @@ class TaskManagementFragment : Fragment() {
     }
 
     private fun updateDateText(timestamp : Long) {
-        binding.dateText.text = getString(R.string.for_date, CalendarUtil.getDateText(timestamp))
+        binding.dateText.text = getString(R.string.for_date, CalendarUtil.getDateText(timestamp, requireContext()))
     }
 
     private fun showDatePickerDialog() {

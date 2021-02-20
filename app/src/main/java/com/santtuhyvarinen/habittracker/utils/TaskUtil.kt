@@ -41,7 +41,7 @@ class TaskUtil {
             for(i in array.indices) {
                 val dateStatusModel = array[i]
                 dateStatusModel.label = CalendarUtil.getWeekDayTextShort(context, date)
-                dateStatusModel.underLabel = CalendarUtil.getDateTextShort(date)
+                dateStatusModel.underLabel = CalendarUtil.getDateTextShort(date, context)
 
                 val startTime = DateTime(date).withTimeAtStartOfDay()
                 val endTime = startTime.plusDays(1)
@@ -86,7 +86,7 @@ class TaskUtil {
             val list = ArrayList<ChartDataModel>()
             for(i in 0 until difference) {
                 val weekDayText = CalendarUtil.getWeekDayTextShort(context, date)
-                val dateText = CalendarUtil.getDateTextShort(date)
+                val dateText = CalendarUtil.getDateTextShort(date, context)
                 val linechartDataModel = ChartDataModel(weekDayText, dateText, getAmountOfDoneTasksForDate(habitsWithTaskLogs, date))
                 list.add(linechartDataModel)
 
