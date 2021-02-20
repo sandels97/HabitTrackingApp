@@ -8,7 +8,7 @@
     android:paddingStart="@dimen/largePadding"
     android:paddingEnd="@dimen/largePadding"
 
-    android:background="@color/colorSecondaryDark"
+    android:background="@color/colorSecondaryBackground"
     android:elevation="@dimen/elevation">
 
     <androidx.appcompat.widget.AppCompatTextView

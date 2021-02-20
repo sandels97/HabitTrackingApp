@@ -10,7 +10,7 @@
     <item android:state_selected="true">
         <shape
             android:shape="oval"
-            android:tint="@color/colorSecondary"/>
+            android:tint="@color/colorSecondaryBackground"/>
     </item>
 
     <item>

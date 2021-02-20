@@ -8,7 +8,7 @@
     <color name="colorSecondary">#78909c</color>
     <color name="colorSecondaryLight">#a7c0cd</color>
     <color name="colorSecondaryDark">#4b636e</color>
-    <color name="colorSecondaryBackground">#597785</color>
+    <color name="colorSecondaryBackground">#4e6b78</color>
 
     <color name="colorSecondaryTransparent">#5578909c</color>
 
@@ -28,7 +28,7 @@
     <color name="dividerColor">#dadada</color>
 
     <color name="colorFail">#d43b3b</color>
-    <color name="colorSuccess">#3bd464</color>
+    <color name="colorSuccess">#2c9e4b</color>
     <color name="colorSkipped">#fefefe</color>
 
     <color name="colorLineGraphBackground">#558a8a8a</color>
