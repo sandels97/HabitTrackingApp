@@ -58,7 +58,10 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val taskModel = data[position]
-        holder.titleTextView.text = taskModel.habitWithTaskLogs.habit.name
+
+        val habitName = taskModel.habitWithTaskLogs.habit.name
+        holder.titleTextView.text = habitName
+
         when(displayTaskTaskValue) {
             SettingsUtil.TASK_STAT_STREAK -> {
                 val score = taskModel.habitWithTaskLogs.habit.score
@@ -79,6 +82,11 @@ class TasksAdapter(private var context: Context, private val iconManager: IconMa
         val iconKey = taskModel.habitWithTaskLogs.habit.iconKey
         if(iconKey != null)
             holder.iconView.setImageDrawable(iconManager.getIconByKey(iconKey))
+
+        //Set content descriptions for task buttons
+        holder.successButton.contentDescription = context.getString(R.string.task_set_success_content_description, habitName)
+        holder.skipButton.contentDescription = context.getString(R.string.task_set_skip_content_description, habitName)
+        holder.failButton.contentDescription = context.getString(R.string.task_set_failed_content_description, habitName)
 
         holder.successButton.setOnClickListener {
             animateExit(TaskUtil.STATUS_SUCCESS, holder, taskModel, position)

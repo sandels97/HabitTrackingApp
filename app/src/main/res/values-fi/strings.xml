@@ -75,6 +75,10 @@
     <string name="task_failed">Epäonnistunut</string>
     <string name="task_skipped">Ohita</string>
 
+    <string name="task_set_success_content_description">Merkitse tehtävä suoritetuksi: %1$s</string>
+    <string name="task_set_failed_content_description">Merkitse tehtävä epäonnistuneeksi: %1$s</string>
+    <string name="task_set_skip_content_description">Ohita tehtävä: %1$s</string>
+
     <string name="all_tasks_done">Kaikki valmista tänään!\nKatso uudestaan huomenna</string>
 
     <!--Errors-->

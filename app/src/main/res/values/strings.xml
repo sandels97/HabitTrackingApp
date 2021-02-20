@@ -80,6 +80,10 @@
     <string name="task_failed">Failed</string>
     <string name="task_skipped">Skip</string>
 
+    <string name="task_set_success_content_description">Mark task as done: %1$s</string>
+    <string name="task_set_failed_content_description">Mark task as failed: %1$s</string>
+    <string name="task_set_skip_content_description">Skip task: %1$s</string>
+
     <string name="all_tasks_done">Everything done for today!\nCheck again tomorrow</string>
 
     <!--Errors-->
