@@ -40,8 +40,17 @@
     <string name="score_content_description">Rutiinin pisteet: +%1$d</string>
     <string name="total_completed_content_description">Tehtäviä suoritettu yhteensä: %1$d</string>
 
+    <string name="task_already_marked">Tehtäväloki on jo lisätty valitulle päivälle</string>
+    <string name="task_log_added">Tehtäväloki lisätty</string>
     <string name="disable_tasks_switch_content_description">Kytke tehtävät päälle</string>
-    <string name="tasks_disabled">Pois päältä</string>
+    <string name="tasks_disabled">Tehtävät pois päältä</string>
+    <string name="tasks_enabled">Tehtävät päällä</string>
+
+    <!--Task management-->
+    <string name="task_logs">Tehtävälokit</string>
+    <string name="view_task_logs">Katso tehtävälokit</string>
+    <string name="add_task_log">Lisää uusi tehtäväloki</string>
+    <string name="for_date">Päivälle: %1$s</string>
 
     <!--Statistics-->
     <string name="created">Luotu</string>
