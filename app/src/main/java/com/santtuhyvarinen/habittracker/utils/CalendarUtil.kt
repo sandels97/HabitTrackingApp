@@ -168,8 +168,6 @@ class CalendarUtil {
         fun getDateTextShort(date: DateTime, context: Context) : String {
             val pattern = DateTimeFormat.patternForStyle("S-", SettingsUtil.getLocale(context)).replace("y", "")
 
-            Log.d("testt", pattern)
-
             val dateTimeFormatter = DateTimeFormat.forPattern(pattern.substring(0, pattern.length - 1))
             return dateTimeFormatter.print(date)
         }
