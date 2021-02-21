@@ -34,9 +34,13 @@ class SettingsUtil {
             }
         }
 
-        fun startNotificationService(context: Context) {
+        fun startNotificationServiceIfEnabled(context: Context) {
             if(!isNotificationServiceEnabled(context)) return
 
+            startNotificationService(context)
+        }
+
+        fun startNotificationService(context: Context) {
             val intent = Intent(context, NotificationService::class.java)
 
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

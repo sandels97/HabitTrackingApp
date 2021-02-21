@@ -10,6 +10,6 @@ class DeviceBootUpReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent?) {
         if(intent == null) return
 
-        if(intent.action == Intent.ACTION_BOOT_COMPLETED) SettingsUtil.startNotificationService(context)
+        if(intent.action == Intent.ACTION_BOOT_COMPLETED) SettingsUtil.startNotificationServiceIfEnabled(context)
     }
 }
