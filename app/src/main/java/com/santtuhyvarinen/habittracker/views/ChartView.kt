@@ -1,13 +1,17 @@
 package com.santtuhyvarinen.habittracker.views
 
+import android.animation.Animator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.text.TextPaint
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.core.content.withStyledAttributes
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.ChartDataModel
+import com.santtuhyvarinen.habittracker.utils.AnimationUtil
 
 class ChartView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
 
@@ -19,10 +23,19 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
     var chartType = CHART_TYPE_LINE
 
     var chartData : List<ChartDataModel> = ArrayList()
+    set(value) {
+        field = value
+        entryAnimationValue = 0f
+    }
 
     private val paint = Paint()
     private val textPaint = TextPaint()
     private val textBounds = Rect()
+
+    var entryAnimationOn = true
+    var entryAnimationSpeed = 0.02f
+    private var entryAnimationValue = 0f
+    private val entryValueAnimator : ValueAnimator
 
     var columns = 7
     set(value) {
@@ -59,6 +72,9 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
             dotRadius = getDimension(R.styleable.ChartView_dotRadius, dotRadius)
             columns = getInt(R.styleable.ChartView_columns, columns)
             rows = getInt(R.styleable.ChartView_rows, rows)
+
+            entryAnimationOn = getBoolean(R.styleable.ChartView_entryAnimationOn, entryAnimationOn)
+            entryAnimationSpeed = getFloat(R.styleable.ChartView_entryAnimationSpeed, entryAnimationSpeed)
         }
 
         paint.isAntiAlias = true
@@ -68,6 +84,19 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
 
         textPaint.isAntiAlias = true
         textPaint.textAlign = Paint.Align.CENTER
+
+        entryValueAnimator = ValueAnimator.ofFloat(0f, Float.MAX_VALUE)
+        entryValueAnimator.repeatCount = ValueAnimator.INFINITE
+
+        entryValueAnimator.addUpdateListener {
+            if(entryAnimationOn && entryAnimationValue < 1f) {
+                entryAnimationValue += entryAnimationSpeed
+                entryAnimationValue = entryAnimationValue.coerceAtMost(1f)
+                invalidate()
+            }
+        }
+
+        entryValueAnimator.start()
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -124,8 +153,15 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
         paint.color = lineColor
         paint.strokeWidth = lineStrokeWidth
 
+        //For entry animations
+        val entryValueMultiplier = getEntryAnimationMultiplier()
+        val minY = bottomHeight - (rows * rowHeight * entryValueMultiplier)
+
         when(chartType) {
             CHART_TYPE_LINE -> {
+                val dotRadius = dotRadius * entryValueMultiplier
+                paint.strokeWidth = lineStrokeWidth * entryValueMultiplier
+
                 //Draw line chart data
                 var previousX = 0f
                 var previousY = bottomHeight
@@ -133,7 +169,7 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
                     val value = if(i < chartData.size) chartData[i].value else 0
 
                     val x = paddingLeft + (i * columnWidth) + columnWidth / 2f
-                    val y = bottomHeight - (rowHeight * value)
+                    val y = (bottomHeight - (rowHeight * value)).coerceAtLeast(minY)
 
                     if(i > 0) canvas.drawLine(previousX, previousY, x, y, paint)
 
@@ -155,7 +191,7 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
                     val value = if(i < chartData.size) chartData[i].value else 0
 
                     val left = (paddingLeft + (i * columnWidth).toFloat() + (columnWidth/2f)) - (columnDataWidth/2f)
-                    val top = bottomHeight - (rowHeight * value)
+                    val top = (bottomHeight - (rowHeight * value)).coerceAtLeast(minY)
                     val right = left + columnDataWidth
                     val bottom = bottomHeight
 
@@ -171,7 +207,7 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
             val label = value.toString()
 
             val x = paddingLeft + (i * columnWidth) + columnWidth / 2f
-            val y = bottomHeight - (rowHeight * value)
+            val y = (bottomHeight - (rowHeight * value)).coerceAtLeast(minY)
 
             textPaint.getTextBounds(label, 0, label.length, textBounds)
             canvas.drawText(label, x, y - dotRadius*3 - textBounds.exactCenterY(), textPaint)
@@ -190,5 +226,11 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
         val labelsEstimatedWidth = textBounds.width() * chartData.size
 
         return labelsEstimatedWidth >= width
+    }
+
+    private fun getEntryAnimationMultiplier() : Float {
+        if(!entryAnimationOn) return 1f
+
+        return AnimationUtil.easeOutCubic(entryAnimationValue)
     }
 }

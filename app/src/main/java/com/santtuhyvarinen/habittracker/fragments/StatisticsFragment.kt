@@ -76,15 +76,11 @@ class StatisticsFragment : Fragment() {
         binding.completedTasksChartView.chartData = data
         binding.completedTasksChartView.columns = statisticsViewModel.lineChartColumns
         binding.completedTasksChartView.rows = if(data.isNotEmpty()) (data.maxOf { it.value }.coerceAtLeast(5)) + 1 else 0
-
-        binding.completedTasksChartView.invalidate()
     }
 
     private fun updateScheduledTasksChartView(data : List<ChartDataModel>) {
         binding.scheduledTasksChartView.chartData = data
         binding.scheduledTasksChartView.rows = if(data.isNotEmpty()) (data.maxOf { it.value }.coerceAtLeast(5)) + 1 else 0
-
-        binding.scheduledTasksChartView.invalidate()
     }
 
     private fun showDatePickerDialog() {

@@ -28,5 +28,7 @@
         <attr name="dotRadius" format="dimension"/>
         <attr name="textSize"/>
         <attr name="textColor"/>
+        <attr name="entryAnimationOn" format="boolean"/>
+        <attr name="entryAnimationSpeed" format="float"/>
     </declare-styleable>
 </resources>
