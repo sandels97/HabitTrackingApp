@@ -48,7 +48,7 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
             lineColor = getColor(R.styleable.ChartView_lineColor, Color.BLACK)
             lineStrokeWidth = getDimension(R.styleable.ChartView_lineStrokeWidth, 10f)
             backgroundLineColor = getColor(R.styleable.ChartView_backgroundLineColor, Color.GRAY)
-            backgroundLineStrokeWidth = getDimension(R.styleable.ChartView_backgroundLineStrokeWidth, 2f)
+            backgroundLineStrokeWidth = getDimension(R.styleable.ChartView_backgroundLineStrokeWidth, backgroundLineStrokeWidth)
             chartType = getInt(R.styleable.ChartView_chartType, CHART_TYPE_LINE)
 
             textPaint.textSize = getDimension(R.styleable.ChartView_textSize, 18f)
@@ -82,6 +82,15 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
 
         //Background lines
         paint.color = backgroundLineColor
+        paint.strokeWidth = backgroundLineStrokeWidth * 0.5f
+
+        val lineLeft = paddingLeft.toFloat()
+        val lineRight = width - paddingRight.toFloat()
+        for(row in 0 until rows) {
+            val lineY = bottomHeight - row * rowHeight
+            canvas.drawLine(lineLeft, lineY, lineRight, lineY, paint)
+        }
+
         paint.strokeWidth = backgroundLineStrokeWidth
 
         canvas.drawLine(paddingLeft.toFloat(), bottomHeight, width - paddingRight.toFloat(), bottomHeight, paint)
@@ -173,7 +182,9 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
     private fun shouldUseMinimizedLabels() : Boolean {
         if(chartData.isEmpty()) return false
 
-        val underLabelText = chartData[0].underLabel
+        val underLabelText = (chartData.maxByOrNull { it.underLabel.length })?.underLabel
+        if(underLabelText.isNullOrBlank()) return false
+
         textPaint.getTextBounds(underLabelText, 0, underLabelText.length, textBounds)
 
         val labelsEstimatedWidth = textBounds.width() * chartData.size
