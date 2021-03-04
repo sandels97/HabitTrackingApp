@@ -1,4 +1,4 @@
-#Habit Tracker
+# Habit Tracker
 
 An Android application made as a part of my thesis. 
 
@@ -18,19 +18,19 @@ Track your progress with different statistics.
 
 ---
 
-##Screenshots
+## Screenshots
 
-####Daily Tasks
+#### Daily Tasks
 ![alt text](screenshots/habit_tasks_eng.png "Daily Tasks")
-####Habit List
+#### Habit List
 ![alt text](screenshots/habit_list_eng.png "Habit List")
-####Habit View
+#### Habit View
 ![alt text](screenshots/habit_view_eng.png "Habit View")
-####Habit Form
+#### Habit Form
 ![alt text](screenshots/habit_create_eng.png "Habit Form")
-####Task logs
+#### Task logs
 ![alt text](screenshots/habit_tasklogs_eng.png "Task logs")
-####Statistics
+#### Statistics
 ![alt text](screenshots/habit_stats_eng.png "Statistics")
-####Settings
+#### Settings
 ![alt text](screenshots/habit_settings_eng.png "Settings")
