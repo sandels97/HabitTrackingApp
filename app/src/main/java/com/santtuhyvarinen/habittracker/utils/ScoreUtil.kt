@@ -1,6 +1,5 @@
 package com.santtuhyvarinen.habittracker.utils
 
-import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 
 class ScoreUtil {

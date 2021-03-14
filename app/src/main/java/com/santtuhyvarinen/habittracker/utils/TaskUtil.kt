@@ -2,9 +2,9 @@ package com.santtuhyvarinen.habittracker.utils
 
 import android.content.Context
 import com.santtuhyvarinen.habittracker.R
+import com.santtuhyvarinen.habittracker.models.ChartDataModel
 import com.santtuhyvarinen.habittracker.models.DateStatusModel
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
-import com.santtuhyvarinen.habittracker.models.ChartDataModel
 import org.joda.time.DateTime
 import org.joda.time.Days
 

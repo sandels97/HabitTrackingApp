@@ -11,11 +11,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.callbacks.TaskLogDiffCallback
-import com.santtuhyvarinen.habittracker.managers.IconManager
-import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.TaskLog
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
-import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
 import com.santtuhyvarinen.habittracker.utils.TaskUtil
 
 class TaskManagementAdapter(private val context: Context) : RecyclerView.Adapter<TaskManagementAdapter.ViewHolder>() {

@@ -2,7 +2,10 @@ package com.santtuhyvarinen.habittracker.views
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.TextPaint
 import android.util.AttributeSet
@@ -21,9 +24,9 @@ class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(con
     private var habit : HabitWithTaskLogs? = null
     private var dateStatusModels : Array<DateStatusModel> = Array(0) { DateStatusModel("", "", TaskUtil.STATUS_NONE) }
 
-    var fromDate : DateTime = DateTime.now()
-    var days = 7
-    var iconSize = 20
+    private var fromDate : DateTime = DateTime.now()
+    private var days = 7
+    private var iconSize = 20
 
     fun setup(habitWithTaskLogs: HabitWithTaskLogs) {
         habit = habitWithTaskLogs
@@ -95,11 +98,11 @@ class HabitTimelineView(context: Context, attributeSet: AttributeSet) : View(con
             //Icon
             val status = dateStatusModel.status
             val icon : Drawable?
-            when(status) {
-                TaskUtil.STATUS_SUCCESS -> icon = successIcon
-                TaskUtil.STATUS_SKIPPED -> icon = skipIcon
-                TaskUtil.STATUS_FAILED -> icon = failIcon
-                else -> icon = null
+            icon = when(status) {
+                TaskUtil.STATUS_SUCCESS -> successIcon
+                TaskUtil.STATUS_SKIPPED -> skipIcon
+                TaskUtil.STATUS_FAILED -> failIcon
+                else -> null
             }
 
             val top = (height/2) - (iconSize/2)

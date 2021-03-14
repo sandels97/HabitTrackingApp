@@ -10,14 +10,11 @@ import androidx.lifecycle.viewModelScope
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.managers.DatabaseManager
 import com.santtuhyvarinen.habittracker.managers.IconManager
-import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
-import com.santtuhyvarinen.habittracker.models.TaskModel
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import com.santtuhyvarinen.habittracker.utils.CalendarUtil
 import com.santtuhyvarinen.habittracker.utils.HabitInfoUtil
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HabitViewModel(application: Application) : AndroidViewModel(application) {

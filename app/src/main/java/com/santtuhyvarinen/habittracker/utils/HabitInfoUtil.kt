@@ -17,10 +17,10 @@ class HabitInfoUtil {
         }
 
         fun getRecurrenceHeader(context: Context, weekDaysSelectionModel: WeekDaysSelectionModel) : String {
-            if(weekDaysSelectionModel.isEveryDaySelectedOrNotSelected()) {
-                return context.getString(R.string.habit_repeat_every_day)
+            return if(weekDaysSelectionModel.isEveryDaySelectedOrNotSelected()) {
+                context.getString(R.string.habit_repeat_every_day)
             } else {
-                return context.getString(R.string.habit_repeat_days, getWeekDaysSelectedText(context, weekDaysSelectionModel))
+                context.getString(R.string.habit_repeat_days, getWeekDaysSelectedText(context, weekDaysSelectionModel))
             }
         }
 
@@ -28,10 +28,10 @@ class HabitInfoUtil {
             val weekDaysSelectionModel = WeekDaysSelectionModel()
             CalendarUtil.parseRRULEtoWeekDaysSelectionModel(habit.taskRecurrence, weekDaysSelectionModel)
 
-            if(weekDaysSelectionModel.isEveryDaySelectedOrNotSelected()) {
-                return context.getString(R.string.daily)
+            return if(weekDaysSelectionModel.isEveryDaySelectedOrNotSelected()) {
+                context.getString(R.string.daily)
             } else {
-                return context.getString(R.string.repeat_every, getWeekDaysSelectedText(context, weekDaysSelectionModel))
+                context.getString(R.string.repeat_every, getWeekDaysSelectedText(context, weekDaysSelectionModel))
             }
         }
 

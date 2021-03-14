@@ -1,17 +1,14 @@
 package com.santtuhyvarinen.habittracker.fragments
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreference
 import androidx.preference.SwitchPreferenceCompat
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.utils.SettingsUtil
-import com.santtuhyvarinen.habittracker.viewmodels.HabitsViewModel
 import com.santtuhyvarinen.habittracker.viewmodels.SettingsViewModel
 
 class SettingsFragment : PreferenceFragmentCompat() {

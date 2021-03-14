@@ -1,21 +1,19 @@
 package com.santtuhyvarinen.habittracker.utils
 
 import android.content.Context
-import android.text.format.DateFormat
 import android.util.Log
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.models.Habit
 import com.santtuhyvarinen.habittracker.models.WeekDaysSelectionModel
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
-import java.util.*
 
 class CalendarUtil {
     companion object {
         const val RRULE_EVERY_DAY = "FREQ=DAILY;"
         const val RRULE_WEEKLY = "FREQ=WEEKLY;BYDAY="
 
-        fun getRRuleWeekDays() : Array<String> {
+        private fun getRRuleWeekDays() : Array<String> {
             return arrayOf("MO", "TU", "WE", "TH", "FR", "SA", "SU")
         }
 
@@ -193,7 +191,7 @@ class CalendarUtil {
         //Monday == 1
         //Sunday == 7
         //etc
-        fun getCurrentWeekDay() : Int {
+        private fun getCurrentWeekDay() : Int {
             val dateTime = DateTime.now()
             return dateTime.dayOfWeek
         }

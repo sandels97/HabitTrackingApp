@@ -23,7 +23,7 @@ data class Habit(@PrimaryKey(autoGenerate = true) val id : Long = 0) {
     var disabled : Boolean = false
 
     override fun toString(): String {
-        return "${name}, taskRecurrence = ${taskRecurrence}, priority = ${priority}, iconKey = ${iconKey}"
+        return "${name}, taskRecurrence = ${taskRecurrence}, priority = ${priority}, iconKey = $iconKey"
     }
 
     fun hasSameContent(habit: Habit): Boolean {

@@ -1,7 +1,5 @@
 package com.santtuhyvarinen.habittracker.utils
 
-import android.util.Log
-import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.TaskLog
 import org.joda.time.DateTime

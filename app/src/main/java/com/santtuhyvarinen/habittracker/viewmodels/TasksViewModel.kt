@@ -10,7 +10,6 @@ import com.santtuhyvarinen.habittracker.managers.TaskManager
 import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.TaskModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class TasksViewModel(application: Application) : AndroidViewModel(application) {

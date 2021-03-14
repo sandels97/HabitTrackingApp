@@ -1,12 +1,10 @@
 package com.santtuhyvarinen.habittracker.views
 
-import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.text.TextPaint
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import androidx.core.content.withStyledAttributes
 import com.santtuhyvarinen.habittracker.R
@@ -20,7 +18,7 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
         const val CHART_TYPE_COLUMN = 1
     }
 
-    var chartType = CHART_TYPE_LINE
+    private var chartType = CHART_TYPE_LINE
 
     var chartData : List<ChartDataModel> = ArrayList()
     set(value) {
@@ -32,8 +30,8 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
     private val textPaint = TextPaint()
     private val textBounds = Rect()
 
-    var entryAnimationOn = true
-    var entryAnimationSpeed = 0.02f
+    private var entryAnimationOn = true
+    private var entryAnimationSpeed = 0.02f
     private var entryAnimationValue = 0f
     private val entryValueAnimator : ValueAnimator
 
@@ -46,15 +44,15 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
         field = value.coerceAtLeast(0)
     }
 
-    var lineColor = Color.BLACK
-    var lineStrokeWidth = 10f
+    private var lineColor = Color.BLACK
+    private var lineStrokeWidth = 10f
 
-    var backgroundLineColor = Color.GRAY
-    var backgroundLineStrokeWidth = 2f
+    private var backgroundLineColor = Color.GRAY
+    private var backgroundLineStrokeWidth = 2f
 
-    var dotRadius = 15f
-    var columnCornerRadius = 10f
-    var columnMaxWidth = 0f
+    private var dotRadius = 15f
+    private var columnCornerRadius = 10f
+    private var columnMaxWidth = 0f
 
     init {
         context.withStyledAttributes(attributeSet, R.styleable.ChartView) {

@@ -27,7 +27,7 @@ class HabitFormViewModel(application: Application) : AndroidViewModel(applicatio
 
     val habitDataSaved : MutableLiveData<Long> = MutableLiveData<Long>()
 
-    lateinit var databaseManager : DatabaseManager
+    private lateinit var databaseManager : DatabaseManager
     val iconManager = IconManager(application)
 
     var habitName = ""

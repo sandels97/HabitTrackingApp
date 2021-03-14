@@ -30,7 +30,7 @@ class SettingsUtil {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 vibrateService.vibrate(VibrationEffect.createOneShot(DEFAULT_VIBRATE_LENGTH, VibrationEffect.DEFAULT_AMPLITUDE))
             } else {
-                vibrateService.vibrate(DEFAULT_VIBRATE_LENGTH);
+                vibrateService.vibrate(DEFAULT_VIBRATE_LENGTH)
             }
         }
 
@@ -55,12 +55,12 @@ class SettingsUtil {
             context.stopService(intent)
         }
 
-        fun isNotificationServiceEnabled(context: Context) : Boolean {
+        private fun isNotificationServiceEnabled(context: Context) : Boolean {
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             return prefs.getBoolean(context.getString(R.string.setting_notification_enable_key), true)
         }
 
-        fun isTouchFeedbackEnabled(context: Context) : Boolean {
+        private fun isTouchFeedbackEnabled(context: Context) : Boolean {
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             return prefs.getBoolean(context.getString(R.string.setting_touch_feedback_key), true)
         }

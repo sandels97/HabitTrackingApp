@@ -1,6 +1,5 @@
 package com.santtuhyvarinen.habittracker.receivers
 
-import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent

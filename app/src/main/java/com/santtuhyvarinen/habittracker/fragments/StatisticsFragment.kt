@@ -12,8 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.santtuhyvarinen.habittracker.R
 import com.santtuhyvarinen.habittracker.databinding.FragmentStatisticsBinding
 import com.santtuhyvarinen.habittracker.databinding.LayoutStatBinding
-import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.ChartDataModel
+import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.utils.StatisticsUtil
 import com.santtuhyvarinen.habittracker.viewmodels.StatisticsViewModel
 import org.joda.time.DateTime

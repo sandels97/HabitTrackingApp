@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.santtuhyvarinen.habittracker.managers.DatabaseManager
-import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.models.ChartDataModel
+import com.santtuhyvarinen.habittracker.models.HabitWithTaskLogs
 import com.santtuhyvarinen.habittracker.utils.TaskUtil
 import kotlinx.coroutines.launch
 import org.joda.time.DateTime
